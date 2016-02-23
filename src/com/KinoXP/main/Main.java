@@ -1,4 +1,4 @@
-package com.company;
+package com.KinoXP.main;
 
 public class Main {
 
