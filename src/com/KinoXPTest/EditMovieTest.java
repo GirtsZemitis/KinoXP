@@ -1,11 +1,13 @@
 package com.KinoXPTest;
 
 import com.KinoXP.controller.EditMovieViewController;
-import com.KinoXP.model.Movie;
 import com.KinoXP.model.MovieTheater;
 import junit.framework.TestCase;
 
-import java.util.ArrayList;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 /**
  * Created by Girts Zemitis on 25/02/2016.
@@ -13,43 +15,69 @@ import java.util.ArrayList;
  */
 public class EditMovieTest extends TestCase {
 
-    @org.junit.Test
-    public void editMovie() {
-        MovieTheater movieTheater = new MovieTheater();
-        Movie movie = new Movie("Title", 180, "release year", "plot", "director", "posterPath", "mainActor", movieTheater);
-        Movie movie1 = new Movie("Title1", 181, "release year1", "plot1", "director1", "posterPath1", "mainActor1", movieTheater);
-        ArrayList<Movie> arrayList = new ArrayList<Movie>();
-        arrayList.add(movie);
-        arrayList.add(movie1);
 
+
+    @org.junit.Test
+    public void testEditMovie() {
 
         EditMovieViewController emvController = new EditMovieViewController();
+        String DB_URL = "jdbc:mysql://localhost/testkinoxp";
+        String USER = "root";
+        String PASS = "root";
+        try {
+            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            String sql = "INSERT INTO movie (title, playingTimeMin, releaseYear, plot, director, posterPath, mainActor, theatreName) VALUES (?,?,?,?,?,?,?,?);";
+                PreparedStatement ps = conn.prepareStatement(sql);
+                ps.setString(1, "Title");
+                ps.setInt(2, 60);
+                ps.setString(3, "releaseYear");
+                ps.setString(4, "plott");
+            ps.setString(5, "director");
+                ps.setString(6, "posterPath");
+                ps.setString(7, "main Actor");
+                ps.setString(8, "theathe name");
+                ps.execute();
+                ps.close();}
+        catch (SQLException e) {
+                e.printStackTrace();
+            }
 
-        emvController.editTitle("Title", "release year", "director", "EditedTitle");
-        assertEquals("EditedTitle", movie.getTitel());
+        String editTitle = emvController.editTitle("Title", "EditedTitle");
+        assertNotNull(editTitle);
+        assertEquals("EditedTitle", editTitle);
 
-        emvController.editPlayingInMinutes("EditedTitle", "release year", "director", 200);
-        assertEquals(200, movie.getPlayingtimeInMinutes());
+        int playingTime = emvController.editPlayingInMinutes("EditedTitle", 200);
+        assertNotNull(playingTime);
+        assertEquals(200, playingTime);
 
-        emvController.editReleaseYear("EditedTitle", "release year", "director", "EditedReleaseYear");
-        assertEquals("EditedReleaseYear", movie.getRealeseYear());
+        String releaseYear = emvController.editReleaseYear("EditedTitle", "EditedReleaseYear");
+        assertNotNull(releaseYear);
+        assertEquals("EditedReleaseYear", releaseYear);
 
-        emvController.editPlot("EditedTitle", "EditedReleaseYear", "director", "EditedPlot");
-        assertEquals("EditedPlot", movie.getPlot());
+        String plot = emvController.editPlot("EditedTitle", "EditedPlot");
+        assertNotNull(plot);
+        assertEquals("EditedPlot", plot);
 
-        emvController.editDirectore("EditedTitle", "EditedReleaseYear", "director", "EditedDirector");
-        assertEquals("EditedDirector", movie.getDirector());
+        String director = emvController.editDirector("EditedTitle", "EditedDirector");
+        assertNotNull(director);
+        assertEquals("EditedDirector", director);
 
-        emvController.editPoster("EditedTitle", "EditedReleaseYear", "EditedDirector", "EditedPosterPath");
-        assertEquals("EditedPosterPath", movie.getPosterpath());
+        String poster = emvController.editPoster("EditedTitle", "EditedPosterPath");
+        assertNotNull(poster);
+        assertEquals("EditedPosterPath", poster);
 
-        emvController.editMainActor("EditedTitle", "EditedReleaseYear", "EditedDirector", "EditedMainActor");
-        assertEquals("EditedMainActor", movie.getMainActor());
+        String mainActor = emvController.editMainActor("EditedTitle", "EditedMainActor");
+        assertNotNull(mainActor);
+        assertEquals("EditedMainActor", mainActor);
 
 
         MovieTheater editedMovieTheater = new MovieTheater();
-        emvController.editMovieTheater("EditedTitle", "EditedReleaseYear", "EditedDirector", editedMovieTheater);
-        assertEquals(editedMovieTheater, movie.getMovieTheater());
+        editedMovieTheater.setName("new name");
+        String newEdit = emvController.editMovieTheater("EditedTitle", editedMovieTheater.getName());
+        assertNotNull(newEdit);
+        assertEquals("new name", editedMovieTheater.getName());
 
     }
+
+
 }
