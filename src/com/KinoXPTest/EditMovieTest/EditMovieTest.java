@@ -1,4 +1,4 @@
-package com.KinoXPTest;
+package com.KinoXPTest.EditMovieTest;
 
 import com.KinoXP.controller.EditMovieViewController;
 import com.KinoXP.model.MovieTheater;
