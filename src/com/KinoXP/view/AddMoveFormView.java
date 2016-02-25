@@ -42,7 +42,8 @@ public class AddMoveFormView {
 
 
 
-        public Scene getNewMovieView() {
+        public void  getNewMovieView() {
+            Stage stage = new Stage();
             Label label1, label2;
             label1 = new Label("NEW MOVIE");
             label2 = new Label("");
@@ -115,7 +116,10 @@ public class AddMoveFormView {
             hBox3.setAlignment(Pos.BOTTOM_RIGHT);
             hBox4.getChildren().addAll(text8, buttonAddActor, label2);
 
-            return scene;
+
+            stage.setScene(scene);
+            stage.show();
+
         }
 
         public void addPosterUrl(String posterUrl) {

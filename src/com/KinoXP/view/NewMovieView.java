@@ -1,5 +1,6 @@
 package com.KinoXP.view;
 
+import com.KinoXP.controller.AddMoveFormViewController;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -38,13 +39,17 @@ public class NewMovieView {
     Button logOut;
     Label topLayout;
     Stage primaryStage;
+    AddMoveFormViewController addMoveFormViewController = new AddMoveFormViewController();
+
     //CONTROLLERS
 
     //
 
 
 
-    public void start(Stage primaryStage) throws Exception {
+    public void start() {
+
+        Stage primaryStage = new Stage();
         //ROOT
         borderPane = new BorderPane();
 
@@ -63,7 +68,10 @@ public class NewMovieView {
         //BORDER Left
         plusButton = new Button("+");
         plusButton.setPrefSize(40, 40);
-        plusButton.setOnAction(event -> addMovie());
+        //plusButton.setOnAction(event -> addMovie());  //You should run AddMovieFormView
+        plusButton.setOnAction(event -> {
+        addMoveFormViewController.addMoveFormViewDisplay();
+        });
         borderPane.setAlignment(plusButton, Pos.CENTER);
         borderPane.setLeft(plusButton);
 
@@ -86,7 +94,7 @@ public class NewMovieView {
 
     }
 
-    public void addMovie() {
+    public void addMovie() {//You should now run the addMoveFromView form!!
         //primaryStage.setScene(newMovieViewController.getCtrlNewMovieView());
 
         VBox vBox = new VBox();

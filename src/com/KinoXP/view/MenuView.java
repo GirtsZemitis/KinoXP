@@ -1,6 +1,8 @@
 package com.KinoXP.view;
 
 
+import com.KinoXP.controller.ManageMovieSceduleController;
+import com.KinoXP.controller.NewMovieViewController;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -16,7 +18,7 @@ import javafx.stage.Stage;
 /**
  * Created by hartyandi on 2/24/16.
  */
-public class MenuView extends Application {
+public class MenuView {
 
     Stage mainMenu;
     Scene menu;
@@ -24,10 +26,13 @@ public class MenuView extends Application {
     VBox vbox;
     Label menuLabel, loggedUser;
     Button movies, schedule, employees, logOut;
+    ManageMovieSceduleController manageMovieSceduleController = new ManageMovieSceduleController();
+    NewMovieViewController newMovieViewController = new NewMovieViewController();
 
-    @Override
-    public void start(Stage primaryStage)
-    {
+
+    public void start() {
+
+        Stage primaryStage = new Stage();
         mainMenu = new Stage();
         mainMenu = primaryStage;
         menuLabel = new Label("Main menu");
@@ -36,6 +41,7 @@ public class MenuView extends Application {
         schedule = new Button("Manage schedule");
         employees = new Button("Manage employees");
         logOut = new Button("Log out");
+
 
         menuLayout = new BorderPane();
         menuLayout.setPadding(new Insets(30));
@@ -48,20 +54,21 @@ public class MenuView extends Application {
         menuLayout.setAlignment(logOut, Pos.BOTTOM_RIGHT);
         vbox.setAlignment(Pos.CENTER);
 
+        movies.setOnAction(event -> {
+            newMovieViewController.newMovieViewDispaly();
+        });
+
+        schedule.setOnAction(event -> {
+            manageMovieSceduleController.scheduleDisplay();
+
+      });
 
         menu = new Scene(menuLayout, 500, 500);
         mainMenu.setScene(menu);
         mainMenu.show();
 
 
-
-
-
     }
 
 
-    public static void main(String[] args) {
-        launch(args);
-    }
 }
-
