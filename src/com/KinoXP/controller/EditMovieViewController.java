@@ -91,7 +91,7 @@ public class EditMovieViewController {
     }
 
     public String editMovieTheater(String title, String moveiTheaterName) {
-        String sql = "UPDATE Movie SET theathreName=? WHERE title = ?";
+        String sql = "UPDATE Movie SET theatreName=? WHERE title = ?";
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setString(1, moveiTheaterName);
