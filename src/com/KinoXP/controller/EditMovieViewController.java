@@ -1,6 +1,5 @@
 package com.KinoXP.controller;
 
-import com.KinoXP.model.Movie;
 import com.KinoXP.model.MovieTheater;
 
 /**
@@ -8,27 +7,28 @@ import com.KinoXP.model.MovieTheater;
  * https://github.com/GirtsZemitis
  */
 public class EditMovieViewController {
-    public void editTitle(Movie movie, String editedTitle) {
+   
+    public void editTitle(String title, String s, String director, String editedTitle) {
     }
 
-    public void editPlayingInMinutes(Movie movie, int i) {
+    public void editPlayingInMinutes(String editedTitle, String s, String director, int i) {
     }
 
-    public void editReleaseYear(Movie movie, String editedReleaseYear) {
+    public void editReleaseYear(String editedTitle, String s, String director, String editedReleaseYear) {
     }
 
-    public void editPlot(Movie movie, String editedPlot) {
+    public void editPlot(String editedTitle, String editedReleaseYear, String director, String editedPlot) {
     }
 
-    public void editDirectore(Movie movie, String editedDirector) {
+    public void editDirectore(String editedTitle, String editedReleaseYear, String director, String editedDirector) {
     }
 
-    public void editPoster(Movie movie, String editedPosterPath) {
+    public void editPoster(String editedTitle, String editedReleaseYear, String editedDirector, String editedPosterPath) {
     }
 
-    public void editMainActor(Movie movie, String editedMainActor) {
+    public void editMainActor(String editedTitle, String editedReleaseYear, String editedDirector, String editedMainActor) {
     }
 
-    public void editMovieTheater(Movie movie, MovieTheater editedMovieTheater) {
+    public void editMovieTheater(String editedTitle, String editedReleaseYear, String editedDirector, MovieTheater editedMovieTheater) {
     }
 }
