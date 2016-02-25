@@ -89,6 +89,8 @@ public class EditMovieTest extends TestCase {
             e.printStackTrace();
         }
 
+
+        System.out.println("pushshshshhs");
     }
 
 
