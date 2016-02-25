@@ -13,11 +13,11 @@ public class AddMovieFormModul {
 
 
     /**
-     * Database Model that creates connection with the MySQL server
-     * when it is instantiated.
+     *  Grzegorz Goraj, SQL queries for AddMovieView
      */
 
     //THE CONNECTION
+
     public void writeToDB(String title, double duration, int releaseYear, String plot, String director, String posterPath, String mainActor, String theatreName, int ageLimit, String genre){
         String sql="INSERT INTO movie VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)\n";
 
@@ -38,9 +38,7 @@ public class AddMovieFormModul {
             int numberOfRows= preparedStatement.executeUpdate();
 
             System.out.println("Completed insert. Number of rows affected:" + numberOfRows);
-        } catch (SQLException e)
-        {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
-}
+}}

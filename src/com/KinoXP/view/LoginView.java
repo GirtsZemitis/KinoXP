@@ -1,7 +1,7 @@
 package com.KinoXP.view;
 
 import com.KinoXP.controller.LoginViewController;
-import com.KinoXP.model.LoginViewModul;
+import com.KinoXP.model.Employee;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -14,19 +14,22 @@ import javafx.stage.Stage;
  * Created by hartyandi on 2/24/16.
  */
 public class LoginView {
-
+    Employee employee;
 
     public void start(){
 
         //creating scene
         Stage primaryStage = new Stage();
         GridPane gridPane = new GridPane();
+
         Label user = new Label("User");
         TextField userField = new TextField();
+
         Label password = new Label("Password");
         TextField passwordText = new TextField();
         Button logIn = new Button("Confirm");
         LoginViewController loginViewController = new LoginViewController();
+
 
         //setting space between textfields and labels
         gridPane.setPadding(new Insets(40, 10, 10, 10));
@@ -41,8 +44,11 @@ public class LoginView {
         GridPane.setConstraints(logIn,1,2);
 
         logIn.setOnAction(event -> {
-            loginViewController.mainMenuDisplay();
-            primaryStage.close();
+
+            //CREATING NEW EMPLOYEE OBJECT TO GRAM THE INPUTED ATTRIBUTE VALUES
+            employee = new Employee(userField.getText(),passwordText.getText());
+            loginViewController.checkLogIn(employee);//CALL METHOD FROM CONTROLLER
+            primaryStage.close();// CLOSE THIS STAGE
         });
 
 
