@@ -32,7 +32,7 @@ public class EditMovieTest extends TestCase {
                 ps.setInt(2, 60);
                 ps.setString(3, "releaseYear");
                 ps.setString(4, "plott");
-            ps.setString(5, "director");
+                ps.setString(5, "director");
                 ps.setString(6, "posterPath");
                 ps.setString(7, "main Actor");
                 ps.setString(8, "theathe name");
@@ -77,7 +77,19 @@ public class EditMovieTest extends TestCase {
         assertNotNull(newEdit);
         assertEquals("new name", editedMovieTheater.getName());
 
+        try {
+            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            String sql = "DELETE FROM movie WHERE 1;";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.execute();
+            ps.close();}
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+
     }
+
+
 
 
 }
