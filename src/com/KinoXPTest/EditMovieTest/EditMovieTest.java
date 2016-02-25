@@ -21,6 +21,8 @@ public class EditMovieTest extends TestCase {
     public void testEditMovie() {
 
         EditMovieViewController emvController = new EditMovieViewController();
+
+        // String DB_URL = "jdbc:mysql://localhost/testkinoxp";
         String DB_URL = "jdbc:mysql://localhost/testkinoxp";
         String USER = "root";
         String PASS = "root";

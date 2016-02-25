@@ -22,7 +22,7 @@ public class EditMovieViewController {
 
         try
         {
-            String DB_URL = "jdbc:mysql://localhost/testkinoxp";
+            String DB_URL = "jdbc:mysql://localhost/tableBook";
             String USER = "root";
             String PASS = "root";
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
