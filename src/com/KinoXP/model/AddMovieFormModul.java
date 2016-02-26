@@ -13,24 +13,11 @@ public class AddMovieFormModul {
 
 
     /**
-     * Database Model that creates connection with the MySQL server
-     * when it is instantiated.
+     *  Grzegorz Goraj, SQL queries for AddMovieView
      */
 
     //THE CONNECTION
-    public AddMovieFormModul() {
 
-        try {
-            String DB_URL = "jdbc:mysql://localhost/tableBook";
-            String USER = "root";
-            String PASS = "root";
-            conn = DriverManager.getConnection(DB_URL, USER, PASS);
-            System.out.println("connmod obj created" + conn + " message: ");
-
-        } catch (SQLException e) {
-            System.out.println("dbsss error Bitches!!" + e.getMessage());
-        }
-    }
 
 
     //METHOD FOR EDITING THE MOVIE TITLE
