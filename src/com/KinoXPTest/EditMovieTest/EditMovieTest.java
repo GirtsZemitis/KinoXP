@@ -1,6 +1,6 @@
 package com.KinoXPTest.EditMovieTest;
 
-import com.KinoXP.controller.EditMovieViewController;
+import com.KinoXP.model.ManageMovieViewModul;
 import com.KinoXP.model.MovieTheater;
 import junit.framework.TestCase;
 
@@ -20,7 +20,7 @@ public class EditMovieTest extends TestCase {
     @org.junit.Test
     public void testEditMovie() {
 
-        EditMovieViewController emvController = new EditMovieViewController();
+        ManageMovieViewModul emvController = new ManageMovieViewModul();
 
         // String DB_URL = "jdbc:mysql://localhost/testkinoxp";
         String DB_URL = "jdbc:mysql://localhost/testkinoxp";
@@ -89,8 +89,6 @@ public class EditMovieTest extends TestCase {
             e.printStackTrace();
         }
 
-
-        System.out.println("pushshshshhs");
     }
 
 

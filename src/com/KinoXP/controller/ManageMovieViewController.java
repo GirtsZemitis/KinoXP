@@ -32,9 +32,8 @@ public class ManageMovieViewController {
             String mainActor = manageMovieViewModul.getMainActor(mainActorInput);
             String movieTheater = manageMovieViewModul.getTheatreName(movieTheaterInput);
 
-            if (!title.equals(titleInput)) {
-                manageMovieViewModul.editTitle(titleInput, title);
-            } else if(!playingtimeInMinutes.equals(playingtimeInMinutesInput)){
+
+            if(!playingtimeInMinutes.equals(playingtimeInMinutesInput)){
                 manageMovieViewModul.editPlayingInMinutes(title, Integer.parseInt(playingtimeInMinutesInput));
             } else if(!releaseYear.equals(releaseYearInput)){
                 manageMovieViewModul.editReleaseYear(title, releaseYearInput);
@@ -48,6 +47,8 @@ public class ManageMovieViewController {
                 manageMovieViewModul.editMainActor(titleInput, mainActorInput);
             } else if(!movieTheater.equals(movieTheaterInput)){
                 manageMovieViewModul.editMovieTheater(titleInput, movieTheaterInput);
+            } else if (!title.equals(titleInput)) {
+                manageMovieViewModul.editTitle(titleInput, title);
             }
         }catch(Exception e){
             System.out.println("Exception in editMovieButtonAction() from Controller: " + e.getMessage());
