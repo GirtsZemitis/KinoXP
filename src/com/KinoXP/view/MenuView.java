@@ -3,7 +3,6 @@ package com.KinoXP.view;
 
 import com.KinoXP.controller.ManageMovieSceduleController;
 import com.KinoXP.controller.NewMovieViewController;
-import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;

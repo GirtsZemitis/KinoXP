@@ -1,8 +1,8 @@
 package com.KinoXP.view;
 
-import com.KinoXP.model.Time;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import com.KinoXP.model.Time;
 
 /**
  * Created by krystian on 2016-02-25.

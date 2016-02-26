@@ -12,34 +12,48 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
+import java.util.ArrayList;
+
 /**
  * Created by krystian on 2015-09-04.
  */
 public class Schedule {
-    ObservableList<Time> observableList;
-    Label welcom;
+    //button for prinitng week in console
     Button printButton;
+    //button for change week
     Button nextButton;
+    //button for change week
     Button preButton;
-    MovieWeek movieWeek;
+    //array list which gonna hold 12 weeks
+    ArrayList<MovieWeek> arrayList;
+    //label for week nr
     Label nrOfWeek;
+    // weekcounter
     int weekCounter = 1;
-
+    TableView<Time> table;
 
     public  void start(){
         Stage primaryStage = new Stage();
-        movieWeek = new MovieWeek();
-
+        //populate array with 12 weeks
+        arrayList = new ArrayList<>();
+        for(int i=0; i<12; i++){
+            arrayList.add(new MovieWeek());
+        }
+        table = new TableView();
         nrOfWeek = new Label("week 1");
         Label movieTitle = new Label("movie title");
         nextButton = new Button("next week");
         nextButton.setOnAction(event2 -> {
             weekCounter++;
             if(weekCounter<=12){
+                table.setItems(arrayList.get(weekCounter-1).getObservableList());
                 setNumberOfWeek(weekCounter);
+
             }else{
                 weekCounter = 1;
                 setNumberOfWeek(weekCounter);
+                table.setItems(arrayList.get(weekCounter-1).getObservableList());
+
 
             }
         });
@@ -48,21 +62,24 @@ public class Schedule {
             if(weekCounter>1){
                 weekCounter--;
                 setNumberOfWeek(weekCounter);
+                table.setItems(arrayList.get(weekCounter-1).getObservableList());
+
             }else {
                 weekCounter = 12;
                 setNumberOfWeek(weekCounter);
+                table.setItems(arrayList.get(weekCounter-1).getObservableList());
+
             }
         });
         printButton = new Button("Print schedule");
         printButton.setOnAction(event1 -> {
-            movieWeek.printOut();
 
         });
         VBox vBox = new VBox();
         HBox hBox = new HBox(490);
         vBox.setAlignment(Pos.TOP_CENTER);
         primaryStage.setTitle("Schedule");
-        TableView<Time> table = new TableView();
+        table = new TableView();
         table.setEditable(true);
         table.getSelectionModel().setCellSelectionEnabled(true);
 
@@ -268,7 +285,7 @@ public class Schedule {
         });
 
 
-        table.setItems(movieWeek.getObservableList());
+        table.setItems(arrayList.get(weekCounter-1).getObservableList());
         table.getColumns().addAll(hour, monday, tuesday, wednesday, thursday, friday, saturday,sanday);
         table.setOnMouseClicked(event -> {
             TablePosition firstCell = table.getSelectionModel().getSelectedCells().get(0);
@@ -279,12 +296,12 @@ public class Schedule {
             if(column==1){
                 if(time.getMonday().equals("no")){
                     time.setMonday("yes");
-                    movieWeek.setYes(time,row);
-                    table.setItems(movieWeek.getObservableList());
+                    arrayList.get(weekCounter-1).setYes(time,row);
+                    table.setItems(arrayList.get(weekCounter-1).getObservableList());
                 }else{
                     time.setMonday("no");
-                    movieWeek.setYes(time,row);
-                    table.setItems(movieWeek.getObservableList());
+                    arrayList.get(weekCounter-1).setYes(time,row);
+                    table.setItems(arrayList.get(weekCounter-1).getObservableList());
                 }
 
 
@@ -292,71 +309,71 @@ public class Schedule {
             if(column==2){
                 if(time.getTuesday().equals("no")) {
                     time.setTuesday("yes");
-                    movieWeek.setYes(time, row);
-                    table.setItems(movieWeek.getObservableList());
+                    arrayList.get(weekCounter-1).setYes(time, row);
+                    table.setItems(arrayList.get(weekCounter-1).getObservableList());
                 }else{
                     time.setTuesday("no");
-                    movieWeek.setYes(time,row);
-                    table.setItems(movieWeek.getObservableList());
+                    arrayList.get(weekCounter-1).setYes(time,row);
+                    table.setItems(arrayList.get(weekCounter-1).getObservableList());
                 }
             }
             if(column==3){
                 if(time.getWednesday().equals("no")) {
 
                     time.setWednesday("yes");
-                    movieWeek.setYes(time, row);
-                    table.setItems(movieWeek.getObservableList());
+                    arrayList.get(weekCounter-1).setYes(time, row);
+                    table.setItems(arrayList.get(weekCounter-1).getObservableList());
                 }else {
                     time.setWednesday("no");
-                    movieWeek.setYes(time,row);
-                    table.setItems(movieWeek.getObservableList());
+                    arrayList.get(weekCounter-1).setYes(time,row);
+                    table.setItems(arrayList.get(weekCounter-1).getObservableList());
                 }
             }
             if(column==4){
                 if(time.getThrusday().equals("no")) {
 
                     time.setThrusday("yes");
-                    movieWeek.setYes(time, row);
-                    table.setItems(movieWeek.getObservableList());
+                    arrayList.get(weekCounter-1).setYes(time, row);
+                    table.setItems(arrayList.get(weekCounter-1).getObservableList());
                 }else {
                     time.setThrusday("no");
-                    movieWeek.setYes(time, row);
-                    table.setItems(movieWeek.getObservableList());
+                    arrayList.get(weekCounter-1).setYes(time, row);
+                    table.setItems(arrayList.get(weekCounter-1).getObservableList());
                 }
             }
             if(column==5){
                 if(time.getFriday().equals("no")) {
                     time.setFriday("yes");
-                    movieWeek.setYes(time, row);
-                    table.setItems(movieWeek.getObservableList());
+                    arrayList.get(weekCounter-1).setYes(time, row);
+                    table.setItems(arrayList.get(weekCounter-1).getObservableList());
                 }else {
                     time.setFriday("no");
-                    movieWeek.setYes(time,row);
-                    table.setItems(movieWeek.getObservableList());
+                    arrayList.get(weekCounter-1).setYes(time,row);
+                    table.setItems(arrayList.get(weekCounter-1).getObservableList());
                 }
             }
             if(column==6){
                 if(time.getSaturday().equals("no")) {
 
                     time.setSaturday("yes");
-                    movieWeek.setYes(time, row);
-                    table.setItems(movieWeek.getObservableList());
+                    arrayList.get(weekCounter-1).setYes(time, row);
+                    table.setItems(arrayList.get(weekCounter-1).getObservableList());
                 }else {
                     time.setSaturday("no");
-                    movieWeek.setYes(time,row);
-                    table.setItems(movieWeek.getObservableList());
+                    arrayList.get(weekCounter-1).setYes(time,row);
+                    table.setItems(arrayList.get(weekCounter-1).getObservableList());
                 }
             }
             if(column==7){
                 if(time.getSunday().equals("no")) {
 
                     time.setSunday("yes");
-                    movieWeek.setYes(time, row);
-                    table.setItems(movieWeek.getObservableList());
+                    arrayList.get(weekCounter-1).setYes(time, row);
+                    table.setItems(arrayList.get(weekCounter-1).getObservableList());
                 }else {
                     time.setSunday("no");
-                    movieWeek.setYes(time,row);
-                    table.setItems(movieWeek.getObservableList());
+                    arrayList.get(weekCounter-1).setYes(time,row);
+                    table.setItems(arrayList.get(weekCounter-1).getObservableList());
                 }
             }
 
@@ -380,5 +397,8 @@ public class Schedule {
         nrOfWeek.setText("week " + i);
     }
 
+    public MovieWeek getWeek(int i){
+        return  arrayList.get(i);
+    }
 
 }

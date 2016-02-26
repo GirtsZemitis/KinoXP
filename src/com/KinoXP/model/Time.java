@@ -74,14 +74,14 @@ public class Time {
     public Time(String time,String monday, String tuesday, String wednesday, String thrusday, String friday, String saturday,
                 String sunday){
 
-          this.time = time;
-          this.monday = monday;
-          this.tuesday = tuesday;
-          this.wednesday = wednesday;
-          this.thrusday = thrusday;
-          this.friday = friday;
-          this.saturday = saturday;
-          this.sunday = sunday;
+        this.time = time;
+        this.monday = monday;
+        this.tuesday = tuesday;
+        this.wednesday = wednesday;
+        this.thrusday = thrusday;
+        this.friday = friday;
+        this.saturday = saturday;
+        this.sunday = sunday;
     }
 
     public String getTime() {
