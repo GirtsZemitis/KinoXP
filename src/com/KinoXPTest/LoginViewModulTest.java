@@ -14,11 +14,11 @@ import static org.junit.Assert.assertEquals;
 public class LoginViewModulTest {
     LoginViewModul loginViewModel = new LoginViewModul();
 
-    @Before
+    @Before //DOING THE CONNECTION
     public void connectToDatabase(){
         loginViewModel.connectToDatabase();
     }
-    @Test
+    @Test // TESTING THE LOG IN METHODS!
     public void testLogIn(){
         Employee employee = new Employee("1","1");
         assertEquals("1",loginViewModel.checkLoginAndPassword(employee).getUserName());
