@@ -56,6 +56,7 @@ public class ManageMovieViewController {
 
     //METHOD FOR HANDLING -GO BACK- BUTTON
     public void goBackButtonAction(){
+        System.out.println( "going back");
 
     }
 }
