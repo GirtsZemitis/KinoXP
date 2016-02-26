@@ -1,11 +1,6 @@
 package com.KinoXP;
-
-import com.KinoXP.controller.LoginViewController;
-import com.KinoXP.model.LoginViewModul;
 import com.KinoXP.view.LoginView;
 import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 /**

@@ -19,14 +19,14 @@ public class ManageMovieViewModul {
     public ManageMovieViewModul() {
 
         try {
-            String DB_URL = "jdbc:mysql://localhost/testkinoxp";
+            String DB_URL = "jdbc:mysql://localhost/tableBook";
             String USER = "root";
             String PASS = "root";
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
             System.out.println("connmod obj created" + conn + " message: ");
 
         } catch (SQLException e) {
-            System.out.println("dbsss error" + e.getMessage());
+            System.out.println("dbsss error Bitches!!" + e.getMessage());
         }
     }
 
