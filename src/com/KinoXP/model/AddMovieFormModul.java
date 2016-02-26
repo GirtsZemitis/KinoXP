@@ -8,7 +8,7 @@ import java.sql.SQLException;
 /**
  * Created by quena on 26-02-2016.
  */
-public class AddMovieViewModul {
+public class AddMovieFormModul {
     private Connection conn = null;
 
 
@@ -18,7 +18,7 @@ public class AddMovieViewModul {
      */
 
     //THE CONNECTION
-    public AddMovieViewModul() {
+    public AddMovieFormModul() {
 
         try {
             String DB_URL = "jdbc:mysql://localhost/tableBook";
