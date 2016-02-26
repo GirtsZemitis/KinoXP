@@ -23,7 +23,7 @@ public class ManageMovieViewModul {
             String USER = "root";
             String PASS = "root";
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
-            System.out.println("conn obj created" + conn + " message: ");
+            System.out.println("connmod obj created" + conn + " message: ");
 
         } catch (SQLException e) {
             System.out.println("dbsss error" + e.getMessage());
@@ -216,7 +216,7 @@ public class ManageMovieViewModul {
 
     //METHOD FOR EDITING THE MOVIE TITLE
     public String editTitle(String title, String editTitle) {
-        String sql = "UPDATE Movie SET title=? WHERE title = ?";
+        String sql = "UPDATE movie SET title=? WHERE title = ?";
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setString(1, editTitle);
@@ -224,14 +224,14 @@ public class ManageMovieViewModul {
             preparedStatement.executeUpdate();
             return editTitle;
         } catch (SQLException e) {
-            System.out.println("Database_Controller error");
+            e.getStackTrace();
         }
         return null;
     }
 
     //METHOD FOR EDITING THE PLAYING TIME OF THE MOVIE
     public int editPlayingInMinutes(String title, int editPlayingInMinutes) {
-        String sql = "UPDATE Movie SET playingTimeMin=? WHERE title = ?";
+        String sql = "UPDATE movie SET playingTimeMin=? WHERE title = ?";
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setInt(1, editPlayingInMinutes);
@@ -246,7 +246,7 @@ public class ManageMovieViewModul {
 
     //METHOD FOR EDITING THE RELEASE YEAR OF THE MOVIE
     public String editReleaseYear(String title, String releaseYear) {
-        String sql = "UPDATE Movie SET releaseYear=? WHERE title = ?";
+        String sql = "UPDATE movie SET releaseYear=? WHERE title = ?";
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setString(1, releaseYear);
@@ -261,7 +261,7 @@ public class ManageMovieViewModul {
 
     //METHOD FOR EDITING THE PLOT OF THE MOVIE
     public String editPlot(String title, String plot) {
-        String sql = "UPDATE Movie SET plot=? WHERE title = ?";
+        String sql = "UPDATE movie SET plot=? WHERE title = ?";
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setString(1, plot);
@@ -276,7 +276,7 @@ public class ManageMovieViewModul {
 
     //METHOD FOR EDITING THE MOVIE THEATER
     public String editMovieTheater(String title, String movieTheaterName) {
-        String sql = "UPDATE Movie SET theatreName=? WHERE title = ?";
+        String sql = "UPDATE movie SET theatreName=? WHERE title = ?";
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setString(1, movieTheaterName);
@@ -291,7 +291,7 @@ public class ManageMovieViewModul {
 
     //METHOD FOR EDITING THE DIRECTOR OF THE MOVIE
     public String editDirector(String title, String editedDirector) {
-        String sql = "UPDATE Movie SET director=? WHERE title = ?";
+        String sql = "UPDATE movie SET director=? WHERE title = ?";
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setString(1, editedDirector);
@@ -306,7 +306,7 @@ public class ManageMovieViewModul {
 
     //METHOD FOR EDITING THE POSTER OF THE MOVIE
     public String editPoster(String title, String editedPosterPath) {
-        String sql = "UPDATE Movie SET posterPath=? WHERE title = ?";
+        String sql = "UPDATE movie SET posterPath=? WHERE title = ?";
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setString(1, editedPosterPath);
@@ -321,7 +321,7 @@ public class ManageMovieViewModul {
 
     //METHOD FOR EDITING THE CAST OF THE MOVIE
     public String editMainActor(String title, String editedMainActor) {
-        String sql = "UPDATE Movie SET mainActor=? WHERE title = ?";
+        String sql = "UPDATE movie SET mainActor=? WHERE title = ?";
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setString(1, editedMainActor);
