@@ -74,7 +74,7 @@ public class NewMovieViewModel {
         return list;
     }
 
-    public String getPhotoLink(int indexMovie){
+    public String getPhotoLink(int indexMovie){                           // returns link to poster from database basing on index
         String link ="";
         try {
             String query = " SELECT posterPath FROM Movie WHERE indexMovie=? ";
@@ -95,7 +95,7 @@ public class NewMovieViewModel {
         return link;
     }
 
-    public String getMovieTitle(int indexMovie){
+    public String getMovieTitle(int indexMovie){                       //returns movie title from database, basing on index
         String title ="";
         try {
             String query = " SELECT title FROM Movie WHERE indexMovie=? ";
