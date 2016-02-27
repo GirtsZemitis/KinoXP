@@ -105,7 +105,8 @@ public class ManageMovieView extends Application {
         hBox7.setAlignment(Pos.BOTTOM_RIGHT);
 
         //V-BOXES CONTAINING THE H-BOXES ABOVE
-        vBox.getChildren().addAll(hBoxTitle, titleLbl, titleTxt, descriptionLbl, plotTxt, hBox1, hBox2, hBox3, hBox4, castLbl, hBox5, posterLbl, hBox6, movieTheaterLbl, movieTheaterTxt, hBox7);
+        vBox.getChildren().addAll(hBoxTitle, titleLbl, titleTxt, descriptionLbl, plotTxt, hBox1,
+                                hBox2, hBox3, hBox4, castLbl, hBox5, posterLbl, hBox6, movieTheaterLbl, movieTheaterTxt, hBox7);
         vBox.setPadding(new Insets(40, 40, 40, 60));
         vBox.setSpacing(10);
 
@@ -124,7 +125,9 @@ public class ManageMovieView extends Application {
         });
 
         editMovieBtn.setOnAction(event -> {
-            manageMovieViewController.editMovieButtonAction(titleTxt.getText(), playingTimeInMinutesTxt.getText(), releaseYearTxt.getText(), plotTxt.getText(), directorTxt.getText(), posterPathTxt.getText(), mainActorTxt.getText(), movieTheaterTxt.getText());
+            manageMovieViewController.editMovieButtonAction(titleTxt.getText(), playingTimeInMinutesTxt.getText(),
+                    releaseYearTxt.getText(), plotTxt.getText(), directorTxt.getText(), posterPathTxt.getText(),
+                    mainActorTxt.getText(), movieTheaterTxt.getText());
         });
 
         backBtn.setOnAction(event -> {

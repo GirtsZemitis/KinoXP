@@ -14,7 +14,7 @@ import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
 /**
- * Created by quena on 25-02-2016.
+ * Created by Grzegorz, Mazur on 25-02-2016.
  */
 public class AddMovieFormView {
 
@@ -28,7 +28,7 @@ public class AddMovieFormView {
         addMovieFormViewController = new AddMovieFormViewController(this, addMovieFormViewModul);
     }
 
-    public void getNewMovieView() {
+    public void getAddMovieView() {
 
         //TEXT FIELDS
         TextField titleTxt = new TextField();
@@ -113,7 +113,8 @@ public class AddMovieFormView {
 
         //V-BOX CONTAINING THE H-BOXES ABOVE
         VBox vBox = new VBox();
-        vBox.getChildren().addAll(hBoxTitle, titleLbl, titleTxt, descriptionLbl, plotTxt, hBox1, hBox2, hBox3, hBox4, castLbl, hBox5, posterLbl, hBox6, movieTheaterLbl, movieTheaterTxt, hBox7);
+        vBox.getChildren().addAll(hBoxTitle, titleLbl, titleTxt, descriptionLbl, plotTxt, hBox1, hBox2, hBox3,
+                            hBox4, castLbl, hBox5, posterLbl, hBox6, movieTheaterLbl, movieTheaterTxt, hBox7);
         vBox.setPadding(new Insets(40, 40, 40, 60));
         vBox.setSpacing(10);
 

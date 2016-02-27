@@ -93,7 +93,6 @@ public class NewMovieView {
     }
 
     public void addMovie() {//You should now run the addMoveFromView form!!
-        //primaryStage.setScene(newMovieViewController.getCtrlNewMovieView());
 
         VBox vBox = new VBox();
         vBox.setPrefSize(80, 120);

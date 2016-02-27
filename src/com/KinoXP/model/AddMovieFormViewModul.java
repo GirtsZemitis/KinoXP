@@ -7,9 +7,9 @@ import java.sql.*;
  */
 public class AddMovieFormViewModul {
     private static Connection conn;
-    private static String url = "jdbc:mysql://sql2.freesqldatabase.com:3306/sql2108018";
-    private static String user = "sql2108018";
-    private static String pass = "nP5%zC6%";
+    private static String url ;
+    private static String user;
+    private static String pass;
 
     //CONSTRUCTOR
     public AddMovieFormViewModul() {
