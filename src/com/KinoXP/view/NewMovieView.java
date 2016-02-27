@@ -35,7 +35,11 @@ public class NewMovieView {
     Button plusButton;
     Button logOut;
     Label topLayout;
-    VBox vBox;
+
+
+    //** common work
+
+    //****
 
     //CONTROLLERS
     NewMovieViewController newMovieViewController = new NewMovieViewController();
@@ -43,7 +47,7 @@ public class NewMovieView {
     //
 
 
-    public void start(String urlGreg) {
+    public void start() {
 
 
         Stage primaryStage = new Stage();
@@ -66,22 +70,61 @@ public class NewMovieView {
         plusButton = new Button("+");
         plusButton.setPrefSize(40, 40);
 
+        /***
+         *          Greg + Mazur :
+         */
 
+        flowPane = new FlowPane();
+        flowPane.setHgap(30);
+        flowPane.setVgap(30);
+        flowPane.setPadding(new Insets(60));
+        flowPane.setMaxWidth(1500);
 
         //method that gets indexMovie to arraylist
         ArrayList<Integer> indexMovieList = new ArrayList<>();
         indexMovieList = newMovieViewController.getArrayListOfMovieIndexFromDb();
-        System.out.println("indexy " + indexMovieList.toString());
 
+
+        // reading from DB and creating Buttons + adding Buttons to ArrayList
         for(int i=0; i<indexMovieList.size(); i++) {
-            indexMovieList.toString();
+            ImageView imageView;
+            String url = null;
+            String label = null;
+
+            //"metoda od Mazura";
+            url = newMovieViewController.getPhotoLinkFromModel(indexMovieList.get(i));
+            label = newMovieViewController.getMovieTitleFromModel(indexMovieList.get(i));
+
+            imageView =  newMovieViewController.getWrapImageFromUrlCtrl(url);
+
+            Button button666 = new Button();
+            button666.setId(indexMovieList.get(i).toString());
+            button666.setPrefSize(80, 100);
+            button666.setPadding(new Insets(0, 0, 0, 0));
+            button666.setGraphic(imageView);
+
+            Label titleBtnLabel666 = new Label();
+            titleBtnLabel666.setPrefSize(80, 20);
+            titleBtnLabel666.setTextAlignment(TextAlignment.RIGHT);
+            titleBtnLabel666.setText(label);
+
+            VBox vBox = new VBox();
+            vBox.setPrefSize(80, 120);
+            //vBox.setMaxSize(80,120);
+            vBox.setAlignment(Pos.CENTER);
+            vBox.getChildren().addAll(button666, titleBtnLabel666);
+            flowPane.getChildren().add(vBox);
         }
 
+        /***
+        *
+        */
 
 
         plusButton.setOnAction(event -> {
 
             addMoveFormViewController.addMovieFormViewDisplay();
+            primaryStage.close();
 
             //*************************
             /*System.out.println("UrlGreg: " + urlGreg);
@@ -103,14 +146,8 @@ public class NewMovieView {
         //Center - FlowPane
 
 
-        vBox = new VBox();
-        vBox.setPrefSize(80, 120);
-        vBox.setAlignment(Pos.CENTER);
-        flowPane = new FlowPane();
-        flowPane.setHgap(30);
-        flowPane.setVgap(30);
-        flowPane.setPadding(new Insets(60));
-        flowPane.setMaxWidth(1500);
+
+
         borderPane.setCenter(flowPane);
 
 
@@ -125,7 +162,8 @@ public class NewMovieView {
     public void addMovie(String url) {
 
 
-        //Image imageOk = new Image(getClass().getResourceAsStream("moviePoster.png"));
+
+        /*//Image imageOk = new Image(getClass().getResourceAsStream("moviePoster.png"));
         ImageView imageView;
         imageView =  newMovieViewController.getWrapImageFromUrlCtrl(url);
 
@@ -138,10 +176,9 @@ public class NewMovieView {
         Label titleBtnLabel = new Label();
         titleBtnLabel.setPrefSize(80, 20);
         titleBtnLabel.setTextAlignment(TextAlignment.RIGHT);
-        //titleBtnLabel.setText("Ip-Man 3");
+        //titleBtnLabel.setText("Ip-Man 3");*/
 
-        vBox.getChildren().addAll(button, titleBtnLabel);
-        flowPane.getChildren().add(vBox);
+
     }
 
 }
