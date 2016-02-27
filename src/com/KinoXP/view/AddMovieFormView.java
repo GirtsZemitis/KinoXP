@@ -1,8 +1,7 @@
 package com.KinoXP.view;
 
-import com.KinoXP.controller.ManageMovieViewController;
-import com.KinoXP.model.ManageMovieViewModul;
-import javafx.application.Application;
+import com.KinoXP.controller.AddMovieFormViewController;
+import com.KinoXP.model.AddMovieFormViewModul;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -11,30 +10,25 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
 /**
- * Created by Paula on 25/2/16.
+ * Created by quena on 25-02-2016.
  */
-public class ManageMovieView extends Application {
+public class AddMovieFormView {
 
-    ManageMovieViewController manageMovieViewController;
-    ManageMovieViewModul manageMovieViewModul;
-
-    //MAIN METHOD TO START THE APPLICATION
-    public static void main(String[] args) {
-        Application.launch(args);
-    }
+    private AddMovieFormViewController addMovieFormViewController;
+    private AddMovieFormViewModul addMovieFormViewModul;
+    private Stage stage;
 
     //CONSTRUCTOR
-    public ManageMovieView() {
-        manageMovieViewModul = new ManageMovieViewModul();
-        manageMovieViewController = new ManageMovieViewController();
+    public AddMovieFormView() {
+        addMovieFormViewModul = new AddMovieFormViewModul();
+        addMovieFormViewController = new AddMovieFormViewController(this, addMovieFormViewModul);
     }
 
-    //START METHOD FOR THE VIEW
-    public void start(Stage primaryStage) throws Exception {
-        VBox vBox = new VBox();
+    public void getNewMovieView() {
 
         //TEXT FIELDS
         TextField titleTxt = new TextField();
@@ -51,8 +45,9 @@ public class ManageMovieView extends Application {
         TextArea mainActorTxt = new TextArea();
 
         //LABELS
-        Label mainTitleLbl = new Label("Edit Movie");
-        mainTitleLbl.setFont(new Font("Serif", 30));
+        Label mainTitleLbl = new Label("Add Movie");
+        mainTitleLbl.setFont(Font.font("Courier", FontWeight.BOLD, 25));
+        mainTitleLbl.setFont(Font.font(25));
         Label titleLbl = new Label("Title");
         Label yearLbl = new Label("Year");
         Label durationLbl = new Label("Duration");
@@ -65,10 +60,17 @@ public class ManageMovieView extends Application {
         Label movieTheaterLbl = new Label("Movie Theater");
 
         //BUTTONS
-        //Button addCastBtn = new Button("Add");
         Button addPosterBtn = new Button("Add");
-        Button editMovieBtn = new Button("Edit Movie");
+        Button addMovieBtn = new Button("Edit Movie");
         Button backBtn = new Button("Go Back");
+
+        addPosterBtn.setOnAction(event1 -> addPosterUrl(posterPathTxt.getText()));
+
+        addMovieBtn.setOnAction(event -> {
+            addMovieFormViewController.addMovieButtonAction(titleTxt.getText(), playingTimeInMinutesTxt.getText(),
+                    releaseYearTxt.getText(), plotTxt.getText(), directorTxt.getText(), posterPathTxt.getText(),
+                    mainActorTxt.getText(), movieTheaterTxt.getText(), genreTxt.getText() ,ageLimitTxt.getText());
+        });
 
         //H-BOXES
         HBox hBoxTitle = new HBox();
@@ -100,39 +102,31 @@ public class ManageMovieView extends Application {
         hBox6.setSpacing(30);
 
         HBox hBox7 = new HBox();
-        hBox7.getChildren().addAll(editMovieBtn, backBtn);
+        hBox7.getChildren().addAll(addMovieBtn, backBtn);
         hBox7.setSpacing(30);
         hBox7.setAlignment(Pos.BOTTOM_RIGHT);
 
-        //V-BOXES CONTAINING THE H-BOXES ABOVE
+        //V-BOX CONTAINING THE H-BOXES ABOVE
+        VBox vBox = new VBox();
         vBox.getChildren().addAll(hBoxTitle, titleLbl, titleTxt, descriptionLbl, plotTxt, hBox1, hBox2, hBox3, hBox4, castLbl, hBox5, posterLbl, hBox6, movieTheaterLbl, movieTheaterTxt, hBox7);
         vBox.setPadding(new Insets(40, 40, 40, 60));
         vBox.setSpacing(10);
 
         //LAYOUT OF THE SCENE
         BorderPane borderPane = new BorderPane();
+        borderPane.setPadding(new Insets(25));
         borderPane.setLeft(vBox);
 
         //SETTING UP THE SCENE AND THE STAGE
         Scene scene = new Scene(borderPane, 700, 650);
-        primaryStage = new Stage();
-        primaryStage.setScene(scene);
-        primaryStage.show();
-
-        //HANDLING THE BUTTONS ACTIONS
-        addPosterBtn.setOnAction(event -> {
-        });
-
-        editMovieBtn.setOnAction(event -> {
-            manageMovieViewController.editMovieButtonAction(titleTxt.getText(), playingTimeInMinutesTxt.getText(), releaseYearTxt.getText(), plotTxt.getText(), directorTxt.getText(), posterPathTxt.getText(), mainActorTxt.getText(), movieTheaterTxt.getText());
-        });
-
-        backBtn.setOnAction(event -> {
-            manageMovieViewController.goBackButtonAction();
-        });
-
-
+        stage = new Stage();
+        stage.setScene(scene);
+        stage.show();
     }
+
+    public void addPosterUrl(String posterUrl) {
+            System.out.println(posterUrl);
+        }
 
     //METHOD FOR THE ALERT MESSAGES SHOWN TO THE USER
     public void updateAlertMessage(String message) {
@@ -140,4 +134,11 @@ public class ManageMovieView extends Application {
         alert.setContentText(message);
         alert.showAndWait();
     }
+
+    //METHOD TO USE FOR CLOSING THE STAGE
+    public void closeStage(){
+        stage.close();
+    }
 }
+
+

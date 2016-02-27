@@ -1,7 +1,10 @@
 package com.KinoXP.model;
 
+
 /**
- * Created by hartyandi on 2/25/16.
+ * Created by quena on 25-02-2016.
  */
+
 public class NewMovieViewModul {
+
 }

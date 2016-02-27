@@ -1,6 +1,6 @@
 package com.KinoXP.view;
 
-import com.KinoXP.controller.AddMoveFormViewController;
+import com.KinoXP.controller.AddMovieFormViewController;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -26,8 +26,8 @@ import java.net.URL;
  */
 public class NewMovieView {
     /**
-     *      ManageMovieView
-     *      by Grzegorz Goraj
+     * ManageMovieView
+     * by Grzegorz Goraj
      */
 
 
@@ -39,12 +39,11 @@ public class NewMovieView {
     Button logOut;
     Label topLayout;
     Stage primaryStage;
-    AddMoveFormViewController addMoveFormViewController = new AddMoveFormViewController();
+    AddMovieFormViewController addMoveFormViewController = new AddMovieFormViewController();
 
     //CONTROLLERS
 
     //
-
 
 
     public void start() {
@@ -70,11 +69,10 @@ public class NewMovieView {
         plusButton.setPrefSize(40, 40);
         //plusButton.setOnAction(event -> addMovie());  //You should run AddMovieFormView
         plusButton.setOnAction(event -> {
-        addMoveFormViewController.addMoveFormViewDisplay();
+            addMoveFormViewController.newMovieFormViewDisplay();
         });
         borderPane.setAlignment(plusButton, Pos.CENTER);
         borderPane.setLeft(plusButton);
-
 
 
         //Center - FlowPane
@@ -87,7 +85,7 @@ public class NewMovieView {
 
 
         //SCENE
-        scene = new Scene(borderPane, 1280, 800 );
+        scene = new Scene(borderPane, 1280, 800);
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);
         primaryStage.show();
@@ -134,12 +132,14 @@ public class NewMovieView {
 
         Button button = new Button();
         button.setGraphic(imageView);
-        button.setPrefSize(80,100);
-        button.setPadding(new Insets(0,0,0,0));
+        button.setPrefSize(80, 100);
+        button.setPadding(new Insets(0, 0, 0, 0));
 
         vBox.getChildren().addAll(button, titleBtnLabel);
         flowPane.getChildren().add(vBox);
     }
 }
+
+
 
 

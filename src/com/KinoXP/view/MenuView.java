@@ -54,7 +54,7 @@ public class MenuView {
         vbox.setAlignment(Pos.CENTER);
 
         movies.setOnAction(event -> {
-            newMovieViewController.newMovieViewDispaly();
+            newMovieViewController.newMovieViewDisplay();
         });
 
         schedule.setOnAction(event -> {

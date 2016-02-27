@@ -1,19 +1,14 @@
 package com.KinoXP.controller;
 
-import com.KinoXP.view.AddMoveFormView;
 import com.KinoXP.view.NewMovieView;
 
 /**
- * Created by hartyandi on 2/24/16.
+ * Created by quena on 25-02-2016.
  */
 public class NewMovieViewController {
 
-
-
-    public void newMovieViewDispaly(){
+    public void newMovieViewDisplay(){
         NewMovieView newMovieView = new NewMovieView();
         newMovieView.start();
     }
-
-
 }

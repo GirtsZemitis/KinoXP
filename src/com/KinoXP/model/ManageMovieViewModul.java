@@ -23,7 +23,7 @@ public class ManageMovieViewModul {
             String USER = "root";
             String PASS = "root";
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
-            System.out.println("connmod obj created" + conn + " message: ");
+            System.out.println("connmod obj created in ManageMovieViewModul: " + conn + " message: ");
 
         } catch (SQLException e) {
             System.out.println("dbsss error Bitches!!" + e.getMessage());

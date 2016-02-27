@@ -18,7 +18,7 @@ public class EditMovieTest extends TestCase {
 
 
     @org.junit.Test
-    public void testEditMovie() {
+    public void testManageMovie() {
 
         ManageMovieViewModul emvController = new ManageMovieViewModul();
 
