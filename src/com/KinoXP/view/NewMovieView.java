@@ -113,23 +113,30 @@ public class NewMovieView {
             String url = null;
             String label = null;
 
-
+            // get DB indexMovie to url variable
             url = newMovieViewController.getPhotoLinkFromModel(indexMovieList.get(i));
+            // get DB title to label variable
             label = newMovieViewController.getMovieTitleFromModel(indexMovieList.get(i));
 
+            // getting the usable image (reprinted in method) to variable imageView
             imageView =  newMovieViewController.getWrapImageFromUrlCtrl(url);
 
             Button button666 = new Button();
+            // setting up ButtonId to DB indexMovie - it makes it easier to pin the EditWindow
             button666.setId(indexMovieList.get(i).toString());
+            //button qualities:
             button666.setMaxSize(60, 90);
             button666.setPadding(new Insets(0, 0, 0, 0));
             button666.setGraphic(imageView);
 
+            //creating label
             Label titleBtnLabel666 = new Label();
-            titleBtnLabel666.setPrefSize(80, 20);
+            // labels qualities:
+            titleBtnLabel666.setPrefSize(110, 20);
             titleBtnLabel666.setTextAlignment(TextAlignment.RIGHT);
             titleBtnLabel666.setText(label);
 
+            // VBox creation ( every button + lable are sitted inside the vBox)
             VBox vBox = new VBox();
             vBox.setPrefSize(100, 130);
             vBox.setAlignment(Pos.CENTER);
