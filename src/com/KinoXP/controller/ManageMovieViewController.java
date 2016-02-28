@@ -1,6 +1,6 @@
 package com.KinoXP.controller;
 
-import com.KinoXP.model.ManageMovieViewModul;
+import com.KinoXP.model.ManageMovieViewModel;
 import com.KinoXP.view.ManageMovieView;
 
 /**
@@ -9,11 +9,11 @@ import com.KinoXP.view.ManageMovieView;
  */
 public class ManageMovieViewController {
 
-    private ManageMovieViewModul manageMovieViewModul;
+    private ManageMovieViewModel manageMovieViewModul;
     private ManageMovieView manageMovieView;
 
     //CONSTRUCTORS
-    public ManageMovieViewController(ManageMovieView manageMovieView, ManageMovieViewModul manageMovieViewModul) {
+    public ManageMovieViewController(ManageMovieView manageMovieView, ManageMovieViewModel manageMovieViewModul) {
         this.manageMovieView = manageMovieView;
         this.manageMovieViewModul = manageMovieViewModul;
     }

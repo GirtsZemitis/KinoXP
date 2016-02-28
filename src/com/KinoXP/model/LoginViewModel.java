@@ -5,9 +5,9 @@ import java.sql.*;
 /**
  * Created by hartyandi on 2/25/16.
  */
-public class LoginViewModul {
-    Connection conn = null;
-    Employee employee;
+public class LoginViewModel {
+    public static Connection conn = null;
+    EmployeeModel employeeModel;
 
 
 
@@ -29,25 +29,25 @@ public class LoginViewModul {
         }
     }
     //CHECK LOG IN AND PASSWORD WITH SQL - DATABASE (PLEASE MODIFY HERE AND UP FOR YOUR LOCAL DATABASES!!!!!)
-    public Employee checkLoginAndPassword(Employee employee){
+    public EmployeeModel checkLoginAndPassword(EmployeeModel employeeModel){
         try {
             String sql = "SELECT * FROM Employee WHERE userName=?";
 
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
-            preparedStatement.setString(1, employee.getUserName());
+            preparedStatement.setString(1, employeeModel.getUserName());
             //preparedStatement.setString(2, password);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                employee = new Employee(resultSet.getString(1),resultSet.getString(2));
+                employeeModel = new EmployeeModel(resultSet.getString(1),resultSet.getString(2));
             } else {
-                employee = null;
+                employeeModel = null;
             }
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return  employee;
+        return employeeModel;
     }
 
 

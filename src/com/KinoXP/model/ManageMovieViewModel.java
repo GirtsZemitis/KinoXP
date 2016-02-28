@@ -6,7 +6,7 @@ import java.sql.*;
  * Created by Girts Zemitis on 25/02/2016.
  * https://github.com/GirtsZemitis
  */
-public class ManageMovieViewModul {
+public class ManageMovieViewModel {
     private Connection conn = null;
 
 
@@ -16,14 +16,14 @@ public class ManageMovieViewModul {
      */
 
     //THE CONNECTION
-    public ManageMovieViewModul() {
+    public ManageMovieViewModel() {
 
         try {
             String DB_URL = "jdbc:mysql://localhost/tableBook";
             String USER = "root";
             String PASS = "root";
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
-            System.out.println("connmod obj created in ManageMovieViewModul: " + conn + " message: ");
+            System.out.println("connmod obj created in ManageMovieViewModel: " + conn + " message: ");
 
         } catch (SQLException e) {
             System.out.println("dbsss error Bitches!!" + e.getMessage());

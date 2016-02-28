@@ -5,11 +5,11 @@ import java.util.Date;
 /**
  * Created by hartyandi on 2/24/16.
  */
-public class Ticket {
+public class TicketModel {
 
     private int price;
     private Date date;
-    private MovieTheater movieTheater;
+    private MovieTheaterModel movieTheater;
     private String type;
 
 }

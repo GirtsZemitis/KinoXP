@@ -1,7 +1,6 @@
 package com.KinoXP.view;
 
-import com.KinoXP.model.Time;
-import javafx.collections.ObservableList;
+import com.KinoXP.model.TimeModel;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -30,7 +29,7 @@ public class Schedule {
     Label nrOfWeek;
     // weekcounter
     int weekCounter = 1;
-    TableView<Time> table;
+    TableView<TimeModel> table;
 
     public  void start(){
         Stage primaryStage = new Stage();
@@ -83,10 +82,10 @@ public class Schedule {
         table.setEditable(true);
         table.getSelectionModel().setCellSelectionEnabled(true);
 
-        TableColumn<Time,String> hour  = new TableColumn("hours");
+        TableColumn<TimeModel,String> hour  = new TableColumn("hours");
         hour.setCellValueFactory(new PropertyValueFactory<>("time"));
         TableColumn monday = new TableColumn("Monday");
-        monday.setCellValueFactory(new PropertyValueFactory<Time, String>("monday"));
+        monday.setCellValueFactory(new PropertyValueFactory<TimeModel, String>("monday"));
         monday.setCellFactory(new Callback<TableColumn, TableCell>() {
             public TableCell call(TableColumn param) {
                 return new TableCell<TableCellTextColorExample.TableData, String>() {
@@ -257,7 +256,7 @@ public class Schedule {
             }
         });
         TableColumn sanday  = new TableColumn("Sanday");
-        sanday.setCellValueFactory(new PropertyValueFactory<Time, String>("sunday"));
+        sanday.setCellValueFactory(new PropertyValueFactory<TimeModel, String>("sunday"));
 
         sanday.setCellFactory(new Callback<TableColumn, TableCell>() {
             public TableCell call(TableColumn param) {
@@ -291,88 +290,88 @@ public class Schedule {
             TablePosition firstCell = table.getSelectionModel().getSelectedCells().get(0);
             int column =  firstCell.getColumn();
             int row = firstCell.getRow();
-            Time time = table.getSelectionModel().getSelectedItem();
+            TimeModel timeModel = table.getSelectionModel().getSelectedItem();
 
             if(column==1){
-                if(time.getMonday().equals("no")){
-                    time.setMonday("yes");
-                    arrayList.get(weekCounter-1).setYes(time,row);
+                if(timeModel.getMonday().equals("no")){
+                    timeModel.setMonday("yes");
+                    arrayList.get(weekCounter-1).setYes(timeModel,row);
                     table.setItems(arrayList.get(weekCounter-1).getObservableList());
                 }else{
-                    time.setMonday("no");
-                    arrayList.get(weekCounter-1).setYes(time,row);
+                    timeModel.setMonday("no");
+                    arrayList.get(weekCounter-1).setYes(timeModel,row);
                     table.setItems(arrayList.get(weekCounter-1).getObservableList());
                 }
 
 
             }
             if(column==2){
-                if(time.getTuesday().equals("no")) {
-                    time.setTuesday("yes");
-                    arrayList.get(weekCounter-1).setYes(time, row);
+                if(timeModel.getTuesday().equals("no")) {
+                    timeModel.setTuesday("yes");
+                    arrayList.get(weekCounter-1).setYes(timeModel, row);
                     table.setItems(arrayList.get(weekCounter-1).getObservableList());
                 }else{
-                    time.setTuesday("no");
-                    arrayList.get(weekCounter-1).setYes(time,row);
+                    timeModel.setTuesday("no");
+                    arrayList.get(weekCounter-1).setYes(timeModel,row);
                     table.setItems(arrayList.get(weekCounter-1).getObservableList());
                 }
             }
             if(column==3){
-                if(time.getWednesday().equals("no")) {
+                if(timeModel.getWednesday().equals("no")) {
 
-                    time.setWednesday("yes");
-                    arrayList.get(weekCounter-1).setYes(time, row);
+                    timeModel.setWednesday("yes");
+                    arrayList.get(weekCounter-1).setYes(timeModel, row);
                     table.setItems(arrayList.get(weekCounter-1).getObservableList());
                 }else {
-                    time.setWednesday("no");
-                    arrayList.get(weekCounter-1).setYes(time,row);
+                    timeModel.setWednesday("no");
+                    arrayList.get(weekCounter-1).setYes(timeModel,row);
                     table.setItems(arrayList.get(weekCounter-1).getObservableList());
                 }
             }
             if(column==4){
-                if(time.getThrusday().equals("no")) {
+                if(timeModel.getThrusday().equals("no")) {
 
-                    time.setThrusday("yes");
-                    arrayList.get(weekCounter-1).setYes(time, row);
+                    timeModel.setThrusday("yes");
+                    arrayList.get(weekCounter-1).setYes(timeModel, row);
                     table.setItems(arrayList.get(weekCounter-1).getObservableList());
                 }else {
-                    time.setThrusday("no");
-                    arrayList.get(weekCounter-1).setYes(time, row);
+                    timeModel.setThrusday("no");
+                    arrayList.get(weekCounter-1).setYes(timeModel, row);
                     table.setItems(arrayList.get(weekCounter-1).getObservableList());
                 }
             }
             if(column==5){
-                if(time.getFriday().equals("no")) {
-                    time.setFriday("yes");
-                    arrayList.get(weekCounter-1).setYes(time, row);
+                if(timeModel.getFriday().equals("no")) {
+                    timeModel.setFriday("yes");
+                    arrayList.get(weekCounter-1).setYes(timeModel, row);
                     table.setItems(arrayList.get(weekCounter-1).getObservableList());
                 }else {
-                    time.setFriday("no");
-                    arrayList.get(weekCounter-1).setYes(time,row);
+                    timeModel.setFriday("no");
+                    arrayList.get(weekCounter-1).setYes(timeModel,row);
                     table.setItems(arrayList.get(weekCounter-1).getObservableList());
                 }
             }
             if(column==6){
-                if(time.getSaturday().equals("no")) {
+                if(timeModel.getSaturday().equals("no")) {
 
-                    time.setSaturday("yes");
-                    arrayList.get(weekCounter-1).setYes(time, row);
+                    timeModel.setSaturday("yes");
+                    arrayList.get(weekCounter-1).setYes(timeModel, row);
                     table.setItems(arrayList.get(weekCounter-1).getObservableList());
                 }else {
-                    time.setSaturday("no");
-                    arrayList.get(weekCounter-1).setYes(time,row);
+                    timeModel.setSaturday("no");
+                    arrayList.get(weekCounter-1).setYes(timeModel,row);
                     table.setItems(arrayList.get(weekCounter-1).getObservableList());
                 }
             }
             if(column==7){
-                if(time.getSunday().equals("no")) {
+                if(timeModel.getSunday().equals("no")) {
 
-                    time.setSunday("yes");
-                    arrayList.get(weekCounter-1).setYes(time, row);
+                    timeModel.setSunday("yes");
+                    arrayList.get(weekCounter-1).setYes(timeModel, row);
                     table.setItems(arrayList.get(weekCounter-1).getObservableList());
                 }else {
-                    time.setSunday("no");
-                    arrayList.get(weekCounter-1).setYes(time,row);
+                    timeModel.setSunday("no");
+                    arrayList.get(weekCounter-1).setYes(timeModel,row);
                     table.setItems(arrayList.get(weekCounter-1).getObservableList());
                 }
             }

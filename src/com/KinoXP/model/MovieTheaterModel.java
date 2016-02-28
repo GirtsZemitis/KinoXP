@@ -3,7 +3,7 @@ package com.KinoXP.model;
 /**
  * Created by hartyandi on 2/24/16.
  */
-public class MovieTheater {
+public class MovieTheaterModel {
 
     private String name;
     private int rows;

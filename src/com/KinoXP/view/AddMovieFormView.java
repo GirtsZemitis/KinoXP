@@ -1,7 +1,8 @@
 package com.KinoXP.view;
 
 import com.KinoXP.controller.AddMovieFormViewController;
-import com.KinoXP.model.AddMovieFormViewModul;
+import com.KinoXP.controller.NewMovieViewController;
+import com.KinoXP.model.AddMovieFormViewModel;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -18,15 +19,17 @@ import javafx.stage.Stage;
  */
 public class AddMovieFormView {
 
-    private AddMovieFormViewController addMovieFormViewController;
-    private AddMovieFormViewModul addMovieFormViewModul;
+    private AddMovieFormViewController addMovieFormViewController = new AddMovieFormViewController();
+    private AddMovieFormViewModel addMovieFormViewModel = new AddMovieFormViewModel();
+    private NewMovieViewController newMovieViewController = new NewMovieViewController();
     private Stage stage;
 
     //CONSTRUCTOR
     public AddMovieFormView() {
-        addMovieFormViewModul = new AddMovieFormViewModul();
-        addMovieFormViewController = new AddMovieFormViewController(this, addMovieFormViewModul);
+        addMovieFormViewModel = new AddMovieFormViewModel();
+        addMovieFormViewController = new AddMovieFormViewController(this, addMovieFormViewModel);
     }
+
 
     public void getAddMovieView() {
 
@@ -45,7 +48,7 @@ public class AddMovieFormView {
         TextArea mainActorTxt = new TextArea();
 
         //LABELS
-        Label mainTitleLbl = new Label("Add Movie");
+        Label mainTitleLbl = new Label("Add MovieModel");
         mainTitleLbl.setFont(Font.font("Courier", FontWeight.BOLD, 25));
         mainTitleLbl.setFont(Font.font(25));
         Label titleLbl = new Label("Title");
@@ -57,11 +60,11 @@ public class AddMovieFormView {
         Label ageLimitLbl = new Label("Age Limit");
         Label castLbl = new Label("Cast");
         Label posterLbl = new Label("Poster URL");
-        Label movieTheaterLbl = new Label("Movie Theater");
+        Label movieTheaterLbl = new Label("MovieModel Theater");
 
         //BUTTONS
         Button addPosterBtn = new Button("Add");
-        Button addMovieBtn = new Button("Add Movie");
+        Button addMovieBtn = new Button("Add MovieModel");
         Button backBtn = new Button("Go Back");
 
         addPosterBtn.setOnAction(event1 -> addPosterUrl(posterPathTxt.getText()));
@@ -70,7 +73,14 @@ public class AddMovieFormView {
             addMovieFormViewController.addMovieButtonAction(titleTxt.getText(), playingTimeInMinutesTxt.getText(),
                     releaseYearTxt.getText(), plotTxt.getText(), directorTxt.getText(), posterPathTxt.getText(),
                     mainActorTxt.getText(), movieTheaterTxt.getText(), genreTxt.getText() ,ageLimitTxt.getText());
+
+            //creating posterButton in NewMovieView
+
+
+            closeStage();
         });
+
+
 
         backBtn.setOnAction(event -> {
             closeStage();

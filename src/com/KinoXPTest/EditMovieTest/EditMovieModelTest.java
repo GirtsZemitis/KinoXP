@@ -1,7 +1,7 @@
 package com.KinoXPTest.EditMovieTest;
 
-import com.KinoXP.model.ManageMovieViewModul;
-import com.KinoXP.model.MovieTheater;
+import com.KinoXP.model.ManageMovieViewModel;
+import com.KinoXP.model.MovieTheaterModel;
 import junit.framework.TestCase;
 
 import java.sql.Connection;
@@ -13,14 +13,14 @@ import java.sql.SQLException;
  * Created by Girts Zemitis on 25/02/2016.
  * https://github.com/GirtsZemitis
  */
-public class EditMovieTest extends TestCase {
+public class EditMovieModelTest extends TestCase {
 
 
 
     @org.junit.Test
     public void testManageMovie() {
 
-        ManageMovieViewModul emvController = new ManageMovieViewModul();
+        ManageMovieViewModel emvController = new ManageMovieViewModel();
 
         // String DB_URL = "jdbc:mysql://localhost/testkinoxp";
         String DB_URL = "jdbc:mysql://localhost/testkinoxp";
@@ -73,7 +73,7 @@ public class EditMovieTest extends TestCase {
         assertEquals("EditedMainActor", mainActor);
 
 
-        MovieTheater editedMovieTheater = new MovieTheater();
+        MovieTheaterModel editedMovieTheater = new MovieTheaterModel();
         editedMovieTheater.setName("new name");
         String newEdit = emvController.editMovieTheater("EditedTitle", editedMovieTheater.getName());
         assertNotNull(newEdit);

@@ -3,7 +3,7 @@ package com.KinoXP.model;
 /**
  * Created by hartyandi on 2/24/16.
  */
-public class Movie {
+public class MovieModel {
 
     private String titel;
     private int playingtimeInMinutes;
@@ -12,9 +12,9 @@ public class Movie {
     private String director;
     private String posterpath;
     private String mainActor;
-    private MovieTheater movieTheater;
+    private MovieTheaterModel movieTheater;
 
-    public Movie(String titel, int playingtimeInMinutes, String realeseYear, String plot, String director, String posterpath, String mainActor, MovieTheater movieTheater) {
+    public MovieModel(String titel, int playingtimeInMinutes, String realeseYear, String plot, String director, String posterpath, String mainActor, MovieTheaterModel movieTheater) {
         this.titel = titel;
         this.playingtimeInMinutes = playingtimeInMinutes;
         this.realeseYear = realeseYear;
@@ -81,11 +81,11 @@ public class Movie {
         this.mainActor = mainActor;
     }
 
-    public MovieTheater getMovieTheater() {
+    public MovieTheaterModel getMovieTheater() {
         return movieTheater;
     }
 
-    public void setMovieTheater(MovieTheater movieTheater) {
+    public void setMovieTheater(MovieTheaterModel movieTheater) {
         this.movieTheater = movieTheater;
     }
 }

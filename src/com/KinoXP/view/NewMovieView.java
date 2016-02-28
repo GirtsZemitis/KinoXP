@@ -1,25 +1,19 @@
 package com.KinoXP.view;
 
 import com.KinoXP.controller.AddMovieFormViewController;
+import com.KinoXP.controller.NewMovieViewController;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javafx.scene.image.PixelWriter;
-import javafx.scene.image.WritableImage;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
-
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.net.URL;
 
 /**
  * Created by quena on 25-02-2016.
@@ -39,10 +33,9 @@ public class NewMovieView {
     Button logOut;
     Label topLayout;
     Stage primaryStage;
-    AddMovieFormViewController addMoveFormViewController = new AddMovieFormViewController();
-
     //CONTROLLERS
-
+    NewMovieViewController newMovieViewController = new NewMovieViewController();
+    AddMovieFormViewController addMoveFormViewController = new AddMovieFormViewController();
     //
 
 
@@ -69,7 +62,8 @@ public class NewMovieView {
         plusButton.setPrefSize(40, 40);
         //plusButton.setOnAction(event -> addMovie());  //You should run AddMovieFormView
         plusButton.setOnAction(event -> {
-            addMoveFormViewController.newMovieFormViewDisplay();
+
+            addMoveFormViewController.addMovieFormViewDisplay();
         });
         borderPane.setAlignment(plusButton, Pos.CENTER);
         borderPane.setLeft(plusButton);
@@ -104,30 +98,8 @@ public class NewMovieView {
         titleBtnLabel.setText("Ip-Man 3");
 
         //Image imageOk = new Image(getClass().getResourceAsStream("moviePoster.png"));
-        BufferedImage img = null;
-        try {
-            img = ImageIO.read(new URL("https://thehande.files.wordpress.com/2014/01/brucelee.jpg"));
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.out.println("error loading image");
-        }
-
-        WritableImage wr = null;
-        if (img != null) {
-            wr = new WritableImage(img.getWidth(), img.getHeight());
-            PixelWriter pw = wr.getPixelWriter();
-            for (int x = 0; x < img.getWidth(); x++) {
-                for (int y = 0; y < img.getHeight(); y++) {
-                    pw.setArgb(x, y, img.getRGB(x, y));
-                }
-            }
-        }
-
-        ImageView imageView = new ImageView();
-        imageView.setImage(wr);
-        imageView.setFitHeight(100);
-        imageView.setPreserveRatio(true);
-        imageView.setCache(true);
+     ImageView imageView;
+       imageView =  newMovieViewController.getWrapImageFromUrlCtrl();
 
         Button button = new Button();
         button.setGraphic(imageView);
@@ -137,6 +109,7 @@ public class NewMovieView {
         vBox.getChildren().addAll(button, titleBtnLabel);
         flowPane.getChildren().add(vBox);
     }
+
 }
 
 

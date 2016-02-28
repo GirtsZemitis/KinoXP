@@ -1,8 +1,8 @@
 package com.KinoXP.controller;
 
 
-import com.KinoXP.model.Employee;
-import com.KinoXP.model.LoginViewModul;
+import com.KinoXP.model.EmployeeModel;
+import com.KinoXP.model.LoginViewModel;
 import com.KinoXP.view.MenuView;
 
 /**
@@ -11,17 +11,17 @@ import com.KinoXP.view.MenuView;
 public class LoginViewController {
 
     //CREATED OBJECT
-    LoginViewModul loginViewModul = new LoginViewModul();
+    LoginViewModel loginViewModel = new LoginViewModel();
 
     //CHECK IF THE INSERTED USERNAME AND PASSWORD ARE AS THE ONES ESTABLISHED IN THE DATABASE
-    public void checkLogIn(Employee employee){
+    public void checkLogIn(EmployeeModel employeeModel){
 
         //CALL THE DATABASE CONNECTION METHOD => CONNECT TO DATABASE
-        loginViewModul.connectToDatabase();
+        loginViewModel.connectToDatabase();
 
         //COMPARE IF INPUTED USERNAME && PASS ARE == TO MANUALLY ESTABLISHED ONES IN DB
-        if((loginViewModul.checkLoginAndPassword(employee).getUserName().equals(employee.getUserName()))&&
-                (loginViewModul.checkLoginAndPassword(employee).getPassword().equals(employee.getPassword()))){
+        if((loginViewModel.checkLoginAndPassword(employeeModel).getUserName().equals(employeeModel.getUserName()))&&
+                (loginViewModel.checkLoginAndPassword(employeeModel).getPassword().equals(employeeModel.getPassword()))){
 
             //IF YES THEN :
                 MenuView menuView = new MenuView();

@@ -3,7 +3,7 @@ package com.KinoXP.model;
 /**
  * Created by krystian on 2016-02-24.
  */
-public class Time {
+public class TimeModel {
 
     String time;
     String monday;
@@ -71,8 +71,8 @@ public class Time {
     String saturday;
     String sunday;
 
-    public Time(String time,String monday, String tuesday, String wednesday, String thrusday, String friday, String saturday,
-                String sunday){
+    public TimeModel(String time, String monday, String tuesday, String wednesday, String thrusday, String friday, String saturday,
+                     String sunday){
 
         this.time = time;
         this.monday = monday;

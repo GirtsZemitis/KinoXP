@@ -1,6 +1,6 @@
 package com.KinoXP.controller;
 
-import com.KinoXP.model.AddMovieFormViewModul;
+import com.KinoXP.model.AddMovieFormViewModel;
 import com.KinoXP.view.AddMovieFormView;
 
 /**
@@ -8,20 +8,23 @@ import com.KinoXP.view.AddMovieFormView;
  */
 public class AddMovieFormViewController {
 
+    //Greg - I moved AddmovieButtonActions Logic to AddMovieFormViewModel.
+    // controller only binds View with logic(Model)..
 
 
-    public void newMovieFormViewDisplay(){
+
+    public void addMovieFormViewDisplay(){
         AddMovieFormView addMovieFormView = new AddMovieFormView();
         addMovieFormView.getAddMovieView();
     }
 
     private AddMovieFormView addMovieFormView;
-    private AddMovieFormViewModul addMovieFormViewModul;
+    private AddMovieFormViewModel addMovieFormViewModel;
 
     //CONSTRUCTORS
-    public AddMovieFormViewController(AddMovieFormView addMovieFormView, AddMovieFormViewModul addMovieFormViewModul) {
+    public AddMovieFormViewController(AddMovieFormView addMovieFormView, AddMovieFormViewModel addMovieFormViewModel) {
         this.addMovieFormView = addMovieFormView;
-        this.addMovieFormViewModul = addMovieFormViewModul;
+        this.addMovieFormViewModel = addMovieFormViewModel;
     }
 
     public AddMovieFormViewController(){};
@@ -31,7 +34,7 @@ public class AddMovieFormViewController {
                                      String plotInput, String directorInput, String posterPathInput, String castInput,
                                      String theatreNameInput, String genreInput, String ageLimitInput) {
 
-        addMovieFormViewModul.insertMovie(titleInput, playingTimeInMinutesInput, releaseYearInput, plotInput, directorInput, posterPathInput,
-                castInput, theatreNameInput, genreInput, ageLimitInput);
+        addMovieFormViewModel.insertMovie(titleInput, playingTimeInMinutesInput, releaseYearInput, plotInput,
+                directorInput, posterPathInput, castInput, theatreNameInput, genreInput, ageLimitInput);
     }
 }

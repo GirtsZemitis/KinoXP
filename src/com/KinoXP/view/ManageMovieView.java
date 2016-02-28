@@ -1,7 +1,7 @@
 package com.KinoXP.view;
 
 import com.KinoXP.controller.ManageMovieViewController;
-import com.KinoXP.model.ManageMovieViewModul;
+import com.KinoXP.model.ManageMovieViewModel;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -19,7 +19,7 @@ import javafx.stage.Stage;
 public class ManageMovieView extends Application {
 
     ManageMovieViewController manageMovieViewController;
-    ManageMovieViewModul manageMovieViewModul;
+    ManageMovieViewModel manageMovieViewModul;
 
     //MAIN METHOD TO START THE APPLICATION
     public static void main(String[] args) {
@@ -28,7 +28,7 @@ public class ManageMovieView extends Application {
 
     //CONSTRUCTOR
     public ManageMovieView() {
-        manageMovieViewModul = new ManageMovieViewModul();
+        manageMovieViewModul = new ManageMovieViewModel();
         manageMovieViewController = new ManageMovieViewController();
     }
 
@@ -51,7 +51,7 @@ public class ManageMovieView extends Application {
         TextArea mainActorTxt = new TextArea();
 
         //LABELS
-        Label mainTitleLbl = new Label("Edit Movie");
+        Label mainTitleLbl = new Label("Edit MovieModel");
         mainTitleLbl.setFont(new Font("Serif", 30));
         Label titleLbl = new Label("Title");
         Label yearLbl = new Label("Year");
@@ -62,12 +62,12 @@ public class ManageMovieView extends Application {
         Label ageLimitLbl = new Label("Age Limit");
         Label castLbl = new Label("Cast");
         Label posterLbl = new Label("Poster URL");
-        Label movieTheaterLbl = new Label("Movie Theater");
+        Label movieTheaterLbl = new Label("MovieModel Theater");
 
         //BUTTONS
         //Button addCastBtn = new Button("Add");
         Button addPosterBtn = new Button("Add");
-        Button editMovieBtn = new Button("Edit Movie");
+        Button editMovieBtn = new Button("Edit MovieModel");
         Button backBtn = new Button("Go Back");
 
         //H-BOXES

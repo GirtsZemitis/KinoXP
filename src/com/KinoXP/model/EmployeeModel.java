@@ -3,17 +3,17 @@ package com.KinoXP.model;
 /**
  * Created by hartyandi on 2/24/16.
  */
-public class Employee {
+public class EmployeeModel {
 
     private String userName;
     private String password;
 
     //CONSTRUCTOR
-    public Employee(String userName, String password) {
+    public EmployeeModel(String userName, String password) {
         this.userName = userName;
         this.password = password;
     }
-   // public Employee(){}
+   // public EmployeeModel(){}
 
     //GETTERS AND SETTERS
     public String getPassword() {
