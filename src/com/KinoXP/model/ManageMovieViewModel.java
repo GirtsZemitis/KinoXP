@@ -1,5 +1,7 @@
 package com.KinoXP.model;
 
+import com.KinoXP.view.LoginView;
+
 import java.sql.*;
 
 /**
@@ -7,28 +9,7 @@ import java.sql.*;
  * https://github.com/GirtsZemitis
  */
 public class ManageMovieViewModel {
-    private Connection conn = null;
-
-
-    /**
-     * Database Model that creates connection with the MySQL server
-     * when it is instantiated.
-     */
-
-    //THE CONNECTION
-    public ManageMovieViewModel() {
-
-        try {
-            String DB_URL = "jdbc:mysql://localhost/tableBook";
-            String USER = "root";
-            String PASS = "root";
-            conn = DriverManager.getConnection(DB_URL, USER, PASS);
-            System.out.println("connmod obj created in ManageMovieViewModel: " + conn + " message: ");
-
-        } catch (SQLException e) {
-            System.out.println("dbsss error Bitches!!" + e.getMessage());
-        }
-    }
+    private Connection conn = LoginViewModel.conn;
 
     //METHOD FOR GETTING THE TITLE FROM DATABASE
     public String getTitle(String title){
