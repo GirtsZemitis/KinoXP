@@ -2,6 +2,7 @@ package com.KinoXP.view;
 
 import com.KinoXP.controller.AddMovieFormViewController;
 import com.KinoXP.controller.NewMovieViewController;
+import com.KinoXP.model.NewMovieViewModel;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -14,6 +15,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
+
+import java.util.ArrayList;
 
 /**
  * Created by quena on 25-02-2016.
@@ -32,14 +35,16 @@ public class NewMovieView {
     Button plusButton;
     Button logOut;
     Label topLayout;
-    Stage primaryStage;
+    VBox vBox;
+
     //CONTROLLERS
     NewMovieViewController newMovieViewController = new NewMovieViewController();
     AddMovieFormViewController addMoveFormViewController = new AddMovieFormViewController();
     //
 
 
-    public void start() {
+    public void start(String urlGreg) {
+
 
         Stage primaryStage = new Stage();
         //ROOT
@@ -60,16 +65,47 @@ public class NewMovieView {
         //BORDER Left
         plusButton = new Button("+");
         plusButton.setPrefSize(40, 40);
-        //plusButton.setOnAction(event -> addMovie());  //You should run AddMovieFormView
+
+
+
+        //method that gets indexMovie to arraylist
+        ArrayList<Integer> indexMovieList = new ArrayList<>();
+        indexMovieList = newMovieViewController.getArrayListOfMovieIndexFromDb();
+        System.out.println("indexy " + indexMovieList.toString());
+
+        for(int i=0; i<indexMovieList.size(); i++) {
+            indexMovieList.toString();
+        }
+
+
+
         plusButton.setOnAction(event -> {
 
             addMoveFormViewController.addMovieFormViewDisplay();
+
+            //*************************
+            /*System.out.println("UrlGreg: " + urlGreg);
+            if(urlGreg != null) {
+                addMovie(urlGreg);
+            }
+            else {
+                System.out.println("url = null");
+                primaryStage.close();
+            }*/
+            //*************************
+
         });
+
         borderPane.setAlignment(plusButton, Pos.CENTER);
         borderPane.setLeft(plusButton);
 
 
         //Center - FlowPane
+
+
+        vBox = new VBox();
+        vBox.setPrefSize(80, 120);
+        vBox.setAlignment(Pos.CENTER);
         flowPane = new FlowPane();
         flowPane.setHgap(30);
         flowPane.setVgap(30);
@@ -86,25 +122,23 @@ public class NewMovieView {
 
     }
 
-    public void addMovie() {//You should now run the addMoveFromView form!!
+    public void addMovie(String url) {
 
-        VBox vBox = new VBox();
-        vBox.setPrefSize(80, 120);
-        vBox.setAlignment(Pos.CENTER);
+
+        //Image imageOk = new Image(getClass().getResourceAsStream("moviePoster.png"));
+        ImageView imageView;
+        imageView =  newMovieViewController.getWrapImageFromUrlCtrl(url);
+
+        Button button = new Button();
+        button.setPrefSize(80, 100);
+        button.setPadding(new Insets(0, 0, 0, 0));
+
+        //button.setGraphic(imageView);
 
         Label titleBtnLabel = new Label();
         titleBtnLabel.setPrefSize(80, 20);
         titleBtnLabel.setTextAlignment(TextAlignment.RIGHT);
-        titleBtnLabel.setText("Ip-Man 3");
-
-        //Image imageOk = new Image(getClass().getResourceAsStream("moviePoster.png"));
-     ImageView imageView;
-       imageView =  newMovieViewController.getWrapImageFromUrlCtrl();
-
-        Button button = new Button();
-        button.setGraphic(imageView);
-        button.setPrefSize(80, 100);
-        button.setPadding(new Insets(0, 0, 0, 0));
+        //titleBtnLabel.setText("Ip-Man 3");
 
         vBox.getChildren().addAll(button, titleBtnLabel);
         flowPane.getChildren().add(vBox);

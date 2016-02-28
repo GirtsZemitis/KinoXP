@@ -13,6 +13,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  * Created by quena on 25-02-2016.
@@ -20,12 +21,13 @@ import java.sql.SQLException;
 
 public class NewMovieViewModel {
 
-    Connection conn;
+    Connection conn = LoginViewModel.conn;
 
-    public ImageView wrapImageFromUrl() {
+    public ImageView wrapImageFromUrl(String url) {
         BufferedImage img = null;
+        //saved for later: "https://thehande.files.wordpress.com/2014/01/brucelee.jpg"
         try {
-            img = ImageIO.read(new URL("https://thehande.files.wordpress.com/2014/01/brucelee.jpg"));
+            img = ImageIO.read(new URL(url));
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println("error loading image");
@@ -51,23 +53,24 @@ public class NewMovieViewModel {
         return imageView;
     }
 
-    public String getActorFromDatabase(String mainActor) {
-        String out = "";
-        try {
-            String query = " SELECT title FROM Movie WHERE mainActor=? ";
-            PreparedStatement preparedStatement = conn.prepareStatement(query);
-            preparedStatement.setString(1, mainActor);
-            ResultSet results = preparedStatement.executeQuery();
+    public ArrayList<Integer> getArrayOfIndexMovieFromDb(){
+        ArrayList<Integer> list = new ArrayList<>();
 
-            if (results.next()) {
-                out = results.getString(1);
-            } else {
-                out = "";
+        String sql = "SELECT * FROM Movie WHERE indexMovie= ?";
+        for(int i=1; i<50; i++) {
+            try {
+                PreparedStatement preparedStatement = conn.prepareStatement(sql);
+                preparedStatement.setInt(1, i);
+                ResultSet resultSet = preparedStatement.executeQuery();
+                while (resultSet.next()) {
+                    int indexMovie = resultSet.getInt(1);
+                    list.add(resultSet.getInt(1));
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
-        return out;
+
+        return list;
     }
 }
