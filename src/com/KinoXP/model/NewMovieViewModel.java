@@ -16,7 +16,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
- * Created by quena on 25-02-2016.
+ * Created by Grzegorz Goraj on 25-02-2016.
  */
 
 public class NewMovieViewModel {

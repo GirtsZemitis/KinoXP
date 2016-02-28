@@ -73,10 +73,25 @@ public class NewMovieView {
         indexMovieList = newMovieViewController.getArrayListOfMovieIndexFromDb();
         System.out.println("indexy " + indexMovieList.toString());
 
-        for(int i=0; i<indexMovieList.size(); i++) {
-            indexMovieList.toString();
-        }
+        for(Integer i : indexMovieList) {
+            ImageView imageView;
+            String url = null;
+            //"metoda od Mazura";
+            url = "https://thehande.files.wordpress.com/2014/01/brucelee.jpg";
 
+            imageView =  newMovieViewController.getWrapImageFromUrlCtrl(url);
+
+            Button button = new Button();
+            button.setPrefSize(80, 100);
+            button.setPadding(new Insets(0, 0, 0, 0));
+            button.setGraphic(imageView);
+
+            Label titleBtnLabel = new Label();
+            titleBtnLabel.setPrefSize(80, 20);
+            titleBtnLabel.setTextAlignment(TextAlignment.RIGHT);
+            titleBtnLabel.setText("Ip-Man 3");
+
+        }
 
 
         plusButton.setOnAction(event -> {
