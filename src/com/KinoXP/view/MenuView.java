@@ -1,8 +1,10 @@
 package com.KinoXP.view;
 
 
+import com.KinoXP.controller.LoginViewController;
 import com.KinoXP.controller.ManageMovieSceduleController;
 import com.KinoXP.controller.NewMovieViewController;
+import com.KinoXP.model.LoginViewModel;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -27,6 +29,7 @@ public class MenuView {
     Button movies, schedule, employees, logOut;
     ManageMovieSceduleController manageMovieSceduleController = new ManageMovieSceduleController();
     NewMovieViewController newMovieViewController = new NewMovieViewController();
+    LoginViewController loginViewController = new LoginViewController();
 
 
     public void start() {
@@ -37,13 +40,22 @@ public class MenuView {
         menuLabel = new Label("Main menu");
         menuLabel.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
         movies = new Button("Manage movies");
+        movies.setStyle("-fx-font-size: 20;");
         schedule = new Button("Manage schedule");
+        schedule.setStyle("-fx-font-size: 20");
+
         employees = new Button("Manage employees");
+        employees.setStyle("-fx-font-size: 20");
+
         logOut = new Button("Log out");
-
-
+        
+        logOut.setStyle("-fx-font-size: 20");
+        logOut.setOnAction(event1 -> {
+            loginViewController.startLoginWidnow();
+            primaryStage.close();
+        });
         menuLayout = new BorderPane();
-        menuLayout.setPadding(new Insets(30));
+        menuLayout.setPadding(new Insets(50));
         vbox = new VBox(20);
         vbox.getChildren().addAll(movies, schedule, employees);
         menuLayout.setCenter(vbox);

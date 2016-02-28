@@ -1,7 +1,9 @@
 package com.KinoXP.view;
 
 import com.KinoXP.controller.AddMovieFormViewController;
+import com.KinoXP.controller.LoginViewController;
 import com.KinoXP.controller.NewMovieViewController;
+import com.KinoXP.model.NewMovieViewModel;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -14,6 +16,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
+
 import java.util.ArrayList;
 
 /**
@@ -34,12 +37,17 @@ public class NewMovieView {
     Button logOut;
     Label topLayout;
 
+
+    //** common work
+
+    //****
+
     //CONTROLLERS
     NewMovieViewController newMovieViewController = new NewMovieViewController();
     AddMovieFormViewController addMoveFormViewController = new AddMovieFormViewController();
     //
 
-    //starting Stage
+
     public void start() {
 
 
@@ -48,35 +56,69 @@ public class NewMovieView {
         borderPane = new BorderPane();
 
         //TOP
-        topLayout = new Label("T o p   L a y o u t");
-        topLayout.setPrefSize(1000, 30);
+        topLayout = new Label("Movies OVERVIEW");
+
+        topLayout.setPrefSize(1280, 70);
         topLayout.setAlignment(Pos.CENTER);
-        topLayout.setStyle("-fx-background-color: azure");
-        logOut = new Button("Log Out");
-        logOut.setAlignment(Pos.CENTER_RIGHT);
+        topLayout.setStyle("-fx-background-color: silver;-fx-font-size: 50");
+
         topLayoutHBox = new HBox();
         topLayoutHBox.setSpacing(10);
-        topLayoutHBox.getChildren().addAll(topLayout, logOut);
+        topLayoutHBox.getChildren().addAll(topLayout);
         borderPane.setTop(topLayoutHBox);
 
         //BORDER Left
         plusButton = new Button("+");
         plusButton.setPrefSize(40, 40);
+        plusButton.setStyle("-fx-background-color: #94ff6d");
 
         /***
          *          Greg + Mazur :
          */
-        //creating flowPane - its the Pane of posterButtons
+
         flowPane = new FlowPane();
         flowPane.setHgap(30);
-        flowPane.setVgap(50);
+        flowPane.setVgap(30);
         flowPane.setPadding(new Insets(60));
         flowPane.setMaxWidth(1500);
 
-        addPosterButtons();
+        //method that gets indexMovie to arraylist
+        ArrayList<Integer> indexMovieList = new ArrayList<>();
+        indexMovieList = newMovieViewController.getArrayListOfMovieIndexFromDb();
 
-        //Center - BorderPane
-        borderPane.setCenter(flowPane);
+
+        // reading from DB and creating Buttons + adding Buttons to ArrayList
+        for(int i=0; i<indexMovieList.size(); i++) {
+            ImageView imageView;
+            String url = null;
+            String label = null;
+
+            //"metoda od Mazura";
+            url = newMovieViewController.getPhotoLinkFromModel(indexMovieList.get(i));
+            label = newMovieViewController.getMovieTitleFromModel(indexMovieList.get(i));
+
+            imageView =  newMovieViewController.getWrapImageFromUrlCtrl(url);
+
+            imageView.setFitHeight(200);
+            imageView.setFitWidth(200);
+            Button button666 = new Button();
+            button666.setId(indexMovieList.get(i).toString());
+
+            button666.setPadding(new Insets(0, 0, 0, 0));
+            button666.setGraphic(imageView);
+
+            Label titleBtnLabel666 = new Label();
+            titleBtnLabel666.setPrefSize(80, 20);
+            titleBtnLabel666.setTextAlignment(TextAlignment.RIGHT);
+            titleBtnLabel666.setText(label);
+
+            VBox vBox = new VBox();
+            vBox.setPrefSize(80, 120);
+            //vBox.setMaxSize(80,120);
+            vBox.setAlignment(Pos.CENTER);
+            vBox.getChildren().addAll(button666, titleBtnLabel666);
+            flowPane.getChildren().add(vBox);
+        }
 
         /***
         *
@@ -93,57 +135,33 @@ public class NewMovieView {
         borderPane.setAlignment(plusButton, Pos.CENTER);
         borderPane.setLeft(plusButton);
 
+
+        //Center - FlowPane
+        borderPane.setCenter(flowPane);
+
+        logOut = new Button("Log Out");
+        logOut.setPrefSize(150,50);
+        logOut.setOnAction(event1 -> {
+            LoginViewController loginViewController = new LoginViewController();
+            loginViewController.startLoginWidnow();
+            primaryStage.close();
+        });
+        borderPane.setAlignment(logOut,Pos.CENTER);
+        borderPane.setBottom(logOut);
+
+        logOut.setStyle("-fx-border-color: black;-fx-font-size: 20");
+
+
         //SCENE
-        scene = new Scene(borderPane, 1100, 700);
+        scene = new Scene(borderPane, 1280, 800);
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);
         primaryStage.show();
 
     }
 
-    public void addPosterButtons() {
-        //Arraylist for Buttons
-        ArrayList<Integer> indexMovieList;
-        indexMovieList = newMovieViewController.getArrayListOfMovieIndexFromDb();
 
 
-        // reading from DB and creating Buttons + adding Buttons to ArrayList
-        for(int i=0; i<indexMovieList.size(); i++) {
-            ImageView imageView;
-            String url = null;
-            String label = null;
-
-            // get DB indexMovie to url variable
-            url = newMovieViewController.getPhotoLinkFromModel(indexMovieList.get(i));
-            // get DB title to label variable
-            label = newMovieViewController.getMovieTitleFromModel(indexMovieList.get(i));
-
-            // getting the usable image (reprinted in method) to variable imageView
-            imageView =  newMovieViewController.getWrapImageFromUrlCtrl(url);
-
-            Button button666 = new Button();
-            // setting up ButtonId to DB indexMovie - it makes it easier to pin the EditWindow
-            button666.setId(indexMovieList.get(i).toString());
-            //button qualities:
-            button666.setMaxSize(60, 90);
-            button666.setPadding(new Insets(0, 0, 0, 0));
-            button666.setGraphic(imageView);
-
-            //creating label
-            Label titleBtnLabel666 = new Label();
-            // labels qualities:
-            titleBtnLabel666.setPrefSize(110, 20);
-            titleBtnLabel666.setTextAlignment(TextAlignment.RIGHT);
-            titleBtnLabel666.setText(label);
-
-            // VBox creation ( every button + lable are sitted inside the vBox)
-            VBox vBox = new VBox();
-            vBox.setPrefSize(100, 130);
-            vBox.setAlignment(Pos.CENTER);
-            vBox.getChildren().addAll(button666, titleBtnLabel666);
-            flowPane.getChildren().add(vBox);
-        }
-    }
 
 }
 

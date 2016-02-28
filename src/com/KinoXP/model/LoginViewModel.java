@@ -7,7 +7,7 @@ import java.sql.*;
  */
 public class LoginViewModel {
     public static Connection conn = null;
-
+    EmployeeModel employeeModel;
 
 
 
@@ -20,7 +20,9 @@ public class LoginViewModel {
             String DB_URL = "jdbc:mysql://sql2.freesqldatabase.com:3306/sql2108018";
             String USER = "sql2108018";
             String PASS = "nP5%zC6%";
-
+            /*String DB_URL = "jdbc:mysql://localhost/testkinoxp";
+            String USER = "root";
+            String PASS = "root";*/
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
             System.out.println("conn obj created" + conn + " message: ");
         }

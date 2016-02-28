@@ -1,6 +1,7 @@
 package com.KinoXP.view;
 
 import com.KinoXP.controller.AddMovieFormViewController;
+import com.KinoXP.controller.NewMovieViewController;
 import com.KinoXP.model.AddMovieFormViewModel;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -20,8 +21,7 @@ public class AddMovieFormView {
 
     private AddMovieFormViewController addMovieFormViewController = new AddMovieFormViewController();
     private AddMovieFormViewModel addMovieFormViewModel = new AddMovieFormViewModel();
-    private NewMovieView newMovieView = new NewMovieView();
-
+    private NewMovieViewController newMovieViewController = new NewMovieViewController();
     private Stage stage;
 
     //CONSTRUCTOR
@@ -70,22 +70,24 @@ public class AddMovieFormView {
         addPosterBtn.setOnAction(event1 -> addPosterUrl(posterPathTxt.getText()));
 
         addMovieBtn.setOnAction(event -> {
-            //
             addMovieFormViewController.addMovieButtonAction(titleTxt.getText(), playingTimeInMinutesTxt.getText(),
                     releaseYearTxt.getText(), plotTxt.getText(), directorTxt.getText(), posterPathTxt.getText(),
                     mainActorTxt.getText(), movieTheaterTxt.getText(), genreTxt.getText() ,ageLimitTxt.getText());
 
-            // closing current stage
+            //creating posterButton in NewMovieView
+
             closeStage();
-            // going back to NewMovieView (after pressing add)
+            NewMovieView newMovieView = new NewMovieView();
             newMovieView.start();
 
         });
+
+
 
         backBtn.setOnAction(event -> {
             closeStage();
-            newMovieView.start();
         });
+
 
         //H-BOXES
         HBox hBoxTitle = new HBox();
@@ -144,7 +146,7 @@ public class AddMovieFormView {
             System.out.println(posterUrl);
         }
 
-    //METHOD FOR THE ALERT MESSAGES SHOWN TO THE USER -------*********Greg - why doesn't it work ? I gues it did before...
+    //METHOD FOR THE ALERT MESSAGES SHOWN TO THE USER
     public void updateAlertMessage(String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setContentText(message);

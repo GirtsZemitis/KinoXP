@@ -3,6 +3,7 @@ package com.KinoXP.controller;
 
 import com.KinoXP.model.EmployeeModel;
 import com.KinoXP.model.LoginViewModel;
+import com.KinoXP.view.LoginView;
 import com.KinoXP.view.MenuView;
 
 /**
@@ -29,6 +30,11 @@ public class LoginViewController {
             }else{
                 System.out.println("The userName and Password don't match!");
         }
+    }
+
+    public void startLoginWidnow(){
+        LoginView loginView = new LoginView();
+        loginView.start();
     }
 
 }
