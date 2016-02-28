@@ -73,4 +73,46 @@ public class NewMovieViewModel {
 
         return list;
     }
+
+    public String getPhotoLink(int indexMovie){
+        String link ="";
+        try {
+            String query = " SELECT posterPath FROM Movie WHERE indexMovie=? ";
+            PreparedStatement preparedStatement = conn.prepareStatement(query);
+            preparedStatement.setInt(1, indexMovie);
+            ResultSet results = preparedStatement.executeQuery();
+
+            if (results.next()) {
+                link = results.getString(1);
+            } else {
+                link = "";
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return link;
+    }
+
+    public String getMovieTitle(int indexMovie){
+        String title ="";
+        try {
+            String query = " SELECT title FROM Movie WHERE indexMovie=? ";
+            PreparedStatement preparedStatement = conn.prepareStatement(query);
+            preparedStatement.setInt(1, indexMovie);
+            ResultSet results = preparedStatement.executeQuery();
+
+            if (results.next()) {
+                title = results.getString(1);
+            } else {
+                title = "";
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return title;
+    }
 }
