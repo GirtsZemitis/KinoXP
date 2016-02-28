@@ -16,7 +16,7 @@ public class NewMovieViewController {
 
     public void newMovieViewDisplay(){
         NewMovieView newMovieView = new NewMovieView();
-        newMovieView.start(null);
+        newMovieView.start();
     }
 
     public ImageView getWrapImageFromUrlCtrl(String url) {
@@ -27,5 +27,13 @@ public class NewMovieViewController {
 
     public ArrayList<Integer> getArrayListOfMovieIndexFromDb() {
         return newMovieViewModel.getArrayOfIndexMovieFromDb();
+    }
+
+    public String getPhotoLinkFromModel(int indexMovie) {
+        return newMovieViewModel.getPhotoLink(indexMovie);
+    }
+
+    public String getMovieTitleFromModel(int indexMovie) {
+        return newMovieViewModel.getMovieTitle(indexMovie);
     }
 }
