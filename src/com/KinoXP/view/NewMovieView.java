@@ -114,6 +114,7 @@ public class NewMovieView {
                 EditMovieViewController editMovieViewController = new EditMovieViewController(editMovieView, editMovieViewModel);
                 editMovieView.setEditMovieViewController(editMovieViewController);
                 editMovieView.setManageMovieViewModul(editMovieViewModel);
+                primaryStage.close();
                 try {
                     editMovieView.start(primaryStage);
                 } catch (Exception e) {

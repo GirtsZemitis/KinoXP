@@ -1,6 +1,7 @@
 package com.KinoXP.view;
 
 import com.KinoXP.controller.EditMovieViewController;
+import com.KinoXP.controller.NewMovieViewController;
 import com.KinoXP.model.EditMovieViewModel;
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -153,6 +154,8 @@ public class EditMovieView extends Application {
                     releaseYearTxt.getText(), plotTxt.getText(), directorTxt.getText(), posterPathTxt.getText(),
                     mainActorTxt.getText(), movieTheaterTxt.getText(), genreTxt.getText(), ageLimitTxt.getText(), result[2], result[3], result[4], result[5],
                     result[6], result[7], result[8], result[9], result[10], result[11]);
+            NewMovieViewController newMovieViewController = new NewMovieViewController();
+            newMovieViewController.newMovieViewDisplay();
             finalPrimaryStage.close();
         });
 
