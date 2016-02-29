@@ -1,7 +1,7 @@
 package com.KinoXPTest.EditMovieTest;
 
 import com.KinoXP.model.LoginViewModel;
-import com.KinoXP.model.ManageMovieViewModel;
+import com.KinoXP.model.EditMovieViewModel;
 import com.KinoXP.model.MovieTheaterModel;
 import junit.framework.TestCase;
 
@@ -24,7 +24,7 @@ public class EditMovieModelTest extends TestCase {
 
         LoginViewModel viewModel = new LoginViewModel();
         viewModel.connectToDatabase();
-        ManageMovieViewModel emvController = new ManageMovieViewModel();
+        EditMovieViewModel emvController = new EditMovieViewModel();
         // String DB_URL = "jdbc:mysql://localhost/testkinoxp";
         String DB_URL = "jdbc:mysql://localhost/testkinoxp";
         String USER = "root";

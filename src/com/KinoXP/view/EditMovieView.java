@@ -1,7 +1,7 @@
 package com.KinoXP.view;
 
-import com.KinoXP.controller.ManageMovieViewController;
-import com.KinoXP.model.ManageMovieViewModel;
+import com.KinoXP.controller.EditMovieViewController;
+import com.KinoXP.model.EditMovieViewModel;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -18,29 +18,29 @@ import java.sql.ResultSet;
 /**
  * Created by Paula on 25/2/16.
  */
-public class ManageMovieView extends Application {
+public class EditMovieView extends Application {
 
-    ManageMovieViewController manageMovieViewController;
-    ManageMovieViewModel manageMovieViewModul;
+    EditMovieViewController editMovieViewController;
+    EditMovieViewModel manageMovieViewModul;
     String title;
     //CONSTRUCTOR
-    public ManageMovieView(String title) {
+    public EditMovieView(String title) {
         this.title = title;
     }
 
-    public ManageMovieViewController getManageMovieViewController() {
-        return manageMovieViewController;
+    public EditMovieViewController getEditMovieViewController() {
+        return editMovieViewController;
     }
 
-    public void setManageMovieViewController(ManageMovieViewController manageMovieViewController) {
-        this.manageMovieViewController = manageMovieViewController;
+    public void setEditMovieViewController(EditMovieViewController editMovieViewController) {
+        this.editMovieViewController = editMovieViewController;
     }
 
-    public ManageMovieViewModel getManageMovieViewModul() {
+    public EditMovieViewModel getManageMovieViewModul() {
         return manageMovieViewModul;
     }
 
-    public void setManageMovieViewModul(ManageMovieViewModel manageMovieViewModul) {
+    public void setManageMovieViewModul(EditMovieViewModel manageMovieViewModul) {
         this.manageMovieViewModul = manageMovieViewModul;
     }
 
@@ -147,15 +147,17 @@ public class ManageMovieView extends Application {
         addPosterBtn.setOnAction(event -> {
         });
 
+        final Stage finalPrimaryStage = primaryStage;
         editMovieBtn.setOnAction(event -> {
-            manageMovieViewController.editMovieButtonAction(titleTxt.getText(), playingTimeInMinutesTxt.getText(),
+            editMovieViewController.editMovieButtonAction(titleTxt.getText(), playingTimeInMinutesTxt.getText(),
                     releaseYearTxt.getText(), plotTxt.getText(), directorTxt.getText(), posterPathTxt.getText(),
                     mainActorTxt.getText(), movieTheaterTxt.getText(), genreTxt.getText(), ageLimitTxt.getText(), result[2], result[3], result[4], result[5],
                     result[6], result[7], result[8], result[9], result[10], result[11]);
+            finalPrimaryStage.close();
         });
 
         backBtn.setOnAction(event -> {
-            manageMovieViewController.goBackButtonAction();
+            finalPrimaryStage.close();
         });
 
 

@@ -2,9 +2,9 @@ package com.KinoXP.view;
 
 import com.KinoXP.controller.AddMovieFormViewController;
 import com.KinoXP.controller.LoginViewController;
-import com.KinoXP.controller.ManageMovieViewController;
+import com.KinoXP.controller.EditMovieViewController;
 import com.KinoXP.controller.NewMovieViewController;
-import com.KinoXP.model.ManageMovieViewModel;
+import com.KinoXP.model.EditMovieViewModel;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -25,7 +25,7 @@ import java.util.ArrayList;
  */
 public class NewMovieView {
     /**
-     * ManageMovieView
+     * EditMovieView
      * by Grzegorz Goraj
      */
 
@@ -109,13 +109,13 @@ public class NewMovieView {
             button666.setGraphic(imageView);
             final String finalLabel = label;
             button666.setOnAction(event -> {
-                ManageMovieViewModel manageMovieViewModel = new ManageMovieViewModel();
-                ManageMovieView manageMovieView = new ManageMovieView(finalLabel);
-                ManageMovieViewController manageMovieViewController = new ManageMovieViewController(manageMovieView, manageMovieViewModel);
-                manageMovieView.setManageMovieViewController(manageMovieViewController);
-                manageMovieView.setManageMovieViewModul(manageMovieViewModel);
+                EditMovieViewModel editMovieViewModel = new EditMovieViewModel();
+                EditMovieView editMovieView = new EditMovieView(finalLabel);
+                EditMovieViewController editMovieViewController = new EditMovieViewController(editMovieView, editMovieViewModel);
+                editMovieView.setEditMovieViewController(editMovieViewController);
+                editMovieView.setManageMovieViewModul(editMovieViewModel);
                 try {
-                    manageMovieView.start(primaryStage);
+                    editMovieView.start(primaryStage);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
