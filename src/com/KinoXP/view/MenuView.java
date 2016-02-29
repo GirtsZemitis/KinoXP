@@ -1,6 +1,7 @@
 package com.KinoXP.view;
 
 
+import com.KinoXP.controller.AddBookingViewController;
 import com.KinoXP.controller.LoginViewController;
 import com.KinoXP.controller.ManageMovieSceduleController;
 import com.KinoXP.controller.NewMovieViewController;
@@ -26,10 +27,11 @@ public class MenuView {
     BorderPane menuLayout;
     VBox vbox;
     Label menuLabel, loggedUser;
-    Button movies, schedule, employees, logOut;
+    Button movies, schedule, employees, booking, logOut;
     ManageMovieSceduleController manageMovieSceduleController = new ManageMovieSceduleController();
     NewMovieViewController newMovieViewController = new NewMovieViewController();
     LoginViewController loginViewController = new LoginViewController();
+    AddBookingViewController addBookingViewController = new AddBookingViewController();
 
 
     public void start() {
@@ -43,6 +45,8 @@ public class MenuView {
         movies.setStyle("-fx-font-size: 20;");
         schedule = new Button("Manage schedule");
         schedule.setStyle("-fx-font-size: 20");
+        booking = new Button("Manage bookings");
+        booking.setStyle("-fx-font-size: 20");
 
         employees = new Button("Manage employees");
         employees.setStyle("-fx-font-size: 20");
@@ -57,7 +61,7 @@ public class MenuView {
         menuLayout = new BorderPane();
         menuLayout.setPadding(new Insets(50));
         vbox = new VBox(20);
-        vbox.getChildren().addAll(movies, schedule, employees);
+        vbox.getChildren().addAll(movies, schedule, employees, booking);
         menuLayout.setCenter(vbox);
         menuLayout.setTop(menuLabel);
         menuLayout.setAlignment(menuLabel, Pos.TOP_CENTER);
@@ -71,8 +75,11 @@ public class MenuView {
 
         schedule.setOnAction(event -> {
             manageMovieSceduleController.scheduleDisplay();
-
       });
+
+        booking.setOnAction(event -> {
+            addBookingViewController.addBookingViewDisplay();
+        });
 
         menu = new Scene(menuLayout, 500, 500);
         mainMenu.setScene(menu);

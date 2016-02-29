@@ -134,7 +134,8 @@ public class NewMovieView {
 
             Label titleBtnLabel666 = new Label();
             titleBtnLabel666.setPrefSize(80, 20);
-            titleBtnLabel666.setTextAlignment(TextAlignment.RIGHT);
+            titleBtnLabel666.setAlignment(Pos.CENTER);
+
             titleBtnLabel666.setText(titlesString.get(i));
 
             VBox vBox = new VBox();
