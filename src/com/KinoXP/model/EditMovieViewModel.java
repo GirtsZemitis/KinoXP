@@ -90,7 +90,7 @@ public class EditMovieViewModel {
 
     //METHOD FOR EDITING THE MOVIE THEATER
     public String editMovieTheater(String title, String movieTheaterName) {
-        String sql = "UPDATE Movie SET theatreName=? WHERE title = ?";
+        String sql = "UPDATE Movie SET cinemaRoomName=? WHERE title = ?";
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setString(1, movieTheaterName);
@@ -150,7 +150,7 @@ public class EditMovieViewModel {
 
 
     public String editGenre(String titleTxtText, String genreInput) {
-        String sql = "UPDATE Movie SET genre=? WHERE title = ?";
+        String sql = "UPDATE Movie SET ganre=? WHERE title = ?";
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setString(1, genreInput);
