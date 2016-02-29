@@ -4,7 +4,7 @@ import com.KinoXP.model.NewMovieViewModel;
 import com.KinoXP.view.NewMovieView;
 import javafx.scene.image.ImageView;
 
-import java.util.ArrayList;
+import java.sql.ResultSet;
 
 /**
  * Created by quena on 25-02-2016.
@@ -25,15 +25,9 @@ public class NewMovieViewController {
         return imageView;
     }
 
-    public ArrayList<Integer> getArrayListOfMovieIndexFromDb() {
-        return newMovieViewModel.getArrayOfIndexMovieFromDb();
-    }
 
-    public String getPhotoLinkFromModel(int indexMovie) {
-        return newMovieViewModel.getPhotoLink(indexMovie);
-    }
 
-    public String getMovieTitleFromModel(int indexMovie) {
-        return newMovieViewModel.getMovieTitle(indexMovie);
+    public ResultSet getMovieTitleFromModel() {
+        return newMovieViewModel.getMovieTitle();
     }
 }

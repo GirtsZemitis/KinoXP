@@ -1,8 +1,8 @@
 package com.KinoXP.view;
 
 import com.KinoXP.controller.AddMovieFormViewController;
-import com.KinoXP.controller.LoginViewController;
 import com.KinoXP.controller.EditMovieViewController;
+import com.KinoXP.controller.LoginViewController;
 import com.KinoXP.controller.NewMovieViewController;
 import com.KinoXP.model.EditMovieViewModel;
 import javafx.geometry.Insets;
@@ -10,6 +10,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
@@ -18,6 +19,9 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
+import java.io.File;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -84,33 +88,39 @@ public class NewMovieView {
         flowPane.setMaxWidth(1500);
 
         //method that gets indexMovie to arraylist
-        ArrayList<Integer> indexMovieList = new ArrayList<>();
-        indexMovieList = newMovieViewController.getArrayListOfMovieIndexFromDb();
+        ArrayList<String> urlString = new ArrayList<>();
+        ArrayList<String> titlesString = new ArrayList<>();
+        ResultSet resultSet = newMovieViewController.getMovieTitleFromModel();
 
+        try {
+            while (resultSet.next()){
+                titlesString.add(resultSet.getString(1));
+                urlString.add(resultSet.getString(2));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
         // reading from DB and creating Buttons + adding Buttons to ArrayList
-        for(int i=0; i<indexMovieList.size(); i++) {
+        for(int i=0; i<titlesString.size(); i++) {
             ImageView imageView;
             String url = null;
             String label = null;
 
-            //"metoda od Mazura";
-            url = newMovieViewController.getPhotoLinkFromModel(indexMovieList.get(i));
-            label = newMovieViewController.getMovieTitleFromModel(indexMovieList.get(i));
-
-            imageView =  newMovieViewController.getWrapImageFromUrlCtrl(url);
+            File file = new File("res/" + urlString.get(i) + ".png" );
+            Image image = new Image(file.toURI().toString());
+            imageView =  new ImageView(image); //newMovieViewController.getWrapImageFromUrlCtrl(urlString.get(i));
 
             imageView.setFitHeight(200);
             imageView.setFitWidth(200);
             Button button666 = new Button();
-            button666.setId(indexMovieList.get(i).toString());
 
             button666.setPadding(new Insets(0, 0, 0, 0));
             button666.setGraphic(imageView);
-            final String finalLabel = label;
+            final int finalI = i;
             button666.setOnAction(event -> {
                 EditMovieViewModel editMovieViewModel = new EditMovieViewModel();
-                EditMovieView editMovieView = new EditMovieView(finalLabel);
+                EditMovieView editMovieView = new EditMovieView(titlesString.get(finalI));
                 EditMovieViewController editMovieViewController = new EditMovieViewController(editMovieView, editMovieViewModel);
                 editMovieView.setEditMovieViewController(editMovieViewController);
                 editMovieView.setManageMovieViewModul(editMovieViewModel);
@@ -125,7 +135,7 @@ public class NewMovieView {
             Label titleBtnLabel666 = new Label();
             titleBtnLabel666.setPrefSize(80, 20);
             titleBtnLabel666.setTextAlignment(TextAlignment.RIGHT);
-            titleBtnLabel666.setText(label);
+            titleBtnLabel666.setText(titlesString.get(i));
 
             VBox vBox = new VBox();
             vBox.setPrefSize(80, 120);

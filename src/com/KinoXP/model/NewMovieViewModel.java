@@ -13,7 +13,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 /**
  * Created by Grzegorz Goraj on 25-02-2016.
@@ -53,66 +52,44 @@ public class NewMovieViewModel {
         return imageView;
     }
 
-    public ArrayList<Integer> getArrayOfIndexMovieFromDb(){
-        ArrayList<Integer> list = new ArrayList<>();
-
-        String sql = "SELECT * FROM Movie WHERE indexMovie= ?";
-        for(int i=1; i<50; i++) {
+    public ResultSet getArrayOfIndexMovieFromDb(){
+        String sql = "SELECT * FROM Movie";
             try {
                 PreparedStatement preparedStatement = conn.prepareStatement(sql);
-                preparedStatement.setInt(1, i);
-                ResultSet resultSet = preparedStatement.executeQuery();
-                while (resultSet.next()) {
-                    int indexMovie = resultSet.getInt(1);
-                    list.add(resultSet.getInt(1));
-                }
+                return preparedStatement.executeQuery();
+
             } catch (SQLException e) {
                 e.printStackTrace();
-            }
         }
 
-        return list;
+        return null;
     }
 
-    public String getPhotoLink(int indexMovie){                           // returns link to poster from database basing on index
-        String link ="";
+    public ResultSet getPhotoLink(){                           // returns link to poster from database basing on index
         try {
-            String query = " SELECT posterPath FROM Movie WHERE indexMovie=? ";
+            String query = " SELECT posterPath FROM Movie";
             PreparedStatement preparedStatement = conn.prepareStatement(query);
-            preparedStatement.setInt(1, indexMovie);
-            ResultSet results = preparedStatement.executeQuery();
-
-            if (results.next()) {
-                link = results.getString(1);
-            } else {
-                link = "";
-            }
+            return preparedStatement.executeQuery();
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return link;
+        return null;
     }
 
-    public String getMovieTitle(int indexMovie){                       //returns movie title from database, basing on index
+    public ResultSet getMovieTitle(){                       //returns movie title from database, basing on index
         String title ="";
         try {
-            String query = " SELECT title FROM Movie WHERE indexMovie=? ";
+            String query = " SELECT title,posterPath FROM Movie";
             PreparedStatement preparedStatement = conn.prepareStatement(query);
-            preparedStatement.setInt(1, indexMovie);
-            ResultSet results = preparedStatement.executeQuery();
+            return preparedStatement.executeQuery();
 
-            if (results.next()) {
-                title = results.getString(1);
-            } else {
-                title = "";
-            }
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return title;
+        return null;
     }
 }
