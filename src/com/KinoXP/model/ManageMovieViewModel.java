@@ -1,8 +1,9 @@
 package com.KinoXP.model;
 
-import com.KinoXP.view.LoginView;
-
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  * Created by Girts Zemitis on 25/02/2016.
@@ -11,193 +12,25 @@ import java.sql.*;
 public class ManageMovieViewModel {
     private Connection conn = LoginViewModel.conn;
 
-    //METHOD FOR GETTING THE TITLE FROM DATABASE
-    public String getTitle(String title){
+
+    public ResultSet getMovie(String title) {
         String out = "";
         try {
-            String sql = "SELECT title FROM Movie WHERE title=?";
-
-            PreparedStatement preparedStatement = conn.prepareStatement(sql);
-
+            String query = "SELECT * FROM Movie WHERE title=?";
+            PreparedStatement preparedStatement = conn.prepareStatement(query);
             preparedStatement.setString(1, title);
             ResultSet results = preparedStatement.executeQuery();
-
-            if (results.next()) {
-                out = results.getString(1);
-            } else {
-                out = "";
-            }
-
-        } catch (SQLException e) {
+            return results;
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        return out;
+        return null;
     }
 
-    //METHOD FOR GETTING THE PLAYING TIME OF THE FILM FROM DATABASE
-    public String getPlayingTimeInMinutes(String playingTimeInMinutes) {
-        String out = "";
-        try {
-            String query = "SELECT playingTimeMin FROM Movie WHERE playingTimeMin=?";
-
-            PreparedStatement preparedStatement = conn.prepareStatement(query);
-
-            preparedStatement.setString(1, playingTimeInMinutes);
-            ResultSet results = preparedStatement.executeQuery();
-
-            if (results.next()) {
-                out = results.getString(1);
-            } else {
-                out = "";
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return out;
-    }
-
-    //METHOD FOR GETTING THE RELEASE YEAR FROM DATABASE
-    public String getReleaseYear(String releaseYear) {
-        String out = "";
-        try {
-            String query = "SELECT releaseYear FROM Movie WHERE releaseYear=?";
-
-            PreparedStatement preparedStatement = conn.prepareStatement(query);
-
-            preparedStatement.setString(1, releaseYear);
-            ResultSet results = preparedStatement.executeQuery();
-
-            if (results.next()) {
-                out = results.getString(1);
-            } else {
-                out = "";
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return out;
-    }
-
-    //METHOD FOR GETTING THE PLOT FROM DATABASE
-    public String getPlot(String plot) {
-        String out = "";
-        try {
-            String query = "SELECT plot FROM Movie WHERE plot=?";
-
-            PreparedStatement preparedStatement = conn.prepareStatement(query);
-
-            preparedStatement.setString(1, plot);
-            ResultSet results = preparedStatement.executeQuery();
-
-            if (results.next()) {
-                out = results.getString(1);
-            } else {
-                out = "";
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return out;
-    }
-
-    //METHOD FOR GETTING THE DIRECTOR FROM DATABASE
-    public String getDirector(String director) {
-        String out = "";
-        try {
-            String query = "SELECT director FROM Movie WHERE director=?";
-
-            PreparedStatement preparedStatement = conn.prepareStatement(query);
-
-            preparedStatement.setString(1, director);
-            ResultSet results = preparedStatement.executeQuery();
-
-            if (results.next()) {
-                out = results.getString(1);
-            } else {
-                out = "";
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return out;
-    }
-
-    //METHOD FOR GETTING THE POSTER PATH FROM DATABASE
-    public String getPosterPath(String posterPath) {
-        String out = "";
-        try {
-            String query = "SELECT posterPath FROM Movie WHERE posterPath=?";
-
-            PreparedStatement preparedStatement = conn.prepareStatement(query);
-
-            preparedStatement.setString(1, posterPath);
-            ResultSet results = preparedStatement.executeQuery();
-
-            if (results.next()) {
-                out = results.getString(1);
-            } else {
-                out = "";
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return out;
-    }
-
-    //METHOD FOR GETTING THE MAIN ACTOR FROM DATABASE
-    public String getMainActor(String mainActor) {
-        String out = "";
-        try {
-            String query = "SELECT mainActor FROM Movie WHERE mainActor=?";
-
-            PreparedStatement preparedStatement = conn.prepareStatement(query);
-
-            preparedStatement.setString(1, mainActor);
-            ResultSet results = preparedStatement.executeQuery();
-
-            if (results.next()) {
-                out = results.getString(1);
-            } else {
-                out = "";
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return out;
-    }
-
-    //METHOD FOR GETTING THE THEATER NAME FROM DATABASE
-    public String getTheatreName(String theatreName) {
-        String out = "";
-        try {
-            String query = "SELECT theatreName FROM Movie WHERE theatreName=?";
-
-            PreparedStatement preparedStatement = conn.prepareStatement(query);
-
-            preparedStatement.setString(1, theatreName);
-            ResultSet results = preparedStatement.executeQuery();
-
-            if (results.next()) {
-                out = results.getString(1);
-            } else {
-                out = "";
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return out;
-    }
 
     //METHOD FOR EDITING THE MOVIE TITLE
     public String editTitle(String title, String editTitle) {
-        String sql = "UPDATE movie SET title=? WHERE title = ?";
+        String sql = "UPDATE Movie SET title=? WHERE title = ?";
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setString(1, editTitle);
@@ -220,7 +53,7 @@ public class ManageMovieViewModel {
             preparedStatement.executeUpdate();
             return editPlayingInMinutes;
         } catch (SQLException e) {
-            System.out.println("Database_Controller error");
+            e.getStackTrace();
         }
         return -1;
     }
@@ -235,7 +68,7 @@ public class ManageMovieViewModel {
             preparedStatement.executeUpdate();
             return releaseYear;
         } catch (SQLException e) {
-            System.out.println("Database_Controller error");
+            e.getStackTrace();
         }
         return null;
     }
@@ -250,7 +83,7 @@ public class ManageMovieViewModel {
             preparedStatement.executeUpdate();
             return plot;
         } catch (SQLException e) {
-            System.out.println("Database_Controller error");
+            e.getStackTrace();
         }
         return null;
     }
@@ -265,7 +98,7 @@ public class ManageMovieViewModel {
             preparedStatement.executeUpdate();
             return movieTheaterName;
         } catch (SQLException e) {
-            System.out.println("Database_Controller error");
+            e.getStackTrace();
         }
         return null;
     }
@@ -280,7 +113,7 @@ public class ManageMovieViewModel {
             preparedStatement.executeUpdate();
             return editedDirector;
         } catch (SQLException e) {
-            System.out.println("Database_Controller error");
+            e.getStackTrace();
         }
         return null;
     }
@@ -295,7 +128,7 @@ public class ManageMovieViewModel {
             preparedStatement.executeUpdate();
             return editedPosterPath;
         } catch (SQLException e) {
-            System.out.println("Database_Controller error");
+            e.getStackTrace();
         }
         return null;
     }
@@ -310,7 +143,36 @@ public class ManageMovieViewModel {
             preparedStatement.executeUpdate();
             return editedMainActor;
         } catch (SQLException e) {
-            System.out.println("Database_Controller error");
+            e.getStackTrace();
+        }
+        return null;
+    }
+
+
+    public String editGenre(String titleTxtText, String genreInput) {
+        String sql = "UPDATE movie SET genre=? WHERE title = ?";
+        try {
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setString(1, genreInput);
+            preparedStatement.setString(2, titleTxtText);
+            preparedStatement.executeUpdate();
+            return genreInput;
+        } catch (SQLException e) {
+            e.getStackTrace();
+        }
+        return null;
+    }
+
+    public String editAgeLimit(String titleTxtText, String ageLimitInput) {
+        String sql = "UPDATE movie SET ageLimit=? WHERE title = ?";
+        try {
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setString(1, ageLimitInput);
+            preparedStatement.setString(2, titleTxtText);
+            preparedStatement.executeUpdate();
+            return ageLimitInput;
+        } catch (SQLException e) {
+            e.getStackTrace();
         }
         return null;
     }

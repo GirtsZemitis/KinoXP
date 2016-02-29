@@ -2,8 +2,9 @@ package com.KinoXP.view;
 
 import com.KinoXP.controller.AddMovieFormViewController;
 import com.KinoXP.controller.LoginViewController;
+import com.KinoXP.controller.ManageMovieViewController;
 import com.KinoXP.controller.NewMovieViewController;
-import com.KinoXP.model.NewMovieViewModel;
+import com.KinoXP.model.ManageMovieViewModel;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -106,6 +107,19 @@ public class NewMovieView {
 
             button666.setPadding(new Insets(0, 0, 0, 0));
             button666.setGraphic(imageView);
+            final String finalLabel = label;
+            button666.setOnAction(event -> {
+                ManageMovieViewModel manageMovieViewModel = new ManageMovieViewModel();
+                ManageMovieView manageMovieView = new ManageMovieView(finalLabel);
+                ManageMovieViewController manageMovieViewController = new ManageMovieViewController(manageMovieView, manageMovieViewModel);
+                manageMovieView.setManageMovieViewController(manageMovieViewController);
+                manageMovieView.setManageMovieViewModul(manageMovieViewModel);
+                try {
+                    manageMovieView.start(primaryStage);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            });
 
             Label titleBtnLabel666 = new Label();
             titleBtnLabel666.setPrefSize(80, 20);

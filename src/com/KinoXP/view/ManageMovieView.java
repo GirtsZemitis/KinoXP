@@ -13,6 +13,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
+import java.sql.ResultSet;
+
 /**
  * Created by Paula on 25/2/16.
  */
@@ -20,35 +22,56 @@ public class ManageMovieView extends Application {
 
     ManageMovieViewController manageMovieViewController;
     ManageMovieViewModel manageMovieViewModul;
-
-    //MAIN METHOD TO START THE APPLICATION
-    public static void main(String[] args) {
-        Application.launch(args);
+    String title;
+    //CONSTRUCTOR
+    public ManageMovieView(String title) {
+        this.title = title;
     }
 
-    //CONSTRUCTOR
-    public ManageMovieView() {
-        manageMovieViewModul = new ManageMovieViewModel();
-        manageMovieViewController = new ManageMovieViewController();
+    public ManageMovieViewController getManageMovieViewController() {
+        return manageMovieViewController;
+    }
+
+    public void setManageMovieViewController(ManageMovieViewController manageMovieViewController) {
+        this.manageMovieViewController = manageMovieViewController;
+    }
+
+    public ManageMovieViewModel getManageMovieViewModul() {
+        return manageMovieViewModul;
+    }
+
+    public void setManageMovieViewModul(ManageMovieViewModel manageMovieViewModul) {
+        this.manageMovieViewModul = manageMovieViewModul;
     }
 
     //START METHOD FOR THE VIEW
     public void start(Stage primaryStage) throws Exception {
+
         VBox vBox = new VBox();
 
+        ResultSet resultSet = manageMovieViewModul.getMovie(title);
+        String[] result = new String[12];
+
+
+        while (resultSet.next()){
+            for (int i = 1; i < 12; i++){
+            result[i] = resultSet.getString(i);
+            }
+        }
+        //        MovieModel movieModel = new MovieModel(result[2], result[3], result[4], result[5], result[6], result[7], result[8], result[9], result[10]);
         //TEXT FIELDS
-        TextField titleTxt = new TextField();
-        TextField playingTimeInMinutesTxt = new TextField();
-        TextField releaseYearTxt = new TextField();
-        TextField directorTxt = new TextField();
-        TextField posterPathTxt = new TextField();
-        TextField movieTheaterTxt = new TextField();
-        TextField genreTxt = new TextField();
-        TextField ageLimitTxt = new TextField();
+        TextField titleTxt = new TextField(result[2]);
+        TextField playingTimeInMinutesTxt = new TextField(result[3]);
+        TextField releaseYearTxt = new TextField(result[4]);
+        TextField directorTxt = new TextField(result[6]);
+        TextField posterPathTxt = new TextField(result[7]);
+        TextField movieTheaterTxt = new TextField(result[9]);
+        TextField genreTxt = new TextField(result[10]);
+        TextField ageLimitTxt = new TextField(result[11]);
 
         //TEXT AREAS
-        TextArea plotTxt = new TextArea();
-        TextArea mainActorTxt = new TextArea();
+        TextArea plotTxt = new TextArea(result[5]);
+        TextArea mainActorTxt = new TextArea(result[8]);
 
         //LABELS
         Label mainTitleLbl = new Label("Edit MovieModel");
@@ -127,7 +150,8 @@ public class ManageMovieView extends Application {
         editMovieBtn.setOnAction(event -> {
             manageMovieViewController.editMovieButtonAction(titleTxt.getText(), playingTimeInMinutesTxt.getText(),
                     releaseYearTxt.getText(), plotTxt.getText(), directorTxt.getText(), posterPathTxt.getText(),
-                    mainActorTxt.getText(), movieTheaterTxt.getText());
+                    mainActorTxt.getText(), movieTheaterTxt.getText(), genreTxt.getText(), ageLimitTxt.getText(), result[2], result[3], result[4], result[5],
+                    result[6], result[7], result[8], result[9], result[10], result[11]);
         });
 
         backBtn.setOnAction(event -> {
