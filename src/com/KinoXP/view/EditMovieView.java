@@ -160,6 +160,8 @@ public class EditMovieView extends Application {
         });
 
         backBtn.setOnAction(event -> {
+            NewMovieViewController newMovieViewController = new NewMovieViewController();
+            newMovieViewController.newMovieViewDisplay();
             finalPrimaryStage.close();
         });
 
