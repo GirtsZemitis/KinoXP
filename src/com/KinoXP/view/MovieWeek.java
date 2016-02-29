@@ -1,5 +1,6 @@
 package com.KinoXP.view;
 
+import com.KinoXP.model.LoginViewModel;
 import com.KinoXP.model.TimeModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -10,7 +11,9 @@ import javafx.collections.ObservableList;
 public class MovieWeek {
 
     ObservableList<TimeModel> observableList;
-
+    ObservableList<TimeModel> observableListFromDb;
+    ObservableList<TimeModel> observableList2;
+    LoginViewModel loginViewModel = new LoginViewModel();
     public MovieWeek(){
         observableList  = FXCollections.observableArrayList();
         observableList.add(new TimeModel("9:00","no","no","no","no","no","no","no"));
@@ -50,37 +53,157 @@ public class MovieWeek {
         observableList.set(i, timeModel);
 
     }
-    public void printOut(){
-        System.out.println("week 1");
-        for(int i= 0; i<observableList.size(); i++){
-            if(observableList.get(i).getMonday().equals("yes")){
-                System.out.println( "monday " +  observableList.get(i).getTime());
-            }
-            if(observableList.get(i).getTuesday().equals("yes")){
-                System.out.println( "tuesday " +  observableList.get(i).getTime());
-
-            }
-            if(observableList.get(i).getWednesday().equals("yes")){
-                System.out.println( "wednesday " +  observableList.get(i).getTime());
-
-            }
-            if(observableList.get(i).getThrusday().equals("yes")){
-                System.out.println( "thursday " +  observableList.get(i).getTime());
-
-            }
-            if(observableList.get(i).getFriday().equals("yes")){
-                System.out.println( "friday " +  observableList.get(i).getTime());
-
-            }
-            if(observableList.get(i).getSaturday().equals("yes")){
-                System.out.println( "saturday " +  observableList.get(i).getTime());
-
-            }
-            if(observableList.get(i).getSunday().equals("yes")){
-                System.out.println( "sunday " +  observableList.get(i).getTime());
-
-            }
-        }
+    public void setYesDb(TimeModel timeModel, int i){
+        observableListFromDb.set(i,timeModel);
     }
 
+    public String save(ObservableList<TimeModel> observableList2, String textFromDb, int weekNr){
+        String save ="";
+
+
+
+
+        this.observableList2 = observableList2;
+        for(int i= 0; i<observableList2.size(); i++){
+            save = save + observableList2.get(i).getTime() + "_" + observableList2.get(i).getMonday() +"_"+
+                    observableList2.get(i).getTuesday() + "_"+observableList2.get(i).getWednesday() +"_"+
+                    observableList2.get(i).getThrusday() +"_"+ observableList2.get(i).getFriday() +"_"+
+                    observableList2.get(i).getSaturday() +"_"+ observableList2.get(i).getSunday() + "\n";
+
+
+        }
+
+
+
+
+        return save;
+      //returning text from observablelist with _
+    }
+
+    public ObservableList<TimeModel> readFromDb(String s,int c){
+        String hour ="";
+        String monday="";
+        String tuesday ="";
+        String wedensday="";
+        String thursday="";
+        String friday="";
+        String saturday="";
+        String sunday="";
+        String weeknr="";
+        char seperator = '_';
+        int variableCounter = -1;
+
+
+
+
+        observableListFromDb = FXCollections.observableArrayList();
+        if(s.equals("bla")){
+            observableListFromDb= observableList;
+            return observableListFromDb;
+
+        }
+        for(int i =c; i <s.length(); i++){
+            if(s.charAt(i)=='-') {
+                break;
+              }
+
+            while(variableCounter ==-1){
+                weeknr+=s.charAt(i);
+                i++;
+                if(s.charAt(i)=='\n'){
+                    i++;
+                    variableCounter++;
+                }
+            }
+            if(variableCounter==0){
+                if(s.charAt(i)!=seperator){
+                    hour += s.charAt(i);
+                }else {
+                    i++;
+                    variableCounter++;
+                }
+            }
+            if(variableCounter==1){
+                if(s.charAt(i)!=seperator){
+                    monday += s.charAt(i);
+                }else {
+                    i++;
+                    variableCounter++;
+                }
+            }
+            if(variableCounter==2){
+                if(s.charAt(i)!=seperator){
+                    tuesday += s.charAt(i);
+                }else {
+                    i++;
+                    variableCounter++;
+                }
+            }
+            if(variableCounter==3){
+                if(s.charAt(i)!=seperator){
+                    wedensday += s.charAt(i);
+                }else {
+                    i++;
+                    variableCounter++;
+                }
+            }
+            if(variableCounter==4){
+                if(s.charAt(i)!=seperator){
+                    thursday += s.charAt(i);
+                }else {
+                    i++;
+                    variableCounter++;
+                }
+            }
+            if(variableCounter==5){
+                if(s.charAt(i)!=seperator){
+                    friday += s.charAt(i);
+                }else {
+                    i++;
+                    variableCounter++;
+                }
+            }
+            if(variableCounter==6){
+                if(s.charAt(i)!=seperator){
+                    saturday += s.charAt(i);
+                }else {
+                    i++;
+                    variableCounter++;
+                }
+            }
+            if(variableCounter==7){
+                if(s.charAt(i)!='\n'){
+                    sunday += s.charAt(i);
+                }else {
+                    System.out.println(hour + monday + tuesday+ wedensday + thursday + friday + saturday + sunday);
+                    variableCounter++;
+                    observableListFromDb.add(new TimeModel(hour,monday,tuesday,wedensday,thursday,friday,saturday,sunday));
+                    variableCounter=0;
+                     hour="";
+                     monday="";
+                     tuesday ="";
+                     wedensday="";
+                     thursday="";
+                     friday="";
+                     saturday="";
+                     sunday="";
+
+
+                }
+
+            }
+
+
+
+        }
+        System.out.println(weeknr);
+     return observableListFromDb;
+    }
+   public ObservableList<TimeModel> getObservableListFromDb(){
+       return observableListFromDb;
+   }
+
+
+
 }
+
