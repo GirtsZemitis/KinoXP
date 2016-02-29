@@ -120,7 +120,7 @@ public class EditMovieView extends Application {
         hBox5.setSpacing(30);
 
         HBox hBox6 = new HBox();
-        hBox6.getChildren().addAll(posterPathTxt, addPosterBtn);
+        hBox6.getChildren().addAll(posterPathTxt);
         hBox6.setSpacing(30);
 
         HBox hBox7 = new HBox();
@@ -146,6 +146,7 @@ public class EditMovieView extends Application {
 
         //HANDLING THE BUTTONS ACTIONS
         addPosterBtn.setOnAction(event -> {
+
         });
 
         final Stage finalPrimaryStage = primaryStage;
