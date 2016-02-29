@@ -62,4 +62,7 @@ public class EditMovieViewController {
     }
 
 
+    public void deleteMovieButtonAction(String titleTxtText) {
+        manageMovieViewModul.deleteMovie(titleTxtText);
+    }
 }

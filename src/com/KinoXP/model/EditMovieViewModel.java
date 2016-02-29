@@ -176,6 +176,17 @@ public class EditMovieViewModel {
         }
         return null;
     }
+
+    public void deleteMovie(String titleTxtText) {
+        String sql = "DELETE FROM Movie WHERE title = ?";
+        try {
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setString(1, titleTxtText);
+            preparedStatement.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
 
 

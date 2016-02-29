@@ -15,6 +15,7 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import java.sql.ResultSet;
+import java.util.Optional;
 
 /**
  * Created by Paula on 25/2/16.
@@ -90,9 +91,9 @@ public class EditMovieView extends Application {
 
         //BUTTONS
         //Button addCastBtn = new Button("Add");
-        Button addPosterBtn = new Button("Add");
-        Button editMovieBtn = new Button("Edit MovieModel");
-        Button backBtn = new Button("Go Back");
+        Button deleteMovieBtn = new Button("Delete");
+        Button editMovieBtn = new Button("Save");
+        Button backBtn = new Button("Back");
 
         //H-BOXES
         HBox hBoxTitle = new HBox();
@@ -124,7 +125,7 @@ public class EditMovieView extends Application {
         hBox6.setSpacing(30);
 
         HBox hBox7 = new HBox();
-        hBox7.getChildren().addAll(editMovieBtn, backBtn);
+        hBox7.getChildren().addAll(editMovieBtn,deleteMovieBtn, backBtn);
         hBox7.setSpacing(30);
         hBox7.setAlignment(Pos.BOTTOM_RIGHT);
 
@@ -143,13 +144,31 @@ public class EditMovieView extends Application {
         primaryStage = new Stage();
         primaryStage.setScene(scene);
         primaryStage.show();
+        final Stage finalPrimaryStage = primaryStage;
 
         //HANDLING THE BUTTONS ACTIONS
-        addPosterBtn.setOnAction(event -> {
+        deleteMovieBtn.setOnAction(event -> {
+
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Delete Movie");
+            alert.setHeaderText("Are you sure you want to delete the movie?");
+            ButtonType buttonTypeYes = new ButtonType("YES");
+            ButtonType buttonTypeNo = new ButtonType("NO");
+            alert.getButtonTypes().setAll(buttonTypeYes, buttonTypeNo);
+
+
+            Optional<ButtonType> results = alert.showAndWait();
+            if (results.get() == buttonTypeYes){
+                editMovieViewController.deleteMovieButtonAction(titleTxt.getText());
+                NewMovieViewController newMovieViewController = new NewMovieViewController();
+                newMovieViewController.newMovieViewDisplay();
+                finalPrimaryStage.close();
+            } else {
+                alert.close();
+            }
 
         });
 
-        final Stage finalPrimaryStage = primaryStage;
         editMovieBtn.setOnAction(event -> {
             editMovieViewController.editMovieButtonAction(titleTxt.getText(), playingTimeInMinutesTxt.getText(),
                     releaseYearTxt.getText(), plotTxt.getText(), directorTxt.getText(), posterPathTxt.getText(),
