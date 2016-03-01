@@ -2,10 +2,10 @@ package com.KinoXP.view;
 
 import com.KinoXP.controller.LoginViewController;
 import com.KinoXP.model.EmployeeModel;
+import com.KinoXP.model.LoginViewModel;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -21,7 +21,7 @@ import javafx.stage.Stage;
  * Created by hartyandi on 2/24/16.
  */
 public class LoginView {
-    EmployeeModel employeeModel;
+    LoginViewModel loginViewModel;
 
     public void start(){
 
@@ -66,13 +66,17 @@ public class LoginView {
         GridPane.setConstraints(passwordText,1,2);
         GridPane.setConstraints(logIn,1,3);
 
+
+
         gridPane.setAlignment(Pos.CENTER);
+
+
 
         logIn.setOnAction(event -> {
 
             //CREATING NEW EMPLOYEE OBJECT TO GRAM THE INPUTED ATTRIBUTE VALUES
-            employeeModel = new EmployeeModel(userField.getText(),passwordText.getText());
-            loginViewController.checkLogIn(employeeModel);//CALL METHOD FROM CONTROLLER
+            loginViewModel = new LoginViewModel(userField.getText(),passwordText.getText());
+            loginViewController.checkLogIn(loginViewModel);//CALL METHOD FROM CONTROLLER
             primaryStage.close();// CLOSE THIS STAGE
         });
 
@@ -83,10 +87,5 @@ public class LoginView {
 
         primaryStage.show();
 
-    }
-    public void updateAlertMessage(String message) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setContentText(message);
-        alert.showAndWait();
     }
 }

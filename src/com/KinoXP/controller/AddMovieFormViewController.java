@@ -1,7 +1,7 @@
 package com.KinoXP.controller;
 
-import com.KinoXP.model.AddMovieFormViewModel;
-import com.KinoXP.view.AddMovieFormView;
+        import com.KinoXP.model.AddMovieFormViewModel;
+        import com.KinoXP.view.AddMovieFormView;
 
 /**
  * Created by Paula on 26/02/2016.
