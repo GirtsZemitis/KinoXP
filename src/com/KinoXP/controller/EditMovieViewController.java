@@ -32,7 +32,7 @@ public class EditMovieViewController {
                 manageMovieViewModul.editPlayingInMinutes(titleInput, Integer.parseInt(playingTimeInMinutesTxtText));
             }
         if(!releaseYearTxtText.equals(releaseYearInput)){
-                manageMovieViewModul.editReleaseYear(titleInput, releaseYearTxtText);
+                manageMovieViewModul.editReleaseYear(titleInput, Integer.parseInt(releaseYearTxtText));
             }
         if(!plotTxtText.equals(plotInput)){
                 manageMovieViewModul.editPlot(titleInput, plotTxtText);
@@ -53,7 +53,7 @@ public class EditMovieViewController {
                 manageMovieViewModul.editGenre(titleInput, genreTxtText);
             }
         if (!ageLimitTxtText.equals(ageLimitInput)) {
-                manageMovieViewModul.editAgeLimit(titleInput, ageLimitTxtText);
+                manageMovieViewModul.editAgeLimit(titleInput, Integer.parseInt(ageLimitTxtText));
             }
         if (!titleTxtText.equals(titleInput)) {
                 manageMovieViewModul.editTitle(titleInput, titleTxtText);

@@ -11,4 +11,5 @@ public class AddBookingViewController {
         AddBookingView addBookingView = new AddBookingView();
         addBookingView.start();
     }
+
 }

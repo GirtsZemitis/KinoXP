@@ -69,11 +69,11 @@ public class EditMovieViewModel {
     }
 
     //METHOD FOR EDITING THE RELEASE YEAR OF THE MOVIE
-    public String editReleaseYear(String title, String releaseYear) {
+    public Integer editReleaseYear(String title, int releaseYear) {
         String sql = "UPDATE Movie SET releaseYear=? WHERE title = ?";
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
-            preparedStatement.setString(1, releaseYear);
+            preparedStatement.setInt(1, releaseYear);
             preparedStatement.setString(2, title);
             preparedStatement.executeUpdate();
             return releaseYear;
@@ -179,11 +179,11 @@ public class EditMovieViewModel {
         return null;
     }
 
-    public String editAgeLimit(String titleTxtText, String ageLimitInput) {
+    public Integer editAgeLimit(String titleTxtText, int ageLimitInput) {
         String sql = "UPDATE Movie SET ageLimit=? WHERE title = ?";
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
-            preparedStatement.setString(1, ageLimitInput);
+            preparedStatement.setInt(1, ageLimitInput);
             preparedStatement.setString(2, titleTxtText);
             preparedStatement.executeUpdate();
             return ageLimitInput;

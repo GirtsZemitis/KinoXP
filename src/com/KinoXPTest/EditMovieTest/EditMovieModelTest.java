@@ -1,12 +1,11 @@
 package com.KinoXPTest.EditMovieTest;
 
-import com.KinoXP.model.LoginViewModel;
 import com.KinoXP.model.EditMovieViewModel;
+import com.KinoXP.model.LoginViewModel;
 import com.KinoXP.model.MovieTheaterModel;
 import junit.framework.TestCase;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
@@ -25,25 +24,24 @@ public class EditMovieModelTest extends TestCase {
         LoginViewModel viewModel = new LoginViewModel();
         viewModel.connectToDatabase();
         EditMovieViewModel emvController = new EditMovieViewModel();
-        // String DB_URL = "jdbc:mysql://localhost/testkinoxp";
-        String DB_URL = "jdbc:mysql://localhost/testkinoxp";
-        String USER = "root";
-        String PASS = "root";
+
         try {
-            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
-            String sql = "INSERT INTO movie (title, playingTimeMin, releaseYear, plot, director, posterPath, mainActor, theatreName) VALUES (?,?,?,?,?,?,?,?);";
+            Connection conn = LoginViewModel.conn;
+            String sql = "INSERT INTO Movie (title, playingTimeMin, releaseYear, plot, director, posterPath, mainActor, cinemaRoomName, ganre, ageLimit) VALUES (?,?,?,?,?,?,?,?,?,?);";
+
                 PreparedStatement ps = conn.prepareStatement(sql);
                 ps.setString(1, "Title");
                 ps.setInt(2, 60);
-                ps.setString(3, "releaseYear");
+                ps.setInt(3, 1994);
                 ps.setString(4, "plott");
                 ps.setString(5, "director");
                 ps.setString(6, "posterPath");
                 ps.setString(7, "main Actor");
-                ps.setString(8, "theathe name");
+                ps.setString(8, "cinemaRoomName");
+                ps.setString(9, "ganre");
+                ps.setInt(10, 10);
                 ps.execute();
-                ps.close();}
-        catch (SQLException e) {
+                ps.close();} catch (SQLException e) {
                 e.printStackTrace();
             }
 
@@ -52,39 +50,43 @@ public class EditMovieModelTest extends TestCase {
         assertEquals("EditedTitle", editTitle);
 
         int playingTime = emvController.editPlayingInMinutes("EditedTitle", 200);
+        int releaseYear = emvController.editReleaseYear("EditedTitle", 10);
+        String plot = emvController.editPlot("EditedTitle", "EditedPlot");
+        String director = emvController.editDirector("EditedTitle", "EditedDirector");
+        String mainActor = emvController.editMainActor("EditedTitle", "EditedMainActor");
+        MovieTheaterModel editedMovieTheater = new MovieTheaterModel();
+        editedMovieTheater.setName("new name");
+        String editedMovieTheaterName = emvController.editMovieTheater("EditedTitle", editedMovieTheater.getName());
+        String genre = emvController.editGenre("EditedTitle", "editedGenre");
+        int ageLimit = emvController.editAgeLimit("EditedTitle", 14);
+
         assertNotNull(playingTime);
         assertEquals(200, playingTime);
 
-        String releaseYear = emvController.editReleaseYear("EditedTitle", "EditedReleaseYear");
-        assertNotNull(releaseYear);
-        assertEquals("EditedReleaseYear", releaseYear);
+        assertEquals(10, releaseYear);
 
-        String plot = emvController.editPlot("EditedTitle", "EditedPlot");
         assertNotNull(plot);
         assertEquals("EditedPlot", plot);
 
-        String director = emvController.editDirector("EditedTitle", "EditedDirector");
         assertNotNull(director);
         assertEquals("EditedDirector", director);
 
-        String poster = emvController.editPoster("EditedTitle", "EditedPosterPath");
-        assertNotNull(poster);
-        assertEquals("EditedPosterPath", poster);
 
-        String mainActor = emvController.editMainActor("EditedTitle", "EditedMainActor");
         assertNotNull(mainActor);
         assertEquals("EditedMainActor", mainActor);
 
 
-        MovieTheaterModel editedMovieTheater = new MovieTheaterModel();
-        editedMovieTheater.setName("new name");
-        String newEdit = emvController.editMovieTheater("EditedTitle", editedMovieTheater.getName());
-        assertNotNull(newEdit);
+        assertNotNull(editedMovieTheaterName);
         assertEquals("new name", editedMovieTheater.getName());
 
+        assertNotNull(genre);
+        assertEquals("editedGenre", genre);
+
+        assertEquals(14, ageLimit);
+
         try {
-            Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
-            String sql = "DELETE FROM movie WHERE 1;";
+            Connection conn = LoginViewModel.conn;
+            String sql = "DELETE FROM Movie WHERE title='EditedTitle';";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.execute();
             ps.close();}
