@@ -57,7 +57,7 @@ public class MovieWeek {
         observableListFromDb.set(i,timeModel);
     }
 
-    public String save(ObservableList<TimeModel> observableList2, String textFromDb, int weekNr){
+    public String save(ObservableList<TimeModel> observableList2){
         String save ="";
 
 
@@ -77,7 +77,7 @@ public class MovieWeek {
 
 
         return save;
-      //returning text from observablelist with _
+        //returning text from observablelist with _
     }
 
     public ObservableList<TimeModel> readFromDb(String s,int c){
@@ -105,7 +105,7 @@ public class MovieWeek {
         for(int i =c; i <s.length(); i++){
             if(s.charAt(i)=='-') {
                 break;
-              }
+            }
 
             while(variableCounter ==-1){
                 weeknr+=s.charAt(i);
@@ -179,14 +179,14 @@ public class MovieWeek {
                     variableCounter++;
                     observableListFromDb.add(new TimeModel(hour,monday,tuesday,wedensday,thursday,friday,saturday,sunday));
                     variableCounter=0;
-                     hour="";
-                     monday="";
-                     tuesday ="";
-                     wedensday="";
-                     thursday="";
-                     friday="";
-                     saturday="";
-                     sunday="";
+                    hour="";
+                    monday="";
+                    tuesday ="";
+                    wedensday="";
+                    thursday="";
+                    friday="";
+                    saturday="";
+                    sunday="";
 
 
                 }
@@ -197,11 +197,11 @@ public class MovieWeek {
 
         }
         System.out.println(weeknr);
-     return observableListFromDb;
+        return observableListFromDb;
     }
-   public ObservableList<TimeModel> getObservableListFromDb(){
-       return observableListFromDb;
-   }
+    public ObservableList<TimeModel> getObservableListFromDb(){
+        return observableListFromDb;
+    }
 
 
 
