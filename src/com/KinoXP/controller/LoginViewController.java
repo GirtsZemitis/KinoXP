@@ -15,21 +15,22 @@ public class LoginViewController {
     LoginViewModel loginViewModel = new LoginViewModel();
 
     //CHECK IF THE INSERTED USERNAME AND PASSWORD ARE AS THE ONES ESTABLISHED IN THE DATABASE
-    public void checkLogIn(EmployeeModel employeeModel){
+    public String checkLogIn(EmployeeModel employeeModel){
+        String errorLabelText = "";
 
         //CALL THE DATABASE CONNECTION METHOD => CONNECT TO DATABASE
         loginViewModel.connectToDatabase();
-
         //COMPARE IF INPUTED USERNAME && PASS ARE == TO MANUALLY ESTABLISHED ONES IN DB
-        if((loginViewModel.checkLoginAndPassword(employeeModel).getUserName().equals(employeeModel.getUserName()))&&
-                (loginViewModel.checkLoginAndPassword(employeeModel).getPassword().equals(employeeModel.getPassword()))){
-
+        if(loginViewModel.checkLoginAndPassword(employeeModel)== true) {
             //IF YES THEN :
-                MenuView menuView = new MenuView();
-                menuView.start();
-            }else{
-                System.out.println("The userName and Password don't match!");
+            MenuView menuView = new MenuView();
+            menuView.start();
+        }else{
+            errorLabelText="Wrong username or password! Try again";
+            System.out.println("Wrong username or password! Try again");
+            return errorLabelText;
         }
+        return errorLabelText;
     }
 
     public void startLoginWidnow(){

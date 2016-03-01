@@ -6,7 +6,10 @@ import com.KinoXP.model.AddMovieFormViewModel;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -147,11 +150,11 @@ public class AddMovieFormView {
         }
 
     //METHOD FOR THE ALERT MESSAGES SHOWN TO THE USER
-    public void updateAlertMessage(String message) {
+   /* public void updateAlertMessage(String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setContentText(message);
         alert.showAndWait();
-    }
+    }*/
 
     //METHOD TO USE FOR CLOSING THE STAGE
     public void closeStage(){

@@ -7,51 +7,46 @@ import java.sql.*;
  */
 public class LoginViewModel {
     public static Connection conn = null;
-    EmployeeModel employeeModel;
-
+    LoginViewModel loginViewModel;
 
 
     //DATABASE CONNECTING METHOD
     //PLEASE APPLY YOUR LOCAL MODIFICATIONS IN ORDER FOR THESE TO WORK!!!
-    public void connectToDatabase(){
+    public void connectToDatabase() {
         System.out.println("***********Welcome to connections**************");
         try {
 
             String DB_URL = "jdbc:mysql://sql2.freesqldatabase.com:3306/sql2108018";
             String USER = "sql2108018";
             String PASS = "nP5%zC6%";
-            /*String DB_URL = "jdbc:mysql://localhost/testkinoxp";
-            String USER = "root";
-            String PASS = "root";*/
+
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
             System.out.println("conn obj created" + conn + " message: ");
-        }
-        catch (SQLException e)
-        {
+        } catch (SQLException e) {
             System.out.println("db error" + e.getMessage());
         }
     }
+
     //CHECK LOG IN AND PASSWORD WITH SQL - DATABASE (PLEASE MODIFY HERE AND UP FOR YOUR LOCAL DATABASES!!!!!)
-    public EmployeeModel checkLoginAndPassword(EmployeeModel employeeModel){
+    public boolean checkLoginAndPassword(EmployeeModel employeeModel) {
         try {
-            String sql = "SELECT * FROM Employee WHERE userName=?";
+            String sql = "SELECT * FROM LogIn WHERE userName=? AND password=?";
 
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setString(1, employeeModel.getUserName());
-            //preparedStatement.setString(2, password);
+            preparedStatement.setString(2, employeeModel.getPassword());
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                employeeModel = new EmployeeModel(resultSet.getString(1),resultSet.getString(2));
+                employeeModel = new EmployeeModel(resultSet.getString(1), resultSet.getString(2));
+                return true;
             } else {
                 employeeModel = null;
+                return false;
+
             }
-
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println(" Check LogIn Method has error! => LoginViewModel");
         }
-
-        return employeeModel;
+        return false;
     }
-
-
 }

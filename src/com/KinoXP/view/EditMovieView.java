@@ -167,9 +167,9 @@ public class EditMovieView extends Application {
     }
 
     //METHOD FOR THE ALERT MESSAGES SHOWN TO THE USER
-    public void updateAlertMessage(String message) {
+    /*public void updateAlertMessage(String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setContentText(message);
         alert.showAndWait();
-    }
+    }*/
 }
