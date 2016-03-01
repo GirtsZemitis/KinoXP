@@ -1,6 +1,7 @@
 package com.KinoXP.view;
 
 import com.KinoXP.controller.AddMovieFormViewController;
+import com.KinoXP.controller.ManageMovieSceduleController;
 import com.KinoXP.model.AddMovieFormViewModel;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -69,16 +70,24 @@ public class AddMovieFormView {
 
 
         addMovieBtn.setOnAction(event -> {
+            ManageMovieSceduleController manageMovieSceduleController = new ManageMovieSceduleController();
+
+            //save movie in Db with default schedule
             addMovieFormViewController.addMovieButtonAction(titleTxt.getText(), playingTimeInMinutesTxt.getText(),
                     releaseYearTxt.getText(), plotTxt.getText(), directorTxt.getText(), posterPathTxt.getText(),
                     mainActorTxt.getText(), movieTheaterTxt.getText(), genreTxt.getText() ,ageLimitTxt.getText());
+            MovieWeek movieWeek = new MovieWeek();
+            manageMovieSceduleController.insertMovie(movieWeek.save(movieWeek.getObservableList()));
 
-            makeFileFromPath();
+
+            manageMovieSceduleController.scheduleDisplay(titleTxt.getText());
+
 
             //creating posterButton in NewMovieView
-            closeStage();
-            NewMovieView newMovieView = new NewMovieView();
-            newMovieView.start();
+
+            //  closeStage();
+            //  NewMovieView newMovieView = new NewMovieView();
+            //  newMovieView.start();
 
         });
 
@@ -149,9 +158,9 @@ public class AddMovieFormView {
 
     //METHOD FOR THE ALERT MESSAGES SHOWN TO THE USER
     public void updateAlertMessage(String message) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setContentText(message);
-        alert.showAndWait();
+        //Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        //alert.setContentText(message);
+        //alert.showAndWait();
     }
 
     public void makeFileFromPath(){
