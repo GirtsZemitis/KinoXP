@@ -1,5 +1,14 @@
 package com.KinoXP.model;
 
+import com.sun.jndi.toolkit.url.Uri;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
 import java.sql.*;
 
 /**
@@ -7,11 +16,16 @@ import java.sql.*;
  */
 public class AddMovieFormViewModel {
     private static Connection conn = LoginViewModel.conn;
-
+    String posterPathString;
+    String titleString;
 
     //METHOD FOR INSERTING THE MOVIE INTO THE DATABASE
     public void insertMovie(String title, String playingTimeInMinutes, String year, String plot, String director,
                             String posterPath, String cast, String theatreName, String genre, String ageLimit) {
+
+        posterPathString=posterPath;
+        titleString=title;
+
         String sql = "INSERT INTO Movie VALUES (null,?,?,?,?,?,?,?,?,?,?,null)";
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
@@ -54,4 +68,20 @@ public class AddMovieFormViewModel {
         }
         return out;
     }
+    public void makeFileFromURI(){
+
+        try {
+            URL url = new URL(posterPathString);
+            BufferedImage img = ImageIO.read(url);
+            File file = new File("res/" + titleString+".png");
+            ImageIO.write(img, "png", file);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+
+    }
+
+
 }

@@ -2,6 +2,8 @@ package com.KinoXP.view;/**
  * Created by MazurJestBoski on 2016-02-29.
  */
 
+import com.KinoXP.controller.AddBookingViewController;
+import com.KinoXP.model.Booking;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -15,9 +17,14 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Date;
+
 public class AddBookingView {
 
-
+    AddBookingViewController addBookingViewController = new AddBookingViewController();
 
 
     public void start() {
@@ -62,6 +69,8 @@ public class AddBookingView {
         //BUTTONS
 
         Button searchButton = new Button();
+
+
         Image imageSearch = new Image(getClass().getResourceAsStream("search.png"));
         searchButton.setGraphic(new ImageView(imageSearch));
         Button addButton = new Button("GO");
@@ -86,13 +95,26 @@ public class AddBookingView {
         primaryStage.setResizable(false);
         primaryStage.show();
 
+        searchButton.setOnAction(event -> {
 
+            String phoneNumber = searchField.getText();
+            Booking booking = addBookingViewController.getBookingByPhoneNUmber(phoneNumber);
+            /*String dateValue = booking.getDate();
+            try {
+                Date date = new SimpleDateFormat("yyyy-mm-dd").parse(dateValue);
+                LocalDate localDate = LocalDate.parse(new SimpleDateFormat(("yyyy-MM-dd").format(dateValue)));
+                dateField.setValue(localDate);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }*/
 
+            timeField.setText(booking.getTime());
+            seatsField.setText(Integer.toString(booking.getSeats()));
+            phoneNrField.setText(booking.getPhoneNumber());
 
-
-
-
-
+        });
 
     }
+
+
 }

@@ -1,7 +1,6 @@
 package com.KinoXP.view;
 
 import com.KinoXP.controller.AddMovieFormViewController;
-import com.KinoXP.controller.NewMovieViewController;
 import com.KinoXP.model.AddMovieFormViewModel;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -21,7 +20,6 @@ public class AddMovieFormView {
 
     private AddMovieFormViewController addMovieFormViewController = new AddMovieFormViewController();
     private AddMovieFormViewModel addMovieFormViewModel = new AddMovieFormViewModel();
-    private NewMovieViewController newMovieViewController = new NewMovieViewController();
     private Stage stage;
 
     //CONSTRUCTOR
@@ -29,7 +27,6 @@ public class AddMovieFormView {
         addMovieFormViewModel = new AddMovieFormViewModel();
         addMovieFormViewController = new AddMovieFormViewController(this, addMovieFormViewModel);
     }
-
 
     public void getAddMovieView() {
 
@@ -69,13 +66,16 @@ public class AddMovieFormView {
 
         addPosterBtn.setOnAction(event1 -> addPosterUrl(posterPathTxt.getText()));
 
+
+
         addMovieBtn.setOnAction(event -> {
             addMovieFormViewController.addMovieButtonAction(titleTxt.getText(), playingTimeInMinutesTxt.getText(),
                     releaseYearTxt.getText(), plotTxt.getText(), directorTxt.getText(), posterPathTxt.getText(),
                     mainActorTxt.getText(), movieTheaterTxt.getText(), genreTxt.getText() ,ageLimitTxt.getText());
 
-            //creating posterButton in NewMovieView
+            makeFileFromPath();
 
+            //creating posterButton in NewMovieView
             closeStage();
             NewMovieView newMovieView = new NewMovieView();
             newMovieView.start();
@@ -140,6 +140,7 @@ public class AddMovieFormView {
         stage = new Stage();
         stage.setScene(scene);
         stage.show();
+
     }
 
     public void addPosterUrl(String posterUrl) {
@@ -151,6 +152,10 @@ public class AddMovieFormView {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setContentText(message);
         alert.showAndWait();
+    }
+
+    public void makeFileFromPath(){
+        addMovieFormViewController.addPicturePath();
     }
 
     //METHOD TO USE FOR CLOSING THE STAGE

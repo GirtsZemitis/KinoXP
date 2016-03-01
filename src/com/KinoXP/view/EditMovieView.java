@@ -162,6 +162,7 @@ public class EditMovieView extends Application {
                 editMovieViewController.deleteMovieButtonAction(titleTxt.getText());
                 NewMovieViewController newMovieViewController = new NewMovieViewController();
                 newMovieViewController.newMovieViewDisplay();
+                deleteFile();
                 finalPrimaryStage.close();
             } else {
                 alert.close();
@@ -193,5 +194,9 @@ public class EditMovieView extends Application {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setContentText(message);
         alert.showAndWait();
+    }
+
+    public void deleteFile(){
+        editMovieViewController.deleteFileAction();
     }
 }
