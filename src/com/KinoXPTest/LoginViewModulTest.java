@@ -18,14 +18,14 @@ public class LoginViewModulTest {
     public void connectToDatabase(){
         loginViewModel.connectToDatabase();
     }
-    @Test // TESTING THE LOG IN METHODS!
+   /* @Test // TESTING THE LOG IN METHODS!
     public void testLogIn(){
         EmployeeModel employeeModel = new EmployeeModel("1","1");
         assertEquals("1",loginViewModel.checkLoginAndPassword(employeeModel).getUserName());
         assertEquals("1",loginViewModel.checkLoginAndPassword(employeeModel).getPassword());
 
 
-    }
+    }*/
 
 
 
