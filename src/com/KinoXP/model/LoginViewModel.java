@@ -34,7 +34,7 @@ public class LoginViewModel {
     //CHECK LOG IN AND PASSWORD WITH SQL - DATABASE (PLEASE MODIFY HERE AND UP FOR YOUR LOCAL DATABASES!!!!!)
     public EmployeeModel checkLoginAndPassword(EmployeeModel employeeModel){
         try {
-            String sql = "SELECT * FROM Employee WHERE userName=?";
+            String sql = "SELECT * FROM LogIn WHERE userName=?";
 
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setString(1, employeeModel.getUserName());

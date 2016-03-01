@@ -5,6 +5,7 @@ import com.KinoXP.model.EmployeeModel;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -65,11 +66,7 @@ public class LoginView {
         GridPane.setConstraints(passwordText,1,2);
         GridPane.setConstraints(logIn,1,3);
 
-
-
         gridPane.setAlignment(Pos.CENTER);
-
-
 
         logIn.setOnAction(event -> {
 
@@ -86,5 +83,10 @@ public class LoginView {
 
         primaryStage.show();
 
+    }
+    public void updateAlertMessage(String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }

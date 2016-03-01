@@ -5,6 +5,7 @@ import com.KinoXP.model.EmployeeModel;
 import com.KinoXP.model.LoginViewModel;
 import com.KinoXP.view.LoginView;
 import com.KinoXP.view.MenuView;
+import javafx.scene.control.Alert;
 
 /**
  * Created by hartyandi on 2/24/16.
@@ -13,6 +14,7 @@ public class LoginViewController {
 
     //CREATED OBJECT
     LoginViewModel loginViewModel = new LoginViewModel();
+    LoginView loginView = new LoginView();
 
     //CHECK IF THE INSERTED USERNAME AND PASSWORD ARE AS THE ONES ESTABLISHED IN THE DATABASE
     public void checkLogIn(EmployeeModel employeeModel){
@@ -27,8 +29,11 @@ public class LoginViewController {
             //IF YES THEN :
                 MenuView menuView = new MenuView();
                 menuView.start();
-            }else{
-                System.out.println("The userName and Password don't match!");
+
+            } else{
+
+            loginView.updateAlertMessage("Wrong Login or Password");
+            startLoginWidnow();
         }
     }
 
