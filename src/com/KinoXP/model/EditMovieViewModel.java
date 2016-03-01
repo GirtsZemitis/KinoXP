@@ -1,5 +1,10 @@
 package com.KinoXP.model;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -28,10 +33,13 @@ public class EditMovieViewModel {
     }
 
 
+
+
     //METHOD FOR EDITING THE MOVIE TITLE
     public String editTitle(String title, String editTitle) {
         String sql = "UPDATE Movie SET title=? WHERE title = ?";
         try {
+
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setString(1, editTitle);
             preparedStatement.setString(2, title);
@@ -42,6 +50,8 @@ public class EditMovieViewModel {
         }
         return null;
     }
+
+
 
     //METHOD FOR EDITING THE PLAYING TIME OF THE MOVIE
     public int editPlayingInMinutes(String title, int editPlayingInMinutes) {
@@ -118,14 +128,20 @@ public class EditMovieViewModel {
         return null;
     }
 
+    String titleString;
+
     //METHOD FOR EDITING THE POSTER OF THE MOVIE
     public String editPoster(String title, String editedPosterPath) {
         String sql = "UPDATE Movie SET posterPath=? WHERE title = ?";
         try {
+            titleString = title;
+            deletefile();
+            makeFileFromURI(editedPosterPath);
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setString(1, editedPosterPath);
             preparedStatement.setString(2, title);
             preparedStatement.executeUpdate();
+
             return editedPosterPath;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -177,7 +193,10 @@ public class EditMovieViewModel {
         return null;
     }
 
+    String titleTxtTextString;
+
     public void deleteMovie(String titleTxtText) {
+        titleTxtTextString = titleTxtText;
         String sql = "DELETE FROM Movie WHERE title = ?";
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
@@ -187,6 +206,37 @@ public class EditMovieViewModel {
             e.printStackTrace();
         }
     }
+
+    public void deletefile() {
+        try {
+
+            File file = new File("res/" + titleTxtTextString + ".png");
+
+            if (file.delete()) {
+                System.out.println(file.getName() + " is deleted!");
+            } else {
+                System.out.println("Delete operation is failed.");
+            }
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+
+        }
+    }
+
+    public void makeFileFromURI(String editedPosterPath) {
+
+        try {
+            URL url = new URL(editedPosterPath);
+            BufferedImage img = ImageIO.read(url);
+            File file = new File("res/" + titleString + ".png");
+            ImageIO.write(img, "png", file);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
 }
-
-

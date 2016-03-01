@@ -95,7 +95,7 @@ public class NewMovieView {
         try {
             while (resultSet.next()){
                 titlesString.add(resultSet.getString(1));
-                urlString.add(resultSet.getString(2));
+                urlString.add(resultSet.getString(1));
             }
         } catch (SQLException e) {
             e.printStackTrace();

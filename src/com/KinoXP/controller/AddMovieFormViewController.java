@@ -37,4 +37,7 @@ public class AddMovieFormViewController {
         addMovieFormViewModel.insertMovie(titleInput, playingTimeInMinutesInput, releaseYearInput, plotInput,
                 directorInput, posterPathInput, castInput, theatreNameInput, genreInput, ageLimitInput);
     }
+    public void addPicturePath(){
+        addMovieFormViewModel.makeFileFromURI();
+    }
 }
