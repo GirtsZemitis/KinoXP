@@ -67,9 +67,6 @@ public class EditMovieModelTest extends TestCase {
         assertNotNull(director);
         assertEquals("EditedDirector", director);
 
-        String poster = emvController.editPoster("EditedTitle", "EditedPosterPath");
-        assertNotNull(poster);
-        assertEquals("EditedPosterPath", poster);
 
         String mainActor = emvController.editMainActor("EditedTitle", "EditedMainActor");
         assertNotNull(mainActor);
