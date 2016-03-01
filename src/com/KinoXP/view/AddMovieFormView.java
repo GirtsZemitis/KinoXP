@@ -1,7 +1,6 @@
 package com.KinoXP.view;
 
 import com.KinoXP.controller.AddMovieFormViewController;
-import com.KinoXP.controller.NewMovieViewController;
 import com.KinoXP.model.AddMovieFormViewModel;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -21,7 +20,6 @@ public class AddMovieFormView {
 
     private AddMovieFormViewController addMovieFormViewController = new AddMovieFormViewController();
     private AddMovieFormViewModel addMovieFormViewModel = new AddMovieFormViewModel();
-    private NewMovieViewController newMovieViewController = new NewMovieViewController();
     private Stage stage;
 
     //CONSTRUCTOR
@@ -29,7 +27,6 @@ public class AddMovieFormView {
         addMovieFormViewModel = new AddMovieFormViewModel();
         addMovieFormViewController = new AddMovieFormViewController(this, addMovieFormViewModel);
     }
-
 
     public void getAddMovieView() {
 
