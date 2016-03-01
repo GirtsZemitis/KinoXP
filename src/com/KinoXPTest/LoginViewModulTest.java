@@ -20,9 +20,9 @@ public class LoginViewModulTest {
     }
     @Test // TESTING THE LOG IN METHODS!
     public void testLogIn(){
-        EmployeeModel employeeModel = new EmployeeModel("1","1");
-        assertEquals("1",loginViewModel.checkLoginAndPassword(employeeModel).getUserName());
-        assertEquals("1",loginViewModel.checkLoginAndPassword(employeeModel).getPassword());
+        LoginViewModel loginViewModel = new LoginViewModel("1","1");
+        assertEquals("1",loginViewModel.checkLoginAndPassword(loginViewModel).getUserName());
+        assertEquals("1",loginViewModel.checkLoginAndPassword(loginViewModel).getPassword());
 
 
     }

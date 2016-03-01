@@ -15,14 +15,14 @@ public class LoginViewController {
     LoginViewModel loginViewModel = new LoginViewModel();
 
     //CHECK IF THE INSERTED USERNAME AND PASSWORD ARE AS THE ONES ESTABLISHED IN THE DATABASE
-    public void checkLogIn(EmployeeModel employeeModel){
+    public void checkLogIn(LoginViewModel loginViewModel){
 
         //CALL THE DATABASE CONNECTION METHOD => CONNECT TO DATABASE
         loginViewModel.connectToDatabase();
 
         //COMPARE IF INPUTED USERNAME && PASS ARE == TO MANUALLY ESTABLISHED ONES IN DB
-        if((loginViewModel.checkLoginAndPassword(employeeModel).getUserName().equals(employeeModel.getUserName()))&&
-                (loginViewModel.checkLoginAndPassword(employeeModel).getPassword().equals(employeeModel.getPassword()))){
+        if((loginViewModel.checkLoginAndPassword(loginViewModel).getUserName().equals(loginViewModel.getUserName()))&&
+                (loginViewModel.checkLoginAndPassword(loginViewModel).getPassword().equals(loginViewModel.getPassword()))){
 
             //IF YES THEN :
                 MenuView menuView = new MenuView();

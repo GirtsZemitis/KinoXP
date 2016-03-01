@@ -2,6 +2,7 @@ package com.KinoXP.view;
 
 import com.KinoXP.controller.LoginViewController;
 import com.KinoXP.model.EmployeeModel;
+import com.KinoXP.model.LoginViewModel;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -20,7 +21,7 @@ import javafx.stage.Stage;
  * Created by hartyandi on 2/24/16.
  */
 public class LoginView {
-    EmployeeModel employeeModel;
+    LoginViewModel loginViewModel;
 
     public void start(){
 
@@ -74,8 +75,8 @@ public class LoginView {
         logIn.setOnAction(event -> {
 
             //CREATING NEW EMPLOYEE OBJECT TO GRAM THE INPUTED ATTRIBUTE VALUES
-            employeeModel = new EmployeeModel(userField.getText(),passwordText.getText());
-            loginViewController.checkLogIn(employeeModel);//CALL METHOD FROM CONTROLLER
+            loginViewModel = new LoginViewModel(userField.getText(),passwordText.getText());
+            loginViewController.checkLogIn(loginViewModel);//CALL METHOD FROM CONTROLLER
             primaryStage.close();// CLOSE THIS STAGE
         });
 
