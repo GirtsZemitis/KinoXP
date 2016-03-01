@@ -15,6 +15,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -72,8 +74,9 @@ public class NewMovieView {
 
         //BORDER Left
         plusButton = new Button("+");
-        plusButton.setPrefSize(40, 40);
-        plusButton.setStyle("-fx-background-color: #94ff6d");
+        plusButton.setPrefSize(100, 100);
+        plusButton.setStyle("-fx-font-size: 32;-fx-background-color: #ffdd19;-fx-border-color: black");
+
 
         /***
          *          Greg + Mazur :
@@ -132,22 +135,24 @@ public class NewMovieView {
             });
 
             Label titleBtnLabel666 = new Label();
-            titleBtnLabel666.setPrefSize(80, 20);
+            titleBtnLabel666.setPrefSize(50, 40);
             titleBtnLabel666.setAlignment(Pos.CENTER);
-
             titleBtnLabel666.setText(titlesString.get(i));
-
             VBox vBox = new VBox();
-            vBox.setPrefSize(80, 120);
-            //vBox.setMaxSize(80,120);
-            vBox.setAlignment(Pos.CENTER);
-            vBox.getChildren().addAll(button666, titleBtnLabel666);
+            vBox.setPrefSize(200, 120);
+            vBox.setAlignment(Pos.TOP_CENTER);
+            Text text = new Text(titleBtnLabel666.getText());
+            text.setWrappingWidth(200);
+            text.setTextAlignment(TextAlignment.CENTER);
+            vBox.getChildren().add(button666);
+            vBox.getChildren().add(text);
+            vBox.setPadding(new Insets(-30, 0, 50, 0));
             flowPane.getChildren().add(vBox);
         }
 
         /***
-        *
-        */
+         *
+         */
 
 
         plusButton.setOnAction(event -> {
@@ -173,7 +178,7 @@ public class NewMovieView {
         });
         borderPane.setAlignment(logOut,Pos.CENTER);
         borderPane.setBottom(logOut);
-
+        borderPane.setPadding(new Insets(0, 0, 30, 30));
         logOut.setStyle("-fx-border-color: black;-fx-font-size: 20");
 
 
