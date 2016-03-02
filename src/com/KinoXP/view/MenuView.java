@@ -54,7 +54,7 @@ public class MenuView {
         
         logOut.setStyle("-fx-font-size: 20");
         logOut.setOnAction(event1 -> {
-            loginViewController.startLoginWidnow();
+            loginViewController.startLoginWindow();
             primaryStage.close();
         });
         menuLayout = new BorderPane();
@@ -79,6 +79,11 @@ public class MenuView {
 
         booking.setOnAction(event -> {
             addBookingViewController.addBookingViewDisplay();
+        });
+
+        employees.setOnAction(event -> {
+            ManageEmployeeView manageEmployeeView = new ManageEmployeeView();
+            manageEmployeeView.start();
         });
 
         menu = new Scene(menuLayout, 500, 500);
