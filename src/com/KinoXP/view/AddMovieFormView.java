@@ -46,7 +46,7 @@ public class AddMovieFormView {
 
         //TEXT AREAS
         TextArea plotTxt = new TextArea();
-        TextArea mainActorTxt = new TextArea();
+        TextArea cast = new TextArea();
 
         //LABELS
         Label mainTitleLbl = new Label("Add MovieModel");
@@ -79,13 +79,16 @@ public class AddMovieFormView {
 
         ComboBox<String>movieTheaterTxt= new ComboBox<>(options);
 
+        addMovieFormViewController.validateFieldsControlsFx(titleTxt, playingTimeInMinutesTxt, releaseYearTxt,
+                plotTxt, directorTxt, posterPathTxt, cast,movieTheaterTxt, genreTxt, ageLimitTxt);
+        // Add Movie Button Action
         addMovieBtn.setOnAction(event -> {
             ManageMovieSceduleController manageMovieSceduleController = new ManageMovieSceduleController();
 
             //save movie in Db with default schedule
             addMovieFormViewController.addMovieButtonAction(titleTxt.getText(), playingTimeInMinutesTxt.getText(),
                     releaseYearTxt.getText(), plotTxt.getText(), directorTxt.getText(), posterPathTxt.getText(),
-                    mainActorTxt.getText(), movieTheaterTxt.getValue(), genreTxt.getText() ,ageLimitTxt.getText());
+                    cast.getText(), movieTheaterTxt.getValue(), genreTxt.getText() ,ageLimitTxt.getText());
             MovieWeek movieWeek = new MovieWeek();
             manageMovieSceduleController.insertMovie(movieWeek.save(movieWeek.getObservableList()));
 
@@ -131,7 +134,7 @@ public class AddMovieFormView {
         hBox4.setSpacing(30);
 
         HBox hBox5 = new HBox();
-        hBox5.getChildren().addAll(mainActorTxt);
+        hBox5.getChildren().addAll(cast);
         hBox5.setSpacing(30);
 
         HBox hBox6 = new HBox();
