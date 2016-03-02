@@ -79,8 +79,9 @@ public class AddMovieFormView {
             MovieWeek movieWeek = new MovieWeek();
             manageMovieSceduleController.insertMovie(movieWeek.save(movieWeek.getObservableList()));
 
+               makeFileFromPath();
 
-            manageMovieSceduleController.scheduleDisplay(titleTxt.getText());
+           // manageMovieSceduleController.scheduleDisplay(titleTxt.getText());
 
 
             //creating posterButton in NewMovieView

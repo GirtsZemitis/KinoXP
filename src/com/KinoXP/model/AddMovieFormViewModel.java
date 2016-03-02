@@ -26,7 +26,7 @@ public class AddMovieFormViewModel {
         posterPathString=posterPath;
         titleString=title;
 
-        String sql = "INSERT INTO Movie VALUES (null,?,?,?,?,?,?,?,?,?,?,null)";
+        String sql = "INSERT INTO Movie VALUES (null,?,?,?,?,?,?,?,?,?,?)";
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setString(1, title);
