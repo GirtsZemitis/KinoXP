@@ -1,8 +1,12 @@
 package com.KinoXP.view;
 
 import com.KinoXP.controller.ManageMovieScheduleController;
+import com.KinoXP.model.ManageMovieSceduleModel;
 import com.KinoXP.model.Movie;
 import com.KinoXP.model.TimeModel;
+import com.KinoXP.controller.NewMovieViewController;
+import com.sun.org.apache.xml.internal.security.utils.SignerOutputStream;
+import com.sun.org.apache.xpath.internal.SourceTree;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -23,7 +27,7 @@ import java.util.ArrayList;
  */
 public class Schedule {
     //button for prinitng week in console
-    Button printButton;
+
     //button for change week
     Button nextButton;
     //button for change week
@@ -42,12 +46,23 @@ public class Schedule {
     ManageMovieScheduleController manageMovieScheduleController = new ManageMovieScheduleController();
     //save Button
     Button saveButton;
+    //back Button
+    Button back;
+    TableColumn<TimeModel, String> hour;
+    TableColumn monday;
+    TableColumn tuesday;
+    TableColumn wednesday;
+    TableColumn thursday;
+    TableColumn friday;
+    TableColumn saturday;
+    TableColumn sanday;
     ComboBox<Movie> choiceBox;
 
     VBox vBox;
     VBox vBox1;
     int b =0;
     Movie movie;
+    Label movieTitleText;
     public Schedule(Movie m){
         movie= m;
     }
@@ -60,20 +75,27 @@ public class Schedule {
         arrayList = manageMovieScheduleController.getArrayList();
         table = new TableView();
         nrOfWeek = new Label("week 1");
-
-
+        nrOfWeek.setId("room");
+        back = new Button("Go back");
+        back.setId("back");
+        back.setOnAction(event3 -> {
+            primaryStage.close();
+        });
         Label movieTitle = new Label("movie 1");
+        movieTitleText = new Label("movie title: " );
+        movieTitleText.setId("movieTitleText");
         pleaseSelectMovie = new Label("Please select movie");
         pleaseSelectMovie.setPrefSize(200,30);
         nextButton = new Button("next week");
+        nextButton.setId("navigationButon");
         nextButton.setOnAction(event2 -> {
             weekCounter++;
             if (weekCounter <= 10) {
 
-                    //--next-- when movie form add
-                    arrayList.get(weekCounter-1).readFromDb(manageMovieScheduleController.getScheduleForMovie(movie.getTitle(),weekCounter),10);
-                    table.setItems(arrayList.get(weekCounter - 1).getObservableListFromDb());
-                    setNumberOfWeek(weekCounter);
+                //--next-- when movie form add
+                arrayList.get(weekCounter-1).readFromDb(manageMovieScheduleController.getScheduleForMovie(movie.getTitle(),weekCounter),10);
+                table.setItems(arrayList.get(weekCounter - 1).getObservableListFromDb());
+                setNumberOfWeek(weekCounter);
 
 
 
@@ -87,6 +109,7 @@ public class Schedule {
             }
         });
         preButton = new Button("pre week");
+        preButton.setId("navigationButon");
         preButton.setOnAction(event2 -> {
             if (weekCounter > 1) {
                 weekCounter--;
@@ -103,29 +126,28 @@ public class Schedule {
 
             }
         });
-        printButton = new Button("Print schedule");
-        printButton.setOnAction(event1 -> {
-            arrayList.get(weekCounter-1).readFromDb(manageMovieScheduleController.printScheduleFromDb(weekCounter),weekCounter);
-        });
+
         saveButton = new Button("Save ");
+        saveButton.setId("save");
         saveButton.setOnAction(event1 -> {
 
-                manageMovieScheduleController.saveSchedule(arrayList.get(weekCounter-1).save(arrayList.get(weekCounter-1).getObservableListFromDb()),weekCounter,movie.getMovieId());
-
+            manageMovieScheduleController.saveSchedule(arrayList.get(weekCounter-1).save(arrayList.get(weekCounter-1).getObservableListFromDb()),weekCounter,movie.getMovieId());
+            conformitionForSaving();
 
         });
         vBox = new VBox();
         vBox1 = new VBox();
-        HBox hBox = new HBox(490);
+        HBox hBox = new HBox();
+        HBox hBox1 = new HBox();
         vBox.setAlignment(Pos.TOP_CENTER);
         primaryStage.setTitle("Schedule");
         table = new TableView();
         table.setEditable(true);
         table.getSelectionModel().setCellSelectionEnabled(true);
 
-        TableColumn<TimeModel, String> hour = new TableColumn("hours");
+        hour = new TableColumn("hours");
         hour.setCellValueFactory(new PropertyValueFactory<>("time"));
-        TableColumn monday = new TableColumn("Monday");
+        monday = new TableColumn("Monday");
         monday.setCellValueFactory(new PropertyValueFactory<TimeModel, String>("monday"));
         monday.setCellFactory(new Callback<TableColumn, TableCell>() {
             public TableCell call(TableColumn param) {
@@ -137,13 +159,13 @@ public class Schedule {
                         if (!isEmpty()) {
                             if (item.contains("no")) {
                                 this.setTextFill(Color.RED);
-                                this.setStyle("-fx-background-color: #8bffa7");
+                                this.setStyle("-fx-background-color: #9bb6b3");
 
                             }
                             if (item.contains("yes")) {
                                 this.setTextFill(Color.GREEN);
 
-                                this.setStyle("-fx-background-color: #18ba0c");
+                                this.setStyle("-fx-background-color: #96cd99");
 
                             }
                             // Get fancy and change color based on data
@@ -154,7 +176,7 @@ public class Schedule {
             }
         });
 
-        TableColumn tuesday = new TableColumn("Tuesday");
+        tuesday = new TableColumn("Tuesday");
         tuesday.setCellValueFactory(new PropertyValueFactory<>("tuesday"));
         tuesday.setCellFactory(new Callback<TableColumn, TableCell>() {
             public TableCell call(TableColumn param) {
@@ -166,13 +188,13 @@ public class Schedule {
                         if (!isEmpty()) {
                             if (item.contains("no")) {
                                 this.setTextFill(Color.RED);
-                                this.setStyle("-fx-background-color: #8bffa7");
+                                this.setStyle("-fx-background-color: #9bb6b3");
 
                             }
                             if (item.contains("yes")) {
                                 this.setTextFill(Color.GREEN);
 
-                                this.setStyle("-fx-background-color: #18ba0c");
+                                this.setStyle("-fx-background-color: #96cd99");
 
                             }
                             // Get fancy and change color based on data
@@ -183,7 +205,7 @@ public class Schedule {
             }
         });
 
-        TableColumn wednesday = new TableColumn("Wednesday");
+        wednesday = new TableColumn("Wednesday");
         wednesday.setCellValueFactory(new PropertyValueFactory<>("wednesday"));
         wednesday.setCellFactory(new Callback<TableColumn, TableCell>() {
             public TableCell call(TableColumn param) {
@@ -195,13 +217,13 @@ public class Schedule {
                         if (!isEmpty()) {
                             if (item.contains("no")) {
                                 this.setTextFill(Color.RED);
-                                this.setStyle("-fx-background-color: #8bffa7");
+                                this.setStyle("-fx-background-color: #9bb6b3");
 
                             }
                             if (item.contains("yes")) {
                                 this.setTextFill(Color.GREEN);
 
-                                this.setStyle("-fx-background-color: #18ba0c");
+                                this.setStyle("-fx-background-color: #96cd99");
 
                             }
                             // Get fancy and change color based on data
@@ -212,7 +234,7 @@ public class Schedule {
             }
         });
 
-        TableColumn thursday = new TableColumn("Thursday");
+        thursday = new TableColumn("Thursday");
         thursday.setCellValueFactory(new PropertyValueFactory<>("thrusday"));
         thursday.setCellFactory(new Callback<TableColumn, TableCell>() {
             public TableCell call(TableColumn param) {
@@ -224,13 +246,13 @@ public class Schedule {
                         if (!isEmpty()) {
                             if (item.contains("no")) {
                                 this.setTextFill(Color.RED);
-                                this.setStyle("-fx-background-color: #8bffa7");
+                                this.setStyle("-fx-background-color: #9bb6b3");
 
                             }
                             if (item.contains("yes")) {
                                 this.setTextFill(Color.GREEN);
 
-                                this.setStyle("-fx-background-color: #18ba0c");
+                                this.setStyle("-fx-background-color: #96cd99");
 
                             }
                             // Get fancy and change color based on data
@@ -240,7 +262,8 @@ public class Schedule {
                 };
             }
         });
-        TableColumn friday = new TableColumn("Friday");
+
+        friday = new TableColumn("Friday");
         friday.setCellValueFactory(new PropertyValueFactory<>("friday"));
         friday.setCellFactory(new Callback<TableColumn, TableCell>() {
             public TableCell call(TableColumn param) {
@@ -252,13 +275,13 @@ public class Schedule {
                         if (!isEmpty()) {
                             if (item.contains("no")) {
                                 this.setTextFill(Color.RED);
-                                this.setStyle("-fx-background-color: #8bffa7");
+                                this.setStyle("-fx-background-color: #9bb6b3");
 
                             }
                             if (item.contains("yes")) {
                                 this.setTextFill(Color.GREEN);
 
-                                this.setStyle("-fx-background-color: #18ba0c");
+                                this.setStyle("-fx-background-color: #96cd99");
 
                             }
                             // Get fancy and change color based on data
@@ -268,7 +291,9 @@ public class Schedule {
                 };
             }
         });
-        TableColumn saturday = new TableColumn("Saturday");
+
+
+        saturday = new TableColumn("Saturday");
         saturday.setCellValueFactory(new PropertyValueFactory<>("saturday"));
         saturday.setCellFactory(new Callback<TableColumn, TableCell>() {
             public TableCell call(TableColumn param) {
@@ -280,13 +305,13 @@ public class Schedule {
                         if (!isEmpty()) {
                             if (item.contains("no")) {
                                 this.setTextFill(Color.RED);
-                                this.setStyle("-fx-background-color: #8bffa7");
+                                this.setStyle("-fx-background-color: #9bb6b3");
 
                             }
                             if (item.contains("yes")) {
                                 this.setTextFill(Color.GREEN);
 
-                                this.setStyle("-fx-background-color: #18ba0c");
+                                this.setStyle("-fx-background-color: #96cd99");
 
                             }
                             // Get fancy and change color based on data
@@ -296,7 +321,9 @@ public class Schedule {
                 };
             }
         });
-        TableColumn sanday = new TableColumn("Sanday");
+
+
+        sanday = new TableColumn("Sanday");
         sanday.setCellValueFactory(new PropertyValueFactory<TimeModel, String>("sunday"));
 
         sanday.setCellFactory(new Callback<TableColumn, TableCell>() {
@@ -309,13 +336,13 @@ public class Schedule {
                         if (!isEmpty()) {
                             if (item.contains("no")) {
                                 this.setTextFill(Color.RED);
-                                this.setStyle("-fx-background-color: #8bffa7");
+                                this.setStyle("-fx-background-color: #9bb6b3");
 
                             }
                             if (item.contains("yes")) {
                                 this.setTextFill(Color.GREEN);
 
-                                this.setStyle("-fx-background-color: #18ba0c");
+                                this.setStyle("-fx-background-color: #96cd99");
 
                             }
                         }
@@ -326,7 +353,7 @@ public class Schedule {
 
 
 
-            table.setItems(arrayList.get(weekCounter-1).readFromDb(manageMovieScheduleController.getScheduleForMovie(movie.getTitle(),1),10));
+        table.setItems(arrayList.get(weekCounter-1).readFromDb(manageMovieScheduleController.getScheduleForMovie(movie.getTitle(),1),10));
 
         table.getColumns().addAll(hour, monday, tuesday, wednesday, thursday, friday, saturday, sanday);
         table.setOnMouseClicked(event -> {
@@ -421,14 +448,30 @@ public class Schedule {
 
 
         });
-        hBox.getChildren().addAll(preButton, nextButton);
+        hBox.setMargin(preButton, new Insets(10,200,0,10));
+        hBox.setMargin(nrOfWeek, new Insets(10,200,0,10));
+        hBox.setMargin(nextButton, new Insets(10,0,0, 0));
+        hBox.getChildren().addAll(preButton,nrOfWeek,nextButton);
+        hBox1.setMargin(back, new Insets(10,0,0,10));
+        hBox1.setMargin(saveButton, new Insets(30,0,20,280));
+        hBox1.getChildren().addAll(back,saveButton);
+        vBox.setMargin(movieTitleText, new Insets(20,0,0,0));
+        movieTitle.setText(movie.getTitle());
+        vBox.getChildren().addAll(hBox,movieTitleText,movieTitle,table,hBox1);
 
-            movieTitle.setText(movie.getTitle());
-            vBox.getChildren().addAll(hBox, nrOfWeek, movieTitle,table, printButton,saveButton);
-
+        //set column size
+        hour.prefWidthProperty().bind(table.widthProperty().divide(10)); // w * 1/4
+        monday.prefWidthProperty().bind(table.widthProperty().divide(8)); // w * 1/4
+        tuesday.prefWidthProperty().bind(table.widthProperty().divide(8)); // w * 1/4
+        wednesday.prefWidthProperty().bind(table.widthProperty().divide(8)); // w * 1/4
+        thursday.prefWidthProperty().bind(table.widthProperty().divide(8)); // w * 1/4
+        friday.prefWidthProperty().bind(table.widthProperty().divide(8)); // w * 1/4
+        saturday.prefWidthProperty().bind(table.widthProperty().divide(8)); // w * 1/4
+        sanday.prefWidthProperty().bind(table.widthProperty().divide(8)); // w * 1/4
 
         Scene scene = new Scene(vBox, 650, 600);
-        scene.getStylesheets().add("ManageMovieSceduleViewPackage/style.css");
+        scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
+        movieTitle.setId("movieTitle");
 
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -487,7 +530,7 @@ public class Schedule {
 
         button.setOnAction(event1 -> {
             try{
-              Movie movie =   comboBox.getSelectionModel().getSelectedItem();
+                Movie movie =   comboBox.getSelectionModel().getSelectedItem();
                 manageMovieScheduleController.scheduleDisplay(movie);
 
             }catch (Exception e){
@@ -501,6 +544,31 @@ public class Schedule {
 
         primaryStage.setScene(scene);
         primaryStage.show();
+    }
+
+    //conformition for saving
+
+    public void conformitionForSaving(){
+
+        Stage primaryStage = new Stage();
+        VBox vbox = new VBox();
+        String title = movie.getTitle();
+        Label label = new Label("You have save "+" week "+weekCounter +"\n"+" for \n "+ "''"+title+"''");
+        label.setId("conformition");
+        Button button = new Button("ok");
+        button.setId("ok");
+        vbox.setAlignment(Pos.TOP_CENTER);
+        vbox.getChildren().addAll(label,button);
+        vbox.setMargin(label, new Insets(30,0,0,0));
+        vbox.setMargin(button, new Insets(30,0,30,0));
+        button.setOnAction(event -> {
+            primaryStage.close();
+        });
+        Scene scene = new Scene(vbox,350,250);
+        scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
+        primaryStage.setScene(scene);
+        primaryStage.show();
+
     }
 
 }
