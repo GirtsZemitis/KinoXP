@@ -1,0 +1,14 @@
+#MenuView{
+    -fx-background-image: url("picture.jpg");
+
+}
+
+
+
+
+.table-cell:selected {
+    -fx-background-color: lightgreen;
+    -fx-text-fill: green;
+}
+
+
