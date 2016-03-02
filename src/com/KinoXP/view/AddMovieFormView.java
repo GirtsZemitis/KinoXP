@@ -3,6 +3,8 @@ package com.KinoXP.view;
 import com.KinoXP.controller.AddMovieFormViewController;
 import com.KinoXP.controller.ManageMovieSceduleController;
 import com.KinoXP.model.AddMovieFormViewModel;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -37,7 +39,8 @@ public class AddMovieFormView {
         TextField releaseYearTxt = new TextField();
         TextField directorTxt = new TextField();
         TextField posterPathTxt = new TextField();
-        TextField movieTheaterTxt = new TextField();
+        //TextField movieTheaterTxt = new TextField();
+
         TextField genreTxt = new TextField();
         TextField ageLimitTxt = new TextField();
 
@@ -67,7 +70,14 @@ public class AddMovieFormView {
 
         addPosterBtn.setOnAction(event1 -> addPosterUrl(posterPathTxt.getText()));
 
+        ObservableList<String> options =
+                FXCollections.observableArrayList(
+                        "Theater 1",
+                        "Theater 2"
 
+                );
+
+        ComboBox<String>movieTheaterTxt= new ComboBox<>(options);
 
         addMovieBtn.setOnAction(event -> {
             ManageMovieSceduleController manageMovieSceduleController = new ManageMovieSceduleController();
@@ -75,7 +85,7 @@ public class AddMovieFormView {
             //save movie in Db with default schedule
             addMovieFormViewController.addMovieButtonAction(titleTxt.getText(), playingTimeInMinutesTxt.getText(),
                     releaseYearTxt.getText(), plotTxt.getText(), directorTxt.getText(), posterPathTxt.getText(),
-                    mainActorTxt.getText(), movieTheaterTxt.getText(), genreTxt.getText() ,ageLimitTxt.getText());
+                    mainActorTxt.getText(), movieTheaterTxt.getValue(), genreTxt.getText() ,ageLimitTxt.getText());
             MovieWeek movieWeek = new MovieWeek();
             manageMovieSceduleController.insertMovie(movieWeek.save(movieWeek.getObservableList()));
 
