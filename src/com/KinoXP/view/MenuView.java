@@ -82,6 +82,11 @@ public class MenuView {
             addBookingViewController.addBookingViewDisplay();
         });
 
+        employees.setOnAction(event -> {
+            ManageEmployeeView manageEmployeeView = new ManageEmployeeView();
+            manageEmployeeView.start();
+        });
+
         menu = new Scene(menuLayout, 500, 500);
         mainMenu.setScene(menu);
         mainMenu.show();
