@@ -4,6 +4,8 @@ import com.KinoXP.controller.EditMovieViewController;
 import com.KinoXP.controller.NewMovieViewController;
 import com.KinoXP.model.EditMovieViewModel;
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -67,7 +69,7 @@ public class EditMovieView extends Application {
         TextField releaseYearTxt = new TextField(result[4]);
         TextField directorTxt = new TextField(result[6]);
         TextField posterPathTxt = new TextField(result[7]);
-        TextField movieTheaterTxt = new TextField(result[9]);
+        //TextField movieTheaterTxt = new TextField(result[9]);
         TextField genreTxt = new TextField(result[10]);
         TextField ageLimitTxt = new TextField(result[11]);
 
@@ -88,6 +90,16 @@ public class EditMovieView extends Application {
         Label castLbl = new Label("Cast");
         Label posterLbl = new Label("Poster URL");
         Label movieTheaterLbl = new Label("MovieModel Theater");
+
+        ObservableList<String> options =
+                FXCollections.observableArrayList(
+                        "Theater 1",
+                        "Theater 2"
+
+                );
+
+        ComboBox<String>movieTheaterTxt= new ComboBox<>(options);
+        movieTheaterTxt.setValue(result[9]);
 
         //BUTTONS
         //Button addCastBtn = new Button("Add");
@@ -173,7 +185,7 @@ public class EditMovieView extends Application {
         editMovieBtn.setOnAction(event -> {
             editMovieViewController.editMovieButtonAction(titleTxt.getText(), playingTimeInMinutesTxt.getText(),
                     releaseYearTxt.getText(), plotTxt.getText(), directorTxt.getText(), posterPathTxt.getText(),
-                    mainActorTxt.getText(), movieTheaterTxt.getText(), genreTxt.getText(), ageLimitTxt.getText(), result[2], result[3], result[4], result[5],
+                    mainActorTxt.getText(), movieTheaterTxt.getValue(), genreTxt.getText(), ageLimitTxt.getText(), result[2], result[3], result[4], result[5],
                     result[6], result[7], result[8], result[9], result[10], result[11]);
             NewMovieViewController newMovieViewController = new NewMovieViewController();
             newMovieViewController.newMovieViewDisplay();
