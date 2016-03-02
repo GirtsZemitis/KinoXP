@@ -86,9 +86,9 @@ public class AddMovieFormView {
 
             //creating posterButton in NewMovieView
 
-            //  closeStage();
-            //  NewMovieView newMovieView = new NewMovieView();
-            //  newMovieView.start();
+            closeStage();
+             NewMovieView newMovieView = new NewMovieView();
+             newMovieView.start();
 
         });
 
