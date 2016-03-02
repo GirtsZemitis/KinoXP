@@ -6,36 +6,53 @@ import com.KinoXP.model.LoginViewModel;
 import com.KinoXP.view.LoginView;
 import com.KinoXP.view.MenuView;
 
-/**
- * Created by hartyandi on 2/24/16.
- */
+
 public class LoginViewController {
 
     //CREATED OBJECT
     LoginViewModel loginViewModel = new LoginViewModel();
+    LoginView loginView = new LoginView();
 
-    //CHECK IF THE INSERTED USERNAME AND PASSWORD ARE AS THE ONES ESTABLISHED IN THE DATABASE
-    public void checkLogIn(LoginViewModel loginViewModel){
 
-        //CALL THE DATABASE CONNECTION METHOD => CONNECT TO DATABASE
+    //CHECK IF THE INSERTED USERNAME AND PASSWORD ARE AS THE ONES ESTABLISHED IN THE DATABASE//////////////////////////
+    public String checkLogIn(EmployeeModel employeeModel){
+        String textForLabel = "";
+        //calling the connect to db method
         loginViewModel.connectToDatabase();
 
-        //COMPARE IF INPUTED USERNAME && PASS ARE == TO MANUALLY ESTABLISHED ONES IN DB
-        if((loginViewModel.checkLoginAndPassword(loginViewModel).getUserName().equals(loginViewModel.getUserName()))&&
-                (loginViewModel.checkLoginAndPassword(loginViewModel).getPassword().equals(loginViewModel.getPassword()))){
-
+        //Compares if the returned result is true or false.
+        if((loginViewModel.checkLoginAndPassword(employeeModel).equals(true))){
             //IF YES THEN :
-                MenuView menuView = new MenuView();
-                menuView.start();
-            }else{
-                System.out.println("The userName and Password don't match!");
+            MenuView menuView = new MenuView();
+            menuView.start();
+        }else{
+            textForLabel = "The username and/or password do not match!";
         }
+        return textForLabel;
     }
-
-    public void startLoginWidnow(){
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////USED IN RUN CLASS MAIN/////////////////////////////////////////////////////
+    public void startLoginWindow(){
         LoginView loginView = new LoginView();
         loginView.start();
     }
+    ////////////////////////////////////////////////////////////////////////////////////
+    public void checkForInternetConnection(){
+        try {
+            if(loginViewModel.isInternetAvailable()){
+                startLoginWindow();
+            }else{
+                loginView.networkAlertMethod();
+                System.exit(1);
+            }
+        }catch (java.io.IOException IoE){
+            System.out.println("Could not check for internet connection! There is an error with the method! See SRC!");
+        }
+    }
+
+
+
+
 
 }
 

@@ -5,7 +5,6 @@ import com.KinoXP.controller.AddBookingViewController;
 import com.KinoXP.controller.LoginViewController;
 import com.KinoXP.controller.ManageMovieSceduleController;
 import com.KinoXP.controller.NewMovieViewController;
-import com.KinoXP.model.LoginViewModel;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -55,7 +54,7 @@ public class MenuView {
         
         logOut.setStyle("-fx-font-size: 20");
         logOut.setOnAction(event1 -> {
-            loginViewController.startLoginWidnow();
+            loginViewController.startLoginWindow();
             primaryStage.close();
         });
         menuLayout = new BorderPane();

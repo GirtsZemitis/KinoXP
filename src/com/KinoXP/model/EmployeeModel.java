@@ -1,8 +1,5 @@
 package com.KinoXP.model;
 
-/**
- * Created by hartyandi on 2/24/16.
- */
 public class EmployeeModel {
 
     private String userName;
@@ -12,7 +9,16 @@ public class EmployeeModel {
     private Integer phoneNumber;
     private String jobTitle;
 
+    private String password;///////////////// BY MONICA - don't delete this before talking with me!!!
+
     //CONSTRUCTOR
+    public EmployeeModel(){}
+
+
+    public EmployeeModel(String userName, String password){ //////////BY MONICA - don't delete this before talking with me :)
+        this.userName = userName;
+        this.password = password;
+    }
     public EmployeeModel(String userName, String name, String surname, String email,
                          Integer phoneNumber, String jobTitle) {
         this.userName = userName;
@@ -23,7 +29,7 @@ public class EmployeeModel {
         this.jobTitle = jobTitle;
     }
 
-    public EmployeeModel(){}
+
 
     //GETTERS AND SETTERS
     public String getUserName() {
@@ -73,4 +79,13 @@ public class EmployeeModel {
     public void setJobTitle(String jobTitle) {
         this.jobTitle = jobTitle;
     }
+
+    //////////////MONICA////////////////////////---------------------
+    public String getPassword() {
+        return password;
+    }
+    public void setPassword(String password) {
+        this.password = password;
+    }
+    /////////////////////////////////////////////-------------------- Don't delete without talking with me! :)
 }
