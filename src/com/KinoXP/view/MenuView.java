@@ -74,7 +74,8 @@ public class MenuView {
         });
 
         schedule.setOnAction(event -> {
-            manageMovieSceduleController.scheduleDisplay();
+           // manageMovieSceduleController.scheduleDisplay();
+            manageMovieSceduleController.scheduleFromTheatre();
       });
 
         booking.setOnAction(event -> {

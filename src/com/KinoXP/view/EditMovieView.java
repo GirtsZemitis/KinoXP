@@ -160,7 +160,7 @@ public class EditMovieView extends Application {
 
         //HANDLING THE BUTTONS ACTIONS
         deleteMovieBtn.setOnAction(event -> {
-
+            /*
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Delete Movie");
             alert.setHeaderText("Are you sure you want to delete the movie?");
@@ -179,7 +179,7 @@ public class EditMovieView extends Application {
             } else {
                 alert.close();
             }
-
+        */
         });
 
         editMovieBtn.setOnAction(event -> {

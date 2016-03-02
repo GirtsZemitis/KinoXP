@@ -175,7 +175,6 @@ public class MovieWeek {
                 if(s.charAt(i)!='\n'){
                     sunday += s.charAt(i);
                 }else {
-                    System.out.println(hour + monday + tuesday+ wedensday + thursday + friday + saturday + sunday);
                     variableCounter++;
                     observableListFromDb.add(new TimeModel(hour,monday,tuesday,wedensday,thursday,friday,saturday,sunday));
                     variableCounter=0;

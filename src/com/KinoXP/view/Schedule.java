@@ -4,6 +4,11 @@ import com.KinoXP.controller.ManageMovieSceduleController;
 import com.KinoXP.model.Movie;
 import com.KinoXP.model.TimeModel;
 import com.KinoXP.controller.NewMovieViewController;
+import com.sun.org.apache.xml.internal.security.utils.SignerOutputStream;
+import com.sun.org.apache.xpath.internal.SourceTree;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -41,13 +46,13 @@ public class Schedule {
     //save Button
     Button saveButton;
     ComboBox<Movie> choiceBox;
-    String title ="";
+
     VBox vBox;
     VBox vBox1;
     int b =0;
     Movie movie;
-    public Schedule(String s){
-        title =s;
+    public Schedule(Movie m){
+        movie= m;
     }
     public Schedule(){
 
@@ -58,24 +63,7 @@ public class Schedule {
         arrayList = manageMovieSceduleController.getArrayList();
         table = new TableView();
         nrOfWeek = new Label("week 1");
-        choiceBox = new ComboBox<>();
-        choiceBox.setItems(manageMovieSceduleController.getMovieTitles());
-        choiceBox.setOnAction(event3 -> {
-            System.out.println("you select "+choiceBox.getSelectionModel().getSelectedItem());
-            movie=choiceBox.getSelectionModel().getSelectedItem();
-            title = movie.getTitle();
-            if(b==0){
-                vBox1.getChildren().add(table);
 
-            }
-            b++;
-            weekCounter=1;
-            nrOfWeek.setText("week"+weekCounter);
-
-            table.setItems(arrayList.get(weekCounter-1).readFromDb(manageMovieSceduleController.getScheduleForMovie(title,1),10));
-
-
-        });
 
         Label movieTitle = new Label("movie 1");
         pleaseSelectMovie = new Label("Please select movie");
@@ -84,17 +72,13 @@ public class Schedule {
         nextButton.setOnAction(event2 -> {
             weekCounter++;
             if (weekCounter <= 10) {
-                if(title.equals("")){
-                    arrayList.get(weekCounter-1).readFromDb(manageMovieSceduleController.printScheduleFromDb(weekCounter),weekCounter);
-                    table.setItems(arrayList.get(weekCounter - 1).getObservableListFromDb());
-                    setNumberOfWeek(weekCounter);
-                }else {
+
                     //--next-- when movie form add
-                    arrayList.get(weekCounter-1).readFromDb(manageMovieSceduleController.getScheduleForMovie(title,weekCounter),10);
+                    arrayList.get(weekCounter-1).readFromDb(manageMovieSceduleController.getScheduleForMovie(movie.getTitle(),weekCounter),10);
                     table.setItems(arrayList.get(weekCounter - 1).getObservableListFromDb());
                     setNumberOfWeek(weekCounter);
 
-                }
+
 
             } else {
                 weekCounter = 1;
@@ -109,14 +93,14 @@ public class Schedule {
         preButton.setOnAction(event2 -> {
             if (weekCounter > 1) {
                 weekCounter--;
-                arrayList.get(weekCounter-1).readFromDb(manageMovieSceduleController.getScheduleForMovie(title,weekCounter),10);
+                arrayList.get(weekCounter-1).readFromDb(manageMovieSceduleController.getScheduleForMovie(movie.getTitle(),weekCounter),10);
                 table.setItems(arrayList.get(weekCounter - 1).getObservableListFromDb());
                 setNumberOfWeek(weekCounter);
 
 
             } else {
                 weekCounter = 10;
-                arrayList.get(weekCounter-1).readFromDb(manageMovieSceduleController.getScheduleForMovie(title,weekCounter),10);
+                arrayList.get(weekCounter-1).readFromDb(manageMovieSceduleController.getScheduleForMovie(movie.getTitle(),weekCounter),10);
                 table.setItems(arrayList.get(weekCounter - 1).getObservableListFromDb());
                 setNumberOfWeek(weekCounter);
 
@@ -128,13 +112,10 @@ public class Schedule {
         });
         saveButton = new Button("Save ");
         saveButton.setOnAction(event1 -> {
-            if(title.equals("")){
-                manageMovieSceduleController.saveSchedule(arrayList.get(weekCounter-1).save(arrayList.get(weekCounter-1).getObservableListFromDb()),weekCounter,5);
 
-            }else {
                 manageMovieSceduleController.saveSchedule(arrayList.get(weekCounter-1).save(arrayList.get(weekCounter-1).getObservableListFromDb()),weekCounter,movie.getMovieId());
 
-            }
+
         });
         vBox = new VBox();
         vBox1 = new VBox();
@@ -346,13 +327,10 @@ public class Schedule {
             }
         });
 
-        if(title.equals("")){
-            table.setItems(arrayList.get(weekCounter - 1).readFromDb(manageMovieSceduleController.printScheduleFromDb(weekCounter),weekCounter));
 
-        }else {
 
-            table.setItems(arrayList.get(weekCounter-1).readFromDb(manageMovieSceduleController.getScheduleForMovie(title,1),10));
-        }
+            table.setItems(arrayList.get(weekCounter-1).readFromDb(manageMovieSceduleController.getScheduleForMovie(movie.getTitle(),1),10));
+
         table.getColumns().addAll(hour, monday, tuesday, wednesday, thursday, friday, saturday, sanday);
         table.setOnMouseClicked(event -> {
             TablePosition firstCell = table.getSelectionModel().getSelectedCells().get(0);
@@ -447,15 +425,11 @@ public class Schedule {
 
         });
         hBox.getChildren().addAll(preButton, nextButton);
-        if(title.equals("")){
-            vBox1.getChildren().add(pleaseSelectMovie);
-            vBox.getChildren().addAll(hBox, nrOfWeek, choiceBox, movieTitle, vBox1, printButton,saveButton);
 
-        }else {
-            movieTitle.setText(title);
+            movieTitle.setText(movie.getTitle());
             vBox.getChildren().addAll(hBox, nrOfWeek, movieTitle,table, printButton,saveButton);
 
-        }
+
         Scene scene = new Scene(vBox, 650, 600);
         scene.getStylesheets().add("ManageMovieSceduleViewPackage/style.css");
 
@@ -469,6 +443,67 @@ public class Schedule {
     public void setNumberOfWeek(int i) {
 
         nrOfWeek.setText("week " + i);
+    }
+    public void startSchedule(){
+
+
+        ObservableList<String> options =
+                FXCollections.observableArrayList(
+                        "Theater 1",
+                        "Theater 2"
+
+                );
+
+
+        Stage primaryStage = new Stage();
+        VBox vbox = new VBox();
+        Scene scene = new Scene(vbox,650,600);
+        scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
+        Label label = new Label("Welcome to manage schedule");
+        label.setId("welcome");
+        Label label1 = new Label("Please choose room");
+        label1.setId("room");
+        Label label2 = new Label("Please select movie");
+        label2.setId("room");
+        Button button = new Button("Go to schedule");
+        button.setId("button");
+
+        ComboBox<Movie> comboBox = new ComboBox<>();
+
+        ComboBox<String>movieTheaterTxt= new ComboBox<>(options);
+        movieTheaterTxt.setOnAction(event -> {
+            comboBox.setItems(manageMovieSceduleController.getMovieTitles(movieTheaterTxt.getSelectionModel().getSelectedItem()));
+        });
+        movieTheaterTxt.setValue("Theater 1");
+
+        String cinameRoomName = movieTheaterTxt.getSelectionModel().getSelectedItem();
+        comboBox.setItems(manageMovieSceduleController.getMovieTitles(cinameRoomName));
+
+        vbox.getChildren().addAll(label,label1,movieTheaterTxt, label2,comboBox,button);
+        vbox.setMargin(label,new Insets(120,0,0,0));
+        vbox.setMargin(label1,new Insets(30,0,0,0));
+        vbox.setMargin(movieTheaterTxt,new Insets(10,0,0,0));
+        vbox.setMargin(label2,new Insets(30,0,0,0));
+        vbox.setMargin(comboBox,new Insets(10,0,0,0));
+        vbox.setMargin(button,new Insets(180,0,0,0));
+
+
+        button.setOnAction(event1 -> {
+            try{
+              Movie movie =   comboBox.getSelectionModel().getSelectedItem();
+                manageMovieSceduleController.scheduleDisplay(movie);
+
+            }catch (Exception e){
+                label2.setId("chooseMovie");
+            }
+
+        });
+
+        vbox.setAlignment(Pos.TOP_CENTER);
+
+
+        primaryStage.setScene(scene);
+        primaryStage.show();
     }
 
 }

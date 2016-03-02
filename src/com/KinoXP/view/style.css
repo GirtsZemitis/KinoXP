@@ -3,12 +3,37 @@
 
 }
 
+#welcome{
+    -fx-text-fill: darkslategrey;
+    -fx-font-size: 18pt;
+}
+#room{
+    -fx-text-fill: darkslategrey;
+    -fx-font-size: 15pt;
+}
+#button{
+    -fx-min-width: 150px;
+    -fx-min-height: 50px;
+    -fx-text-fill: darkslategrey;
+    -fx-font-size: 15pt;
+    -fx-background-color: #c0cfdb;
+    -fx-border-style: solid;
+    -fx-border-color: #99a5af;
+}
+#button:hover{
+    -fx-background-color: #a3b1bd;
 
+}
+#chooseMovie{
+    -fx-text-fill: red;
+    -fx-font-size: 15pt;
+}
 
 
 .table-cell:selected {
     -fx-background-color: lightgreen;
     -fx-text-fill: green;
+
 }
 
 
