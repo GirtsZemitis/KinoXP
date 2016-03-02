@@ -11,7 +11,7 @@ import javafx.collections.ObservableList;
 /**
  * Created by hartyandi on 2/24/16.
  */
-public class ManageMovieSceduleController {
+public class ManageMovieScheduleController {
     ArrayList<MovieWeek> arrayList;
     ManageMovieSceduleModel manageMovieSceduleModel = new ManageMovieSceduleModel();
 

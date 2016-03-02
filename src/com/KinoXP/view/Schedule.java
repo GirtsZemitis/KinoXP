@@ -1,11 +1,8 @@
 package com.KinoXP.view;
 
-import com.KinoXP.controller.ManageMovieSceduleController;
+import com.KinoXP.controller.ManageMovieScheduleController;
 import com.KinoXP.model.Movie;
 import com.KinoXP.model.TimeModel;
-import com.KinoXP.controller.NewMovieViewController;
-import com.sun.org.apache.xml.internal.security.utils.SignerOutputStream;
-import com.sun.org.apache.xpath.internal.SourceTree;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -42,7 +39,7 @@ public class Schedule {
     //table view for holding schedule
     TableView<TimeModel> table;
     //controller object
-    ManageMovieSceduleController manageMovieSceduleController = new ManageMovieSceduleController();
+    ManageMovieScheduleController manageMovieScheduleController = new ManageMovieScheduleController();
     //save Button
     Button saveButton;
     ComboBox<Movie> choiceBox;
@@ -60,7 +57,7 @@ public class Schedule {
     public void start() {
         Stage primaryStage = new Stage();
         //populate array with 12 weeks
-        arrayList = manageMovieSceduleController.getArrayList();
+        arrayList = manageMovieScheduleController.getArrayList();
         table = new TableView();
         nrOfWeek = new Label("week 1");
 
@@ -74,7 +71,7 @@ public class Schedule {
             if (weekCounter <= 10) {
 
                     //--next-- when movie form add
-                    arrayList.get(weekCounter-1).readFromDb(manageMovieSceduleController.getScheduleForMovie(movie.getTitle(),weekCounter),10);
+                    arrayList.get(weekCounter-1).readFromDb(manageMovieScheduleController.getScheduleForMovie(movie.getTitle(),weekCounter),10);
                     table.setItems(arrayList.get(weekCounter - 1).getObservableListFromDb());
                     setNumberOfWeek(weekCounter);
 
@@ -82,7 +79,7 @@ public class Schedule {
 
             } else {
                 weekCounter = 1;
-                arrayList.get(weekCounter-1).readFromDb(manageMovieSceduleController.printScheduleFromDb(weekCounter),weekCounter);
+                arrayList.get(weekCounter-1).readFromDb(manageMovieScheduleController.printScheduleFromDb(weekCounter),weekCounter);
                 table.setItems(arrayList.get(weekCounter - 1).getObservableListFromDb());
                 setNumberOfWeek(weekCounter);
 
@@ -93,14 +90,14 @@ public class Schedule {
         preButton.setOnAction(event2 -> {
             if (weekCounter > 1) {
                 weekCounter--;
-                arrayList.get(weekCounter-1).readFromDb(manageMovieSceduleController.getScheduleForMovie(movie.getTitle(),weekCounter),10);
+                arrayList.get(weekCounter-1).readFromDb(manageMovieScheduleController.getScheduleForMovie(movie.getTitle(),weekCounter),10);
                 table.setItems(arrayList.get(weekCounter - 1).getObservableListFromDb());
                 setNumberOfWeek(weekCounter);
 
 
             } else {
                 weekCounter = 10;
-                arrayList.get(weekCounter-1).readFromDb(manageMovieSceduleController.getScheduleForMovie(movie.getTitle(),weekCounter),10);
+                arrayList.get(weekCounter-1).readFromDb(manageMovieScheduleController.getScheduleForMovie(movie.getTitle(),weekCounter),10);
                 table.setItems(arrayList.get(weekCounter - 1).getObservableListFromDb());
                 setNumberOfWeek(weekCounter);
 
@@ -108,12 +105,12 @@ public class Schedule {
         });
         printButton = new Button("Print schedule");
         printButton.setOnAction(event1 -> {
-            arrayList.get(weekCounter-1).readFromDb(manageMovieSceduleController.printScheduleFromDb(weekCounter),weekCounter);
+            arrayList.get(weekCounter-1).readFromDb(manageMovieScheduleController.printScheduleFromDb(weekCounter),weekCounter);
         });
         saveButton = new Button("Save ");
         saveButton.setOnAction(event1 -> {
 
-                manageMovieSceduleController.saveSchedule(arrayList.get(weekCounter-1).save(arrayList.get(weekCounter-1).getObservableListFromDb()),weekCounter,movie.getMovieId());
+                manageMovieScheduleController.saveSchedule(arrayList.get(weekCounter-1).save(arrayList.get(weekCounter-1).getObservableListFromDb()),weekCounter,movie.getMovieId());
 
 
         });
@@ -329,7 +326,7 @@ public class Schedule {
 
 
 
-            table.setItems(arrayList.get(weekCounter-1).readFromDb(manageMovieSceduleController.getScheduleForMovie(movie.getTitle(),1),10));
+            table.setItems(arrayList.get(weekCounter-1).readFromDb(manageMovieScheduleController.getScheduleForMovie(movie.getTitle(),1),10));
 
         table.getColumns().addAll(hour, monday, tuesday, wednesday, thursday, friday, saturday, sanday);
         table.setOnMouseClicked(event -> {
@@ -472,12 +469,12 @@ public class Schedule {
 
         ComboBox<String>movieTheaterTxt= new ComboBox<>(options);
         movieTheaterTxt.setOnAction(event -> {
-            comboBox.setItems(manageMovieSceduleController.getMovieTitles(movieTheaterTxt.getSelectionModel().getSelectedItem()));
+            comboBox.setItems(manageMovieScheduleController.getMovieTitles(movieTheaterTxt.getSelectionModel().getSelectedItem()));
         });
         movieTheaterTxt.setValue("Theater 1");
 
         String cinameRoomName = movieTheaterTxt.getSelectionModel().getSelectedItem();
-        comboBox.setItems(manageMovieSceduleController.getMovieTitles(cinameRoomName));
+        comboBox.setItems(manageMovieScheduleController.getMovieTitles(cinameRoomName));
 
         vbox.getChildren().addAll(label,label1,movieTheaterTxt, label2,comboBox,button);
         vbox.setMargin(label,new Insets(120,0,0,0));
@@ -491,7 +488,7 @@ public class Schedule {
         button.setOnAction(event1 -> {
             try{
               Movie movie =   comboBox.getSelectionModel().getSelectedItem();
-                manageMovieSceduleController.scheduleDisplay(movie);
+                manageMovieScheduleController.scheduleDisplay(movie);
 
             }catch (Exception e){
                 label2.setId("chooseMovie");

@@ -3,9 +3,8 @@ package com.KinoXP.view;
 
 import com.KinoXP.controller.AddBookingViewController;
 import com.KinoXP.controller.LoginViewController;
-import com.KinoXP.controller.ManageMovieSceduleController;
+import com.KinoXP.controller.ManageMovieScheduleController;
 import com.KinoXP.controller.NewMovieViewController;
-import com.KinoXP.model.LoginViewModel;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -28,7 +27,7 @@ public class MenuView {
     VBox vbox;
     Label menuLabel, loggedUser;
     Button movies, schedule, employees, booking, logOut;
-    ManageMovieSceduleController manageMovieSceduleController = new ManageMovieSceduleController();
+    ManageMovieScheduleController manageMovieScheduleController = new ManageMovieScheduleController();
     NewMovieViewController newMovieViewController = new NewMovieViewController();
     LoginViewController loginViewController = new LoginViewController();
     AddBookingViewController addBookingViewController = new AddBookingViewController();
@@ -74,8 +73,8 @@ public class MenuView {
         });
 
         schedule.setOnAction(event -> {
-           // manageMovieSceduleController.scheduleDisplay();
-            manageMovieSceduleController.scheduleFromTheatre();
+           // manageMovieScheduleController.scheduleDisplay();
+            manageMovieScheduleController.scheduleFromTheatre();
       });
 
         booking.setOnAction(event -> {
