@@ -64,17 +64,15 @@ public class AddMovieFormView {
         Label movieTheaterLbl = new Label("MovieModel Theater");
 
         //BUTTONS
-        Button addPosterBtn = new Button("Add");
+
         Button addMovieBtn = new Button("Add MovieModel");
         Button backBtn = new Button("Go Back");
 
-        addPosterBtn.setOnAction(event1 -> addPosterUrl(posterPathTxt.getText()));
 
         ObservableList<String> options =
                 FXCollections.observableArrayList(
                         "Theater 1",
                         "Theater 2"
-
                 );
 
         ComboBox<String>movieTheaterTxt= new ComboBox<>(options);
@@ -103,6 +101,8 @@ public class AddMovieFormView {
 
         backBtn.setOnAction(event -> {
             closeStage();
+            NewMovieView movieView = new NewMovieView();
+            movieView.start();
         });
 
 
@@ -132,7 +132,7 @@ public class AddMovieFormView {
         hBox5.setSpacing(30);
 
         HBox hBox6 = new HBox();
-        hBox6.getChildren().addAll(posterPathTxt, addPosterBtn);
+        hBox6.getChildren().addAll(posterPathTxt);
         hBox6.setSpacing(30);
 
         HBox hBox7 = new HBox();
@@ -160,10 +160,6 @@ public class AddMovieFormView {
 
     }
 
-    public void addPosterUrl(String posterUrl) {
-            System.out.println(posterUrl);
-        }
-
     //METHOD FOR THE ALERT MESSAGES SHOWN TO THE USER
     public void updateAlertMessage(String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -180,5 +176,3 @@ public class AddMovieFormView {
         stage.close();
     }
 }
-
-

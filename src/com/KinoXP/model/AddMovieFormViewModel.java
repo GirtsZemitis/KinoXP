@@ -68,7 +68,7 @@ public class AddMovieFormViewModel {
         }
         return out;
     }
-    public void makeFileFromURI(){
+    public void makeFileFromURL(){
 
         try {
             URL url = new URL(posterPathString);
@@ -80,6 +80,30 @@ public class AddMovieFormViewModel {
         }
 
     }
+
+    public String getPosterPathFromDatabase(String mainActor) {
+        String out = "";
+
+
+       /* try {
+            String query = " SELECT title FROM Movie WHERE mainActor=? ";
+            PreparedStatement preparedStatement = conn.prepareStatement(query);
+            preparedStatement.setString(1, mainActor);
+            ResultSet results = preparedStatement.executeQuery();
+
+            if (results.next()) {
+                out = results.getString(1);
+            } else {
+                out = "";
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }*/
+        return out;
+    }
+
+
 
 
 }

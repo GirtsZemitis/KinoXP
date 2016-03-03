@@ -38,7 +38,7 @@ public class AddMovieFormViewController {
     public AddMovieFormViewController(){};
 
     public void addPicturePath(){
-        addMovieFormViewModel.makeFileFromURI();
+        addMovieFormViewModel.makeFileFromURL();
     }
 
 
@@ -153,7 +153,7 @@ public class AddMovieFormViewController {
              *
              */
             ManageMovieScheduleController manageMovieScheduleController = new ManageMovieScheduleController();
-            //save movie in Db with default schedule
+            //save movie in Db
             addMovieToDB(titleInput.getText(), playingTimeInMinutesInput.getText(),
                     releaseYearInput.getText(), plotInput.getText(), directorInput.getText(), posterPathInput.getText(),
                     castInput.getText(), theatreNameInput, genreInput.getText(), ageLimitInput.getText());
