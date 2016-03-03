@@ -18,6 +18,8 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
+
 public class AddBookingView {
 
     AddBookingViewController addBookingViewController = new AddBookingViewController();
@@ -100,9 +102,16 @@ public class AddBookingView {
             dateField.setItems(addBookingViewController.getDateFieldInfo(titleCombo.getSelectionModel().getSelectedItem().toString()));
             dateField.setPromptText("Choose a week and date");
 
+
         });
 
         dateField.getSelectionModel().selectedItemProperty().addListener(observable -> {
+            int day = Integer.parseInt(dateField.getSelectionModel().getSelectedItem().toString().substring(4, 5));
+            int week = Integer.parseInt(dateField.getSelectionModel().getSelectedItem().toString().substring(11));
+            ArrayList<String> times = new ArrayList<>();
+            for (int i = 0; i < schedule.getSchedule().get(week - 1).get(Integer.toString(day)).size(); i++) {
+                times.add(schedule.getSchedule().get(week - 1).get(Integer.toString(day)).get(i));
+            }
 
             timeField.setItems( addBookingViewController.getTimes(Integer.parseInt(dateField.getSelectionModel().getSelectedItem().toString().substring(4,5)),
                     Integer.parseInt(dateField.getSelectionModel().getSelectedItem().toString().substring(11)), schedule));
@@ -124,12 +133,24 @@ public class AddBookingView {
             }*/
 
             //timeField.setText(booking.getTime());
+            titleCombo.setValue((booking.getTitle()));
+            dateField.setValue(booking.getDate());
+            timeField.setValue(booking.getTime());
             seatsField.setText(Integer.toString(booking.getSeats()));
             phoneNrField.setText(booking.getPhoneNumber());
+            paidCheck.setSelected(booking.isPaid());
+        });
+
+        addButton.setOnAction(event -> {
+
+            addBookingViewController.insertBooking(dateField.getValue(),timeField.getValue(),titleCombo.getValue().toString(),Integer.parseInt(seatsField.getText()),phoneNrField.getText(),paidCheck.isSelected());
+            primaryStage.close();
 
         });
 
+
     }
+
 
 
 }

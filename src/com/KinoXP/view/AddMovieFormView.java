@@ -100,11 +100,6 @@ public class AddMovieFormView {
 
 
 
-        backBtn.setOnAction(event -> {
-            closeStage();
-            NewMovieView movieView = new NewMovieView();
-            movieView.start();
-        });
 
 
         //H-BOXES

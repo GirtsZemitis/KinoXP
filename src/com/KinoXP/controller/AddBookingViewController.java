@@ -91,6 +91,11 @@ public class AddBookingViewController {
         return FXCollections.observableArrayList(times);
     }
 
+    public void insertBooking(String date,String time,String title,int seats,String phonenumber,boolean paid){
+
+        addBookingViewModel.insertBooking(date,time,title,seats,phonenumber,paid);
+    }
+
     // it doesnt find getSchedule in model
     /*public Booking getSchedule(String phoneNumber){
         return addBookingViewModel.getSchedule();

@@ -7,10 +7,14 @@ package com.KinoXP.model;
 public class Booking {
 
     private String date;
+
+
+
     private String time;
     private String title;
     private int seats;
     private String phoneNumber;
+    private boolean paid;
 
     public String getDate() {
         return date;
@@ -52,12 +56,21 @@ public class Booking {
         this.phoneNumber = phone_number;
     }
 
-    public Booking(String date, String time, String title, int seats, String phoneNumber) {
+    public boolean isPaid() {
+        return paid;
+    }
+
+    public void setPaid(boolean paid) {
+        this.paid = paid;
+    }
+
+    public Booking(String date, String time, String title, int seats, String phoneNumber,boolean paid) {
 
         this.date = date;
         this.time = time;
         this.title = title;
         this.seats = seats;
         this.phoneNumber = phoneNumber;
+        this.paid = paid;
     }
 }
