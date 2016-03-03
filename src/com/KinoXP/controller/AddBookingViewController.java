@@ -96,6 +96,98 @@ public class AddBookingViewController {
         addBookingViewModel.insertBooking(date,time,title,seats,phonenumber,paid);
     }
 
+    public ObservableList<String> parseTimes(ObservableList<String> times) {
+        for (int i = 0; i < times.size(); i++){
+            switch (times.get(i)) {
+                case "0":
+                    times.set(i, "9:00");
+                    break;
+                case "1":
+                    times.set(i, "9:30");
+                    break;
+                case "2":
+                    times.set(i, "10:00");
+                    break;
+                case "3":
+                    times.set(i, "10:30");
+                    break;
+                case "4":
+                    times.set(i, "11:00");
+                    break;
+                case "5":
+                    times.set(i, "11:30");
+                    break;
+                case "6":
+                    times.set(i, "12:00");
+                    break;
+                case "7":
+                    times.set(i, "12:30");
+                    break;
+                case "8":
+                    times.set(i, "13:00");
+                    break;
+                case "9":
+                    times.set(i, "13:30");
+                    break;
+                case "10":
+                    times.set(i, "14:00");
+                    break;
+                case "11":
+                    times.set(i, "14:30");
+                    break;
+                case "12":
+                    times.set(i, "15:00");
+                    break;
+                case "13":
+                    times.set(i, "15:30");
+                    break;
+                case "14":
+                    times.set(i, "16:00");
+                    break;
+                case "15":
+                    times.set(i, "16:30");
+                    break;
+                case "16":
+                    times.set(i, "17:00");
+                    break;
+                case "17":
+                    times.set(i, "17:30");
+                    break;
+                case "18":
+                    times.set(i, "18:00");
+                    break;
+                case "19":
+                    times.set(i, "18:30");
+                    break;
+                case "20":
+                    times.set(i, "19:00");
+                    break;
+                case "21":
+                    times.set(i, "19:30");
+                    break;
+                case "22":
+                    times.set(i, "20:00");
+                    break;
+                case "23":
+                    times.set(i, "20:30");
+                    break;
+                case "24":
+                    times.set(i, "21:00");
+                    break;
+                case "25":
+                    times.set(i, "21:30");
+                    break;
+                case "26":
+                    times.set(i, "22:00");
+                    break;
+                case "27":
+                    times.set(i, "22:30");
+                    break;
+            }
+    }
+        return times;
+    }
+
     // it doesnt find getSchedule in model
     /*public Booking getSchedule(String phoneNumber){
         return addBookingViewModel.getSchedule();

@@ -113,8 +113,8 @@ public class AddBookingView {
                 times.add(schedule.getSchedule().get(week - 1).get(Integer.toString(day)).get(i));
             }
 
-            timeField.setItems( addBookingViewController.getTimes(Integer.parseInt(dateField.getSelectionModel().getSelectedItem().toString().substring(4,5)),
-                    Integer.parseInt(dateField.getSelectionModel().getSelectedItem().toString().substring(11)), schedule));
+            timeField.setItems( addBookingViewController.parseTimes(addBookingViewController.getTimes(Integer.parseInt(dateField.getSelectionModel().getSelectedItem().toString().substring(4,5)),
+                    Integer.parseInt(dateField.getSelectionModel().getSelectedItem().toString().substring(11)), schedule)));
             timeField.setPromptText("Choose time");
 
         });
