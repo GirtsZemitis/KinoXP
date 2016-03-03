@@ -4,6 +4,7 @@ import com.KinoXP.model.EmployeeModel;
 import com.KinoXP.model.LoginViewModel;
 import com.KinoXP.model.ManageEmployeeModel;
 import com.KinoXP.view.ManageEmployeeView;
+import com.KinoXP.view.MenuView;
 import javafx.collections.ObservableList;
 
 /**
@@ -15,12 +16,22 @@ public class ManageEmployeeController {
     EmployeeModel employeeModel;
     LoginViewModel loginViewModel;
 
+
     public ManageEmployeeController(ManageEmployeeModel manageEmployeeModel, ManageEmployeeView manageEmployeeView) {
         this.manageEmployeeModel = manageEmployeeModel;
         this.manageEmployeeView = manageEmployeeView;
     }
 
+    public ManageEmployeeController(){
 
+    }
+
+    //CHANGES BUTTONS TO INVISIBLE IF USER LOGING IN IS NOT MANAGER
+    public void changeButtonVisibility(){
+
+        MenuView.employees.setDisable(true);
+        MenuView.movies.setDisable(true);
+    }
     /**
           METHODS WHICH MAKE THE CONNECTION BETWEEN THE VIEW AND THE MODEL
      **/

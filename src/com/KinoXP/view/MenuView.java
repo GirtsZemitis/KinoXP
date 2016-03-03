@@ -25,7 +25,10 @@ public class MenuView {
     BorderPane menuLayout;
     VBox vbox;
     Label menuLabel, loggedUser;
-    Button movies, schedule, employees, booking, logOut;
+
+
+
+    public static Button movies, schedule, employees, booking, logOut = new Button();
     ManageMovieScheduleController manageMovieScheduleController = new ManageMovieScheduleController();
     NewMovieViewController newMovieViewController = new NewMovieViewController();
     LoginViewController loginViewController = new LoginViewController();
