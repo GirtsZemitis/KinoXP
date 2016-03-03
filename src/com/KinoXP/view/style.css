@@ -1,3 +1,16 @@
+#backgroundImage{
+
+    -fx-background-image: url("picture.jpg");
+}
+.scroll-pane > .viewport {
+    -fx-background-color: transparent;
+}
+#plusButton{
+
+    -fx-background-image: url("add.png");
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
 #MenuView{
     -fx-background-image: url("picture.jpg");
 

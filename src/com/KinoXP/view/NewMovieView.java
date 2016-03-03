@@ -10,6 +10,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
@@ -59,6 +60,7 @@ public class NewMovieView {
         Stage primaryStage = new Stage();
         //ROOT
         borderPane = new BorderPane();
+        borderPane.setId("backgroundImage");
 
         //TOP
         topLayout = new Label("Movies OVERVIEW");
@@ -73,9 +75,19 @@ public class NewMovieView {
         borderPane.setTop(topLayoutHBox);
 
         //BORDER Left
-        plusButton = new Button("+");
-        plusButton.setPrefSize(100, 100);
-        plusButton.setStyle("-fx-font-size: 32;-fx-background-color: #ffdd19;-fx-border-color: black");
+
+        plusButton = new Button();
+        plusButton.setStyle(
+                "-fx-font-size: 40px;"+
+                "-fx-background-radius: 78em; " +
+                "-fx-min-width: 144px; " +
+                "-fx-min-height: 144px; " +
+                "-fx-max-width: 144px; " +
+                "-fx-max-height: 144px;");
+        plusButton.setId("plusButton");
+
+
+
 
 
         /***
@@ -85,8 +97,19 @@ public class NewMovieView {
         flowPane = new FlowPane();
         flowPane.setHgap(30);
         flowPane.setVgap(30);
-        flowPane.setPadding(new Insets(60));
+        flowPane.setPadding(new Insets(5));
         flowPane.setMaxWidth(1500);
+        flowPane.setStyle("-fx-background-color:transparent;");
+
+        final ScrollPane scrollPane = new ScrollPane();
+        scrollPane.setBorder(null);
+        scrollPane.setStyle("-fx-background-color:transparent;");
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);    // Horizontal scroll bar
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);    // Vertical scroll bar
+        scrollPane.viewportBoundsProperty().addListener((ov, oldBounds, bounds) -> {
+            flowPane.setPrefWidth(bounds.getWidth());
+        });
+
 
         //method that gets indexMovie to arraylist
         ArrayList<String> urlString = new ArrayList<>();
@@ -166,12 +189,18 @@ public class NewMovieView {
             vBox.setPrefSize(200, 120);
             vBox.setAlignment(Pos.TOP_CENTER);
             Text text = new Text(titleBtnLabel666.getText());
+            text.setStyle("-fx-background-color:transparent;");
             text.setWrappingWidth(200);
             text.setTextAlignment(TextAlignment.CENTER);
             vBox.getChildren().add(button666);
             vBox.getChildren().add(text);
-            vBox.setPadding(new Insets(-30, 0, 50, 0));
+            vBox.setPadding(new Insets(0, 0, 20, 0));
+            vBox.setStyle("-fx-background-color:transparent;");
             flowPane.getChildren().add(vBox);
+            scrollPane.setContent(flowPane);
+            scrollPane.setStyle("-fx-background-color:transparent;");
+
+
         }
 
         /***
@@ -191,7 +220,7 @@ public class NewMovieView {
 
 
         //Center - FlowPane
-        borderPane.setCenter(flowPane);
+        borderPane.setCenter(scrollPane);
 
         logOut = new Button("Log Out");
         logOut.setPrefSize(150,50);
@@ -202,14 +231,16 @@ public class NewMovieView {
         });
         borderPane.setAlignment(logOut,Pos.CENTER);
         borderPane.setBottom(logOut);
-        borderPane.setPadding(new Insets(0, 0, 30, 30));
+        borderPane.setPadding(new Insets(0, 0, 0, 30));
         logOut.setStyle("-fx-border-color: black;-fx-font-size: 20");
 
 
         //SCENE
-        scene = new Scene(borderPane, 1280, 800);
+        scene = new Scene(borderPane, 900, 600);
+        scene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
         primaryStage.setScene(scene);
-        primaryStage.setResizable(false);
+        primaryStage.setResizable(true);
+        primaryStage.setMaximized(true);
         primaryStage.show();
 
     }
