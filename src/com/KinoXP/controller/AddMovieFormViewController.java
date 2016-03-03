@@ -123,12 +123,11 @@ public class AddMovieFormViewController {
         boolean result = false;
 
         //if any field is empty
-        if(titleInput == null || playingTimeInMinutesInput == null || releaseYearInput == null ||
-                plotInput == null || directorInput == null || posterPathInput == null || castInput == null ||
-                theatreNameInput == null || genreInput == null || ageLimitInput == null) {
+        if(titleInput.equals("") || playingTimeInMinutesInput.equals("") || releaseYearInput.equals("") ||
+                plotInput.equals("") || directorInput.equals("") || posterPathInput.equals("") || castInput.equals("") ||
+                theatreNameInput.equals("") || genreInput.equals("") || ageLimitInput.equals("")) {
 
-            //if any empty then:
-            result = true;
+            result = true ;
         }
 
         return result;

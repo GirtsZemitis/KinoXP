@@ -180,6 +180,7 @@ public class EditMovieView extends Application {
                 newMovieViewController.newMovieViewDisplay();
                 deleteFile();
                 finalPrimaryStage.close();
+                closeStage();
             } else {
                 alert.close();
             }
