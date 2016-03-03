@@ -4,6 +4,8 @@ package com.KinoXP.view;/**
 
 import com.KinoXP.controller.AddBookingViewController;
 import com.KinoXP.model.Booking;
+import com.KinoXP.model.Schedule;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -19,6 +21,7 @@ import javafx.stage.Stage;
 public class AddBookingView {
 
     AddBookingViewController addBookingViewController = new AddBookingViewController();
+    private Schedule schedule;
 
 
     public void start() {
@@ -30,7 +33,6 @@ public class AddBookingView {
         Label dateLabel = new Label("Date");
         Label timeLabel = new Label("Time");
         Label titleLabel = new Label("Title");
-        Label hallLabel  = new Label("Hall");
         Label seatsAmountLabel = new Label("Seats amount");
         Label phoneNumberLabel = new Label("Phone number");
         Label paidLabel = new Label("Paid");
@@ -39,10 +41,10 @@ public class AddBookingView {
         //TEXTFIELDS
         TextField searchField = new TextField();
         searchField.setPromptText("ex. 91110399");
-        DatePicker dateField = new DatePicker();
-        TextField timeField = new TextField("00:00");
-        timeField.setPromptText("ex. 20:40");
-        timeField.setMaxWidth(150);
+        ComboBox<String> dateField = new ComboBox<>();
+        dateField.setMinWidth(150);
+        ComboBox<String> timeField = new ComboBox<>();
+        timeField.setMinWidth(150);
         TextField seatsField = new TextField();
         seatsField.setPromptText("ex. 3");
         seatsField.setMaxWidth(40);
@@ -51,8 +53,11 @@ public class AddBookingView {
         phoneNrField.setMaxWidth(150);
 
         //COMBOBOXES
-        ComboBox titleCombo  = new ComboBox();
+        ObservableList<String> options = addBookingViewController.getMoviesWithSchedule();
+        ComboBox titleCombo  = new ComboBox(options);
         titleCombo.setPromptText("Choose a movie");
+
+
         ComboBox hallCombo  = new ComboBox();
         hallCombo.setPromptText("Choose a hall");
 
@@ -74,9 +79,9 @@ public class AddBookingView {
         HBox search = new HBox();
         search.getChildren().addAll(searchField, searchButton);
         HBox isPaid = new HBox();
-        isPaid.getChildren().addAll(paidLabel, paidCheck, reservationLabel, reservedCheck);
+        isPaid.getChildren().addAll(paidLabel, paidCheck);
         VBox layout = new VBox();
-        layout.getChildren().addAll(mainLabel, searchLabel, search, dateLabel, dateField, timeLabel, timeField, titleLabel, titleCombo, hallLabel, hallCombo, seatsAmountLabel, seatsField, phoneNumberLabel, phoneNrField, isPaid, addButton );
+        layout.getChildren().addAll(mainLabel, searchLabel, search, titleLabel, titleCombo, dateLabel, dateField, timeLabel,  timeField, seatsAmountLabel, seatsField, phoneNumberLabel, phoneNrField, isPaid, addButton );
         addButton.setAlignment(Pos.BOTTOM_RIGHT);
         layout.setPadding(new Insets(40, 40, 40, 60));
         layout.setSpacing(5);
@@ -88,6 +93,22 @@ public class AddBookingView {
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);
         primaryStage.show();
+
+        titleCombo.getSelectionModel().selectedItemProperty().addListener(observable -> {
+
+            schedule = addBookingViewController.getSchedule(titleCombo.getSelectionModel().getSelectedItem().toString());
+            dateField.setItems(addBookingViewController.getDateFieldInfo(titleCombo.getSelectionModel().getSelectedItem().toString()));
+            dateField.setPromptText("Choose a week and date");
+
+        });
+
+        dateField.getSelectionModel().selectedItemProperty().addListener(observable -> {
+
+            timeField.setItems( addBookingViewController.getTimes(Integer.parseInt(dateField.getSelectionModel().getSelectedItem().toString().substring(4,5)),
+                    Integer.parseInt(dateField.getSelectionModel().getSelectedItem().toString().substring(11)), schedule));
+            timeField.setPromptText("Choose time");
+
+        });
 
         searchButton.setOnAction(event -> {
 
@@ -102,7 +123,7 @@ public class AddBookingView {
                 e.printStackTrace();
             }*/
 
-            timeField.setText(booking.getTime());
+            //timeField.setText(booking.getTime());
             seatsField.setText(Integer.toString(booking.getSeats()));
             phoneNrField.setText(booking.getPhoneNumber());
 
