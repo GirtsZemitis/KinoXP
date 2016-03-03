@@ -37,12 +37,12 @@ public class EditMovieViewController {
                                         String directorInput, String posterPathInput, String mainActorInput, String movieTheaterInput,
                                         String genreInput, String ageLimitInput){
 
-        // Call to other controller
+        // Call other controller - to reduce code redundancy
         addMovieFormViewController = new AddMovieFormViewController();
 
         if (addMovieFormViewController.areFieldsEmpty(titleTxtText.getText(), playingTimeInMinutesTxtText.getText(),  releaseYearTxtText.getText(),
                  plotTxtText,  directorTxtText.getText(),  posterPathTxtText.getText(),  mainActorTxtText,
-                 movieTheaterTxt, genreTxtText.getText(), ageLimitTxtText.getText())) {
+                 movieTheaterTxt, genreTxtText.getText(), ageLimitTxtText.getText()) == true) {
             editMovieView.updateAlertMessage("Some fields are missing");
         }
         else if (addMovieFormViewController.ifFieldHasInteger(playingTimeInMinutesTxtText, releaseYearTxtText, ageLimitTxtText) == false) {

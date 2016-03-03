@@ -5,9 +5,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.*;
 
 /**
  * Created by hartyandi on 2/25/16.
@@ -16,22 +16,7 @@ public class ManageMovieSceduleModel {
     public static Connection conn = null;
 
     public  ManageMovieSceduleModel(){
-        System.out.println("***********Welcome to connections**************");
-        try {
-
-            String DB_URL = "jdbc:mysql://sql2.freesqldatabase.com:3306/sql2108018";
-            String USER = "sql2108018";
-            String PASS = "nP5%zC6%";
-            /*String DB_URL = "jdbc:mysql://localhost/testkinoxp";
-            String USER = "root";
-            String PASS = "root";*/
-            conn = DriverManager.getConnection(DB_URL, USER, PASS);
-            System.out.println("conn obj created" + conn + " message: ");
-        }
-        catch (SQLException e)
-        {
-            System.out.println("db error" + e.getMessage());
-        }
+        conn = LoginViewModel.conn;
     }
     public void saveSchedule(String s, int i, int id){
 

@@ -57,28 +57,6 @@ public class AddBookingViewModel {
         return null;
     }
 
-    public Booking get(String phoneNumber){
-        String out = "";
-        try {
-            String query = "SELECT * FROM Booking WHERE phone_number=?";
-            PreparedStatement preparedStatement = conn.prepareStatement(query);
-            preparedStatement.setString(1, phoneNumber);
-            ResultSet results = preparedStatement.executeQuery();
 
-            while(results.next()){
-                booking = new Booking (results.getString(1),results.getString(2),results.getString(3),results.getInt(4),results.getString(5));
-            }
-
-
-
-            return booking;
-
-
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
 
 }

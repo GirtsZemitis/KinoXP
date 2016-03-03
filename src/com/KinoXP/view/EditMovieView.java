@@ -18,6 +18,7 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import java.sql.ResultSet;
+import java.util.Optional;
 
 /**
  * Created by Paula on 25/2/16.
@@ -161,6 +162,7 @@ public class EditMovieView extends Application {
         this.primaryStage = primaryStage;
 
         //HANDLING THE BUTTONS ACTIONS
+        final Stage finalPrimaryStage = primaryStage;
         deleteMovieBtn.setOnAction(event -> {
 
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -177,7 +179,8 @@ public class EditMovieView extends Application {
                 NewMovieViewController newMovieViewController = new NewMovieViewController();
                 newMovieViewController.newMovieViewDisplay();
                 deleteFile();
-                primaryStage.close();
+                finalPrimaryStage.close();
+                closeStage();
             } else {
                 alert.close();
             }
