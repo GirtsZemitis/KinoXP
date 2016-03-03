@@ -48,10 +48,7 @@ public class ManageMovieScheduleController {
     }
 
 
-    public void insertMovie(String s) {
-        manageMovieSceduleModel.InsertDefaultSchedule(s);
 
-    }
 
     public String getScheduleForMovie(String s, int i) {
         return manageMovieSceduleModel.getScheduleForMovie(s, i);
@@ -59,5 +56,10 @@ public class ManageMovieScheduleController {
 
     public ObservableList<Movie> getMovieTitles(String s) {
         return manageMovieSceduleModel.getMovieTitles(s);
+    }
+
+    public void insertMovie(String s) {
+        manageMovieSceduleModel.InsertDefaultSchedule(s);
+
     }
 }

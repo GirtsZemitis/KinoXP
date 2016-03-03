@@ -86,6 +86,7 @@ public class AddMovieFormView {
 
             addMovieFormViewController.validateFieldsAndAction(titleTxt, playingTimeInMinutesTxt, releaseYearTxt,
                     plotTxt, directorTxt, posterPathTxt, cast,movieTheaterTxt.getValue(), genreTxt, ageLimitTxt);
+
         });
 
 
