@@ -62,7 +62,24 @@ public class ManageEmployeeModel {
             preparedStatement.setString(7, oldUserName);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            ManageEmployeeView.updateAlertMessage("Phone has to be an integer");
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public String editEmployeeWithoutUserName(String name, String surname, String email, Integer phoneNumber, String jobTitle, String oldUserName) {
+        String sql = "UPDATE Employee SET name=?, surname=?, email=?, phoneNumber=?, jobTitle=? WHERE userName = ?";
+        try {
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setString(1, name);
+            preparedStatement.setString(2, surname);
+            preparedStatement.setString(3, email);
+            preparedStatement.setInt(4, phoneNumber);
+            preparedStatement.setString(5, jobTitle);
+            preparedStatement.setString(6, oldUserName);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         return null;
     }
@@ -105,10 +122,10 @@ public class ManageEmployeeModel {
         }
     }
 
-    public String getEmployeeFromDatabase(String userName) {
+    public String checkUserName(String userName) {
         String out = "";
         try {
-            String query = " SELECT name FROM Employee WHERE userName=? ";
+            String query = " SELECT userName FROM LogIn WHERE userName=? ";
             PreparedStatement preparedStatement = conn.prepareStatement(query);
             preparedStatement.setString(1, userName);
             ResultSet results = preparedStatement.executeQuery();
@@ -153,6 +170,7 @@ public class ManageEmployeeModel {
         }
         return observableList;
     }
+
     public ObservableList<LoginViewModel> getLoginInformation() {
         ObservableList<LoginViewModel> observableList = FXCollections.observableArrayList();
         LoginViewModel loginViewModel;
@@ -202,6 +220,25 @@ public class ManageEmployeeModel {
         return out;
     }
 
+    public String getUserName(String userName) {
+        String out = "";
+        try {
+            String query = " SELECT userName FROM LogIn WHERE userName=? ";
+            PreparedStatement preparedStatement = conn.prepareStatement(query);
+            preparedStatement.setString(1, userName);
+            ResultSet results = preparedStatement.executeQuery();
+
+            if (results.next()) {
+                out = results.getString(1);
+            } else {
+                out = "";
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return out;
+    }
 
 }
 

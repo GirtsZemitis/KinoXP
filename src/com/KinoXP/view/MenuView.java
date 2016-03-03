@@ -1,10 +1,7 @@
 package com.KinoXP.view;
 
 
-import com.KinoXP.controller.AddBookingViewController;
-import com.KinoXP.controller.LoginViewController;
-import com.KinoXP.controller.ManageMovieScheduleController;
-import com.KinoXP.controller.NewMovieViewController;
+import com.KinoXP.controller.*;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -31,6 +28,7 @@ public class MenuView {
     NewMovieViewController newMovieViewController = new NewMovieViewController();
     LoginViewController loginViewController = new LoginViewController();
     AddBookingViewController addBookingViewController = new AddBookingViewController();
+    ManageEmployeeView manageEmployeeView = new ManageEmployeeView();
 
 
     public void start() {
@@ -83,8 +81,8 @@ public class MenuView {
         });
 
         employees.setOnAction(event -> {
-            ManageEmployeeView manageEmployeeView = new ManageEmployeeView();
             manageEmployeeView.start();
+            mainMenu.close();
         });
 
         menu = new Scene(menuLayout, 500, 500);

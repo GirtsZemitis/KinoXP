@@ -15,75 +15,62 @@ public class ManageEmployeeController {
     EmployeeModel employeeModel;
     LoginViewModel loginViewModel;
 
-    public ManageEmployeeController(ManageEmployeeModel manageEmployeeModel, ManageEmployeeView manageEmployeeView){
+    public ManageEmployeeController(ManageEmployeeModel manageEmployeeModel, ManageEmployeeView manageEmployeeView) {
         this.manageEmployeeModel = manageEmployeeModel;
         this.manageEmployeeView = manageEmployeeView;
     }
 
 
+    /**
+          METHODS WHICH MAKE THE CONNECTION BETWEEN THE VIEW AND THE MODEL
+     **/
 
-
-    public ObservableList<EmployeeModel> returnEmployeeInfo(){
+    //GET EMPLOYEE INFO
+    public ObservableList<EmployeeModel> returnEmployeeInfo() {
         ObservableList<EmployeeModel> tab = manageEmployeeModel.getEmployeeInformation();
         return tab;
 
     }
 
-
-    public ObservableList<LoginViewModel> returnLogInInfo(){
+    //GET LOG IN INFO
+    public ObservableList<LoginViewModel> returnLogInInfo() {
         ManageEmployeeModel manageEmployeeModel = new ManageEmployeeModel();
-        ObservableList<LoginViewModel> list =  manageEmployeeModel.getLoginInformation();
+        ObservableList<LoginViewModel> list = manageEmployeeModel.getLoginInformation();
 
-        return  list;
+        return list;
     }
 
-    public String getPassword(String a){
+    //GET PASSWORD
+    public String getPassword(String a) {
         String password = manageEmployeeModel.getPassword(a);
 
         return password;
-}
-
-    public void editEmployee(String userName,String name,String surname, String email, int phoneNumber, String jobTitle, String oldUser){
-        manageEmployeeModel.editEmployee(userName,name,surname,email,phoneNumber,jobTitle,oldUser);
     }
-
-    public void editLogin(String userName, String password, String oldUserName){
-        manageEmployeeModel.editLogIn(userName,password,oldUserName);
-    }
-
-
-
-    public ManageEmployeeController(){}
-
-    //METHODS WHICH MAKE THE CONNECTION BETWEEN THE VIEW AND THE MODEL
 
     //ADD EMPLOYEE TO THE DATABASE
     public void addEmployeeAction(String userNameInput, String nameInput, String surnameInput, String emailInput,
-                                  Integer phoneNumberInput, String jobTitleInput){
+                                  Integer phoneNumberInput, String jobTitleInput) {
         try {
-            if (userNameInput.length() > 0 && nameInput.length() > 0 && surnameInput.length() > 0 &&
-                    emailInput.length() > 0 && phoneNumberInput != 0 && jobTitleInput.length() > 0) {
+            if(userNameInput.equals(manageEmployeeModel.getUserName(userNameInput))) {
+                manageEmployeeView.updateAlertMessage("User name already exists. Please insert a different one.");
+            }else if(!userNameInput.equals(manageEmployeeModel.getUserName(userNameInput))) {
                 manageEmployeeModel.insertEmployee(userNameInput, nameInput, surnameInput, emailInput,
                         phoneNumberInput, jobTitleInput);
-                //manageEmployeeView.updateAlertMessage("New employee was successfully added to the database");
-                //manageEmployeeView.closeStage();
-            } else {
-                manageEmployeeView.updateAlertMessage("All text fields must contain information in order to save the employee");
+                manageEmployeeView.updateAlertMessage("New employee was successfully added to the database");
             }
-
         } catch (Exception e) {
             System.out.println("Exception in addEmployeeAction() from ManageEmployeeController: " + e.getMessage());
         }
     }
 
-    //CREATE USER AND PASSWORD FOR EMPLOYEE OR ADMIN
-    public void addLogInCredentials(String userNameInput, String passwordInput){
+    //CREATE LOG IN ACCOUNT
+    public void addLogInCredentials(String userNameInput, String passwordInput) {
         try {
             if (userNameInput.length() > 0 && passwordInput.length() > 0) {
                 manageEmployeeModel.insertLogIn(userNameInput, passwordInput);
-                manageEmployeeView.updateAlertMessage("New employee was successfully added to the database");
-                //manageEmployeeView.closeStage();
-            } else {
+            }else if(userNameInput.equals(employeeModel.getUserName())) {
+                manageEmployeeView.updateAlertMessage("User name already exists. Please insert a different one.");
+            }else {
                 manageEmployeeView.updateAlertMessage("All text fields must contain information in order to save the employee");
             }
 
@@ -93,35 +80,31 @@ public class ManageEmployeeController {
     }
 
     //EDIT EMPLOYEE FROM DATABASE
-    public void editEmployeeAction(String userNameInput, String nameInput, String surnameInput, String emailInput,
-                                   Integer phoneNumberInput, String jobTitleInput, String passwordInput){
-        String userName = employeeModel.getUserName();
-        String name = employeeModel.getName();
-        String surname = employeeModel.getSurname();
-        String email = employeeModel.getEmail();
-        int phoneNumber = employeeModel.getPhoneNumber();
-        String jobTitle = employeeModel.getJobTitle();
-        String password = loginViewModel.getPassword();
-
-        if(!userNameInput.equals(userName) || !nameInput.equals(name) || !surnameInput.equals(surname) ||
-                !emailInput.equals(email) || !phoneNumberInput.equals(phoneNumber) || !jobTitleInput.equals(jobTitle)){
-            manageEmployeeModel.editEmployee(userNameInput, nameInput, surnameInput, emailInput, phoneNumberInput,
-                    jobTitleInput, userName);
-        }else if(!userNameInput.equals(userName) || !passwordInput.equals(password)){
-            manageEmployeeModel.editLogIn(userNameInput, passwordInput, userName);
+    public void editEmployee(String userName, String name, String surname, String email, int phoneNumber, String jobTitle, String oldUser) {
+        String existingUserName = manageEmployeeModel.checkUserName(userName);
+        if (!userName.equals(existingUserName)) {
+            manageEmployeeModel.editEmployee(userName, name, surname, email, phoneNumber, jobTitle, oldUser);
+        } else if(userName.equals(existingUserName)){
+            manageEmployeeModel.editEmployeeWithoutUserName(name,surname,email,phoneNumber,jobTitle,oldUser);
+            manageEmployeeView.updateAlertMessage("Employee information was successfully edited into the database");
         }else{
-            manageEmployeeView.updateAlertMessage("No fields were modified");
-
+            System.out.println("User name already exists. Please insert a different one.");
         }
     }
 
-    //DELETE EMPLOYEE FROM DATABASE
-    public void deleteEmployeeAction(String userNameInput){
-        manageEmployeeModel.deleteEmployee(userNameInput);
-        manageEmployeeModel.deleteLogInCredentials(userNameInput);
+    //EDIT LOG IN ACCOUNT
+    public void editLogin(String userName, String password, String oldUserName) {
+        manageEmployeeModel.editLogIn(userName, password, oldUserName);
     }
 
-    public void manageAlert(){
-        manageEmployeeView.updateAlertMessage("Already existing user");
+    //DELETE EMPLOYEE FROM DATABASE
+    public void deleteEmployeeAction(String userNameInput) {
+        manageEmployeeModel.deleteEmployee(userNameInput);
+        manageEmployeeView.updateAlertMessage("Employee was successfully deleted from the database");
+    }
+
+    //DELETE LOG IN ACCOUNT FROM DATABASE
+    public void deleteLogInCredentials(String userNameInput){
+        manageEmployeeModel.deleteLogInCredentials(userNameInput);
     }
 }
