@@ -1,7 +1,7 @@
 package com.KinoXP.view;
 
 import com.KinoXP.controller.AddMovieFormViewController;
-import com.KinoXP.controller.ManageMovieSceduleController;
+import com.KinoXP.controller.ManageMovieScheduleController;
 import com.KinoXP.model.AddMovieFormViewModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -46,7 +46,7 @@ public class AddMovieFormView {
 
         //TEXT AREAS
         TextArea plotTxt = new TextArea();
-        TextArea mainActorTxt = new TextArea();
+        TextArea cast = new TextArea();
 
         //LABELS
         Label mainTitleLbl = new Label("Add MovieModel");
@@ -79,27 +79,24 @@ public class AddMovieFormView {
 
         ComboBox<String>movieTheaterTxt= new ComboBox<>(options);
 
+        //active validation of  fields (decoration)
+        addMovieFormViewController.validateFieldsControlsFx(titleTxt, playingTimeInMinutesTxt, releaseYearTxt,
+                plotTxt, directorTxt, posterPathTxt, cast,movieTheaterTxt, genreTxt, ageLimitTxt);
+
+        // Add Movie Button Action
         addMovieBtn.setOnAction(event -> {
-            ManageMovieSceduleController manageMovieSceduleController = new ManageMovieSceduleController();
 
-            //save movie in Db with default schedule
-            addMovieFormViewController.addMovieButtonAction(titleTxt.getText(), playingTimeInMinutesTxt.getText(),
-                    releaseYearTxt.getText(), plotTxt.getText(), directorTxt.getText(), posterPathTxt.getText(),
-                    mainActorTxt.getText(), movieTheaterTxt.getValue(), genreTxt.getText() ,ageLimitTxt.getText());
-            MovieWeek movieWeek = new MovieWeek();
-            manageMovieSceduleController.insertMovie(movieWeek.save(movieWeek.getObservableList()));
-
-               makeFileFromPath();
-
-           // manageMovieSceduleController.scheduleDisplay(titleTxt.getText());
+            addMovieFormViewController.validateFieldsAndAction(titleTxt, playingTimeInMinutesTxt, releaseYearTxt,
+                    plotTxt, directorTxt, posterPathTxt, cast,movieTheaterTxt.getValue(), genreTxt, ageLimitTxt);
+        });
 
 
-            //creating posterButton in NewMovieView
 
+        // ACTION - BACK BUTTON
+        backBtn.setOnAction(event -> {
             closeStage();
-             NewMovieView newMovieView = new NewMovieView();
-             newMovieView.start();
-
+            NewMovieView newMovieView = new NewMovieView();
+            newMovieView.start();
         });
 
 
@@ -131,7 +128,7 @@ public class AddMovieFormView {
         hBox4.setSpacing(30);
 
         HBox hBox5 = new HBox();
-        hBox5.getChildren().addAll(mainActorTxt);
+        hBox5.getChildren().addAll(cast);
         hBox5.setSpacing(30);
 
         HBox hBox6 = new HBox();
@@ -169,9 +166,9 @@ public class AddMovieFormView {
 
     //METHOD FOR THE ALERT MESSAGES SHOWN TO THE USER
     public void updateAlertMessage(String message) {
-        //Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        //alert.setContentText(message);
-        //alert.showAndWait();
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 
     public void makeFileFromPath(){

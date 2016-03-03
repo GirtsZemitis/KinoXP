@@ -2,26 +2,22 @@ package com.KinoXP.view;
 
 import com.KinoXP.controller.LoginViewController;
 import com.KinoXP.model.EmployeeModel;
-import com.KinoXP.model.LoginViewModel;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-/**
- * Created by hartyandi on 2/24/16.
- */
+
 public class LoginView {
-    LoginViewModel loginViewModel;
+    EmployeeModel employeeModel;///// DON'T DELETE WITHOUT SAYING IT!!!!
 
     public void start(){
 
@@ -39,7 +35,8 @@ public class LoginView {
         primaryStage.setScene(scene);
 
 
-
+        Label errorLabel = new Label("");//////////////////BY MONICA/////////////////
+        errorLabel.setStyle("-fx-font-size: 15;-fx-text-fill: crimson;-fx-font-weight:bold;");
         Label user = new Label("User");
         user.setStyle("-fx-font-size: 20");
         TextField userField = new TextField();
@@ -52,40 +49,40 @@ public class LoginView {
         logIn.setStyle("-fx-font-size: 20;-fx-background-color: #ffdd19;-fx-border-color: black");
         LoginViewController loginViewController = new LoginViewController();
 
-
-
-
-
-
         //locating the text fields and labels
 
         GridPane.setConstraints(scenetitle,0,0);
-        GridPane.setConstraints(user,0,1);
-        GridPane.setConstraints(userField,1,1);
-        GridPane.setConstraints(password,0,2);
-        GridPane.setConstraints(passwordText,1,2);
-        GridPane.setConstraints(logIn,1,3);
-
-
+        GridPane.setConstraints(errorLabel,0,1);/////////////////////BY MONICA///////////
+        GridPane.setConstraints(user,0,2);
+        GridPane.setConstraints(userField,1,2);
+        GridPane.setConstraints(password,0,3);
+        GridPane.setConstraints(passwordText,1,3);
+        GridPane.setConstraints(logIn,1,4);
 
         gridPane.setAlignment(Pos.CENTER);
 
 
-
+        //ACTION TO LOG IN BUTTON/////////////////////////////////////////////////////////////
         logIn.setOnAction(event -> {
+            //CREATING NEW EMPLOYEE OBJECT TO GRAB THE INPUT ATTRIBUTE VALUES
+            employeeModel = new EmployeeModel(userField.getText(),passwordText.getText());
 
-            //CREATING NEW EMPLOYEE OBJECT TO GRAM THE INPUTED ATTRIBUTE VALUES
-            loginViewModel = new LoginViewModel(userField.getText(),passwordText.getText());
-            loginViewController.checkLogIn(loginViewModel);//CALL METHOD FROM CONTROLLER
-            primaryStage.close();// CLOSE THIS STAGE
+            errorLabel.setText(loginViewController.checkLogIn(employeeModel));//CALL METHOD FROM CONTROLLER
+            //primaryStage.close();// CLOSE THIS STAGE
         });
+        //////////////////////////////////////////////////////////////////////////////////////
 
-
-
-        gridPane.getChildren().addAll(scenetitle,user,userField,password,passwordText,logIn);
-
-
+        gridPane.getChildren().addAll(scenetitle,errorLabel,user,userField,password,passwordText,logIn);
         primaryStage.show();
 
     }
+
+    //GUI ALERT USED BY LogInViewController////////////////////////////////////////////////////
+    public void networkAlertMethod(){
+       Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setContentText("The system failed to start due to lack of internet connection signal! Please check your network connection.");
+        alert.showAndWait();
+    }
+    //////////////////////////////////////////////////////BY MONICA// COMMUNICATE BEFORE YOU MOVE/CHANGE/DELETE!
 }

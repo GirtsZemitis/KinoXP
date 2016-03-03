@@ -1,5 +1,6 @@
 package com.KinoXP.view;
 
+import com.KinoXP.controller.AddMovieFormViewController;
 import com.KinoXP.controller.EditMovieViewController;
 import com.KinoXP.controller.NewMovieViewController;
 import com.KinoXP.model.EditMovieViewModel;
@@ -17,16 +18,17 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import java.sql.ResultSet;
-import java.util.Optional;
 
 /**
  * Created by Paula on 25/2/16.
  */
 public class EditMovieView extends Application {
 
-    EditMovieViewController editMovieViewController;
-    EditMovieViewModel manageMovieViewModul;
-    String title;
+    private EditMovieViewController editMovieViewController;
+    private AddMovieFormViewController addMovieFormViewController;
+    private  EditMovieViewModel manageMovieViewModul;
+    private Stage primaryStage;
+    private String title;
     //CONSTRUCTOR
     public EditMovieView(String title) {
         this.title = title;
@@ -74,8 +76,8 @@ public class EditMovieView extends Application {
         TextField ageLimitTxt = new TextField(result[11]);
 
         //TEXT AREAS
-        TextArea plotTxt = new TextArea(result[5]);
-        TextArea mainActorTxt = new TextArea(result[8]);
+        TextArea plotTxtArea = new TextArea(result[5]);
+        TextArea mainActorTxtArea = new TextArea(result[8]);
 
         //LABELS
         Label mainTitleLbl = new Label("Edit MovieModel");
@@ -98,8 +100,8 @@ public class EditMovieView extends Application {
 
                 );
 
-        ComboBox<String>movieTheaterTxt= new ComboBox<>(options);
-        movieTheaterTxt.setValue(result[9]);
+        ComboBox<String> movieTheaterCombo = new ComboBox<>(options);
+        movieTheaterCombo.setValue(result[9]);
 
         //BUTTONS
         //Button addCastBtn = new Button("Add");
@@ -129,7 +131,7 @@ public class EditMovieView extends Application {
         hBox4.setSpacing(30);
 
         HBox hBox5 = new HBox();
-        hBox5.getChildren().addAll(mainActorTxt);
+        hBox5.getChildren().addAll(mainActorTxtArea);
         hBox5.setSpacing(30);
 
         HBox hBox6 = new HBox();
@@ -142,8 +144,8 @@ public class EditMovieView extends Application {
         hBox7.setAlignment(Pos.BOTTOM_RIGHT);
 
         //V-BOXES CONTAINING THE H-BOXES ABOVE
-        vBox.getChildren().addAll(hBoxTitle, titleLbl, titleTxt, descriptionLbl, plotTxt, hBox1,
-                                hBox2, hBox3, hBox4, castLbl, hBox5, posterLbl, hBox6, movieTheaterLbl, movieTheaterTxt, hBox7);
+        vBox.getChildren().addAll(hBoxTitle, titleLbl, titleTxt, descriptionLbl, plotTxtArea, hBox1,
+                                hBox2, hBox3, hBox4, castLbl, hBox5, posterLbl, hBox6, movieTheaterLbl, movieTheaterCombo, hBox7);
         vBox.setPadding(new Insets(40, 40, 40, 60));
         vBox.setSpacing(10);
 
@@ -156,11 +158,11 @@ public class EditMovieView extends Application {
         primaryStage = new Stage();
         primaryStage.setScene(scene);
         primaryStage.show();
-        final Stage finalPrimaryStage = primaryStage;
+        this.primaryStage = primaryStage;
 
         //HANDLING THE BUTTONS ACTIONS
         deleteMovieBtn.setOnAction(event -> {
-            /*
+
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Delete Movie");
             alert.setHeaderText("Are you sure you want to delete the movie?");
@@ -175,27 +177,28 @@ public class EditMovieView extends Application {
                 NewMovieViewController newMovieViewController = new NewMovieViewController();
                 newMovieViewController.newMovieViewDisplay();
                 deleteFile();
-                finalPrimaryStage.close();
+                primaryStage.close();
             } else {
                 alert.close();
             }
-        */
+
         });
 
+        //active validation of  fields (decoration)
+        editMovieViewController.validateEditFieldsControlsFx(titleTxt, playingTimeInMinutesTxt, releaseYearTxt,
+                plotTxtArea, directorTxt, posterPathTxt, mainActorTxtArea, movieTheaterCombo, genreTxt, ageLimitTxt);
+
         editMovieBtn.setOnAction(event -> {
-            editMovieViewController.editMovieButtonAction(titleTxt.getText(), playingTimeInMinutesTxt.getText(),
-                    releaseYearTxt.getText(), plotTxt.getText(), directorTxt.getText(), posterPathTxt.getText(),
-                    mainActorTxt.getText(), movieTheaterTxt.getValue(), genreTxt.getText(), ageLimitTxt.getText(), result[2], result[3], result[4], result[5],
+            editMovieViewController.editMovieButtonAction(titleTxt, playingTimeInMinutesTxt,
+                    releaseYearTxt, plotTxtArea.getText(), directorTxt, posterPathTxt,
+                    mainActorTxtArea.getText(), movieTheaterCombo.getValue().toString(), genreTxt, ageLimitTxt, result[2], result[3], result[4], result[5],
                     result[6], result[7], result[8], result[9], result[10], result[11]);
-            NewMovieViewController newMovieViewController = new NewMovieViewController();
-            newMovieViewController.newMovieViewDisplay();
-            finalPrimaryStage.close();
         });
 
         backBtn.setOnAction(event -> {
             NewMovieViewController newMovieViewController = new NewMovieViewController();
             newMovieViewController.newMovieViewDisplay();
-            finalPrimaryStage.close();
+            this.primaryStage.close();
         });
 
 
@@ -203,9 +206,13 @@ public class EditMovieView extends Application {
 
     //METHOD FOR THE ALERT MESSAGES SHOWN TO THE USER
     public void updateAlertMessage(String message) {
-        //Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        //alert.setContentText(message);
-        //alert.showAndWait();
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+       alert.setContentText(message);
+        alert.showAndWait();
+    }
+
+    public void closeStage(){
+        primaryStage.close();
     }
 
     public void deleteFile(){
