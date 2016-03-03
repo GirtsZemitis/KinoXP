@@ -24,7 +24,7 @@ public class AddBookingModelTest extends TestCase {
         AddBookingViewModel addBookingViewModel = new AddBookingViewModel();
         // String DB_URL = "jdbc:mysql://localhost/testkinoxp";
 
-        Booking booking = addBookingViewModel.insertBooking("Date", "Time", "Title", 3, "999999999");
+        Booking booking = addBookingViewModel.insertBooking("Date", "Time", "Title", 3, "999999999",true);
 
         assertNotNull(booking);
         assertEquals("Date", booking.getDate());

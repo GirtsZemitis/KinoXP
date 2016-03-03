@@ -86,6 +86,7 @@ public class AddMovieFormView {
 
             addMovieFormViewController.validateFieldsAndAction(titleTxt, playingTimeInMinutesTxt, releaseYearTxt,
                     plotTxt, directorTxt, posterPathTxt, cast,movieTheaterTxt.getValue(), genreTxt, ageLimitTxt);
+
         });
 
 
@@ -99,11 +100,6 @@ public class AddMovieFormView {
 
 
 
-        backBtn.setOnAction(event -> {
-            closeStage();
-            NewMovieView movieView = new NewMovieView();
-            movieView.start();
-        });
 
 
         //H-BOXES

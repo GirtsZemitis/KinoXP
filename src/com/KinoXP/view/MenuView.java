@@ -58,6 +58,7 @@ public class MenuView {
             primaryStage.close();
         });
         menuLayout = new BorderPane();
+        menuLayout.setId("backgroundImage");
         menuLayout.setPadding(new Insets(50));
         vbox = new VBox(20);
         vbox.getChildren().addAll(movies, schedule, employees, booking);
@@ -87,6 +88,7 @@ public class MenuView {
         });
 
         menu = new Scene(menuLayout, 500, 500);
+        menu.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
         mainMenu.setScene(menu);
         mainMenu.show();
 
