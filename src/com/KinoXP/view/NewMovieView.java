@@ -106,9 +106,8 @@ public class NewMovieView {
             String label = null;
 
             File file = new File("res/" + urlString.get(i) + ".png" );
-            //Image image = new Image(file.toURI().toString());
             imageView = newMovieViewController.getWrapImageFromUrlCtrl(file.toURI().toString());
-            //imageView =  new ImageView(image); //newMovieViewController.getWrapImageFromUrlCtrl("res/");
+
 
             imageView.setFitHeight(200);
             imageView.setFitWidth(200);
