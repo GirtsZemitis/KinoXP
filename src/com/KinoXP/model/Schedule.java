@@ -12,7 +12,7 @@ public class Schedule {
     private String title;
     private int id;
                 //week      //day           //times
-    private Map<String, Map<String,ArrayList<String>>>schedule = new TreeMap<>();
+    private ArrayList<Map<String,ArrayList<String>>>schedule = new ArrayList<>();
     private String theater;
 
     /*public Schedule(String title, int id, Map<String, Map<ArrayList<String>, String>> schedule, String theater) {
@@ -21,6 +21,12 @@ public class Schedule {
         this.schedule = schedule;
         this.theater = theater;
     }*/
+
+    public ArrayList<Map<String,ArrayList<String>>> getSchedule() {
+        return schedule;
+    }
+
+
 
     static String scheduleee =
             "11:00_yes_yes_no_no_no_no_no\n" +
@@ -48,7 +54,7 @@ public class Schedule {
             "22:00_no_no_no_no_no_no_no\n" +
             "22:30_yes_yes_yes_yes_yes_yes_yes\n";
 
-    public Map<String, Map<String, ArrayList<String>>> parseSchedule(String schedule, int week){
+    public ArrayList<Map<String,ArrayList<String>>> parseSchedule(String schedule, int week){
         ArrayList<String> timesStrings = new ArrayList<>();
         for (int i = 5; i < schedule.length(); i++){
             if (schedule.charAt(i) == '1' || schedule.charAt(i) == '2'){
@@ -59,7 +65,6 @@ public class Schedule {
                 timesStrings.add(schedule.substring(6));
             }
         }
-        System.out.println(timesStrings.size());
 
         Map<String, ArrayList<String>> tempMap = new TreeMap<>();
         for (int day = 1; day < 8; day++) {
@@ -82,7 +87,7 @@ public class Schedule {
             tempMap.put(Integer.toString(day), times);
         }
 
-        this.schedule.put(Integer.toString(week), tempMap);
+        this.schedule.add(week - 1, tempMap);
 
         return this.schedule;
     }
