@@ -5,7 +5,6 @@ package com.KinoXP.view;/**
 import com.KinoXP.controller.AddBookingViewController;
 import com.KinoXP.model.Booking;
 import com.KinoXP.model.Schedule;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -18,8 +17,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
-
-import java.util.ArrayList;
 
 public class AddBookingView {
 
@@ -98,34 +95,17 @@ public class AddBookingView {
         primaryStage.show();
 
         titleCombo.getSelectionModel().selectedItemProperty().addListener(observable -> {
-            schedule = addBookingViewController.getSchedule(titleCombo.getSelectionModel().getSelectedItem().toString());
-            ArrayList<String> weeksAndDays = new ArrayList<String>();
-            for (int i = 0; i < 9; i++) {
-                for (int j = 0; j < 7; j++) {
-                    if (schedule.getSchedule().get(i).get(Integer.toString(j)) == null) {
 
-                    } else if (!schedule.getSchedule().get(i).get(Integer.toString(j)).isEmpty()) {
-                        weeksAndDays.add("Day:" + j + " Week:" + (i + 1));
-                    }
-                }
-            }
-            ObservableList<String> observableList = FXCollections.observableArrayList(weeksAndDays);
-            dateField.setItems(observableList);
+            schedule = addBookingViewController.getSchedule(titleCombo.getSelectionModel().getSelectedItem().toString());
+            dateField.setItems(addBookingViewController.getDateFieldInfo(titleCombo.getSelectionModel().getSelectedItem().toString()));
             dateField.setPromptText("Choose a week and date");
 
         });
 
         dateField.getSelectionModel().selectedItemProperty().addListener(observable -> {
-            int day = Integer.parseInt(dateField.getSelectionModel().getSelectedItem().toString().substring(4,5));
-            int week = Integer.parseInt(dateField.getSelectionModel().getSelectedItem().toString().substring(11));
-            ArrayList<String> times = new ArrayList<>();
-            for (int i = 0; i < schedule.getSchedule().get(week - 1).get(Integer.toString(day)).size(); i++){
-                times.add(schedule.getSchedule().get(week - 1).get(Integer.toString(day)).get(i));
-            }
 
-
-            ObservableList<String> observableList = FXCollections.observableArrayList(times);
-            timeField.setItems(observableList);
+            timeField.setItems( addBookingViewController.getTimes(Integer.parseInt(dateField.getSelectionModel().getSelectedItem().toString().substring(4,5)),
+                    Integer.parseInt(dateField.getSelectionModel().getSelectedItem().toString().substring(11)), schedule));
             timeField.setPromptText("Choose time");
 
         });

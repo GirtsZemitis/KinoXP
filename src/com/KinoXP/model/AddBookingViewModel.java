@@ -33,6 +33,30 @@ public class AddBookingViewModel {
         return null;
     }
 
+    public Schedule getSchedule(String movieName) {
+        try {
+            String query = "SELECT * FROM Movie INNER JOIN schedule ON Movie.indexMovie= schedule.indexMovie WhERE Movie.title=?";
+            PreparedStatement preparedStatement = conn.prepareStatement(query);
+            preparedStatement.setString(1, movieName);
+            ResultSet results = preparedStatement.executeQuery();
+            Schedule schedule = new Schedule();
+            while (results.next()){
+                //CHANGE HEREEEEE
+                for (int i = 1; i < 10; i++){
+                    schedule.parseSchedule(results.getString("week" + i), i);
+                }
+            }
+
+            return schedule;
+
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public Booking getBooking(String phoneNumber){
         String out = "";
         try {
