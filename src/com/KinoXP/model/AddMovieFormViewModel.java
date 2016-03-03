@@ -68,18 +68,7 @@ public class AddMovieFormViewModel {
         }
         return out;
     }
-    public void makeFileFromURL(){
 
-        try {
-            URL url = new URL(posterPathString);
-            BufferedImage img = ImageIO.read(url);
-            File file = new File("res/" + titleString+".png");
-            ImageIO.write(img, "png", file);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-    }
 
     public String getPosterPathFromDatabase(String mainActor) {
         String out = "";

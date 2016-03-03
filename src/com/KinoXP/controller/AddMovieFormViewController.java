@@ -11,6 +11,12 @@ package com.KinoXP.controller;
         import org.controlsfx.validation.ValidationSupport;
         import org.controlsfx.validation.Validator;
 
+        import javax.imageio.ImageIO;
+        import java.awt.image.BufferedImage;
+        import java.io.File;
+        import java.io.IOException;
+        import java.net.URL;
+
 /**
  * Created by Paula on 26/02/2016.
  */
@@ -37,9 +43,6 @@ public class AddMovieFormViewController {
 
     public AddMovieFormViewController(){};
 
-    public void addPicturePath(){
-        addMovieFormViewModel.makeFileFromURL();
-    }
 
 
     //METHOD WHICH PASSES THE INPUT FROM THE VIEW TO THE MODEL
@@ -159,7 +162,7 @@ public class AddMovieFormViewController {
                     castInput.getText(), theatreNameInput, genreInput.getText(), ageLimitInput.getText());
             MovieWeek movieWeek = new MovieWeek();
             manageMovieScheduleController.insertMovie(movieWeek.save(movieWeek.getObservableList()));
-            addMovieFormView.makeFileFromPath();
+            makeFileFromURL(addMovieFormView.getUrl(),addMovieFormView.getTitle());
             addMovieFormView.closeStage();
             NewMovieView newMovieView = new NewMovieView();
             newMovieView.start();
@@ -167,6 +170,20 @@ public class AddMovieFormViewController {
              *
              */
         }
+    }
+
+    //making file from url method
+    public void makeFileFromURL(String urlString, String titleString){
+
+        try {
+            URL url = new URL(urlString);
+            BufferedImage img = ImageIO.read(url);
+            File file = new File("res/" + titleString+".png");
+            ImageIO.write(img, "png", file);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
 

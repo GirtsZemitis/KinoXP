@@ -24,7 +24,8 @@ public class AddMovieFormView {
     private AddMovieFormViewController addMovieFormViewController = new AddMovieFormViewController();
     private AddMovieFormViewModel addMovieFormViewModel = new AddMovieFormViewModel();
     private Stage stage;
-
+    TextField posterPathTxt;
+    TextField titleTxt;
     //CONSTRUCTOR
     public AddMovieFormView() {
         addMovieFormViewModel = new AddMovieFormViewModel();
@@ -34,11 +35,11 @@ public class AddMovieFormView {
     public void getAddMovieView() {
 
         //TEXT FIELDS
-        TextField titleTxt = new TextField();
+         titleTxt = new TextField();
         TextField playingTimeInMinutesTxt = new TextField();
         TextField releaseYearTxt = new TextField();
         TextField directorTxt = new TextField();
-        TextField posterPathTxt = new TextField();
+         posterPathTxt = new TextField();
         //TextField movieTheaterTxt = new TextField();
 
         TextField genreTxt = new TextField();
@@ -97,9 +98,6 @@ public class AddMovieFormView {
             NewMovieView newMovieView = new NewMovieView();
             newMovieView.start();
         });
-
-
-
 
 
         //H-BOXES
@@ -163,12 +161,19 @@ public class AddMovieFormView {
         alert.showAndWait();
     }
 
-    public void makeFileFromPath(){
-        addMovieFormViewController.addPicturePath();
-    }
+
 
     //METHOD TO USE FOR CLOSING THE STAGE
     public void closeStage(){
         stage.close();
     }
+
+ //get url form addmovie
+ public String getUrl(){
+     return  posterPathTxt.getText();
+ }
+    public String getTitle(){
+        return titleTxt.getText();
+    }
+
 }

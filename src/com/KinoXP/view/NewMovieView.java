@@ -151,7 +151,8 @@ public class NewMovieView {
 
             //
             if(ifFileExistsOnThisPc == false) {
-
+                String url = urlString.get(i).toString();
+                String title = titlesString.get(i).toString();
                 System.out.println("Movie " + titlesString.get(i).toString() + " - picture doesn't exist on this Pc");
                 System.out.println("Of Url: " + urlString.get(i).toString());
 
@@ -159,7 +160,7 @@ public class NewMovieView {
 
                 //properly save to /res
 
-               // newMovieViewController.createFile(filePath);
+                addMoveFormViewController.makeFileFromURL(url,title);
 
             }
             else {

@@ -33,4 +33,6 @@ public class NewMovieViewController {
     public ResultSet getUrlFromModel() {
         return newMovieViewModel.getPhotoLink();
     }
+
+
 }
