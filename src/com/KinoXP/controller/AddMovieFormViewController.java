@@ -8,7 +8,7 @@ package com.KinoXP.controller;
         import javafx.scene.control.TextArea;
         import javafx.scene.control.TextField;
         import org.apache.commons.validator.routines.UrlValidator;
-        import org.controlsfx.validation.ValidationSupport;
+       import org.controlsfx.validation.ValidationSupport;
         import org.controlsfx.validation.Validator;
 
         import javax.imageio.ImageIO;
@@ -156,7 +156,7 @@ public class AddMovieFormViewController {
              *
              */
             ManageMovieScheduleController manageMovieScheduleController = new ManageMovieScheduleController();
-            //save movie in Db
+            //save movie in Db with default schedule
             addMovieToDB(titleInput.getText(), playingTimeInMinutesInput.getText(),
                     releaseYearInput.getText(), plotInput.getText(), directorInput.getText(), posterPathInput.getText(),
                     castInput.getText(), theatreNameInput, genreInput.getText(), ageLimitInput.getText());
