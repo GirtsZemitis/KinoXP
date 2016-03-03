@@ -162,6 +162,7 @@ public class EditMovieView extends Application {
         this.primaryStage = primaryStage;
 
         //HANDLING THE BUTTONS ACTIONS
+        final Stage finalPrimaryStage = primaryStage;
         deleteMovieBtn.setOnAction(event -> {
 
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -178,6 +179,7 @@ public class EditMovieView extends Application {
                 NewMovieViewController newMovieViewController = new NewMovieViewController();
                 newMovieViewController.newMovieViewDisplay();
                 deleteFile();
+                finalPrimaryStage.close();
                 closeStage();
             } else {
                 alert.close();
