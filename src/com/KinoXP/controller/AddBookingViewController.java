@@ -60,32 +60,35 @@ public class AddBookingViewController {
         return null;
     }
 
-    public Schedule getSchedule(String movieName) {
-        try {
-            String query = "SELECT * FROM Movie INNER JOIN schedule ON Movie.indexMovie= schedule.indexMovie WhERE Movie.title=?";
-            PreparedStatement preparedStatement = conn.prepareStatement(query);
-            preparedStatement.setString(1, movieName);
-            ResultSet results = preparedStatement.executeQuery();
-            Schedule schedule = new Schedule();
-            while (results.next()){
-                //CHANGE HEREEEEE
-                for (int i = 1; i < 10; i++){
-                    schedule.parseSchedule(results.getString("week" + i), i);
+    public Schedule getSchedule(String title){
+        return addBookingViewModel.getSchedule(title);
+    }
+
+
+    public ObservableList getDateFieldInfo(String title) {
+        Schedule schedule = addBookingViewModel.getSchedule(title);
+        ArrayList<String> weeksAndDays = new ArrayList<String>();
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 7; j++) {
+                if (schedule.getSchedule().get(i).get(Integer.toString(j)) == null) {
+
+                } else if (!schedule.getSchedule().get(i).get(Integer.toString(j)).isEmpty()) {
+                    weeksAndDays.add("Day:" + j + " Week:" + (i + 1));
                 }
-
-
-
-
             }
-
-            return schedule;
-
-
-
-        } catch (Exception e) {
-            e.printStackTrace();
         }
-        return null;
+        return FXCollections.observableArrayList(weeksAndDays);
+    }
+
+    public ObservableList<String> getTimes(int day, int week, Schedule schedule) {
+
+        ArrayList<String> times = new ArrayList<>();
+        for (int i = 0; i < schedule.getSchedule().get(week - 1).get(Integer.toString(day)).size(); i++){
+            times.add(schedule.getSchedule().get(week - 1).get(Integer.toString(day)).get(i));
+        }
+
+
+        return FXCollections.observableArrayList(times);
     }
 
     // it doesnt find getSchedule in model
