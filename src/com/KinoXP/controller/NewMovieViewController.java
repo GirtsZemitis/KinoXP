@@ -30,4 +30,7 @@ public class NewMovieViewController {
     public ResultSet getMovieTitleFromModel() {
         return newMovieViewModel.getMovieTitle();
     }
+    public ResultSet getUrlFromModel() {
+        return newMovieViewModel.getPhotoLink();
+    }
 }

@@ -22,9 +22,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-/**
- * Created by quena on 25-02-2016.
- */
 public class NewMovieView {
     /**
      * EditMovieView
@@ -41,9 +38,6 @@ public class NewMovieView {
     Label topLayout;
 
 
-    //** common work
-
-    //****
 
     //CONTROLLERS
     NewMovieViewController newMovieViewController = new NewMovieViewController();
@@ -88,34 +82,58 @@ public class NewMovieView {
         //method that gets indexMovie to arraylist
         ArrayList<String> urlString = new ArrayList<>();
         ArrayList<String> titlesString = new ArrayList<>();
-        ResultSet resultSet = newMovieViewController.getMovieTitleFromModel();
+        ResultSet resultSet1 = newMovieViewController.getMovieTitleFromModel();
+        ResultSet resultSet2 = newMovieViewController.getUrlFromModel();
 
         try {
-            while (resultSet.next()){
-                titlesString.add(resultSet.getString(1));
-                urlString.add(resultSet.getString(1));
+            while (resultSet1.next()){
+                titlesString.add(resultSet1.getString(1));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        // reading from DB and creating Buttons + adding Buttons to ArrayList
+        try {
+            while (resultSet2.next()) {
+                urlString.add(resultSet2.getString(1));
+            }
+        }
+        catch(SQLException e2) {
+            e2.printStackTrace();
+        }
+        /**
+         * / reading from DB and creating Buttons + adding Buttons to ArrayList
+         */
+
         for(int i=0; i<titlesString.size(); i++) {
             ImageView imageView;
-            String url = null;
-            String label = null;
+            boolean ifFileExistsOnThisPc;
+            String filePath = "res/" + titlesString.get(i) + ".png";
 
-            File file = new File("res/" + urlString.get(i) + ".png" );
-            imageView = newMovieViewController.getWrapImageFromUrlCtrl(file.toURI().toString());
+            File file = new File("res/" + titlesString.get(i) + ".png" );
+            ifFileExistsOnThisPc = file.exists();
+            if(ifFileExistsOnThisPc == false) {
 
+                System.out.println("Movie " + titlesString.get(i).toString() + " - picture doesn't exist on this Pc");
+                System.out.println("Of Url: " + urlString.get(i).toString());
+                imageView = newMovieViewController.getWrapImageFromUrlCtrl(urlString.get(i));
+
+                //properly save to /res
+
+                //newMovieViewController.createFile(filePath);
+
+            }
+            else {
+                imageView = newMovieViewController.getWrapImageFromUrlCtrl(file.toURI().toString());
+            }
 
             imageView.setFitHeight(200);
             imageView.setFitWidth(200);
             Button button666 = new Button();
-
             button666.setPadding(new Insets(0, 0, 0, 0));
             button666.setGraphic(imageView);
             final int finalI = i;
+            //Poster Butons Action
             button666.setOnAction(event -> {
                 EditMovieViewModel editMovieViewModel = new EditMovieViewModel();
                 EditMovieView editMovieView = new EditMovieView(titlesString.get(finalI));
@@ -133,12 +151,10 @@ public class NewMovieView {
             Label titleBtnLabel666 = new Label();
             titleBtnLabel666.setPrefSize(80, 20);
             titleBtnLabel666.setAlignment(Pos.CENTER);
-
             titleBtnLabel666.setText(titlesString.get(i));
 
             VBox vBox = new VBox();
             vBox.setPrefSize(80, 120);
-            //vBox.setMaxSize(80,120);
             vBox.setAlignment(Pos.CENTER);
             vBox.getChildren().addAll(button666, titleBtnLabel666);
             flowPane.getChildren().add(vBox);

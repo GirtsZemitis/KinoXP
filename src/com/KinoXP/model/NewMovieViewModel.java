@@ -24,7 +24,7 @@ public class NewMovieViewModel {
 
     public ImageView wrapImageFromUrl(String url) {
         BufferedImage img = null;
-        //saved for later: "https://thehande.files.wordpress.com/2014/01/brucelee.jpg"
+
         try {
             img = ImageIO.read(new URL(url));
         } catch (IOException e) {
@@ -65,7 +65,7 @@ public class NewMovieViewModel {
         return null;
     }
 
-    public ResultSet getPhotoLink(){                           // returns link to poster from database basing on index
+    public ResultSet getPhotoLink(){        // returns link to poster from database basing on index
         try {
             String query = " SELECT posterPath FROM Movie";
             PreparedStatement preparedStatement = conn.prepareStatement(query);
