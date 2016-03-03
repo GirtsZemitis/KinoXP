@@ -24,6 +24,7 @@ public class ManageMovieScheduleController {
         schedule.startSchedule();
     }
 
+
     public void scheduleDisplay(Movie m) {
         Schedule schedule = new Schedule(m);
         schedule.start();

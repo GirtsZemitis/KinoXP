@@ -79,7 +79,7 @@ public class LoginView {
 
     //GUI ALERT USED BY LogInViewController////////////////////////////////////////////////////
     public void networkAlertMethod(){
-        Alert alert = new Alert(Alert.AlertType.ERROR);
+       Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
         alert.setContentText("The system failed to start due to lack of internet connection signal! Please check your network connection.");
         alert.showAndWait();
