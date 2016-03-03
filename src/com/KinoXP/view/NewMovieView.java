@@ -110,17 +110,22 @@ public class NewMovieView {
             boolean ifFileExistsOnThisPc;
             String filePath = "res/" + titlesString.get(i) + ".png";
 
-            File file = new File("res/" + titlesString.get(i) + ".png" );
+
+            File file = new File(filePath);
+            //checking if file exists
             ifFileExistsOnThisPc = file.exists();
+
+            //
             if(ifFileExistsOnThisPc == false) {
 
                 System.out.println("Movie " + titlesString.get(i).toString() + " - picture doesn't exist on this Pc");
                 System.out.println("Of Url: " + urlString.get(i).toString());
+
                 imageView = newMovieViewController.getWrapImageFromUrlCtrl(urlString.get(i));
 
                 //properly save to /res
 
-                //newMovieViewController.createFile(filePath);
+               // newMovieViewController.createFile(filePath);
 
             }
             else {

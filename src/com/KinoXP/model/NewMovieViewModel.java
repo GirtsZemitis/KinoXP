@@ -7,6 +7,7 @@ import javafx.scene.image.WritableImage;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -91,5 +92,10 @@ public class NewMovieViewModel {
         }
 
         return null;
+    }
+
+    public void createPosterPathFile(String filePath) {
+        File file = new File(filePath);
+
     }
 }
