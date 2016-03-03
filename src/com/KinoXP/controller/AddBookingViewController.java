@@ -26,10 +26,11 @@ public class AddBookingViewController {
 
     }
 
-    public Booking getSchedule(String phoneNumber){
-        return addBookingViewModel.getScedule();
+    // it doesnt find getSchedule in model
+    /*public Booking getSchedule(String phoneNumber){
+        return addBookingViewModel.getSchedule();
 
-    }
+    }*/
 
 
 }
