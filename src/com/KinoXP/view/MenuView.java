@@ -7,7 +7,9 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -39,27 +41,35 @@ public class MenuView {
         menuLabel = new Label("Main menu");
         menuLabel.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
         movies = new Button("Manage movies");
-        movies.setStyle("-fx-font-size: 20;");
+        movies.setId("button");
+        movies.setMaxWidth(Double.MAX_VALUE);
         schedule = new Button("Manage schedule");
-        schedule.setStyle("-fx-font-size: 20");
+        schedule.setId("button");
+        schedule.setMaxWidth(Double.MAX_VALUE);
         booking = new Button("Manage bookings");
-        booking.setStyle("-fx-font-size: 20");
-
+        booking.setId("button");
+        booking.setMaxWidth(Double.MAX_VALUE);
         employees = new Button("Manage employees");
-        employees.setStyle("-fx-font-size: 20");
+        employees.setId("button");
+        employees.setMaxWidth(Double.MAX_VALUE);
 
         logOut = new Button("Log out");
         
         logOut.setStyle("-fx-font-size: 20");
+        logOut.setId("button");
         logOut.setOnAction(event1 -> {
             loginViewController.startLoginWindow();
             primaryStage.close();
         });
         menuLayout = new BorderPane();
         menuLayout.setId("backgroundImage");
-        menuLayout.setPadding(new Insets(50));
-        vbox = new VBox(20);
+        menuLayout.setPadding(new Insets(30));
+        vbox = new VBox(10);
+
         vbox.getChildren().addAll(movies, schedule, employees, booking);
+        vbox.setPadding(new Insets(0, 20, 0, 20 ));
+        vbox.setSpacing(20);
+        vbox.setMaxWidth(200);
         menuLayout.setCenter(vbox);
         menuLayout.setTop(menuLabel);
         menuLayout.setAlignment(menuLabel, Pos.TOP_CENTER);

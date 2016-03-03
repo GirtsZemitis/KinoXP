@@ -68,8 +68,11 @@ public class NewMovieView {
         topLayout.setPrefSize(1280, 70);
         topLayout.setAlignment(Pos.CENTER);
         topLayout.setStyle(
+                "-fx-font-family: cursive;" +
                 "-fx-background-color: transparent;" +
-                "-fx-font-size: 50");
+                "-fx-font-size: 50"
+
+        );
 
         topLayoutHBox = new HBox();
         topLayoutHBox.setSpacing(10);
