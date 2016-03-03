@@ -26,10 +26,6 @@ public class AddBookingViewController {
 
     }
 
-    public Booking getSchedule(String phoneNumber){
-        return addBookingViewModel.getScedule();
-
-    }
 
 
 }
