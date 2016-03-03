@@ -63,11 +63,13 @@ public class NewMovieView {
         borderPane.setId("backgroundImage");
 
         //TOP
-        topLayout = new Label("Movies OVERVIEW");
+        topLayout = new Label("Movies Database");
 
         topLayout.setPrefSize(1280, 70);
         topLayout.setAlignment(Pos.CENTER);
-        topLayout.setStyle("-fx-background-color: silver;-fx-font-size: 50");
+        topLayout.setStyle(
+                "-fx-background-color: transparent;" +
+                "-fx-font-size: 50");
 
         topLayoutHBox = new HBox();
         topLayoutHBox.setSpacing(10);
@@ -223,7 +225,7 @@ public class NewMovieView {
         borderPane.setCenter(scrollPane);
 
         logOut = new Button("Log Out");
-        logOut.setPrefSize(150,50);
+        logOut.setId("button");
         logOut.setOnAction(event1 -> {
             LoginViewController loginViewController = new LoginViewController();
             loginViewController.startLoginWindow();
@@ -231,8 +233,7 @@ public class NewMovieView {
         });
         borderPane.setAlignment(logOut,Pos.CENTER);
         borderPane.setBottom(logOut);
-        borderPane.setPadding(new Insets(0, 0, 0, 30));
-        logOut.setStyle("-fx-border-color: black;-fx-font-size: 20");
+        borderPane.setPadding(new Insets(0, 0, 30, 30));
 
 
         //SCENE
