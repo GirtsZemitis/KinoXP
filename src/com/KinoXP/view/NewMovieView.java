@@ -173,7 +173,7 @@ public class NewMovieView {
         logOut.setPrefSize(150,50);
         logOut.setOnAction(event1 -> {
             LoginViewController loginViewController = new LoginViewController();
-            loginViewController.startLoginWidnow();
+            loginViewController.startLoginWindow();
             primaryStage.close();
         });
         borderPane.setAlignment(logOut,Pos.CENTER);

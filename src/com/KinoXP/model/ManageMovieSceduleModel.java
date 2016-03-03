@@ -161,12 +161,14 @@ public class ManageMovieSceduleModel {
 
     }
 
-    public ObservableList<Movie> getMovieTitles(){
-        String sql ="SELECT `title` , `indexMovie`  FROM `Movie` ";
+    public ObservableList<Movie> getMovieTitles(String s){
+        String sql ="SELECT `title` , `indexMovie`  FROM `Movie` WHERE cinemaRoomName=?";
         PreparedStatement preparedStatement = null;
         ObservableList<Movie> observableList = FXCollections.observableArrayList();
         try {
             preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setString(1, s);
+
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 observableList.add(new Movie(resultSet.getString(1),resultSet.getInt(2)));

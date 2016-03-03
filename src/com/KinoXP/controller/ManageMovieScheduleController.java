@@ -11,7 +11,7 @@ import javafx.collections.ObservableList;
 /**
  * Created by hartyandi on 2/24/16.
  */
-public class ManageMovieSceduleController {
+public class ManageMovieScheduleController {
     ArrayList<MovieWeek> arrayList;
     ManageMovieSceduleModel manageMovieSceduleModel = new ManageMovieSceduleModel();
 
@@ -19,9 +19,14 @@ public class ManageMovieSceduleController {
         Schedule schedule = new Schedule();
         schedule.start();
     }
+    public void scheduleFromTheatre(){
+        Schedule schedule = new Schedule();
+        schedule.startSchedule();
+    }
 
-    public void scheduleDisplay(String s) {
-        Schedule schedule = new Schedule(s);
+
+    public void scheduleDisplay(Movie m) {
+        Schedule schedule = new Schedule(m);
         schedule.start();
     }
 
@@ -52,7 +57,7 @@ public class ManageMovieSceduleController {
         return manageMovieSceduleModel.getScheduleForMovie(s, i);
     }
 
-    public ObservableList<Movie> getMovieTitles() {
-        return manageMovieSceduleModel.getMovieTitles();
+    public ObservableList<Movie> getMovieTitles(String s) {
+        return manageMovieSceduleModel.getMovieTitles(s);
     }
 }
