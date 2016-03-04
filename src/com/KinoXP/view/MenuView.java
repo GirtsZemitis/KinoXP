@@ -25,10 +25,7 @@ public class MenuView {
     BorderPane menuLayout;
     VBox vbox;
     Label menuLabel, loggedUser;
-
-
-
-    public static Button movies, schedule, employees, booking, logOut = new Button();
+    public static Button movies, schedule, employees, booking, logOut, prices;
     ManageMovieScheduleController manageMovieScheduleController = new ManageMovieScheduleController();
     NewMovieViewController newMovieViewController = new NewMovieViewController();
     LoginViewController loginViewController = new LoginViewController();
@@ -55,6 +52,9 @@ public class MenuView {
         employees = new Button("Manage employees");
         employees.setId("button");
         employees.setMaxWidth(Double.MAX_VALUE);
+        prices = new Button("Manage prices");
+        prices.setId("button");
+        prices.setMaxWidth(Double.MAX_VALUE);
 
         logOut = new Button("Log out");
         
@@ -69,7 +69,7 @@ public class MenuView {
         menuLayout.setPadding(new Insets(30));
         vbox = new VBox(10);
 
-        vbox.getChildren().addAll(movies, schedule, employees, booking);
+        vbox.getChildren().addAll(movies, schedule, employees, prices);
         vbox.setPadding(new Insets(0, 20, 0, 20 ));
         vbox.setSpacing(20);
         vbox.setMaxWidth(200);
@@ -82,19 +82,29 @@ public class MenuView {
 
         movies.setOnAction(event -> {
             newMovieViewController.newMovieViewDisplay();
+            mainMenu.close();
         });
 
         schedule.setOnAction(event -> {
            // manageMovieScheduleController.scheduleDisplay();
             manageMovieScheduleController.scheduleFromTheatre();
+            mainMenu.close();
       });
 
         booking.setOnAction(event -> {
             addBookingViewController.addBookingViewDisplay();
+            mainMenu.close();
         });
 
         employees.setOnAction(event -> {
+            ManageEmployeeView manageEmployeeView = new ManageEmployeeView();
             manageEmployeeView.start();
+            mainMenu.close();
+        });
+
+        prices.setOnAction(event -> {
+            PricesView pricesView = new PricesView();
+            pricesView.start();
             mainMenu.close();
         });
 
