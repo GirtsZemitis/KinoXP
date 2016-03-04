@@ -28,6 +28,7 @@ public class ManageEmployeeController {
 
     //CHANGES BUTTONS TO INVISIBLE IF USER LOGING IN IS NOT MANAGER
     public void changeButtonVisibility(){
+
         MenuView.employees.setDisable(true);
         MenuView.movies.setDisable(true);
     }
@@ -41,6 +42,7 @@ public class ManageEmployeeController {
         return tab;
 
     }
+
     //GET LOG IN INFO
     public ObservableList<LoginViewModel> returnLogInInfo() {
         ManageEmployeeModel manageEmployeeModel = new ManageEmployeeModel();
