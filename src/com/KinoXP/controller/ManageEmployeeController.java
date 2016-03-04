@@ -28,7 +28,6 @@ public class ManageEmployeeController {
 
     //CHANGES BUTTONS TO INVISIBLE IF USER LOGING IN IS NOT MANAGER
     public void changeButtonVisibility(){
-
         MenuView.employees.setDisable(true);
         MenuView.movies.setDisable(true);
     }
