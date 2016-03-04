@@ -1,15 +1,16 @@
 package com.KinoXP.view;
 
 
-import com.KinoXP.controller.*;
+import com.KinoXP.controller.AddBookingViewController;
+import com.KinoXP.controller.LoginViewController;
+import com.KinoXP.controller.ManageMovieScheduleController;
+import com.KinoXP.controller.NewMovieViewController;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -25,15 +26,11 @@ public class MenuView {
     BorderPane menuLayout;
     VBox vbox;
     Label menuLabel, loggedUser;
-
-
-
-    public static Button movies, schedule, employees, booking, logOut = new Button();
+    Button movies, schedule, employees, booking, logOut;
     ManageMovieScheduleController manageMovieScheduleController = new ManageMovieScheduleController();
     NewMovieViewController newMovieViewController = new NewMovieViewController();
     LoginViewController loginViewController = new LoginViewController();
     AddBookingViewController addBookingViewController = new AddBookingViewController();
-    ManageEmployeeView manageEmployeeView = new ManageEmployeeView();
 
 
     public void start() {
@@ -44,35 +41,26 @@ public class MenuView {
         menuLabel = new Label("Main menu");
         menuLabel.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
         movies = new Button("Manage movies");
-        movies.setId("button");
-        movies.setMaxWidth(Double.MAX_VALUE);
+        movies.setStyle("-fx-font-size: 20;");
         schedule = new Button("Manage schedule");
-        schedule.setId("button");
-        schedule.setMaxWidth(Double.MAX_VALUE);
+        schedule.setStyle("-fx-font-size: 20");
         booking = new Button("Manage bookings");
-        booking.setId("button");
-        booking.setMaxWidth(Double.MAX_VALUE);
+        booking.setStyle("-fx-font-size: 20");
+
         employees = new Button("Manage employees");
-        employees.setId("button");
-        employees.setMaxWidth(Double.MAX_VALUE);
+        employees.setStyle("-fx-font-size: 20");
 
         logOut = new Button("Log out");
         
         logOut.setStyle("-fx-font-size: 20");
-        logOut.setId("button");
         logOut.setOnAction(event1 -> {
             loginViewController.startLoginWindow();
             primaryStage.close();
         });
         menuLayout = new BorderPane();
-        menuLayout.setId("backgroundImage");
-        menuLayout.setPadding(new Insets(30));
-        vbox = new VBox(10);
-
+        menuLayout.setPadding(new Insets(50));
+        vbox = new VBox(20);
         vbox.getChildren().addAll(movies, schedule, employees, booking);
-        vbox.setPadding(new Insets(0, 20, 0, 20 ));
-        vbox.setSpacing(20);
-        vbox.setMaxWidth(200);
         menuLayout.setCenter(vbox);
         menuLayout.setTop(menuLabel);
         menuLayout.setAlignment(menuLabel, Pos.TOP_CENTER);
@@ -94,12 +82,11 @@ public class MenuView {
         });
 
         employees.setOnAction(event -> {
+            ManageEmployeeView manageEmployeeView = new ManageEmployeeView();
             manageEmployeeView.start();
-            mainMenu.close();
         });
 
         menu = new Scene(menuLayout, 500, 500);
-        menu.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
         mainMenu.setScene(menu);
         mainMenu.show();
 

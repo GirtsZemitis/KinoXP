@@ -1,7 +1,6 @@
 package com.KinoXP.view;
 
 import com.KinoXP.controller.LoginViewController;
-import com.KinoXP.controller.ManageEmployeeController;
 import com.KinoXP.model.EmployeeModel;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -19,7 +18,6 @@ import javafx.stage.Stage;
 
 public class LoginView {
     EmployeeModel employeeModel;///// DON'T DELETE WITHOUT SAYING IT!!!!
-    ManageEmployeeController manageEmployeeController = new ManageEmployeeController();
 
     public void start(){
 
@@ -71,12 +69,6 @@ public class LoginView {
 
             errorLabel.setText(loginViewController.checkLogIn(employeeModel));//CALL METHOD FROM CONTROLLER
             //primaryStage.close();// CLOSE THIS STAGE
-
-            if(checkIfManager()==false){
-                manageEmployeeController.changeButtonVisibility();
-            }
-
-
         });
         //////////////////////////////////////////////////////////////////////////////////////
 
@@ -91,14 +83,6 @@ public class LoginView {
         alert.setTitle("Error");
         alert.setContentText("The system failed to start due to lack of internet connection signal! Please check your network connection.");
         alert.showAndWait();
-    }
-
-    public boolean checkIfManager(){
-        if(employeeModel.getUserName().equals("1")&& employeeModel.getPassword().equals("1")){
-            return true;
-        }
-
-        return false;
     }
     //////////////////////////////////////////////////////BY MONICA// COMMUNICATE BEFORE YOU MOVE/CHANGE/DELETE!
 }
