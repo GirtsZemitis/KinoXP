@@ -41,7 +41,6 @@ public class ManageEmployeeController {
         return tab;
 
     }
-
     //GET LOG IN INFO
     public ObservableList<LoginViewModel> returnLogInInfo() {
         ManageEmployeeModel manageEmployeeModel = new ManageEmployeeModel();
