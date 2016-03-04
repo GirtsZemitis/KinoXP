@@ -116,28 +116,10 @@ public class NewMovieView {
         });
 
 
-        //method that gets indexMovie to arraylist
-        ArrayList<String> urlString = new ArrayList<>();
-        ArrayList<String> titlesString = new ArrayList<>();
-        ResultSet resultSet1 = newMovieViewController.getMovieTitleFromModel();
-        ResultSet resultSet2 = newMovieViewController.getUrlFromModel();
+        // lists of urls and titles from DB
+        ArrayList<String> urlString = newMovieViewController.getUrlListCtr();
+        ArrayList<String> titlesString = newMovieViewController.getTitleListCtr();
 
-        try {
-            while (resultSet1.next()){
-                titlesString.add(resultSet1.getString(1));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        try {
-            while (resultSet2.next()) {
-                urlString.add(resultSet2.getString(1));
-            }
-        }
-        catch(SQLException e2) {
-            e2.printStackTrace();
-        }
         /**
          * / reading from DB and creating Buttons + adding Buttons to ArrayList
          */

@@ -2,8 +2,6 @@ package com.KinoXP.controller;
 
 import com.KinoXP.model.EditMovieViewModel;
 import com.KinoXP.view.EditMovieView;
-import com.KinoXP.view.MovieWeek;
-import com.KinoXP.view.NewMovieView;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
