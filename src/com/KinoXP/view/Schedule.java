@@ -497,6 +497,7 @@ public class Schedule {
 
         Stage primaryStage = new Stage();
         VBox vbox = new VBox();
+        HBox hBox = new HBox(30);
         Scene scene = new Scene(vbox,650,600);
         scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
         Label label = new Label("Welcome to manage schedule");
@@ -507,6 +508,12 @@ public class Schedule {
         label2.setId("room");
         Button button = new Button("Go to schedule");
         button.setId("button");
+        Button button1 = new Button("Go to main manu");
+        button1.setOnAction(event2 -> {
+            primaryStage.close();
+        });
+        button1.setId("button");
+        hBox.getChildren().addAll(button1,button);
 
         ComboBox<Movie> comboBox = new ComboBox<>();
 
@@ -519,13 +526,13 @@ public class Schedule {
         String cinameRoomName = movieTheaterTxt.getSelectionModel().getSelectedItem();
         comboBox.setItems(manageMovieScheduleController.getMovieTitles(cinameRoomName));
 
-        vbox.getChildren().addAll(label,label1,movieTheaterTxt, label2,comboBox,button);
+        vbox.getChildren().addAll(label,label1,movieTheaterTxt, label2,comboBox,hBox);
         vbox.setMargin(label,new Insets(120,0,0,0));
         vbox.setMargin(label1,new Insets(30,0,0,0));
         vbox.setMargin(movieTheaterTxt,new Insets(10,0,0,0));
         vbox.setMargin(label2,new Insets(30,0,0,0));
         vbox.setMargin(comboBox,new Insets(10,0,0,0));
-        vbox.setMargin(button,new Insets(180,0,0,0));
+        vbox.setMargin(hBox,new Insets(180,0,0,0));
 
 
         button.setOnAction(event1 -> {
@@ -540,7 +547,7 @@ public class Schedule {
         });
 
         vbox.setAlignment(Pos.TOP_CENTER);
-
+        hBox.setAlignment(Pos.TOP_CENTER);
 
         primaryStage.setScene(scene);
         primaryStage.show();
