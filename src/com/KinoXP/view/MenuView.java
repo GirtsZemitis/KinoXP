@@ -71,7 +71,7 @@ public class MenuView {
         menuLayout.setPadding(new Insets(30));
         vbox = new VBox(10);
 
-        vbox.getChildren().addAll(movies, schedule, employees, prices);
+        vbox.getChildren().addAll(movies, schedule, employees,booking, prices);
         vbox.setPadding(new Insets(0, 20, 0, 20 ));
         vbox.setSpacing(20);
         vbox.setMaxWidth(200);
