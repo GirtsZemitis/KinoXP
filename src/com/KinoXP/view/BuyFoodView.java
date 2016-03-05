@@ -1,5 +1,7 @@
 package com.KinoXP.view;
 
+import com.KinoXP.controller.BuyFoodViewController;
+import com.KinoXP.model.Booking;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -17,7 +19,7 @@ import javafx.stage.Stage;
 /**
  * Created by hartyandi on 3/4/16.
  */
-public class BuyFoodView extends Application{
+public class BuyFoodView {
 
 
     Label lSodaAmount;
@@ -31,16 +33,8 @@ public class BuyFoodView extends Application{
     int sCandyCount = 0;
     int lCandyCount = 0;
 
+    BuyFoodViewController buyFoodViewController = new BuyFoodViewController();
 
-    public static void main(String[] args) {
-
-        launch(args);
-    }
-
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-        startBuyFoodView();
-    }
 
     public void startBuyFoodView(){
 
@@ -59,7 +53,7 @@ public class BuyFoodView extends Application{
         Button largeCandyPlus = new Button("+");
         Button largeCandyMinus = new Button("-");
         Button noThankYou = new Button("No");
-        Button yes        =new Button("Yes");
+        Button yes = new Button("Yes");
 
         lSodaAmount = new Label("?");
         lCandyAmount = new Label("?");
@@ -95,7 +89,8 @@ public class BuyFoodView extends Application{
         hboxButtons.setPadding(new Insets(10, 10, 10, 10));
         hboxButtons.setAlignment(Pos.CENTER);
 
-        //////////////////////////BUTTONS SETTING ON ACTION, MOVE TO MODEL
+        //*****************************************
+        // BUTTONS ON ACTION
 
         largeSodaPlus.setOnAction(event ->{
             lSodaCount++;
@@ -141,6 +136,17 @@ public class BuyFoodView extends Application{
             sCandyAmount.setText(Integer.toString(sCandyCount));
         });
 
+        //**********************
+        //      YES NO ACTIONS
+
+        yes.setOnAction(event -> {
+            //
+        });
+
+        noThankYou.setOnAction(event ->  {
+            //
+        });
+
 
 
 
@@ -150,19 +156,11 @@ public class BuyFoodView extends Application{
         layout.setPadding(new Insets(40, 40, 40, 60));
         layout.setAlignment(Pos.TOP_CENTER);
 
-
-
-
-
         Scene scene = new Scene(layout, 250, 310);
         Stage primaryStage = new Stage();
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);
         primaryStage.show();
-
-
-
-
 
     }
     public int getsSodaCount() {

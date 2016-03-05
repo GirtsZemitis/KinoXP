@@ -22,11 +22,6 @@ package com.KinoXP.controller;
  */
 public class AddMovieFormViewController {
 
-    //Greg - I moved AddmovieButtonActions Logic to AddMovieFormViewModel.
-    // controller only binds View with logic(Model)..
-
-
-
     public void addMovieFormViewDisplay(){
         AddMovieFormView addMovieFormView = new AddMovieFormView();
         addMovieFormView.getAddMovieView();
