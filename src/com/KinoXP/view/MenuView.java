@@ -102,11 +102,13 @@ public class MenuView {
             mainMenu.close();
         });
 
+
         /*prices.setOnAction(event -> {
             PricesView pricesView = new PricesView();
             pricesView.start();
             mainMenu.close();
         });*/
+
 
         menu = new Scene(menuLayout, 500, 500);
         menu.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
