@@ -115,7 +115,6 @@ public class MenuView {
             mainMenu.close();
         });
 
-
         menu = new Scene(menuLayout, 500, 500);
         menu.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
         mainMenu.setScene(menu);
