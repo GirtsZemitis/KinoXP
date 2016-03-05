@@ -24,6 +24,8 @@ public class AddBookingView {
 
     AddBookingViewController addBookingViewController = new AddBookingViewController();
     private Schedule schedule;
+
+
     private String phoneNr;
 
 
@@ -152,12 +154,13 @@ public class AddBookingView {
                     paidCheck.isSelected());
             BuyFoodView buyFoodView = new BuyFoodView();
             buyFoodView.startBuyFoodView();
+            buyFoodView.phoneNumber = phoneNrField.getText();
             primaryStage.close();
 
         });
+
+
     }
-
-
 
 
 

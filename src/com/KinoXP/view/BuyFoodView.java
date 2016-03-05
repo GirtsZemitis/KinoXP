@@ -21,7 +21,8 @@ import javafx.stage.Stage;
  */
 public class BuyFoodView {
 
-
+    BuyFoodViewController buyFoodViewController = new BuyFoodViewController();
+    MenuView menuView;
     Label lSodaAmount;
     Label lCandyAmount;
     Label sSodaAmount;
@@ -32,8 +33,10 @@ public class BuyFoodView {
     int lSodaCount = 0;
     int sCandyCount = 0;
     int lCandyCount = 0;
+    String phoneNumber;
+    Stage primaryStage;
 
-    BuyFoodViewController buyFoodViewController = new BuyFoodViewController();
+
 
 
     public void startBuyFoodView(){
@@ -140,11 +143,17 @@ public class BuyFoodView {
         //      YES NO ACTIONS
 
         yes.setOnAction(event -> {
-            //
+            buyFoodViewController.insertFood(phoneNumber, sCandyCount, lCandyCount, sSodaCount, lSodaCount);
+            menuView = new MenuView();
+            menuView.start();
+            primaryStage.close();
         });
 
         noThankYou.setOnAction(event ->  {
-            //
+            buyFoodViewController.insertFood(phoneNumber,0,0,0,0);
+            menuView = new MenuView();
+            menuView.start();
+            primaryStage.close();
         });
 
 
@@ -157,25 +166,10 @@ public class BuyFoodView {
         layout.setAlignment(Pos.TOP_CENTER);
 
         Scene scene = new Scene(layout, 250, 310);
-        Stage primaryStage = new Stage();
+        primaryStage = new Stage();
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);
         primaryStage.show();
 
-    }
-    public int getsSodaCount() {
-        return sSodaCount;
-    }
-
-    public int getlSodaCount() {
-        return lSodaCount;
-    }
-
-    public int getsCandyCount() {
-        return sCandyCount;
-    }
-
-    public int getlCandyCount() {
-        return lCandyCount;
     }
 }

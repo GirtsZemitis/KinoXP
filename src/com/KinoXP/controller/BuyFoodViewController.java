@@ -1,27 +1,16 @@
 package com.KinoXP.controller;
 
-import com.KinoXP.view.BuyFoodView;
+import com.KinoXP.model.BuyFoodViewModel;
 
 /**
  * Created by MazurJestBoski on 2016-03-05.
  */
 public class BuyFoodViewController {
+    BuyFoodViewModel buyFoodViewModel = new BuyFoodViewModel();
 
-    private BuyFoodView buyFoodView = new BuyFoodView();
+    public void insertFood(String phonenumber, int sCandyCount, int lCandyCount, int sSodaCount, int lSodaCount){
 
-    public Integer getsSodaCount() {
-        return buyFoodView.getsSodaCount();
+        buyFoodViewModel.setFoodToDB(phonenumber ,sCandyCount,lCandyCount,sSodaCount, lSodaCount);
     }
 
-    public Integer getLSodaCount() {
-        return buyFoodView.getlSodaCount();
-    }
-
-    public Integer getsCandyCount() {
-        return buyFoodView.getsCandyCount();
-    }
-
-    public Integer getLCandyCount() {
-        return buyFoodView.getlCandyCount();
-    }
 }

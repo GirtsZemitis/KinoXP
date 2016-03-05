@@ -1,12 +1,10 @@
 package com.KinoXP.model;
 
-import com.KinoXP.controller.BuyFoodViewController;
-import com.KinoXP.view.LoginView;
-import com.sun.corba.se.spi.orbutil.fsm.Guard;
+
+import com.KinoXP.controller.AddBookingViewController;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
@@ -15,14 +13,8 @@ import java.sql.SQLException;
 public class BuyFoodViewModel {
 
     Connection conn = LoginViewModel.conn;
-    BuyFoodViewController buyFoodViewController = new BuyFoodViewController();
 
-    public void setFoodToDB(String phoneNumber) {
-        ResultSet resultSet = null;
-        int sSodaCount = buyFoodViewController.getsSodaCount();
-        int lSodaCount = buyFoodViewController.getLSodaCount();
-        int sCandyCount = buyFoodViewController.getsCandyCount();
-        int lCandyCount = buyFoodViewController.getLCandyCount();
+    public void setFoodToDB(String phoneNumber, int sCandyCount, int lCandyCount, int sSodaCount, int lSodaCount) {
 
         String query;
         query = "INSERT into drinkSnacks VALUES (?,?,?,?,?)";
