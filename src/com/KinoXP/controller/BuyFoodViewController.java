@@ -7,7 +7,7 @@ import com.KinoXP.view.BuyFoodView;
  */
 public class BuyFoodViewController {
 
-    BuyFoodView buyFoodView = new BuyFoodView();
+    private BuyFoodView buyFoodView = new BuyFoodView();
 
     public Integer getsSodaCount() {
         return buyFoodView.getsSodaCount();
