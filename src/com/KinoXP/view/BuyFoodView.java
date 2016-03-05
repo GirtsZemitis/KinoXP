@@ -24,7 +24,13 @@ public class BuyFoodView extends Application{
     Label lCandyAmount;
     Label sSodaAmount;
     Label sCandyAmount;
+
+
+    int sSodaCount = 0;
     int lSodaCount = 0;
+    int sCandyCount = 0;
+    int lCandyCount = 0;
+
 
     public static void main(String[] args) {
 
@@ -88,10 +94,56 @@ public class BuyFoodView extends Application{
         HBox hboxButtons = new HBox();
         hboxButtons.setPadding(new Insets(10, 10, 10, 10));
         hboxButtons.setAlignment(Pos.CENTER);
+
+        //////////////////////////BUTTONS SETTING ON ACTION, MOVE TO MODEL
+
         largeSodaPlus.setOnAction(event ->{
             lSodaCount++;
             lSodaAmount.setText(Integer.toString(lSodaCount));
         });
+
+        largeSodaMinus.setOnAction(event ->{
+            if(lSodaCount>0)
+            {lSodaCount--;}
+            lSodaAmount.setText(Integer.toString(lSodaCount));
+        });
+
+        smallSodaPlus.setOnAction(event ->{
+            sSodaCount++;
+            sSodaAmount.setText(Integer.toString(sSodaCount));
+        });
+
+        smallSodaMinus.setOnAction(event ->{
+            if(sSodaCount>0)
+            {sSodaCount--;}
+            sSodaAmount.setText(Integer.toString(sSodaCount));
+        });
+
+        largeCandyPlus.setOnAction(event ->{
+            lCandyCount++;
+            lCandyAmount.setText(Integer.toString(lCandyCount));
+        });
+
+        largeCandyMinus.setOnAction(event ->{
+            if(lCandyCount>0)
+            {lCandyCount--;}
+            lCandyAmount.setText(Integer.toString(lCandyCount));
+        });
+
+        smallCandyPlus.setOnAction(event ->{
+            sCandyCount++;
+            sCandyAmount.setText(Integer.toString(sCandyCount));
+        });
+
+        smallCandyMinus.setOnAction(event ->{
+            if(sCandyCount>0)
+            {sCandyCount--;}
+            sCandyAmount.setText(Integer.toString(sCandyCount));
+        });
+
+
+
+
 
         hboxButtons.getChildren().addAll(noThankYou,yes);
         layout.getChildren().addAll(mainLabel, smallSoda, hboxSSoda, largeSoda, hboxLSoda, smallCandy, hboxSCandy, largeCandy, hboxLCandy, hboxButtons);
@@ -112,5 +164,20 @@ public class BuyFoodView extends Application{
 
 
 
+    }
+    public int getsSodaCount() {
+        return sSodaCount;
+    }
+
+    public int getlSodaCount() {
+        return lSodaCount;
+    }
+
+    public int getsCandyCount() {
+        return sCandyCount;
+    }
+
+    public int getlCandyCount() {
+        return lCandyCount;
     }
 }
