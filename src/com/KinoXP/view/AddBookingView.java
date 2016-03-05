@@ -142,9 +142,7 @@ public class AddBookingView {
         });
 
         addButton.setOnAction(event -> {
-
             addBookingViewController.insertBooking(dateField.getValue(),timeField.getValue(),titleCombo.getValue().toString(),Integer.parseInt(seatsField.getText()),phoneNrField.getText(),paidCheck.isSelected());
-
             primaryStage.close();
 
         });
