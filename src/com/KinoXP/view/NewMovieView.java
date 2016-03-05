@@ -41,12 +41,8 @@ public class NewMovieView {
     FlowPane flowPane;
     Button plusButton;
     Button logOut;
+    Button backBtn;
     Label topLayout;
-
-
-    //** common work
-
-    //****
 
     //CONTROLLERS
     NewMovieViewController newMovieViewController = new NewMovieViewController();
@@ -80,6 +76,13 @@ public class NewMovieView {
         borderPane.setTop(topLayoutHBox);
 
         //BORDER Left
+        backBtn = new Button("Back");
+        backBtn.setOnAction(event2 -> {
+            primaryStage.close();
+
+        });
+        borderPane.setAlignment(backBtn, Pos.BOTTOM_LEFT);
+        borderPane.setLeft(backBtn);
 
         plusButton = new Button();
         plusButton.setStyle(
