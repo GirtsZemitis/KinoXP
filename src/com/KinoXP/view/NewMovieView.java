@@ -218,11 +218,11 @@ public class NewMovieView {
         //Center - FlowPane
         borderPane.setCenter(scrollPane);
 
-        logOut = new Button("Log Out");
+        logOut = new Button("Back");
         logOut.setId("button");
         logOut.setOnAction(event1 -> {
-            LoginViewController loginViewController = new LoginViewController();
-            loginViewController.startLoginWindow();
+            MenuView menuView = new MenuView();
+            menuView.start();
             primaryStage.close();
         });
         borderPane.setAlignment(logOut,Pos.CENTER);

@@ -70,7 +70,7 @@ public class LoginView {
             employeeModel = new EmployeeModel(userField.getText(),passwordText.getText());
 
             errorLabel.setText(loginViewController.checkLogIn(employeeModel));//CALL METHOD FROM CONTROLLER
-            //primaryStage.close();// CLOSE THIS STAGE
+            primaryStage.close();// CLOSE THIS STAGE
 
             if(checkIfManager()==false){
                 manageEmployeeController.changeButtonVisibility();
