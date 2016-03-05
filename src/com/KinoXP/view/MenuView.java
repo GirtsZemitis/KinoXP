@@ -15,6 +15,8 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+
 /**
  * Created by hartyandi on 2/24/16.
  */
@@ -103,12 +105,15 @@ public class MenuView {
         });
 
 
-        /*prices.setOnAction(event -> {
+        prices.setOnAction(event -> {
             PricesView pricesView = new PricesView();
-            pricesView.start();
+            try {
+                pricesView.start();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             mainMenu.close();
-        });*/
-
+        });
 
         menu = new Scene(menuLayout, 500, 500);
         menu.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
