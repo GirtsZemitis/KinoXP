@@ -24,6 +24,7 @@ public class AddBookingView {
 
     AddBookingViewController addBookingViewController = new AddBookingViewController();
     private Schedule schedule;
+    private String phoneNr;
 
 
     public void start() {
@@ -56,11 +57,11 @@ public class AddBookingView {
 
         //COMBOBOXES
         ObservableList<String> options = addBookingViewController.getMoviesWithSchedule();
-        ComboBox titleCombo  = new ComboBox(options);
+        ComboBox titleCombo = new ComboBox(options);
         titleCombo.setPromptText("Choose a movie");
 
 
-        ComboBox hallCombo  = new ComboBox();
+        ComboBox hallCombo = new ComboBox();
         hallCombo.setPromptText("Choose a hall");
 
         //CHECHBOXES
@@ -83,7 +84,7 @@ public class AddBookingView {
         HBox isPaid = new HBox();
         isPaid.getChildren().addAll(paidLabel, paidCheck);
         VBox layout = new VBox();
-        layout.getChildren().addAll(mainLabel, searchLabel, search, titleLabel, titleCombo, dateLabel, dateField, timeLabel,  timeField, seatsAmountLabel, seatsField, phoneNumberLabel, phoneNrField, isPaid, addButton );
+        layout.getChildren().addAll(mainLabel, searchLabel, search, titleLabel, titleCombo, dateLabel, dateField, timeLabel, timeField, seatsAmountLabel, seatsField, phoneNumberLabel, phoneNrField, isPaid, addButton);
         addButton.setAlignment(Pos.BOTTOM_RIGHT);
         layout.setPadding(new Insets(40, 40, 40, 60));
         layout.setSpacing(5);
@@ -113,7 +114,7 @@ public class AddBookingView {
                 times.add(schedule.getSchedule().get(week - 1).get(Integer.toString(day)).get(i));
             }
 
-            timeField.setItems( addBookingViewController.parseTimes(addBookingViewController.getTimes(Integer.parseInt(dateField.getSelectionModel().getSelectedItem().toString().substring(4,5)),
+            timeField.setItems(addBookingViewController.parseTimes(addBookingViewController.getTimes(Integer.parseInt(dateField.getSelectionModel().getSelectedItem().toString().substring(4, 5)),
                     Integer.parseInt(dateField.getSelectionModel().getSelectedItem().toString().substring(11)), schedule)));
             timeField.setPromptText("Choose time");
 
@@ -142,13 +143,21 @@ public class AddBookingView {
         });
 
         addButton.setOnAction(event -> {
-            addBookingViewController.insertBooking(dateField.getValue(),timeField.getValue(),titleCombo.getValue().toString(),Integer.parseInt(seatsField.getText()),phoneNrField.getText(),paidCheck.isSelected());
+            addBookingViewController.insertBooking(
+                    dateField.getValue(),
+                    timeField.getValue(),
+                    titleCombo.getValue().toString(),
+                    Integer.parseInt(seatsField.getText()),
+                    phoneNrField.getText(),
+                    paidCheck.isSelected());
+            BuyFoodView buyFoodView = new BuyFoodView();
+            buyFoodView.startBuyFoodView();
             primaryStage.close();
 
         });
-
-
     }
+
+
 
 
 
