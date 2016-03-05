@@ -103,9 +103,9 @@ public class MenuView {
         });
 
         prices.setOnAction(event -> {
-            PricesView pricesView = new PricesView();
+            /*PricesView pricesView = new PricesView();
             pricesView.start();
-            mainMenu.close();
+            mainMenu.close();*/
         });
 
         menu = new Scene(menuLayout, 500, 500);
