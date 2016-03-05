@@ -25,7 +25,7 @@ public class MenuView {
     BorderPane menuLayout;
     VBox vbox;
     Label menuLabel, loggedUser;
-    public static Button movies, schedule, employees, booking, logOut, prices;
+    public static Button movies, schedule, employees, booking, logOut, prices, ticketStatus;
     ManageMovieScheduleController manageMovieScheduleController = new ManageMovieScheduleController();
     NewMovieViewController newMovieViewController = new NewMovieViewController();
     LoginViewController loginViewController = new LoginViewController();
@@ -55,6 +55,8 @@ public class MenuView {
         prices = new Button("Manage prices");
         prices.setId("button");
         prices.setMaxWidth(Double.MAX_VALUE);
+        ticketStatus = new Button("Ticket Status");
+        ticketStatus.setId("button");
 
         logOut = new Button("Log out");
         
@@ -69,7 +71,7 @@ public class MenuView {
         menuLayout.setPadding(new Insets(30));
         vbox = new VBox(10);
 
-        vbox.getChildren().addAll(movies, schedule, employees, prices);
+        vbox.getChildren().addAll(movies, schedule, employees, prices,booking,ticketStatus);
         vbox.setPadding(new Insets(0, 20, 0, 20 ));
         vbox.setSpacing(20);
         vbox.setMaxWidth(200);
@@ -90,7 +92,6 @@ public class MenuView {
             manageMovieScheduleController.scheduleFromTheatre();
             mainMenu.close();
       });
-
         booking.setOnAction(event -> {
             addBookingViewController.addBookingViewDisplay();
             mainMenu.close();
@@ -102,10 +103,15 @@ public class MenuView {
             mainMenu.close();
         });
 
+        ticketStatus.setOnAction(event1 -> {
+            TicketView ticketView = new TicketView();
+            ticketView.start();
+        });
+
         prices.setOnAction(event -> {
-            /*PricesView pricesView = new PricesView();
-            pricesView.start();
-            mainMenu.close();*/
+          //  PricesView pricesView = new PricesView();
+          //  pricesView.start();
+           // mainMenu.close();
         });
 
         menu = new Scene(menuLayout, 500, 500);

@@ -1,5 +1,7 @@
 package com.KinoXP.view;
 
+import com.KinoXP.controller.BuyFoodViewController;
+import com.KinoXP.model.Booking;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -17,17 +19,25 @@ import javafx.stage.Stage;
 /**
  * Created by hartyandi on 3/4/16.
  */
-public class BuyFoodView extends Application{
+public class BuyFoodView {
 
-    public static void main(String[] args) {
+    BuyFoodViewController buyFoodViewController = new BuyFoodViewController();
+    MenuView menuView;
+    Label lSodaAmount;
+    Label lCandyAmount;
+    Label sSodaAmount;
+    Label sCandyAmount;
 
-        launch(args);
-    }
 
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-        startBuyFoodView();
-    }
+    int sSodaCount = 0;
+    int lSodaCount = 0;
+    int sCandyCount = 0;
+    int lCandyCount = 0;
+    String phoneNumber;
+    Stage primaryStage;
+
+
+
 
     public void startBuyFoodView(){
 
@@ -46,12 +56,12 @@ public class BuyFoodView extends Application{
         Button largeCandyPlus = new Button("+");
         Button largeCandyMinus = new Button("-");
         Button noThankYou = new Button("No");
-        Button yes        =new Button("Yes");
+        Button yes = new Button("Yes");
 
-        Label lSodaAmount = new Label("?");
-        Label lCandyAmount = new Label("?");
-        Label sSodaAmount = new Label("?");
-        Label sCandyAmount = new Label("?");
+        lSodaAmount = new Label("?");
+        lCandyAmount = new Label("?");
+        sSodaAmount = new Label("?");
+        sCandyAmount = new Label("?");
         lCandyAmount.setAlignment(Pos.CENTER);
         sCandyAmount.setAlignment(Pos.CENTER);
         lSodaAmount.setAlignment(Pos.CENTER);
@@ -82,24 +92,84 @@ public class BuyFoodView extends Application{
         hboxButtons.setPadding(new Insets(10, 10, 10, 10));
         hboxButtons.setAlignment(Pos.CENTER);
 
+        //*****************************************
+        // BUTTONS ON ACTION
+
+        largeSodaPlus.setOnAction(event ->{
+            lSodaCount++;
+            lSodaAmount.setText(Integer.toString(lSodaCount));
+        });
+
+        largeSodaMinus.setOnAction(event ->{
+            if(lSodaCount>0)
+            {lSodaCount--;}
+            lSodaAmount.setText(Integer.toString(lSodaCount));
+        });
+
+        smallSodaPlus.setOnAction(event ->{
+            sSodaCount++;
+            sSodaAmount.setText(Integer.toString(sSodaCount));
+        });
+
+        smallSodaMinus.setOnAction(event ->{
+            if(sSodaCount>0)
+            {sSodaCount--;}
+            sSodaAmount.setText(Integer.toString(sSodaCount));
+        });
+
+        largeCandyPlus.setOnAction(event ->{
+            lCandyCount++;
+            lCandyAmount.setText(Integer.toString(lCandyCount));
+        });
+
+        largeCandyMinus.setOnAction(event ->{
+            if(lCandyCount>0)
+            {lCandyCount--;}
+            lCandyAmount.setText(Integer.toString(lCandyCount));
+        });
+
+        smallCandyPlus.setOnAction(event ->{
+            sCandyCount++;
+            sCandyAmount.setText(Integer.toString(sCandyCount));
+        });
+
+        smallCandyMinus.setOnAction(event ->{
+            if(sCandyCount>0)
+            {sCandyCount--;}
+            sCandyAmount.setText(Integer.toString(sCandyCount));
+        });
+
+        //**********************
+        //      YES NO ACTIONS
+
+        yes.setOnAction(event -> {
+            buyFoodViewController.insertFood(phoneNumber, sCandyCount, lCandyCount, sSodaCount, lSodaCount);
+            menuView = new MenuView();
+            menuView.start();
+            primaryStage.close();
+        });
+
+        noThankYou.setOnAction(event ->  {
+            buyFoodViewController.insertFood(phoneNumber,0,0,0,0);
+            menuView = new MenuView();
+            menuView.start();
+            primaryStage.close();
+        });
+
+
+
+
+
         hboxButtons.getChildren().addAll(noThankYou,yes);
         layout.getChildren().addAll(mainLabel, smallSoda, hboxSSoda, largeSoda, hboxLSoda, smallCandy, hboxSCandy, largeCandy, hboxLCandy, hboxButtons);
         layout.setPadding(new Insets(40, 40, 40, 60));
         layout.setAlignment(Pos.TOP_CENTER);
 
-
-
-
-
         Scene scene = new Scene(layout, 250, 310);
-        Stage primaryStage = new Stage();
+        primaryStage = new Stage();
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);
         primaryStage.show();
-
-
-
-
 
     }
 }
