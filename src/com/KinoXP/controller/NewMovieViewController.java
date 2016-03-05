@@ -5,7 +5,6 @@ import com.KinoXP.view.NewMovieView;
 import javafx.scene.image.ImageView;
 
 import java.sql.ResultSet;
-import java.util.ArrayList;
 
 /**
  * Created by quena on 25-02-2016.
@@ -26,14 +25,14 @@ public class NewMovieViewController {
         return imageView;
     }
 
-    public ArrayList<String> getUrlListCtr() {
-        return newMovieViewModel.getUrlListFromDB();
-    }
 
-    public ArrayList<String> getTitleListCtr() {
-        return newMovieViewModel.getTitleListFromDB();
-    }
 
+    public ResultSet getMovieTitleFromModel() {
+        return newMovieViewModel.getMovieTitle();
+    }
+    public ResultSet getUrlFromModel() {
+        return newMovieViewModel.getPhotoLink();
+    }
 
 
 }
