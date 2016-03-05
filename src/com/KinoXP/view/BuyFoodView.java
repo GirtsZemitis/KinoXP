@@ -19,6 +19,13 @@ import javafx.stage.Stage;
  */
 public class BuyFoodView extends Application{
 
+
+    Label lSodaAmount;
+    Label lCandyAmount;
+    Label sSodaAmount;
+    Label sCandyAmount;
+    int lSodaCount = 0;
+
     public static void main(String[] args) {
 
         launch(args);
@@ -48,10 +55,10 @@ public class BuyFoodView extends Application{
         Button noThankYou = new Button("No");
         Button yes        =new Button("Yes");
 
-        Label lSodaAmount = new Label("?");
-        Label lCandyAmount = new Label("?");
-        Label sSodaAmount = new Label("?");
-        Label sCandyAmount = new Label("?");
+        lSodaAmount = new Label("?");
+        lCandyAmount = new Label("?");
+        sSodaAmount = new Label("?");
+        sCandyAmount = new Label("?");
         lCandyAmount.setAlignment(Pos.CENTER);
         sCandyAmount.setAlignment(Pos.CENTER);
         lSodaAmount.setAlignment(Pos.CENTER);
@@ -81,6 +88,10 @@ public class BuyFoodView extends Application{
         HBox hboxButtons = new HBox();
         hboxButtons.setPadding(new Insets(10, 10, 10, 10));
         hboxButtons.setAlignment(Pos.CENTER);
+        largeSodaPlus.setOnAction(event ->{
+            lSodaCount++;
+            lSodaAmount.setText(Integer.toString(lSodaCount));
+        });
 
         hboxButtons.getChildren().addAll(noThankYou,yes);
         layout.getChildren().addAll(mainLabel, smallSoda, hboxSSoda, largeSoda, hboxLSoda, smallCandy, hboxSCandy, largeCandy, hboxLCandy, hboxButtons);
