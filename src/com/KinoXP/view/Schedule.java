@@ -26,7 +26,6 @@ import java.util.ArrayList;
  * Created by krystian on 2015-09-04.
  */
 public class Schedule {
-    //button for prinitng week in console
 
     //button for change week
     Button nextButton;
@@ -48,6 +47,7 @@ public class Schedule {
     Button saveButton;
     //back Button
     Button back;
+    //columns for schedule
     TableColumn<TimeModel, String> hour;
     TableColumn monday;
     TableColumn tuesday;
@@ -56,44 +56,60 @@ public class Schedule {
     TableColumn friday;
     TableColumn saturday;
     TableColumn sanday;
-    ComboBox<Movie> choiceBox;
 
+    //some layouts
     VBox vBox;
     VBox vBox1;
-    int b =0;
+    //movie object
     Movie movie;
+    //label for storing movie title
     Label movieTitleText;
+    //constructor for schedule which is takes movie object
     public Schedule(Movie m){
+
         movie= m;
     }
+    //empty construction for schedue
     public Schedule(){
 
     }
+
     public void start() {
+        // set primaryStage
         Stage primaryStage = new Stage();
         //populate array with 12 weeks
         arrayList = manageMovieScheduleController.getArrayList();
+        //iniciate table
         table = new TableView();
+        //nr of week
         nrOfWeek = new Label("week 1");
         nrOfWeek.setId("room");
+        //back Button
         back = new Button("Go back");
+
         back.setId("back");
+        //acton for back
         back.setOnAction(event3 -> {
             primaryStage.close();
         });
+        //movie title lablle
         Label movieTitle = new Label("movie 1");
+        //movieTitle
         movieTitleText = new Label("movie title: " );
         movieTitleText.setId("movieTitleText");
+
         pleaseSelectMovie = new Label("Please select movie");
         pleaseSelectMovie.setPrefSize(200,30);
         nextButton = new Button("next week");
         nextButton.setId("navigationButon");
         nextButton.setOnAction(event2 -> {
+            // Increments  weekCounter
             weekCounter++;
-            if (weekCounter <= 10) {
+            // If week counter is bigger then less or equals  12
+            if (weekCounter <13) {
+                //return week from array
 
-                //--next-- when movie form add
-                arrayList.get(weekCounter-1).readFromDb(manageMovieScheduleController.getScheduleForMovie(movie.getTitle(),weekCounter),10);
+                arrayList.get(weekCounter-1).readFromDb(manageMovieScheduleController.getScheduleForMovie(movie.getTitle(),weekCounter));
                 table.setItems(arrayList.get(weekCounter - 1).getObservableListFromDb());
                 setNumberOfWeek(weekCounter);
 
@@ -101,7 +117,7 @@ public class Schedule {
 
             } else {
                 weekCounter = 1;
-                arrayList.get(weekCounter-1).readFromDb(manageMovieScheduleController.printScheduleFromDb(weekCounter),weekCounter);
+                arrayList.get(weekCounter-1).readFromDb(manageMovieScheduleController.getScheduleForMovie(movie.getTitle(),weekCounter));
                 table.setItems(arrayList.get(weekCounter - 1).getObservableListFromDb());
                 setNumberOfWeek(weekCounter);
 
@@ -113,14 +129,14 @@ public class Schedule {
         preButton.setOnAction(event2 -> {
             if (weekCounter > 1) {
                 weekCounter--;
-                arrayList.get(weekCounter-1).readFromDb(manageMovieScheduleController.getScheduleForMovie(movie.getTitle(),weekCounter),10);
+                arrayList.get(weekCounter-1).readFromDb(manageMovieScheduleController.getScheduleForMovie(movie.getTitle(),weekCounter));
                 table.setItems(arrayList.get(weekCounter - 1).getObservableListFromDb());
                 setNumberOfWeek(weekCounter);
 
 
             } else {
-                weekCounter = 10;
-                arrayList.get(weekCounter-1).readFromDb(manageMovieScheduleController.getScheduleForMovie(movie.getTitle(),weekCounter),10);
+                weekCounter = 12;
+                arrayList.get(weekCounter-1).readFromDb(manageMovieScheduleController.getScheduleForMovie(movie.getTitle(),weekCounter));
                 table.setItems(arrayList.get(weekCounter - 1).getObservableListFromDb());
                 setNumberOfWeek(weekCounter);
 
@@ -157,16 +173,22 @@ public class Schedule {
                     public void updateItem(String item, boolean empty) {
                         super.updateItem(item, empty);
                         if (!isEmpty()) {
-                            if (item.contains("no")) {
+                            if (item.contains("n")) {
                                 this.setTextFill(Color.RED);
-                                this.setStyle("-fx-background-color: #9bb6b3");
+                                this.setStyle("-fx-background-color: #9bb6b3;" +
+                                              "-fx-border-bottom-style: solid; " +
+                                              "-fx-border-color: white; " );
+                              //  this.setStyle("-fx-border-style: solid");
+                                //this.setStyle("-fx-border-color: white");
+
 
                             }
-                            if (item.contains("yes")) {
+                            if (item.contains("y")) {
                                 this.setTextFill(Color.GREEN);
 
-                                this.setStyle("-fx-background-color: #96cd99");
-
+                                this.setStyle("-fx-background-color: #506360;" +
+                                        "-fx-border-bottom-style: solid; " +
+                                        "-fx-border-color: white; " );
                             }
                             // Get fancy and change color based on data
 
@@ -186,16 +208,18 @@ public class Schedule {
                     public void updateItem(String item, boolean empty) {
                         super.updateItem(item, empty);
                         if (!isEmpty()) {
-                            if (item.contains("no")) {
+                            if (item.contains("n")) {
                                 this.setTextFill(Color.RED);
-                                this.setStyle("-fx-background-color: #9bb6b3");
-
+                                this.setStyle("-fx-background-color: #9bb6b3;" +
+                                        "-fx-border-bottom-style: solid; " +
+                                        "-fx-border-color: white; " );
                             }
-                            if (item.contains("yes")) {
+                            if (item.contains("y")) {
                                 this.setTextFill(Color.GREEN);
 
-                                this.setStyle("-fx-background-color: #96cd99");
-
+                                this.setStyle("-fx-background-color: #506360;" +
+                                        "-fx-border-bottom-style: solid; " +
+                                        "-fx-border-color: white; " );
                             }
                             // Get fancy and change color based on data
 
@@ -215,16 +239,18 @@ public class Schedule {
                     public void updateItem(String item, boolean empty) {
                         super.updateItem(item, empty);
                         if (!isEmpty()) {
-                            if (item.contains("no")) {
+                            if (item.contains("n")) {
                                 this.setTextFill(Color.RED);
-                                this.setStyle("-fx-background-color: #9bb6b3");
-
+                                this.setStyle("-fx-background-color: #9bb6b3;" +
+                                        "-fx-border-bottom-style: solid; " +
+                                        "-fx-border-color: white; " );
                             }
-                            if (item.contains("yes")) {
+                            if (item.contains("y")) {
                                 this.setTextFill(Color.GREEN);
 
-                                this.setStyle("-fx-background-color: #96cd99");
-
+                                this.setStyle("-fx-background-color: #506360;" +
+                                        "-fx-border-bottom-style: solid; " +
+                                        "-fx-border-color: white; " );
                             }
                             // Get fancy and change color based on data
 
@@ -244,16 +270,18 @@ public class Schedule {
                     public void updateItem(String item, boolean empty) {
                         super.updateItem(item, empty);
                         if (!isEmpty()) {
-                            if (item.contains("no")) {
+                            if (item.contains("n")) {
                                 this.setTextFill(Color.RED);
-                                this.setStyle("-fx-background-color: #9bb6b3");
-
+                                this.setStyle("-fx-background-color: #9bb6b3;" +
+                                        "-fx-border-bottom-style: solid; " +
+                                        "-fx-border-color: white; " );
                             }
-                            if (item.contains("yes")) {
+                            if (item.contains("y")) {
                                 this.setTextFill(Color.GREEN);
 
-                                this.setStyle("-fx-background-color: #96cd99");
-
+                                this.setStyle("-fx-background-color: #506360;" +
+                                        "-fx-border-bottom-style: solid; " +
+                                        "-fx-border-color: white; " );
                             }
                             // Get fancy and change color based on data
 
@@ -273,16 +301,18 @@ public class Schedule {
                     public void updateItem(String item, boolean empty) {
                         super.updateItem(item, empty);
                         if (!isEmpty()) {
-                            if (item.contains("no")) {
+                            if (item.contains("n")) {
                                 this.setTextFill(Color.RED);
-                                this.setStyle("-fx-background-color: #9bb6b3");
-
+                                this.setStyle("-fx-background-color: #9bb6b3;" +
+                                        "-fx-border-bottom-style: solid; " +
+                                        "-fx-border-color: white; " );
                             }
-                            if (item.contains("yes")) {
+                            if (item.contains("y")) {
                                 this.setTextFill(Color.GREEN);
 
-                                this.setStyle("-fx-background-color: #96cd99");
-
+                                this.setStyle("-fx-background-color: #506360;" +
+                                        "-fx-border-bottom-style: solid; " +
+                                        "-fx-border-color: white; " );
                             }
                             // Get fancy and change color based on data
 
@@ -303,16 +333,18 @@ public class Schedule {
                     public void updateItem(String item, boolean empty) {
                         super.updateItem(item, empty);
                         if (!isEmpty()) {
-                            if (item.contains("no")) {
+                            if (item.contains("n")) {
                                 this.setTextFill(Color.RED);
-                                this.setStyle("-fx-background-color: #9bb6b3");
-
+                                this.setStyle("-fx-background-color: #9bb6b3;" +
+                                        "-fx-border-bottom-style: solid; " +
+                                        "-fx-border-color: white; " );
                             }
-                            if (item.contains("yes")) {
+                            if (item.contains("y")) {
                                 this.setTextFill(Color.GREEN);
 
-                                this.setStyle("-fx-background-color: #96cd99");
-
+                                this.setStyle("-fx-background-color: #506360;" +
+                                        "-fx-border-bottom-style: solid; " +
+                                        "-fx-border-color: white; " );
                             }
                             // Get fancy and change color based on data
 
@@ -334,16 +366,18 @@ public class Schedule {
                     public void updateItem(String item, boolean empty) {
                         super.updateItem(item, empty);
                         if (!isEmpty()) {
-                            if (item.contains("no")) {
+                            if (item.contains("n")) {
                                 this.setTextFill(Color.RED);
-                                this.setStyle("-fx-background-color: #9bb6b3");
-
+                                this.setStyle("-fx-background-color: #9bb6b3;" +
+                                        "-fx-border-bottom-style: solid; " +
+                                        "-fx-border-color: white; " );
                             }
-                            if (item.contains("yes")) {
+                            if (item.contains("y")) {
                                 this.setTextFill(Color.GREEN);
 
-                                this.setStyle("-fx-background-color: #96cd99");
-
+                                this.setStyle("-fx-background-color: #506360;" +
+                                        "-fx-border-bottom-style: solid; " +
+                                        "-fx-border-color: white; " );
                             }
                         }
                     }
@@ -353,7 +387,7 @@ public class Schedule {
 
 
 
-        table.setItems(arrayList.get(weekCounter-1).readFromDb(manageMovieScheduleController.getScheduleForMovie(movie.getTitle(),1),10));
+        table.setItems(arrayList.get(weekCounter-1).readFromDb(manageMovieScheduleController.getScheduleForMovie(movie.getTitle(),1)));
 
         table.getColumns().addAll(hour, monday, tuesday, wednesday, thursday, friday, saturday, sanday);
         table.setOnMouseClicked(event -> {
@@ -363,12 +397,12 @@ public class Schedule {
             TimeModel timeModel = table.getSelectionModel().getSelectedItem();
 
             if (column == 1) {
-                if (timeModel.getMonday().equals("no")) {
-                    timeModel.setMonday("yes");
+                if (timeModel.getMonday().equals("n")) {
+                    timeModel.setMonday("y");
                     arrayList.get(weekCounter - 1).setYesDb(timeModel, row);
                     table.setItems(arrayList.get(weekCounter - 1).getObservableListFromDb());
                 } else {
-                    timeModel.setMonday("no");
+                    timeModel.setMonday("n");
                     arrayList.get(weekCounter - 1).setYesDb(timeModel, row);
                     table.setItems(arrayList.get(weekCounter - 1).getObservableListFromDb());
                 }
@@ -376,71 +410,71 @@ public class Schedule {
 
             }
             if (column == 2) {
-                if (timeModel.getTuesday().equals("no")) {
-                    timeModel.setTuesday("yes");
+                if (timeModel.getTuesday().equals("n")) {
+                    timeModel.setTuesday("y");
                     arrayList.get(weekCounter - 1).setYesDb(timeModel, row);
                     table.setItems(arrayList.get(weekCounter - 1).getObservableListFromDb());
                 } else {
-                    timeModel.setTuesday("no");
+                    timeModel.setTuesday("n");
                     arrayList.get(weekCounter - 1).setYesDb(timeModel, row);
                     table.setItems(arrayList.get(weekCounter - 1).getObservableListFromDb());
                 }
             }
             if (column == 3) {
-                if (timeModel.getWednesday().equals("no")) {
+                if (timeModel.getWednesday().equals("n")) {
 
-                    timeModel.setWednesday("yes");
+                    timeModel.setWednesday("y");
                     arrayList.get(weekCounter - 1).setYesDb(timeModel, row);
                     table.setItems(arrayList.get(weekCounter - 1).getObservableListFromDb());
                 } else {
-                    timeModel.setWednesday("no");
+                    timeModel.setWednesday("n");
                     arrayList.get(weekCounter - 1).setYesDb(timeModel, row);
                     table.setItems(arrayList.get(weekCounter - 1).getObservableListFromDb());
                 }
             }
             if (column == 4) {
-                if (timeModel.getThrusday().equals("no")) {
+                if (timeModel.getThrusday().equals("n")) {
 
-                    timeModel.setThrusday("yes");
+                    timeModel.setThrusday("y");
                     arrayList.get(weekCounter - 1).setYesDb(timeModel, row);
                     table.setItems(arrayList.get(weekCounter - 1).getObservableListFromDb());
                 } else {
-                    timeModel.setThrusday("no");
+                    timeModel.setThrusday("n");
                     arrayList.get(weekCounter - 1).setYesDb(timeModel, row);
                     table.setItems(arrayList.get(weekCounter - 1).getObservableListFromDb());
                 }
             }
             if (column == 5) {
-                if (timeModel.getFriday().equals("no")) {
-                    timeModel.setFriday("yes");
+                if (timeModel.getFriday().equals("n")) {
+                    timeModel.setFriday("y");
                     arrayList.get(weekCounter - 1).setYesDb(timeModel, row);
                     table.setItems(arrayList.get(weekCounter - 1).getObservableListFromDb());
                 } else {
-                    timeModel.setFriday("no");
+                    timeModel.setFriday("n");
                     arrayList.get(weekCounter - 1).setYesDb(timeModel, row);
                     table.setItems(arrayList.get(weekCounter - 1).getObservableListFromDb());
                 }
             }
             if (column == 6) {
-                if (timeModel.getSaturday().equals("no")) {
+                if (timeModel.getSaturday().equals("n")) {
 
-                    timeModel.setSaturday("yes");
+                    timeModel.setSaturday("y");
                     arrayList.get(weekCounter - 1).setYesDb(timeModel, row);
                     table.setItems(arrayList.get(weekCounter - 1).getObservableListFromDb());
                 } else {
-                    timeModel.setSaturday("no");
+                    timeModel.setSaturday("n");
                     arrayList.get(weekCounter - 1).setYesDb(timeModel, row);
                     table.setItems(arrayList.get(weekCounter - 1).getObservableListFromDb());
                 }
             }
             if (column == 7) {
-                if (timeModel.getSunday().equals("no")) {
+                if (timeModel.getSunday().equals("n")) {
 
-                    timeModel.setSunday("yes");
+                    timeModel.setSunday("y");
                     arrayList.get(weekCounter - 1).setYesDb(timeModel, row);
                     table.setItems(arrayList.get(weekCounter - 1).getObservableListFromDb());;
                 } else {
-                    timeModel.setSunday("no");
+                    timeModel.setSunday("n");
                     arrayList.get(weekCounter - 1).setYesDb(timeModel, row);
                     table.setItems(arrayList.get(weekCounter - 1).getObservableListFromDb());
                 }

@@ -16,34 +16,34 @@ public class MovieWeek {
     LoginViewModel loginViewModel = new LoginViewModel();
     public MovieWeek(){
         observableList  = FXCollections.observableArrayList();
-        observableList.add(new TimeModel("9:00","no","no","no","no","no","no","no"));
-        observableList.add(new TimeModel("9:30","no","no","no","no","no","no","no"));
-        observableList.add(new TimeModel("10:00","no","no","no","no","no","no","no"));
-        observableList.add(new TimeModel("10:30","no","no","no","no","no","no","no"));
-        observableList.add(new TimeModel("11:00","no","no","no","no","no","no","no"));
-        observableList.add(new TimeModel("11:30","no","no","no","no","no","no","no"));
-        observableList.add(new TimeModel("12:00","no","no","no","no","no","no","no"));
-        observableList.add(new TimeModel("12:30","no","no","no","no","no","no","no"));
-        observableList.add(new TimeModel("13:00","no","no","no","no","no","no","no"));
-        observableList.add(new TimeModel("13:30","no","no","no","no","no","no","no"));
-        observableList.add(new TimeModel("14:00","no","no","no","no","no","no","no"));
-        observableList.add(new TimeModel("14:30","no","no","no","no","no","no","no"));
-        observableList.add(new TimeModel("15:00","no","no","no","no","no","no","no"));
-        observableList.add(new TimeModel("15:30","no","no","no","no","no","no","no"));
-        observableList.add(new TimeModel("16:00","no","no","no","no","no","no","no"));
-        observableList.add(new TimeModel("16:30","no","no","no","no","no","no","no"));
-        observableList.add(new TimeModel("17:00","no","no","no","no","no","no","no"));
-        observableList.add(new TimeModel("17:30","no","no","no","no","no","no","no"));
-        observableList.add(new TimeModel("18:00","no","no","no","no","no","no","no"));
-        observableList.add(new TimeModel("18:30","no","no","no","no","no","no","no"));
-        observableList.add(new TimeModel("19:00","no","no","no","no","no","no","no"));
-        observableList.add(new TimeModel("19:30","no","no","no","no","no","no","no"));
-        observableList.add(new TimeModel("20:00","no","no","no","no","no","no","no"));
-        observableList.add(new TimeModel("20:30","no","no","no","no","no","no","no"));
-        observableList.add(new TimeModel("21:00","no","no","no","no","no","no","no"));
-        observableList.add(new TimeModel("21:30","no","no","no","no","no","no","no"));
-        observableList.add(new TimeModel("22:00","no","no","no","no","no","no","no"));
-        observableList.add(new TimeModel("22:30","no","no","no","no","no","no","no"));
+        observableList.add(new TimeModel("9:00","n","n","n","n","n","n","n"));
+        observableList.add(new TimeModel("9:30","n","n","n","n","n","n","n"));
+        observableList.add(new TimeModel("10:00","n","n","n","n","n","n","n"));
+        observableList.add(new TimeModel("10:30","n","n","n","n","n","n","n"));
+        observableList.add(new TimeModel("11:00","n","n","n","n","n","n","n"));
+        observableList.add(new TimeModel("11:30","n","n","n","n","n","n","n"));
+        observableList.add(new TimeModel("12:00","n","n","n","n","n","n","n"));
+        observableList.add(new TimeModel("12:30","n","n","n","n","n","n","n"));
+        observableList.add(new TimeModel("13:00","n","n","n","n","n","n","n"));
+        observableList.add(new TimeModel("13:30","n","n","n","n","n","n","n"));
+        observableList.add(new TimeModel("14:00","n","n","n","n","n","n","n"));
+        observableList.add(new TimeModel("14:30","n","n","n","n","n","n","n"));
+        observableList.add(new TimeModel("15:00","n","n","n","n","n","n","n"));
+        observableList.add(new TimeModel("15:30","n","n","n","n","n","n","n"));
+        observableList.add(new TimeModel("16:00","n","n","n","n","n","n","n"));
+        observableList.add(new TimeModel("16:30","n","n","n","n","n","n","n"));
+        observableList.add(new TimeModel("17:00","n","n","n","n","n","n","n"));
+        observableList.add(new TimeModel("17:30","n","n","n","n","n","n","n"));
+        observableList.add(new TimeModel("18:00","n","n","n","n","n","n","n"));
+        observableList.add(new TimeModel("18:30","n","n","n","n","n","n","n"));
+        observableList.add(new TimeModel("19:00","n","n","n","n","n","n","n"));
+        observableList.add(new TimeModel("19:30","n","n","n","n","n","n","n"));
+        observableList.add(new TimeModel("20:00","n","n","n","n","n","n","n"));
+        observableList.add(new TimeModel("20:30","n","n","n","n","n","n","n"));
+        observableList.add(new TimeModel("21:00","n","n","n","n","n","n","n"));
+        observableList.add(new TimeModel("21:30","n","n","n","n","n","n","n"));
+        observableList.add(new TimeModel("22:00","n","n","n","n","n","n","n"));
+        observableList.add(new TimeModel("22:30","n","n","n","n","n","n","n"));
     }
 
     public ObservableList<TimeModel> getObservableList(){
@@ -59,9 +59,6 @@ public class MovieWeek {
 
     public String save(ObservableList<TimeModel> observableList2){
         String save ="";
-
-
-
 
         this.observableList2 = observableList2;
         for(int i= 0; i<observableList2.size(); i++){
@@ -80,7 +77,7 @@ public class MovieWeek {
         //returning text from observablelist with _
     }
 
-    public ObservableList<TimeModel> readFromDb(String s,int c){
+    public ObservableList<TimeModel> readFromDb(String s){
         String hour ="";
         String monday="";
         String tuesday ="";
@@ -91,7 +88,7 @@ public class MovieWeek {
         String sunday="";
         String weeknr="";
         char seperator = '_';
-        int variableCounter = -1;
+        int variableCounter = 0;
 
 
 
@@ -102,19 +99,12 @@ public class MovieWeek {
             return observableListFromDb;
 
         }
-        for(int i =c; i <s.length(); i++){
+        for(int i =0; i <s.length(); i++){
             if(s.charAt(i)=='-') {
                 break;
             }
 
-            while(variableCounter ==-1){
-                weeknr+=s.charAt(i);
-                i++;
-                if(s.charAt(i)=='\n'){
-                    i++;
-                    variableCounter++;
-                }
-            }
+
             if(variableCounter==0){
                 if(s.charAt(i)!=seperator){
                     hour += s.charAt(i);
