@@ -26,7 +26,7 @@ public class AddMovieFormViewModel {
         posterPathString=posterPath;
         titleString=title;
 
-        String sql = "INSERT INTO Movie VALUES (null,?,?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO Movie VALUES (null,?,?,?,?,?,?,?,?,?,?,?)";
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setString(1, title);
@@ -39,6 +39,8 @@ public class AddMovieFormViewModel {
             preparedStatement.setString(8, theatreName);
             preparedStatement.setString(9, genre);
             preparedStatement.setString(10, ageLimit);
+            preparedStatement.setDate(11, null);
+
 
             int numberOfRows = preparedStatement.executeUpdate();
             System.out.println("New title was successfully added to the database: " + numberOfRows);
