@@ -1,15 +1,16 @@
 package com.KinoXP.view;
 
 
-import com.KinoXP.controller.*;
+import com.KinoXP.controller.AddBookingViewController;
+import com.KinoXP.controller.LoginViewController;
+import com.KinoXP.controller.ManageMovieScheduleController;
+import com.KinoXP.controller.NewMovieViewController;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -109,9 +110,9 @@ public class MenuView {
         });
 
         prices.setOnAction(event -> {
-          //  PricesView pricesView = new PricesView();
-          //  pricesView.start();
-           // mainMenu.close();
+          PricesView pricesView = new PricesView();
+          pricesView.start();
+            mainMenu.close();
         });
 
         menu = new Scene(menuLayout, 500, 500);
