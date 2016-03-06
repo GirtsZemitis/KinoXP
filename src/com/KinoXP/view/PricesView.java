@@ -1,6 +1,8 @@
 package com.KinoXP.view;
 
 
+import com.KinoXP.controller.PriceViewController;
+import com.KinoXP.model.ExtrasModel;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -23,6 +25,7 @@ public class PricesView {
     public static Button back, priceButton;
     private String lSodaPrice, sSodaPrice, lCandyPrice, sCandyPrice, textfield;
     TextField lSodaField, sSodaField, lCandyField, sCandyField;
+    PriceViewController priceViewController;
 
     public void start() {
 
@@ -30,30 +33,30 @@ public class PricesView {
         pricesMenu = new Stage();
         pricesMenu = primaryStage;
         menuLabel = new Label("Current prices");
+        priceViewController = new PriceViewController();
 
 
-        lSodaLabel = new Label("Large soda -- "+ lSodaPrice);
-        lSodaLabel.setId("priceLabels");
-        sSodaLabel = new Label("Small soda -- "+ sSodaPrice);
-        sSodaLabel.setId("priceLabels");
-        lCandyLabel = new Label("Large candy -- "+ lCandyPrice);
-        lCandyLabel.setId("priceLabels");
-        sCandyLabel = new Label("Small candy -- "+ sCandyPrice);
-        sCandyLabel.setId("priceLabels");
 
+        //GET PRICES FROM DB && SET THE LABELS
+        setLabels();
+
+        //TEXTFIELDS
         lSodaField = new TextField();
         lSodaField.setStyle("-fx-font-size: 16");
+
         sSodaField = new TextField();
         sSodaField.setStyle("-fx-font-size: 16");
+
         lCandyField = new TextField();
         lCandyField.setStyle("-fx-font-size: 16");
+
         sCandyField = new TextField();
         sCandyField.setStyle("-fx-font-size: 16");
+
 
         menuLabel.setStyle(
                 "-fx-font-size: 20px;" +
                 "-fx-font-weight: bold"
-
         );
 
         priceButton = new Button("Set Prices");
@@ -65,36 +68,18 @@ public class PricesView {
         back.setId("button");
 
 
-
-
-
-
-
-
-
         priceButton.setOnAction(event1 -> {
+            if ((!lSodaField.getText().equals(null))&&(!sSodaField.getText().equals(null))&&
+                    (!lCandyField.getText().equals(null))&&(!sCandyField.getText().equals(null))){
 
+                priceViewController.updatePrices("Soda",Integer.valueOf(lSodaField.getText()),Integer.valueOf(sSodaField.getText()));
+                priceViewController.updatePrices("Candy",Integer.valueOf(lCandyField.getText()),Integer.valueOf(sCandyField.getText()));
 
-            if (lSodaField != null){
-                textfield = lSodaField.getText();
-                lSodaLabel.setText("Large soda -- "+ textfield);
-
-
-            }
-            if (lCandyField != null){
-                textfield = lCandyField.getText();
-                lCandyLabel.setText("Large candy -- "+ textfield);
-            }
-            if (sCandyField != null){
-                textfield = sCandyField.getText();
-                sCandyLabel.setText("Small candy -- "+ textfield);
-            }
-            if (sSodaField != null){
-                textfield = sSodaField.getText();
-                sSodaLabel.setText("Small soda -- "+ textfield);
+                setLabels();
+            }else{
+                System.out.println("Insert some shit please!!!");
             }
 
-            return;
 
         });
 
@@ -113,17 +98,11 @@ public class PricesView {
         elements.setHgap(50);
         elements.setVgap(20);
 
-        elements.setStyle(
-                " -fx-alignment: center;"
-
-
-        );
-
+        elements.setStyle("-fx-alignment: center;");
 
         menuLayout = new BorderPane();
         menuLayout.setId("backgroundImage");
         menuLayout.setPadding(new Insets(30));
-
 
         menuLayout.setTop(menuLabel);
         menuLayout.setAlignment(menuLabel, Pos.TOP_CENTER);
@@ -132,13 +111,34 @@ public class PricesView {
 
         menuLayout.setAlignment(back, Pos.BOTTOM_RIGHT);
 
-
         menu = new Scene(menuLayout, 800, 400);
         menu.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
         pricesMenu.setScene(menu);
         pricesMenu.show();
 
 
+    }
+    public void setLabels(){
+        ExtrasModel soda = new ExtrasModel(priceViewController.getPrice("Soda").getCategory(),
+                priceViewController.getPrice("Soda").getLargePrice(),
+                priceViewController.getPrice("Soda").getSmallPrice());
+        ExtrasModel candy = new ExtrasModel(priceViewController.getPrice("Candy").getCategory(),
+                priceViewController.getPrice("Candy").getLargePrice(),
+                priceViewController.getPrice("Candy").getSmallPrice());
+
+        lSodaPrice= String.valueOf(soda.getLargePrice());
+        sSodaPrice= String.valueOf(soda.getSmallPrice());
+        lCandyPrice= String.valueOf(candy.getLargePrice());
+        sCandyPrice= String.valueOf(candy.getSmallPrice());
+
+        lSodaLabel = new Label("Large soda -- "+ lSodaPrice);
+        lSodaLabel.setId("priceLabels");
+        sSodaLabel = new Label("Small soda -- "+ sSodaPrice);
+        sSodaLabel.setId("priceLabels");
+        lCandyLabel = new Label("Large candy -- "+ lCandyPrice);
+        lCandyLabel.setId("priceLabels");
+        sCandyLabel = new Label("Small candy -- "+ sCandyPrice);
+        sCandyLabel.setId("priceLabels");
     }
 
 
