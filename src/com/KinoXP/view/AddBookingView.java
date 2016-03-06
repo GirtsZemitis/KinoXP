@@ -80,6 +80,7 @@ public class AddBookingView {
         Button addButton = new Button("GO");
 
 
+
         //LAYOUT
         HBox search = new HBox();
         search.getChildren().addAll(searchField, searchButton);
@@ -145,18 +146,31 @@ public class AddBookingView {
         });
 
         addButton.setOnAction(event -> {
-            addBookingViewController.insertBooking(
-                    dateField.getValue(),
-                    timeField.getValue(),
-                    titleCombo.getValue().toString(),
-                    Integer.parseInt(seatsField.getText()),
-                    phoneNrField.getText(),
-                    paidCheck.isSelected());
-            BuyFoodView buyFoodView = new BuyFoodView();
-            buyFoodView.startBuyFoodView();
-            buyFoodView.phoneNumber = phoneNrField.getText();
-            primaryStage.close();
 
+            if(paidCheck.isSelected()){
+                addBookingViewController.updateBooking(dateField.getValue(),
+                        timeField.getValue(),
+                        titleCombo.getValue().toString(),
+                        Integer.parseInt(seatsField.getText()),
+                        phoneNrField.getText(),
+                        paidCheck.isSelected());
+                    /*use the same as below - pop up a buyfoodview that is auto-filled with info from db and opened for modifications
+                    in case the buyer doesn't want the default quantity of soda and/or candy
+                     */
+
+            }else{
+                addBookingViewController.insertBooking(
+                        dateField.getValue(),
+                        timeField.getValue(),
+                        titleCombo.getValue().toString(),
+                        Integer.parseInt(seatsField.getText()),
+                        phoneNrField.getText(),
+                        paidCheck.isSelected());
+                BuyFoodView buyFoodView = new BuyFoodView();
+                buyFoodView.startBuyFoodView();
+                buyFoodView.phoneNumber = phoneNrField.getText();
+            }
+            primaryStage.close();
         });
 
 

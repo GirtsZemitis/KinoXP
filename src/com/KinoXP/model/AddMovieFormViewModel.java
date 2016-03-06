@@ -21,12 +21,12 @@ public class AddMovieFormViewModel {
 
     //METHOD FOR INSERTING THE MOVIE INTO THE DATABASE
     public void insertMovie(String title, String playingTimeInMinutes, String year, String plot, String director,
-                            String posterPath, String cast, String theatreName, String genre, String ageLimit) {
+                            String posterPath, String cast, String theatreName, String genre, String ageLimit,Date date) {
 
         posterPathString=posterPath;
         titleString=title;
 
-        String sql = "INSERT INTO Movie VALUES (null,?,?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO Movie VALUES (null,?,?,?,?,?,?,?,?,?,?,?)";
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setString(1, title);
@@ -39,6 +39,8 @@ public class AddMovieFormViewModel {
             preparedStatement.setString(8, theatreName);
             preparedStatement.setString(9, genre);
             preparedStatement.setString(10, ageLimit);
+            preparedStatement.setDate(11, date);
+
 
             int numberOfRows = preparedStatement.executeUpdate();
             System.out.println("New title was successfully added to the database: " + numberOfRows);

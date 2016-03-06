@@ -16,6 +16,9 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
+import java.time.LocalDate;
+import java.util.Date;
+
 /**
  * Created by Grzegorz, Mazur on 25-02-2016.
  */
@@ -63,13 +66,16 @@ public class AddMovieFormView {
         Label castLbl = new Label("Cast");
         Label posterLbl = new Label("Poster URL");
         Label movieTheaterLbl = new Label("MovieModel Theater");
+        Label movieTime = new Label("Movie premiere: ");
 
         //BUTTONS
 
         Button addMovieBtn = new Button("Add MovieModel");
         Button backBtn = new Button("Go Back");
 
+        //calendar
 
+        DatePicker datePicker = new DatePicker();
         ObservableList<String> options =
                 FXCollections.observableArrayList(
                         "Theater 1",
@@ -84,9 +90,23 @@ public class AddMovieFormView {
 
         // Add Movie Button Action
         addMovieBtn.setOnAction(event -> {
+            //getting date from datePicer
+            try{
+                LocalDate localDate = datePicker.getValue();
+                java.sql.Date date = java.sql.Date.valueOf(localDate);
+                addMovieFormViewController.validateFieldsAndAction(titleTxt, playingTimeInMinutesTxt, releaseYearTxt,
+                        plotTxt, directorTxt, posterPathTxt, cast,movieTheaterTxt.getValue(), genreTxt, ageLimitTxt,date);
+            } catch (NullPointerException e) {
 
-            addMovieFormViewController.validateFieldsAndAction(titleTxt, playingTimeInMinutesTxt, releaseYearTxt,
-                    plotTxt, directorTxt, posterPathTxt, cast,movieTheaterTxt.getValue(), genreTxt, ageLimitTxt);
+                System.out.println("Please choose date from my sweet datePicker");
+
+            }
+            //converting date form dp to date format readable by db
+            //checking if  you choose date
+                //parse through counstructor
+
+
+
 
         });
 
@@ -136,7 +156,7 @@ public class AddMovieFormView {
 
         //V-BOX CONTAINING THE H-BOXES ABOVE
         VBox vBox = new VBox();
-        vBox.getChildren().addAll(hBoxTitle, titleLbl, titleTxt, descriptionLbl, plotTxt, hBox1, hBox2, hBox3,
+        vBox.getChildren().addAll(hBoxTitle, titleLbl, titleTxt, descriptionLbl, plotTxt,movieTime, datePicker, hBox1, hBox2, hBox3,
                             hBox4, castLbl, hBox5, posterLbl, hBox6, movieTheaterLbl, movieTheaterTxt, hBox7);
         vBox.setPadding(new Insets(40, 40, 40, 60));
         vBox.setSpacing(10);

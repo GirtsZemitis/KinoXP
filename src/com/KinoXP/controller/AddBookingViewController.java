@@ -95,6 +95,10 @@ public class AddBookingViewController {
 
         addBookingViewModel.insertBooking(date,time,title,seats,phonenumber,paid);
     }
+    //CALL UPDATE BOOKING METHOD
+    public void updateBooking(String date,String time,String title,int seats,String phonenumber,boolean paid){
+        addBookingViewModel.updateBookingAfterPaid(date,time,title,seats,phonenumber,paid);
+    }
 
     public ObservableList<String> parseTimes(ObservableList<String> times) {
         for (int i = 0; i < times.size(); i++){
@@ -193,6 +197,28 @@ public class AddBookingViewController {
         return addBookingViewModel.getSchedule();
 
     }*/
+    //convert new week into old no_yes
+    public String convertWeek(String s){
+        String newSchedule ="";
+        for(int i =0; i<s.length(); i++){
+            if(s.charAt(i)=='y'||s.charAt(i)=='n'){
+                if(s.charAt(i)=='y'){
+                    newSchedule += s.charAt(i);
+                    newSchedule += "es";
 
+
+                }else {
+                    newSchedule += s.charAt(i);
+                    newSchedule +="o";
+
+                }
+
+            }else {
+                newSchedule+= s.charAt(i);
+
+            }
+        }
+        return  newSchedule;
+    }
 
 }

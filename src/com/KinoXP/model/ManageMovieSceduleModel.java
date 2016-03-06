@@ -37,6 +37,7 @@ public class ManageMovieSceduleModel {
         }
 
     }
+
     public String getSchedule(int i){
         //nr of week
         String schedule ="";
@@ -111,9 +112,9 @@ public class ManageMovieSceduleModel {
             preparedStatement.setString(7,s);
             preparedStatement.setString(8,s);
             preparedStatement.setString(9,s);
-            preparedStatement.setString(10,null);
-            preparedStatement.setString(11,null);
-            preparedStatement.setString(12,null);
+            preparedStatement.setString(10,s);
+            preparedStatement.setString(11,s);
+            preparedStatement.setString(12,s);
             int numberOfRows = preparedStatement.executeUpdate();
             System.out.println("Schedule is save: " + numberOfRows);
         } catch (SQLException e) {
