@@ -16,6 +16,9 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
+import java.time.LocalDate;
+import java.util.Date;
+
 /**
  * Created by Grzegorz, Mazur on 25-02-2016.
  */
@@ -87,9 +90,23 @@ public class AddMovieFormView {
 
         // Add Movie Button Action
         addMovieBtn.setOnAction(event -> {
+            //getting date from datePicer
+            try{
+                LocalDate localDate = datePicker.getValue();
+                java.sql.Date date = java.sql.Date.valueOf(localDate);
+                addMovieFormViewController.validateFieldsAndAction(titleTxt, playingTimeInMinutesTxt, releaseYearTxt,
+                        plotTxt, directorTxt, posterPathTxt, cast,movieTheaterTxt.getValue(), genreTxt, ageLimitTxt,date);
+            } catch (NullPointerException e) {
 
-            addMovieFormViewController.validateFieldsAndAction(titleTxt, playingTimeInMinutesTxt, releaseYearTxt,
-                    plotTxt, directorTxt, posterPathTxt, cast,movieTheaterTxt.getValue(), genreTxt, ageLimitTxt);
+                System.out.println("Please choose date from my sweet datePicker");
+
+            }
+            //converting date form dp to date format readable by db
+            //checking if  you choose date
+                //parse through counstructor
+
+
+
 
         });
 
