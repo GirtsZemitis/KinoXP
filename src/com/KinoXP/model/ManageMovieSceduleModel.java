@@ -159,6 +159,7 @@ public class ManageMovieSceduleModel {
             while (resultSet.next()) {
                 //adding date to movie object
                 observableList.add(new Movie(resultSet.getString(1),resultSet.getInt(2),resultSet.getDate(3)));
+                System.out.println(observableList.toString());
             }
 
         } catch (SQLException e) {

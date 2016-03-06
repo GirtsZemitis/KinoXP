@@ -21,8 +21,9 @@
     -fx-font-size: 18pt;
 }
 #room{
-    -fx-text-fill: darkslategrey;
+    -fx-text-fill: #4e5251;
     -fx-font-size: 15pt;
+    -fx-font-family: sans-serif;
 }
 #button{
     -fx-min-width: 200px;
@@ -75,26 +76,23 @@
     -fx-font-size: 15pt;
 }
 #navigationButon{
-    -fx-text-fill: darkslategrey;
-    -fx-font-size: 10pt;
-    -fx-background-color: #c0cfdb;
-    -fx-border-style: solid;
-    -fx-border-color: #99a5af;
+    -fx-background-color: rgba(255,0,255,0);;
 }
 #navigationButon:hover{
-    -fx-background-color: #a3b1bd;
-
-}
-
-.table-cell:selected {
-    -fx-background-color: lightgreen;
-    -fx-text-fill: green;
 
 }
 
 
+
+
+.table-cell {
+    -fx-background-color: #2d3b47;
+
+}
 #movieTitleText{
-    -fx-text-fill: darkslategrey;
+    -fx-text-fill: #474849;
+    -fx-font-size: 12pt;
+    -fx-font-family: sans-serif;
 
 }
 #movieTitle{
@@ -103,11 +101,40 @@
     -fx-font-weight: bold;
 }
 #back{
-    -fx-text-fill: darkslategrey;
+    -fx-text-fill: #3a3938;
     -fx-font-size: 10pt;
-    -fx-background-color: #c0cfdb;
+    -fx-font-family: sans-serif;
+    -fx-background-color: #979495;
+    -fx-background-radius: 10px;
     -fx-border-style: solid;
-    -fx-border-color: #99a5af;
+    -fx-border-radius: 10px;
+    -fx-min-width: 100px;
+    -fx-min-height: 25px;
+    -fx-border-color: #4d555d;
+}
+#back:hover{
+    -fx-background-color: #3d586f;
+    -fx-text-fill: #d6d2ce;
+
+
+}
+#back1{
+    -fx-text-fill: #3a3938;
+    -fx-font-size: 10pt;
+    -fx-font-family: sans-serif;
+    -fx-background-color: #979495;
+    -fx-background-radius: 10px;
+    -fx-border-style: solid;
+    -fx-border-radius: 10px;
+    -fx-min-width: 100px;
+    -fx-min-height: 40px;
+    -fx-border-color: #4d555d;
+}
+#back1:hover{
+    -fx-background-color: #3d586f;
+    -fx-text-fill: #d6d2ce;
+
+
 }
 #save{
     -fx-min-height: 90px;
@@ -145,3 +172,5 @@
     -fx-background-color: #c0cfdb;
 
 }
+#vbox{
+-fx-background-image: url("backGround.jpg")}

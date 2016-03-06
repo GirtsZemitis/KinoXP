@@ -14,6 +14,8 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -30,6 +32,7 @@ public class Schedule {
 
     //button for change week
     Button nextButton;
+
     //button for change week
     Button preButton;
     //array list which gonna hold 12 weeks
@@ -78,7 +81,8 @@ public class Schedule {
     }
 
     public void start() {
-        //setting week from db
+        //setting week from
+        System.out.println("it schedule" + movie.getTitle());
          Calendar cal = Calendar.getInstance();
          cal.setTime(movie.getDate());
         weekFromDb = cal.get(Calendar.WEEK_OF_YEAR);
@@ -91,7 +95,7 @@ public class Schedule {
         //iniciate table
         table = new TableView();
         //nr of week
-        nrOfWeek = new Label("week"+weekFromDb);
+        nrOfWeek = new Label("Week "+weekFromDb);
         nrOfWeek.setId("room");
         //back Button
         back = new Button("Go back");
@@ -104,14 +108,17 @@ public class Schedule {
         //movie title lablle
         Label movieTitle = new Label("movie 1");
         //movieTitle
-        movieTitleText = new Label("movie title: " );
+        movieTitleText = new Label("Movie title: " );
         movieTitleText.setId("movieTitleText");
 
         pleaseSelectMovie = new Label("Please select movie");
         pleaseSelectMovie.setPrefSize(200,30);
-        nextButton = new Button("next week");
+        javafx.scene.image.Image image = new javafx.scene.image.Image(getClass().getResource("arrowRight.png").toExternalForm());
+        nextButton = new Button();
+        nextButton.setGraphic(new ImageView(image));
+
         nextButton.setId("navigationButon");
-        nextButton.setOnAction(event2 -> {
+        nextButton.setOnMouseClicked(event2 -> {
             // Increments  weekCounter
             weekCounter++;
             weekFromDb++;
@@ -135,9 +142,12 @@ public class Schedule {
 
             }
         });
-        preButton = new Button("pre week");
+        javafx.scene.image.Image image1 = new javafx.scene.image.Image(getClass().getResource("arrowLefi.png").toExternalForm());
+
+        preButton = new Button();
+        preButton.setGraphic(new ImageView(image1));
         preButton.setId("navigationButon");
-        preButton.setOnAction(event2 -> {
+        preButton.setOnMouseClicked(event2 -> {
             if (weekCounter > 1) {
                 weekCounter--;
                 weekFromDb--;
@@ -157,7 +167,7 @@ public class Schedule {
         });
 
         saveButton = new Button("Save ");
-        saveButton.setId("save");
+        saveButton.setId("back1");
         saveButton.setOnAction(event1 -> {
 
             manageMovieScheduleController.saveSchedule(arrayList.get(weekCounter-1).save(arrayList.get(weekCounter-1).getObservableListFromDb()),weekCounter,movie.getMovieId());
@@ -165,8 +175,9 @@ public class Schedule {
 
         });
         vBox = new VBox();
+        vBox.setId("vbox");
         vBox1 = new VBox();
-        HBox hBox = new HBox();
+        HBox hBox = new HBox(265);
         HBox hBox1 = new HBox();
         vBox.setAlignment(Pos.TOP_CENTER);
         primaryStage.setTitle("Schedule");
@@ -174,9 +185,16 @@ public class Schedule {
         table.setEditable(true);
         table.getSelectionModel().setCellSelectionEnabled(true);
 
-        hour = new TableColumn("hours");
+        hour = new TableColumn("Hours");
+        hour.setStyle("-fx-background-color: #cfcbd0;");
         hour.setCellValueFactory(new PropertyValueFactory<>("time"));
+
+
         monday = new TableColumn("Monday");
+        monday.setStyle("-fx-background-color: #cfcbd0;" +
+                "       -fx-border-style: solid;" +
+                "       -fx-border-color: #3d586f;");
+
         monday.setCellValueFactory(new PropertyValueFactory<TimeModel, String>("monday"));
         monday.setCellFactory(new Callback<TableColumn, TableCell>() {
             public TableCell call(TableColumn param) {
@@ -188,9 +206,9 @@ public class Schedule {
                         if (!isEmpty()) {
                             if (item.contains("n")) {
                                 this.setTextFill(Color.RED);
-                                this.setStyle("-fx-background-color: #9bb6b3;" +
+                                this.setStyle("-fx-background-color: #878588;" +
                                               "-fx-border-bottom-style: solid; " +
-                                              "-fx-border-color: white; " );
+                                              "-fx-border-color: #979495;; " );
                               //  this.setStyle("-fx-border-style: solid");
                                 //this.setStyle("-fx-border-color: white");
 
@@ -199,9 +217,9 @@ public class Schedule {
                             if (item.contains("y")) {
                                 this.setTextFill(Color.GREEN);
 
-                                this.setStyle("-fx-background-color: #506360;" +
+                                this.setStyle("-fx-background-color: #343533;" +
                                         "-fx-border-bottom-style: solid; " +
-                                        "-fx-border-color: white; " );
+                                        "-fx-border-color: #979495;; " );
                             }
                             // Get fancy and change color based on data
 
@@ -212,6 +230,9 @@ public class Schedule {
         });
 
         tuesday = new TableColumn("Tuesday");
+        tuesday.setStyle("-fx-background-color: #cfcbd0;" +
+                "       -fx-border-style: solid;" +
+                "       -fx-border-color: #3d586f;");
         tuesday.setCellValueFactory(new PropertyValueFactory<>("tuesday"));
         tuesday.setCellFactory(new Callback<TableColumn, TableCell>() {
             public TableCell call(TableColumn param) {
@@ -223,16 +244,18 @@ public class Schedule {
                         if (!isEmpty()) {
                             if (item.contains("n")) {
                                 this.setTextFill(Color.RED);
-                                this.setStyle("-fx-background-color: #9bb6b3;" +
+                                this.setStyle("-fx-background-color: #878588;;" +
                                         "-fx-border-bottom-style: solid; " +
-                                        "-fx-border-color: white; " );
+                                        "-fx-border-color: #979495; " +
+                                        "-fx-text-fill: white;" );
                             }
                             if (item.contains("y")) {
                                 this.setTextFill(Color.GREEN);
 
-                                this.setStyle("-fx-background-color: #506360;" +
+                                this.setStyle("-fx-background-color: #343533;" +
                                         "-fx-border-bottom-style: solid; " +
-                                        "-fx-border-color: white; " );
+                                        "-fx-border-color: #979495; " +
+                                        "-fx-text-fill: white;" );
                             }
                             // Get fancy and change color based on data
 
@@ -243,6 +266,9 @@ public class Schedule {
         });
 
         wednesday = new TableColumn("Wednesday");
+        wednesday.setStyle("-fx-background-color: #cfcbd0;" +
+                "       -fx-border-style: solid;" +
+                "       -fx-border-color: #3d586f;");
         wednesday.setCellValueFactory(new PropertyValueFactory<>("wednesday"));
         wednesday.setCellFactory(new Callback<TableColumn, TableCell>() {
             public TableCell call(TableColumn param) {
@@ -254,16 +280,18 @@ public class Schedule {
                         if (!isEmpty()) {
                             if (item.contains("n")) {
                                 this.setTextFill(Color.RED);
-                                this.setStyle("-fx-background-color: #9bb6b3;" +
+                                this.setStyle("-fx-background-color: #878588;;" +
                                         "-fx-border-bottom-style: solid; " +
-                                        "-fx-border-color: white; " );
+                                        "-fx-border-color: #979495;; " +
+                                        "-fx-text-fill: white; " );
                             }
                             if (item.contains("y")) {
                                 this.setTextFill(Color.GREEN);
 
                                 this.setStyle("-fx-background-color: #506360;" +
                                         "-fx-border-bottom-style: solid; " +
-                                        "-fx-border-color: white; " );
+                                        "-fx-border-color: #979495; " +
+                                        "-fx-text-fill: white; " );
                             }
                             // Get fancy and change color based on data
 
@@ -274,6 +302,9 @@ public class Schedule {
         });
 
         thursday = new TableColumn("Thursday");
+        thursday.setStyle("-fx-background-color: #cfcbd0;" +
+                "       -fx-border-style: solid;" +
+                "       -fx-border-color: #3d586f;");
         thursday.setCellValueFactory(new PropertyValueFactory<>("thrusday"));
         thursday.setCellFactory(new Callback<TableColumn, TableCell>() {
             public TableCell call(TableColumn param) {
@@ -285,16 +316,16 @@ public class Schedule {
                         if (!isEmpty()) {
                             if (item.contains("n")) {
                                 this.setTextFill(Color.RED);
-                                this.setStyle("-fx-background-color: #9bb6b3;" +
+                                this.setStyle("-fx-background-color: #878588;;" +
                                         "-fx-border-bottom-style: solid; " +
-                                        "-fx-border-color: white; " );
+                                        "-fx-border-color: #979495;; " );
                             }
                             if (item.contains("y")) {
                                 this.setTextFill(Color.GREEN);
 
                                 this.setStyle("-fx-background-color: #506360;" +
                                         "-fx-border-bottom-style: solid; " +
-                                        "-fx-border-color: white; " );
+                                        "-fx-border-color: #979495;; " );
                             }
                             // Get fancy and change color based on data
 
@@ -305,6 +336,9 @@ public class Schedule {
         });
 
         friday = new TableColumn("Friday");
+        friday.setStyle("-fx-background-color: #cfcbd0;" +
+                "       -fx-border-style: solid;" +
+                "       -fx-border-color: #3d586f;");
         friday.setCellValueFactory(new PropertyValueFactory<>("friday"));
         friday.setCellFactory(new Callback<TableColumn, TableCell>() {
             public TableCell call(TableColumn param) {
@@ -316,16 +350,16 @@ public class Schedule {
                         if (!isEmpty()) {
                             if (item.contains("n")) {
                                 this.setTextFill(Color.RED);
-                                this.setStyle("-fx-background-color: #9bb6b3;" +
+                                this.setStyle("-fx-background-color: #878588;;" +
                                         "-fx-border-bottom-style: solid; " +
-                                        "-fx-border-color: white; " );
+                                        "-fx-border-color: #979495;; " );
                             }
                             if (item.contains("y")) {
                                 this.setTextFill(Color.GREEN);
 
                                 this.setStyle("-fx-background-color: #506360;" +
                                         "-fx-border-bottom-style: solid; " +
-                                        "-fx-border-color: white; " );
+                                        "-fx-border-color: #979495;; " );
                             }
                             // Get fancy and change color based on data
 
@@ -337,6 +371,9 @@ public class Schedule {
 
 
         saturday = new TableColumn("Saturday");
+        saturday.setStyle("-fx-background-color: #cfcbd0;" +
+                "       -fx-border-style: solid;" +
+                "       -fx-border-color: #3d586f;");
         saturday.setCellValueFactory(new PropertyValueFactory<>("saturday"));
         saturday.setCellFactory(new Callback<TableColumn, TableCell>() {
             public TableCell call(TableColumn param) {
@@ -348,16 +385,16 @@ public class Schedule {
                         if (!isEmpty()) {
                             if (item.contains("n")) {
                                 this.setTextFill(Color.RED);
-                                this.setStyle("-fx-background-color: #9bb6b3;" +
+                                this.setStyle("-fx-background-color: #878588;;" +
                                         "-fx-border-bottom-style: solid; " +
-                                        "-fx-border-color: white; " );
+                                        "-fx-border-color: #979495;; " );
                             }
                             if (item.contains("y")) {
                                 this.setTextFill(Color.GREEN);
 
                                 this.setStyle("-fx-background-color: #506360;" +
                                         "-fx-border-bottom-style: solid; " +
-                                        "-fx-border-color: white; " );
+                                        "-fx-border-color: #979495;; " );
                             }
                             // Get fancy and change color based on data
 
@@ -369,6 +406,9 @@ public class Schedule {
 
 
         sanday = new TableColumn("Sanday");
+        sanday.setStyle("-fx-background-color: #cfcbd0;" +
+                "       -fx-border-style: solid;" +
+                "       -fx-border-color: #3d586f;");
         sanday.setCellValueFactory(new PropertyValueFactory<TimeModel, String>("sunday"));
 
         sanday.setCellFactory(new Callback<TableColumn, TableCell>() {
@@ -381,16 +421,16 @@ public class Schedule {
                         if (!isEmpty()) {
                             if (item.contains("n")) {
                                 this.setTextFill(Color.RED);
-                                this.setStyle("-fx-background-color: #9bb6b3;" +
+                                this.setStyle("-fx-background-color: #878588;;" +
                                         "-fx-border-bottom-style: solid; " +
-                                        "-fx-border-color: white; " );
+                                        "-fx-border-color: #979495;; " );
                             }
                             if (item.contains("y")) {
                                 this.setTextFill(Color.GREEN);
 
                                 this.setStyle("-fx-background-color: #506360;" +
                                         "-fx-border-bottom-style: solid; " +
-                                        "-fx-border-color: white; " );
+                                        "-fx-border-color: #979495;; " );
                             }
                         }
                     }
@@ -495,12 +535,12 @@ public class Schedule {
 
 
         });
-        hBox.setMargin(preButton, new Insets(10,200,0,10));
-        hBox.setMargin(nrOfWeek, new Insets(10,200,0,10));
-        hBox.setMargin(nextButton, new Insets(10,0,0, 0));
+       hBox.setMargin(preButton, new Insets(20,0,0,0));
+        hBox.setMargin(nrOfWeek, new Insets(40,0,0,0));
+       hBox.setMargin(nextButton, new Insets(20,0,0, 0));
         hBox.getChildren().addAll(preButton,nrOfWeek,nextButton);
         hBox1.setMargin(back, new Insets(10,0,0,10));
-        hBox1.setMargin(saveButton, new Insets(30,0,20,280));
+        hBox1.setMargin(saveButton, new Insets(10,0,0,480));
         hBox1.getChildren().addAll(back,saveButton);
         vBox.setMargin(movieTitleText, new Insets(20,0,0,0));
         movieTitle.setText(movie.getTitle());
@@ -516,7 +556,7 @@ public class Schedule {
         saturday.prefWidthProperty().bind(table.widthProperty().divide(8)); // w * 1/4
         sanday.prefWidthProperty().bind(table.widthProperty().divide(8)); // w * 1/4
 
-        Scene scene = new Scene(vBox, 650, 600);
+        Scene scene = new Scene(vBox, 700, 600);
         scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
         movieTitle.setId("movieTitle");
 
@@ -529,7 +569,7 @@ public class Schedule {
 
     public void setNumberOfWeek(int i) {
 
-        nrOfWeek.setText("week " + i);
+        nrOfWeek.setText("Week  " + i);
     }
     public void startSchedule(){
 
@@ -544,8 +584,10 @@ public class Schedule {
 
         Stage primaryStage = new Stage();
         VBox vbox = new VBox();
-        HBox hBox = new HBox(30);
+        vbox.setId("vbox");
         Scene scene = new Scene(vbox,650,600);
+        HBox hBox = new HBox(30);
+
         scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
         Label label = new Label("Welcome to manage schedule");
         label.setId("welcome");
@@ -583,13 +625,12 @@ public class Schedule {
 
 
         button.setOnAction(event1 -> {
-            try{
-                Movie movie =   comboBox.getSelectionModel().getSelectedItem();
+                 movie =   comboBox.getSelectionModel().getSelectedItem();
+
                 manageMovieScheduleController.scheduleDisplay(movie);
 
-            }catch (Exception e){
                 label2.setId("chooseMovie");
-            }
+
 
         });
 
@@ -603,23 +644,31 @@ public class Schedule {
     //conformition for saving
 
     public void conformitionForSaving(){
-
-        Stage primaryStage = new Stage();
         VBox vbox = new VBox();
+
+        Scene scene = new Scene(vbox,650,600);
+        Stage primaryStage = new Stage();
+
+
         String title = movie.getTitle();
         Label label = new Label("You have save "+" week "+weekFromDb +"\n"+" for \n "+ "''"+title+"''");
         label.setId("conformition");
         Button button = new Button("ok");
-        button.setId("ok");
+
         vbox.setAlignment(Pos.TOP_CENTER);
         vbox.getChildren().addAll(label,button);
         vbox.setMargin(label, new Insets(30,0,0,0));
         vbox.setMargin(button, new Insets(30,0,30,0));
+        vbox.setId("vbox");
+
+        button.setId("ok");
+
         button.setOnAction(event -> {
             primaryStage.close();
         });
-        Scene scene = new Scene(vbox,350,250);
         scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
+
+
         primaryStage.setScene(scene);
         primaryStage.show();
 

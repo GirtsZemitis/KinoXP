@@ -15,8 +15,8 @@ public class NewMovieViewController {
     NewMovieViewModel newMovieViewModel = new NewMovieViewModel();
 
 
-    public void newMovieViewDisplay(){
-        NewMovieView newMovieView = new NewMovieView();
+        public void newMovieViewDisplay(){
+            NewMovieView newMovieView = new NewMovieView();
         newMovieView.start();
     }
 
