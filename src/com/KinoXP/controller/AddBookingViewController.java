@@ -95,6 +95,10 @@ public class AddBookingViewController {
 
         addBookingViewModel.insertBooking(date,time,title,seats,phonenumber,paid);
     }
+    //CALL UPDATE BOOKING METHOD
+    public void updateBooking(String date,String time,String title,int seats,String phonenumber,boolean paid){
+        addBookingViewModel.updateBookingAfterPaid(date,time,title,seats,phonenumber,paid);
+    }
 
     public ObservableList<String> parseTimes(ObservableList<String> times) {
         for (int i = 0; i < times.size(); i++){
