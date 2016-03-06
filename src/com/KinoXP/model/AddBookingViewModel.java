@@ -1,5 +1,7 @@
 package com.KinoXP.model;
 
+import com.KinoXP.controller.AddBookingViewController;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -35,6 +37,7 @@ public class AddBookingViewModel {
     }
 
     public Schedule getSchedule(String movieName) {
+        AddBookingViewController addBookingViewController = new AddBookingViewController();
         try {
             String query = "SELECT * FROM Movie INNER JOIN schedule ON Movie.indexMovie= schedule.indexMovie WhERE Movie.title=?";
             PreparedStatement preparedStatement = conn.prepareStatement(query);
@@ -43,8 +46,9 @@ public class AddBookingViewModel {
             Schedule schedule = new Schedule();
             while (results.next()){
                 //CHANGE HEREEEEE
+
                 for (int i = 1; i < 10; i++){
-                    schedule.parseSchedule(results.getString("week" + i), i);
+                    schedule.parseSchedule(addBookingViewController.convertWeek(results.getString("week" + i)), i);
                 }
             }
 

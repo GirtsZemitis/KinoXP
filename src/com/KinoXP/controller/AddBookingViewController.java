@@ -193,6 +193,28 @@ public class AddBookingViewController {
         return addBookingViewModel.getSchedule();
 
     }*/
+    //convert new week into old no_yes
+    public String convertWeek(String s){
+        String newSchedule ="";
+        for(int i =0; i<s.length(); i++){
+            if(s.charAt(i)=='y'||s.charAt(i)=='n'){
+                if(s.charAt(i)=='y'){
+                    newSchedule += s.charAt(i);
+                    newSchedule += "es";
 
+
+                }else {
+                    newSchedule += s.charAt(i);
+                    newSchedule +="o";
+
+                }
+
+            }else {
+                newSchedule+= s.charAt(i);
+
+            }
+        }
+        return  newSchedule;
+    }
 
 }

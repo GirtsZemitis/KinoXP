@@ -77,6 +77,7 @@ public class MovieWeek {
         //returning text from observablelist with _
     }
 
+
     public ObservableList<TimeModel> readFromDb(String s){
         String hour ="";
         String monday="";
