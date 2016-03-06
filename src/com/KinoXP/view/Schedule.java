@@ -21,6 +21,7 @@ import javafx.stage.Stage;
 import javafx.util.Callback;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 /**
  * Created by krystian on 2015-09-04.
@@ -65,6 +66,8 @@ public class Schedule {
     //label for storing movie title
     Label movieTitleText;
     //constructor for schedule which is takes movie object
+    int weekFromDb = 0;
+
     public Schedule(Movie m){
 
         movie= m;
@@ -75,6 +78,12 @@ public class Schedule {
     }
 
     public void start() {
+        //setting week from db
+         Calendar cal = Calendar.getInstance();
+         cal.setTime(movie.getDate());
+        weekFromDb = cal.get(Calendar.WEEK_OF_YEAR);
+        final int weekLimit =weekFromDb+12;
+
         // set primaryStage
         Stage primaryStage = new Stage();
         //populate array with 12 weeks
@@ -82,7 +91,7 @@ public class Schedule {
         //iniciate table
         table = new TableView();
         //nr of week
-        nrOfWeek = new Label("week 1");
+        nrOfWeek = new Label("week"+weekFromDb);
         nrOfWeek.setId("room");
         //back Button
         back = new Button("Go back");
@@ -105,21 +114,23 @@ public class Schedule {
         nextButton.setOnAction(event2 -> {
             // Increments  weekCounter
             weekCounter++;
+            weekFromDb++;
             // If week counter is bigger then less or equals  12
-            if (weekCounter <13) {
+            if (weekFromDb <weekLimit) {
                 //return week from array
 
                 arrayList.get(weekCounter-1).readFromDb(manageMovieScheduleController.getScheduleForMovie(movie.getTitle(),weekCounter));
                 table.setItems(arrayList.get(weekCounter - 1).getObservableListFromDb());
-                setNumberOfWeek(weekCounter);
+                setNumberOfWeek(weekFromDb);
 
 
 
             } else {
                 weekCounter = 1;
+                weekFromDb = weekLimit-12;
                 arrayList.get(weekCounter-1).readFromDb(manageMovieScheduleController.getScheduleForMovie(movie.getTitle(),weekCounter));
                 table.setItems(arrayList.get(weekCounter - 1).getObservableListFromDb());
-                setNumberOfWeek(weekCounter);
+                setNumberOfWeek(weekFromDb);
 
 
             }
@@ -129,16 +140,18 @@ public class Schedule {
         preButton.setOnAction(event2 -> {
             if (weekCounter > 1) {
                 weekCounter--;
+                weekFromDb--;
                 arrayList.get(weekCounter-1).readFromDb(manageMovieScheduleController.getScheduleForMovie(movie.getTitle(),weekCounter));
                 table.setItems(arrayList.get(weekCounter - 1).getObservableListFromDb());
-                setNumberOfWeek(weekCounter);
+                setNumberOfWeek(weekFromDb);
 
 
             } else {
                 weekCounter = 12;
+                weekFromDb = weekLimit;
                 arrayList.get(weekCounter-1).readFromDb(manageMovieScheduleController.getScheduleForMovie(movie.getTitle(),weekCounter));
                 table.setItems(arrayList.get(weekCounter - 1).getObservableListFromDb());
-                setNumberOfWeek(weekCounter);
+                setNumberOfWeek(weekFromDb);
 
             }
         });
@@ -594,7 +607,7 @@ public class Schedule {
         Stage primaryStage = new Stage();
         VBox vbox = new VBox();
         String title = movie.getTitle();
-        Label label = new Label("You have save "+" week "+weekCounter +"\n"+" for \n "+ "''"+title+"''");
+        Label label = new Label("You have save "+" week "+weekFromDb +"\n"+" for \n "+ "''"+title+"''");
         label.setId("conformition");
         Button button = new Button("ok");
         button.setId("ok");
