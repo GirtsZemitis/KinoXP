@@ -63,13 +63,16 @@ public class AddMovieFormView {
         Label castLbl = new Label("Cast");
         Label posterLbl = new Label("Poster URL");
         Label movieTheaterLbl = new Label("MovieModel Theater");
+        Label movieTime = new Label("Movie premiere: ");
 
         //BUTTONS
 
         Button addMovieBtn = new Button("Add MovieModel");
         Button backBtn = new Button("Go Back");
 
+        //calendar
 
+        DatePicker datePicker = new DatePicker();
         ObservableList<String> options =
                 FXCollections.observableArrayList(
                         "Theater 1",
@@ -136,7 +139,7 @@ public class AddMovieFormView {
 
         //V-BOX CONTAINING THE H-BOXES ABOVE
         VBox vBox = new VBox();
-        vBox.getChildren().addAll(hBoxTitle, titleLbl, titleTxt, descriptionLbl, plotTxt, hBox1, hBox2, hBox3,
+        vBox.getChildren().addAll(hBoxTitle, titleLbl, titleTxt, descriptionLbl, plotTxt,movieTime, datePicker, hBox1, hBox2, hBox3,
                             hBox4, castLbl, hBox5, posterLbl, hBox6, movieTheaterLbl, movieTheaterTxt, hBox7);
         vBox.setPadding(new Insets(40, 40, 40, 60));
         vBox.setSpacing(10);

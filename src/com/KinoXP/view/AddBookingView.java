@@ -80,6 +80,7 @@ public class AddBookingView {
         Button addButton = new Button("GO");
 
 
+
         //LAYOUT
         HBox search = new HBox();
         search.getChildren().addAll(searchField, searchButton);
