@@ -107,7 +107,7 @@ public class EditMovieView extends Application {
         //BUTTONS
         //Button addCastBtn = new Button("Add");
         Button deleteMovieBtn = new Button("Delete");
-        Button editMovgiieBtn = new Button("Save");
+        Button editMovieBtn = new Button("Save");
         Button backBtn = new Button("Back");
 
         //H-BOXES
