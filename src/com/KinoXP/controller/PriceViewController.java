@@ -17,9 +17,12 @@ public class PriceViewController {
 
     public ExtrasModel getPrice(String type){
 
-        ExtrasModel extra = new ExtrasModel(priceViewModel.retrievePricesOfExtras("Soda").getCategory(),
-                priceViewModel.retrievePricesOfExtras("Soda").getLargePrice(),
-                priceViewModel.retrievePricesOfExtras("Soda").getSmallPrice());
+        ExtrasModel extra = new ExtrasModel(priceViewModel.retrievePricesOfExtras(type).getCategory(),
+                priceViewModel.retrievePricesOfExtras(type).getLargePrice(),
+                priceViewModel.retrievePricesOfExtras(type).getSmallPrice());
         return extra;
+    }
+    public void updatePrices(String type, int LPrice, int SPrice){
+        priceViewModel.changePrices(type,LPrice,SPrice);
     }
 }
