@@ -107,6 +107,7 @@ public class MenuView {
         ticketStatus.setOnAction(event1 -> {
             TicketView ticketView = new TicketView();
             ticketView.start();
+            mainMenu.close();
         });
 
         prices.setOnAction(event -> {
