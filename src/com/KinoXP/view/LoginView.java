@@ -95,7 +95,7 @@ public class LoginView {
         gridPane.setAlignment(Pos.CENTER);
 
 
-
+        //after typing in username and password u can press "enter" to log in.
         passwordText.setOnKeyPressed((keyEvent) -> {
                     if (keyEvent.getCode() == KeyCode.ENTER) {
                         employeeModel = new EmployeeModel(userField.getText(), passwordText.getText());
