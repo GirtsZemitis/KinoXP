@@ -29,39 +29,58 @@ public class Schedule {
 
 
     static String scheduleee =
-            "11:00_yes_yes_no_no_no_no_no\n" +
-            "11:30_yes_no_yes_yes_no_no_no\n" +
-            "12:00_yes_no_no_no_no_yes_no\n" +
-            "12:30_no_no_yes_no_no_no_no\n" +
-            "13:00_yes_no_no_yes_no_no_no\n" +
-            "13:30_no_no_no_no_no_no_no\n" +
-            "14:00_no_no_no_no_no_no_no\n" +
-            "14:30_no_no_yes_no_no_yes_no\n" +
-            "15:00_no_no_no_no_no_no_no\n" +
-            "15:30_no_no_no_no_no_no_yes\n" +
-            "16:00_no_no_no_no_no_no_no\n" +
-            "16:30_no_no_no_no_no_no_no\n" +
-            "17:00_no_no_no_no_no_no_no\n" +
-            "17:30_no_no_no_no_no_no_no\n" +
-            "18:00_no_no_no_no_no_no_no\n" +
-            "18:30_no_no_no_no_no_no_yes\n" +
-            "19:00_no_no_no_no_no_no_no\n" +
-            "19:30_no_no_no_no_no_no_no\n" +
-            "20:00_no_no_no_no_no_no_no\n" +
-            "20:30_no_no_no_no_no_no_no\n" +
-            "21:00_no_no_no_no_no_no_no\n" +
-            "21:30_no_no_no_no_no_no_no\n" +
-            "22:00_no_no_no_no_no_no_no\n" +
-            "22:30_yes_yes_yes_yes_yes_yes_yes\n";
+           "9:00_yes_no_no_no_no_no_no\n" +
+                   "9:30_yes_no_no_no_no_no_no\n" +
+                   "10:00_yes_no_no_no_no_no_no\n" +
+                   "10:30_yes_no_no_no_no_no_no\n" +
+                   "11:00_no_no_no_no_no_no_no\n" +
+                   "11:30_no_no_no_no_no_no_no\n" +
+                   "12:00_no_no_no_no_no_no_no\n" +
+                   "12:30_no_no_no_no_no_no_no\n" +
+                   "13:00_no_no_no_no_no_no_no\n" +
+                   "13:30_no_no_no_no_no_no_no\n" +
+                   "14:00_no_no_no_no_no_no_no\n" +
+                   "14:30_no_no_no_no_no_no_no\n" +
+                   "15:00_no_no_no_no_no_no_no\n" +
+                   "15:30_no_no_no_no_no_no_no\n" +
+                   "16:00_no_no_no_no_no_no_no\n" +
+                   "16:30_no_no_no_no_no_no_no\n" +
+                   "17:00_no_no_no_no_no_no_no\n" +
+                   "17:30_no_no_no_no_no_no_no\n" +
+                   "18:00_no_no_no_no_no_no_no\n" +
+                   "18:30_no_no_no_no_no_no_no\n" +
+                   "19:00_no_no_no_no_no_no_no\n" +
+                   "19:30_no_no_no_no_no_no_no\n" +
+                   "20:00_no_no_no_no_no_no_no\n" +
+                   "20:30_no_no_no_no_no_no_no\n" +
+                   "21:00_no_no_no_no_no_no_no\n" +
+                   "21:30_no_no_no_no_no_no_no\n" +
+                   "22:00_no_no_no_no_no_no_no\n" +
+                   "22:30_no_no_no_no_no_no_no";
 
     public ArrayList<Map<String,ArrayList<String>>> parseSchedule(String schedule, int week){
         ArrayList<String> timesStrings = new ArrayList<>();
+        int nineCounter = 1;
         for (int i = 5; i < schedule.length(); i++){
             if (schedule.charAt(i) == '1' || schedule.charAt(i) == '2'){
-                timesStrings.add(schedule.substring(6, i - 1));
+                if (nineCounter == 2){
+                    timesStrings.add(schedule.substring(5, i - 1));
+                    schedule = schedule.substring(i, schedule.length());
+                    i = 5;
+                    nineCounter = -1;
+                } else {
+                    timesStrings.add(schedule.substring(6, i - 1));
+                    schedule = schedule.substring(i, schedule.length());
+                    i = 5;
+                }
+
+
+            } else if (schedule.charAt(i) == '9'){
+                timesStrings.add(schedule.substring(5, i - 1));
                 schedule = schedule.substring(i, schedule.length());
                 i = 5;
-            } else if (i == schedule.length() - 1){
+                nineCounter++;
+            }else if (i == schedule.length() - 1){
                 timesStrings.add(schedule.substring(6));
             }
         }
@@ -88,7 +107,6 @@ public class Schedule {
         }
 
         this.schedule.add(week - 1, tempMap);
-
         return this.schedule;
     }
 

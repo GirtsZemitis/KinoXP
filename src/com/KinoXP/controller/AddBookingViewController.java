@@ -69,7 +69,7 @@ public class AddBookingViewController {
     public ObservableList getDateFieldInfo(String title) {
         Schedule schedule = addBookingViewModel.getSchedule(title);
         ArrayList<String> weeksAndDays = new ArrayList<String>();
-        for (int i = 0; i < 9; i++) {
+        for (int i = 0; i < schedule.getSchedule().size(); i++) {
             for (int j = 0; j < 7; j++) {
                 if (schedule.getSchedule().get(i).get(Integer.toString(j)) == null) {
 
@@ -217,21 +217,21 @@ public class AddBookingViewController {
     //convert new week into old no_yes
     public String convertWeek(String s){
         String newSchedule ="";
-        for(int i =0; i<s.length(); i++){
-            if(s.charAt(i)=='y'||s.charAt(i)=='n'){
-                if(s.charAt(i)=='y'){
+        for(int i =0; i<s.length(); i++) {
+            if (s.charAt(i) == 'y' || s.charAt(i) == 'n') {
+                if (s.charAt(i) == 'y') {
                     newSchedule += s.charAt(i);
                     newSchedule += "es";
 
 
-                }else {
+                } else {
                     newSchedule += s.charAt(i);
-                    newSchedule +="o";
+                    newSchedule += "o";
 
                 }
 
-            }else {
-                newSchedule+= s.charAt(i);
+            } else {
+                newSchedule += s.charAt(i);
 
             }
         }
