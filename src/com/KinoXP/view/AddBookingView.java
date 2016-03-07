@@ -3,6 +3,7 @@ package com.KinoXP.view;/**
  */
 
 import com.KinoXP.controller.AddBookingViewController;
+import com.KinoXP.controller.NewMovieViewController;
 import com.KinoXP.model.Booking;
 import com.KinoXP.model.Schedule;
 import javafx.collections.ObservableList;
@@ -14,11 +15,13 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 public class AddBookingView {
 
@@ -39,6 +42,8 @@ public class AddBookingView {
         Label phoneNumberLabel = new Label("Phone number");
         Label paidLabel = new Label("Paid");
         Label reservationLabel = new Label("Reservation");
+        Label searchNotFound = new Label();
+        searchNotFound.setTextFill(Color.web("#FF0000"));
 
         //TEXTFIELDS
         TextField searchField = new TextField();
@@ -53,6 +58,7 @@ public class AddBookingView {
         TextField phoneNrField = new TextField();
         phoneNrField.setPromptText("ex 91110399");
         phoneNrField.setMaxWidth(150);
+
 
         //COMBOBOXES
         ObservableList<String> options = addBookingViewController.getMoviesWithSchedule();
@@ -70,6 +76,9 @@ public class AddBookingView {
         //BUTTONS
 
         Button searchButton = new Button();
+        Button updateButton = new Button("Update");
+        updateButton.setVisible(false);
+
 
 
         Image imageSearch = new Image(getClass().getResourceAsStream("search.png"));
@@ -83,7 +92,7 @@ public class AddBookingView {
         HBox isPaid = new HBox();
         isPaid.getChildren().addAll(paidLabel, paidCheck);
         VBox layout = new VBox();
-        layout.getChildren().addAll(mainLabel, searchLabel, search, titleLabel, titleCombo, dateLabel, dateField, timeLabel,  timeField, seatsAmountLabel, seatsField, phoneNumberLabel, phoneNrField, isPaid, addButton );
+        layout.getChildren().addAll(mainLabel, searchLabel, search,searchNotFound, titleLabel, titleCombo, dateLabel, dateField, timeLabel,  timeField, seatsAmountLabel, seatsField, phoneNumberLabel, phoneNrField, isPaid, addButton, updateButton);
         addButton.setAlignment(Pos.BOTTOM_RIGHT);
         layout.setPadding(new Insets(40, 40, 40, 60));
         layout.setSpacing(5);
@@ -113,14 +122,15 @@ public class AddBookingView {
                 times.add(schedule.getSchedule().get(week - 1).get(Integer.toString(day)).get(i));
             }
 
-            timeField.setItems( addBookingViewController.parseTimes(addBookingViewController.getTimes(Integer.parseInt(dateField.getSelectionModel().getSelectedItem().toString().substring(4,5)),
+            timeField.setItems( addBookingViewController.parseTimes(addBookingViewController.getTimes(Integer.parseInt(dateField.getSelectionModel().getSelectedItem().toString().substring(4, 5)),
                     Integer.parseInt(dateField.getSelectionModel().getSelectedItem().toString().substring(11)), schedule)));
             timeField.setPromptText("Choose time");
 
         });
 
         searchButton.setOnAction(event -> {
-
+            phoneNrField.setDisable(true);
+            updateButton.setVisible(true);
             String phoneNumber = searchField.getText();
             Booking booking = addBookingViewController.getBookingByPhoneNUmber(phoneNumber);
             /*String dateValue = booking.getDate();
@@ -132,13 +142,19 @@ public class AddBookingView {
                 e.printStackTrace();
             }*/
 
-            //timeField.setText(booking.getTime());
-            titleCombo.setValue((booking.getTitle()));
-            dateField.setValue(booking.getDate());
-            timeField.setValue(booking.getTime());
-            seatsField.setText(Integer.toString(booking.getSeats()));
-            phoneNrField.setText(booking.getPhoneNumber());
-            paidCheck.setSelected(booking.isPaid());
+            if (booking != null) {
+                titleCombo.setValue((booking.getTitle()));
+                dateField.setValue(booking.getDate());
+                timeField.setValue(booking.getTime());
+                seatsField.setText(Integer.toString(booking.getSeats()));
+                phoneNrField.setText(booking.getPhoneNumber());
+                paidCheck.setSelected(booking.isPaid());
+                addButton.setVisible(false);
+            } else {
+                searchNotFound.setText("This ticket id doesn't exist");
+            }
+
+
         });
 
         addButton.setOnAction(event -> {
@@ -147,6 +163,42 @@ public class AddBookingView {
             primaryStage.close();
 
         });
+        updateButton.setOnAction(event -> {
+            Booking booking = addBookingViewController.getBookingByPhoneNUmber(phoneNrField.getText());
+            if(!paidCheck.isSelected()==(booking.isPaid())){
+                addBookingViewController.updatePaid(paidCheck.isSelected(),phoneNrField.getText());
+            }if(!seatsField.getText().equals(booking.getSeats())){
+                addBookingViewController.updateSeat(seatsField.getText(), phoneNrField.getText());
+            }if(!timeField.getValue().equals(booking.getTime())){
+                addBookingViewController.updateTime(timeField.getValue(), phoneNrField.getText());
+
+            }if(!dateField.getValue().equals(booking.getDate())){
+                addBookingViewController.updateDate(dateField.getValue(),phoneNrField.getText());
+            }if(!titleCombo.getValue().equals(booking.getTitle())){
+                addBookingViewController.updateTitle(titleCombo.getValue().toString(),phoneNrField.getText());
+
+            }
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Save");
+            alert.setHeaderText("You updated the booking");
+            ButtonType buttonTypeYes = new ButtonType("OK");
+
+            Optional<ButtonType> results = alert.showAndWait();
+            if (results.get() == buttonTypeYes){
+                alert.close();
+            }
+
+
+            alert.getButtonTypes().setAll(buttonTypeYes);
+            primaryStage.close();
+
+
+
+
+
+
+        });
+
 
 
     }

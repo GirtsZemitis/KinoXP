@@ -26,6 +26,7 @@ public class AddBookingViewController {
 
     }
 
+
     public void addBookingViewDisplay(){
         AddBookingView addBookingView = new AddBookingView();
         addBookingView.start();
@@ -186,6 +187,22 @@ public class AddBookingViewController {
             }
     }
         return times;
+    }
+
+    public void updatePaid(boolean isPaid, String phonenr){
+        addBookingViewModel.updatePaid(isPaid, phonenr);
+    }
+    public void updateSeat(String seatNr, String phonenr){
+        addBookingViewModel.updateSeat(seatNr, phonenr);
+    }
+    public void updateTitle(String title, String phonenr){
+        addBookingViewModel.updateTitle(title, phonenr);
+    }
+    public void updateDate(String date, String phonenr){
+        addBookingViewModel.updateDate(date, phonenr);
+    }
+    public void updateTime(String time, String phonenr){
+        addBookingViewModel.updateTime(time, phonenr);
     }
 
     // it doesnt find getSchedule in model
