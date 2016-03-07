@@ -17,6 +17,7 @@ import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
 import java.time.LocalDate;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -94,6 +95,11 @@ public class AddMovieFormView {
             try{
                 LocalDate localDate = datePicker.getValue();
                 java.sql.Date date = java.sql.Date.valueOf(localDate);
+              //  Calendar cal = Calendar.getInstance();
+               // cal.setTime(date);
+               // int week = cal.get(Calendar.WEEK_OF_YEAR);
+               // System.out.println("week nr is: " + week);
+
                 addMovieFormViewController.validateFieldsAndAction(titleTxt, playingTimeInMinutesTxt, releaseYearTxt,
                         plotTxt, directorTxt, posterPathTxt, cast,movieTheaterTxt.getValue(), genreTxt, ageLimitTxt,date);
             } catch (NullPointerException e) {

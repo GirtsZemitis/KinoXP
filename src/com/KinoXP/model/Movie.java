@@ -1,5 +1,7 @@
 package com.KinoXP.model;
 
+import java.sql.Date;
+
 /**
  * Created by krystian on 2016-03-01.
  */
@@ -11,7 +13,11 @@ public class Movie {
         this.title = title;
         this.movieId = movieId;
     }
-
+    public Movie(String title, int movieId, Date date){
+        this.title = title;
+        this.movieId = movieId;
+        this.date = date;
+    }
     public void setTitle(String title) {
         this.title = title;
     }
@@ -29,4 +35,14 @@ public class Movie {
 
     String title;
     int movieId;
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    Date date;
 }
