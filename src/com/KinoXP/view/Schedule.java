@@ -98,6 +98,8 @@ public class Schedule {
         back.setId("back");
         //acton for back
         back.setOnAction(event3 -> {
+            MenuView menuView = new MenuView();
+            menuView.start();
             primaryStage.close();
         });
         //movie title lablle
@@ -162,7 +164,7 @@ public class Schedule {
         });
 
         saveButton = new Button("Save ");
-        saveButton.setId("back1");
+        saveButton.setId("back");
         saveButton.setOnAction(event1 -> {
 
             manageMovieScheduleController.saveSchedule(arrayList.get(weekCounter-1).save(arrayList.get(weekCounter-1).getObservableListFromDb()),weekCounter,movie.getMovieId());
@@ -593,6 +595,7 @@ public class Schedule {
         Button button = new Button("Go to schedule");
         button.setId("button");
         Button button1 = new Button("Go to main manu");
+        button1.setId("button");
         button1.setOnAction(event2 -> {
 
 
@@ -653,6 +656,7 @@ public class Schedule {
         Label label = new Label("You have save "+" week "+weekFromDb +"\n"+" for \n "+ "''"+title+"''");
         label.setId("conformition");
         Button button = new Button("ok");
+        button.setId("back");
 
         vbox.setAlignment(Pos.TOP_CENTER);
         vbox.getChildren().addAll(label,button);
@@ -666,8 +670,6 @@ public class Schedule {
             primaryStage.close();
         });
         scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
-
-
         primaryStage.setScene(scene);
         primaryStage.show();
 

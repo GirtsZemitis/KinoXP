@@ -50,15 +50,19 @@ public class ManageEmployeeView {
 
 
         Button logOut = new Button("LOG OUT");
-        logOut.setStyle("-fx-font-size: 10");
+        logOut.setId("back");
+
         Button goBack = new Button("GO BACK");
-        goBack.setStyle("-fx-font-size: 10");
+        goBack.setId("back");
+
         Button add = new Button("ADD");
-        add.setStyle("-fx-font-size: 18");
+        add.setId("back");
+
         Button delete = new Button("DELETE");
-        delete.setStyle("-fx-font-size:  18");
+        delete.setId("back");
+
         Button edit = new Button("EDIT");
-        edit.setStyle("-fx-font-size: 18");
+        edit.setId("back");
 
 
         TabPane tabPane = new TabPane();
@@ -107,6 +111,7 @@ public class ManageEmployeeView {
                 Label position = new Label("Position");
                 TextField positionTextField = new TextField();
                 Button confirm = new Button("Confirm");
+                confirm.setId("button");
                 Label userName = new Label("User name");
                 TextField userNameTextField = new TextField();
                 Label password = new Label("Password");
@@ -147,8 +152,9 @@ public class ManageEmployeeView {
                 gridPane.setHgap(20);
                 gridPane.setVgap(30);
                 Scene scene = new Scene(gridPane, 1000, 650);
-
+                scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
                 stage1.setScene(scene);
+
                 stage1.show();
 
                 confirm.setOnAction(event1 -> {
@@ -211,6 +217,7 @@ public class ManageEmployeeView {
             Label position = new Label("Position");
             TextField positionTextField = new TextField();
             Button confirm = new Button("Confirm");
+            confirm.setId("button");
             Label userName = new Label("User name");
             TextField userNameTextField = new TextField();
             Label password = new Label("Password");
@@ -243,7 +250,7 @@ public class ManageEmployeeView {
             gridPane.setHgap(20);
             gridPane.setVgap(30);
             Scene scene = new Scene(gridPane, 1000, 650);
-
+            scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
             stage1.setScene(scene);
             stage1.show();
 
@@ -289,8 +296,9 @@ public class ManageEmployeeView {
 
         Scene scene = new Scene(borderPane, 1000, 650);
 
-        primaryStage.setScene(scene);
 
+        scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
+        primaryStage.setScene(scene);
         primaryStage.show();
     }
 

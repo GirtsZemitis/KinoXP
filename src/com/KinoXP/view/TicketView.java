@@ -97,8 +97,9 @@ public class TicketView {
 
         //BUTTONS
         Button searchButton = new Button("SEARCH");
+        searchButton.setId("scheduleButtons");
         Button mainMenuButton = new Button("MAIN MENU");
-
+        mainMenuButton.setId("scheduleButtons");
 
         //H-BOXES
         VBox vBoxLeft = new VBox();
@@ -143,6 +144,7 @@ public class TicketView {
         Stage primaryStage = new Stage();
 
         primaryStage.setScene(scene);
+        scene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
         primaryStage.setResizable(false);
         primaryStage.show();
 

@@ -17,6 +17,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
@@ -85,8 +86,12 @@ public class AddBookingView {
 
         Image imageSearch = new Image(getClass().getResourceAsStream("search.png"));
         searchButton.setGraphic(new ImageView(imageSearch));
-        Button addButton = new Button("ADD Booking");
+        Button addButton = new Button("ADD");
+        addButton.setId("scheduleButtons");
+        addButton.setTextAlignment(TextAlignment.CENTER);
         Button btnBack = new Button("BACK");
+        btnBack.setId("scheduleButtons");
+        btnBack.setTextAlignment(TextAlignment.CENTER);
 
 
         //LAYOUT
@@ -106,6 +111,7 @@ public class AddBookingView {
         Stage primaryStage = new Stage();
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);
+        scene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
         primaryStage.show();
 
         titleCombo.getSelectionModel().selectedItemProperty().addListener(observable -> {

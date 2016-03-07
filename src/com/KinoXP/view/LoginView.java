@@ -27,9 +27,13 @@ public class LoginView {
         //creating scene
         Stage primaryStage = new Stage();
         GridPane gridPane = new GridPane();
-        Text scenetitle = new Text("Welcome to KINO XP!");
+        Text scenetitle = new Text("KINO CINEMA Management");
         scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 25));
         gridPane.setPadding(new Insets(0, 0, 50, 0));
+        gridPane.setStyle("-fx-background-color: \n" +
+                "        #c3c4c4,\n" +
+                "        linear-gradient(#d6d6d6 20%, white 100%),\n" +
+                "        radial-gradient(center 50% -40%, radius 100%, #e6e6e6 25%, rgba(230,230,230,0) 50%);");
 
         gridPane.setVgap(20);
         gridPane.setHgap(-80);
@@ -49,8 +53,32 @@ public class LoginView {
         TextField passwordText = new TextField();
         passwordText.setStyle("-fx-font-size: 16");
         Button logIn = new Button("Log In");
-        Button exit = new Button("EXIT");
-        logIn.setStyle("-fx-font-size: 20;-fx-background-color: #ffdd19;-fx-border-color: black");
+        Button exit = new Button("Exit");
+        logIn.setStyle("-fx-min-width: 130px;\n" +
+                "    -fx-max-width: 130px;\n" +
+                "    -fx-background-color:\n" +
+                "            #000000,\n" +
+                "            linear-gradient(#7ebcea, #2f4b8f),\n" +
+                "            linear-gradient(#426ab7, #263e75),\n" +
+                "            linear-gradient(#395cab, #223768);\n" +
+                "    -fx-background-insets: 0,1,2,3;\n" +
+                "    -fx-background-radius: 3,2,2,2;\n" +
+                "    -fx-padding: 12 30 12 30;\n" +
+                "    -fx-text-fill: white;\n" +
+                "    -fx-font-size: 12px;");
+
+        exit.setStyle("-fx-min-width: 130px;\n" +
+                "    -fx-max-width: 130px;\n" +
+                "    -fx-background-color:\n" +
+                "            #000000,\n" +
+                "            linear-gradient(#7ebcea, #2f4b8f),\n" +
+                "            linear-gradient(#426ab7, #263e75),\n" +
+                "            linear-gradient(#395cab, #223768);\n" +
+                "    -fx-background-insets: 0,1,2,3;\n" +
+                "    -fx-background-radius: 3,2,2,2;\n" +
+                "    -fx-padding: 12 30 12 30;\n" +
+                "    -fx-text-fill: white;\n" +
+                "    -fx-font-size: 12px;");
         LoginViewController loginViewController = new LoginViewController();
 
         //locating the text fields and labels

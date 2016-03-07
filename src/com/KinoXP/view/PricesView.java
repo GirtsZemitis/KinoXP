@@ -12,7 +12,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
+
+import java.io.IOException;
 
 
 public class PricesView {
@@ -36,6 +40,14 @@ public class PricesView {
         priceViewController = new PriceViewController();
 
 
+        lSodaLabel = new Label("Large soda -- "+ lSodaPrice);
+        lSodaLabel.setId("priceLabels");
+        sSodaLabel = new Label("Small soda -- "+ sSodaPrice);
+        sSodaLabel.setId("priceLabels");
+        lCandyLabel = new Label("Large candy -- "+ lCandyPrice);
+        lCandyLabel.setId("priceLabels");
+        sCandyLabel = new Label("Small candy -- "+ sCandyPrice);
+        sCandyLabel.setId("priceLabels");
 
 
         //TEXTFIELDS
@@ -64,15 +76,23 @@ public class PricesView {
         menuLabel.setStyle(
                 "-fx-font-size: 20px;" +
                 "-fx-font-weight: bold"
+
         );
 
         priceButton = new Button("Set Prices");
-        priceButton.setId("pricesButton");
+        priceButton.setId("button");
 
 
         back = new Button("Back");
-        back.setStyle("-fx-font-size: 20");
+        back.setStyle("-fx-font-size: 12");
         back.setId("button");
+
+
+
+
+
+
+
 
 
         priceButton.setOnAction(event1 -> {
