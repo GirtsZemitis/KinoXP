@@ -1,6 +1,5 @@
 package com.KinoXP.model;
 
-import com.KinoXP.controller.ManageEmployeeController;
 import com.KinoXP.view.ManageEmployeeView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -11,12 +10,12 @@ import java.sql.SQLException;
 import java.sql.*;
 
 /**
- * Created by Paula on 01/03/16.
+ * Created by Paula/Lucia on 01/03/16.
  */
 public class ManageEmployeeModel {
     private static Connection conn = LoginViewModel.conn;
 
-
+    //INSERT LOG IN ACCOUNT INTO DB
     public void insertLogIn(String userName, String password) {
         String sql = "INSERT INTO LogIn VALUES (?, ?)";
         try {
@@ -30,6 +29,7 @@ public class ManageEmployeeModel {
         }
     }
 
+    //INSERT EMPLOYEE INTO DB
     public void insertEmployee(String userName, String name, String surname, String email, Integer phoneNumber,
                                String jobTitle) {
         String sql = "INSERT INTO Employee VALUES (?, ?, ?, ?, ?, ?)";
@@ -49,6 +49,7 @@ public class ManageEmployeeModel {
         }
     }
 
+    //EDIT EMPLOYEE INFORMATION FROM DB
     public String editEmployee(String userName, String name, String surname, String email, Integer phoneNumber, String jobTitle, String oldUserName) {
         String sql = "UPDATE Employee SET userName=?, name=?, surname=?, email=?, phoneNumber=?, jobTitle=? WHERE userName = ?";
         try {
@@ -67,6 +68,7 @@ public class ManageEmployeeModel {
         return null;
     }
 
+    //EDIT EMPLOYEE INFORMATION FROM DB WITHOUT CHANCING THE USERNAME
     public String editEmployeeWithoutUserName(String name, String surname, String email, Integer phoneNumber, String jobTitle, String oldUserName) {
         String sql = "UPDATE Employee SET name=?, surname=?, email=?, phoneNumber=?, jobTitle=? WHERE userName = ?";
         try {
@@ -84,6 +86,7 @@ public class ManageEmployeeModel {
         return null;
     }
 
+    //EDIT LOG IN INFORMATION FROM DB
     public String editLogIn(String userName, String password, String oldUserName) {
         String sql = "UPDATE LogIn SET userName=?, password=? WHERE userName = ?";
         try {
@@ -98,6 +101,7 @@ public class ManageEmployeeModel {
         return null;
     }
 
+    //DELETE EMPLOYEE FROM DB
     public void deleteEmployee(String userName) {
         String sql = "DELETE FROM Employee WHERE userName=?";
         try {
@@ -110,6 +114,7 @@ public class ManageEmployeeModel {
         }
     }
 
+    //DELETE LOG IN ACCOUNT FROM DB
     public void deleteLogInCredentials(String userName) {
         String sql = "DELETE FROM LogIn WHERE userName=?";
         try {
@@ -122,6 +127,7 @@ public class ManageEmployeeModel {
         }
     }
 
+    //CHECK THE USERNAME FROM DATABASE
     public String checkUserName(String userName) {
         String out = "";
         try {
@@ -142,6 +148,7 @@ public class ManageEmployeeModel {
         return out;
     }
 
+    //GET EMPLOYEE INFORMATION FROM DATABASE
     public ObservableList<EmployeeModel> getEmployeeInformation() {
         ObservableList<EmployeeModel> observableList = FXCollections.observableArrayList();
         EmployeeModel employee;
@@ -171,6 +178,7 @@ public class ManageEmployeeModel {
         return observableList;
     }
 
+    //GET LOG IN INFORMATION FROM DATABASE
     public ObservableList<LoginViewModel> getLoginInformation() {
         ObservableList<LoginViewModel> observableList = FXCollections.observableArrayList();
         LoginViewModel loginViewModel;
@@ -200,6 +208,7 @@ public class ManageEmployeeModel {
         return observableList;
     }
 
+    //GET PASSWORD FROM DATABASE
     public String getPassword(String userName) {
         String out = "";
         try {
@@ -219,26 +228,5 @@ public class ManageEmployeeModel {
         }
         return out;
     }
-
-    public String getUserName(String userName) {
-        String out = "";
-        try {
-            String query = " SELECT userName FROM LogIn WHERE userName=? ";
-            PreparedStatement preparedStatement = conn.prepareStatement(query);
-            preparedStatement.setString(1, userName);
-            ResultSet results = preparedStatement.executeQuery();
-
-            if (results.next()) {
-                out = results.getString(1);
-            } else {
-                out = "";
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return out;
-    }
-
 }
 

@@ -4,12 +4,8 @@ import com.KinoXP.controller.AddBookingViewController;
 import com.KinoXP.controller.TicketController;
 import com.KinoXP.model.Booking;
 import com.KinoXP.model.TicketModel;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -24,7 +20,7 @@ import javafx.stage.Stage;
 
 
 /**
- * Created by Palko on 05/03/2016.
+ * Created by Lucia/Paula on 05/03/2016.
  */
 public class TicketView {
 
@@ -36,11 +32,11 @@ public class TicketView {
     private Booking booking;
 
     private TableView<Booking> tableView = new TableView<>();
-    CheckBox paidCheckBox,reservedCheckBox,theatre1CheckBox,theatre2CheckBox;
+    CheckBox paidCheckBox, reservedCheckBox;
     TextField phoneNumberTxt;
     Stage resultStage;
 
-    public TicketView(){
+    public TicketView() {
         ticketModel = new TicketModel();
         ticketController = new TicketController(ticketModel, this);
     }
@@ -53,6 +49,8 @@ public class TicketView {
         Label mainLabel = new Label("Search Booking");
         mainLabel.setFont(Font.font("Tahoma", FontWeight.NORMAL, 25));
         mainLabel.setAlignment(Pos.CENTER);
+        Label searchLabel = new Label("Search booking by:");
+        searchLabel.setFont(Font.font("Tahoma", FontWeight.NORMAL, 15));
         Label phoneLabel = new Label("Phone Number");
         Label titleLabel = new Label("Movie");
         Label dateLabel = new Label("Date");
@@ -66,7 +64,7 @@ public class TicketView {
         phoneNumberTxt.setMaxWidth(150);
 
         //COMBO BOXES
-        ObservableList<String> options = ticketModel.getMovies(); //addBookingViewController.getMoviesWithSchedule();
+        ObservableList<String> options = ticketModel.getMovies();
         ComboBox titleCombo = new ComboBox(options);
         titleCombo.setPromptText("Choose a movie");
         titleCombo.setMaxWidth(150);
@@ -75,29 +73,24 @@ public class TicketView {
         ComboBox<String> timeField = new ComboBox<>();
         timeField.setMinWidth(150);
         ObservableList<String> theatreList = FXCollections.observableArrayList(
-                        "Theatre 1",
-                        "Theatre 2"
-                );
+                "Theater 1",
+                "Theater 2"
+        );
         ComboBox<String> theatreField = new ComboBox(theatreList);
         theatreField.setMinWidth(150);
 
 
-
-                //CHECK BOXES
+        //CHECK BOXES
         paidCheckBox = new CheckBox();
         paidCheckBox.setSelected(false);
         reservedCheckBox = new CheckBox();
         reservedCheckBox.setSelected(false);
-        theatre1CheckBox = new CheckBox();
-        theatre1CheckBox.setSelected(false);
-        theatre2CheckBox = new CheckBox();
-        theatre2CheckBox.setSelected(false);
 
         //BUTTONS
-        Button searchButton = new Button("Search");
-        searchButton.setId("back");
-        Button mainMenuButton = new Button("Back");
-        mainMenuButton.setId("back");
+        Button searchButton = new Button("SEARCH");
+        searchButton.setId("scheduleButtons");
+        Button mainMenuButton = new Button("MAIN MENU");
+        mainMenuButton.setId("scheduleButtons");
 
         //H-BOXES
         VBox vBoxLeft = new VBox();
@@ -125,9 +118,9 @@ public class TicketView {
         checkedBoxes1.getChildren().addAll(paidBox, reservedBox);
         checkedBoxes2.getChildren().addAll(theatre1, theatre2);
         vBoxLeft.getChildren().addAll(phoneLabel, phoneNumberTxt, titleLabel, titleCombo, dateLabel, dateField,
-                timeLabel, timeField, theatreLabel ,theatreField);
+                timeLabel, timeField, theatreLabel, theatreField);
 
-        layout.getChildren().addAll( vBoxLeft, checkedBoxes1, checkedBoxes2);
+        layout.getChildren().addAll(searchLabel, vBoxLeft, checkedBoxes1, checkedBoxes2);
         layout.setPadding(new Insets(40, 40, 40, 60));
         layout.setSpacing(10);
 
@@ -135,25 +128,21 @@ public class TicketView {
         borderPane.setCenter(layout);
         borderPane.setBottom(buttons);
         borderPane.setPadding(new Insets(40, 40, 40, 60));
-        layout.setId("booking");
-        borderPane.setId("backgroundImage");
 
 
         //SCENE
-        Scene scene = new Scene(borderPane, 500, 550);
+        Scene scene = new Scene(borderPane, 400, 550);
         Stage primaryStage = new Stage();
 
+        //STAGE
         primaryStage.setScene(scene);
         scene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
         primaryStage.setResizable(false);
         primaryStage.show();
 
         //CHECK BOXES LISTENERS
-        paidCheckBox.setOnAction(e -> handleButtonAction(e));
-        reservedCheckBox.setOnAction(e -> handleButtonAction(e));
-        theatre1CheckBox.setOnAction(e -> handleButtonAction(e));
-        theatre2CheckBox.setOnAction(e -> handleButtonAction(e));
-
+        paidCheckBox.setOnAction(e -> handleButtonAction());
+        reservedCheckBox.setOnAction(e -> handleButtonAction());
 
         //COMBO BOXES LISTENERS
         titleCombo.getSelectionModel().selectedItemProperty().addListener(observable -> {
@@ -174,26 +163,33 @@ public class TicketView {
 
         });
 
+
         //BUTTONS ACTION
         searchButton.setOnAction(event -> {
             primaryStage.close();
-
-            if(phoneNumberTxt.getText().length() > 0){
+            if (phoneNumberTxt.getText().length() > 0) {
                 ticketController.returnBookingByPhoneNumber(phoneNumberTxt.getText());
                 tableView.setItems(ticketController.returnBookingByPhoneNumber(phoneNumberTxt.getText()));
-            }else if(titleCombo.getValue() != null){
+            } else if (paidCheckBox.isSelected()) {
+                ticketController.returnBookingByPaidTicket(String.valueOf(handleButtonAction()));
+                tableView.setItems(ticketController.returnBookingByPaidTicket(String.valueOf(handleButtonAction())));
+            } else if (reservedCheckBox.isSelected()) {
+                ticketController.returnBookingByUnpaidTicket(String.valueOf(handleButtonAction()));
+                tableView.setItems(ticketController.returnBookingByUnpaidTicket(String.valueOf(handleButtonAction())));
+            } else if (theatreField.getSelectionModel().selectedItemProperty().getValue() != null) {
+                ticketController.returnBookingByTheater(String.valueOf(theatreField.getValue()));
+                tableView.setItems(ticketController.returnBookingByTheater(String.valueOf(theatreField.getValue())));
+            } else if (titleCombo.getValue() != null && dateField.getValue() == null && timeField.getValue() == null) {
                 ticketController.returnBookingByTitle(String.valueOf(titleCombo.getValue()));
                 tableView.setItems(ticketController.returnBookingByTitle(String.valueOf(titleCombo.getValue())));
-            }else if(dateField.getValue() != null){
-                ticketController.returnBookingByDate(String.valueOf(dateField.getValue()));
-                tableView.setItems(ticketController.returnBookingByDate(String.valueOf(dateField.getValue())));
-            }else if(timeField.getValue() != null){
-                //ticketController.returnBookingByTime(String.valueOf(timeField.getValue()));
-                //tableView.setItems(ticketController.returnBookingByTime(String.valueOf(timeField.getValue())));
-            }else if (paidCheckBox.isSelected()){
-                //ticketController.returnBookingByPaidTickets(paidCheckBox.isSelected());
-                //tableView.setItems(ticketController.returnBookingByPaidTickets(paidCheckBox.isSelected()));
-            }else{
+            } else if (dateField.getValue() != null && titleCombo.getValue() == null && timeField.getValue() == null) {
+                ticketController.returnBookingByDateTime(dateField.getValue(), timeField.getValue(), String.valueOf(titleCombo.getValue()));
+                tableView.setItems(ticketController.returnBookingByDateTime(dateField.getValue(), timeField.getValue(), String.valueOf(titleCombo.getValue())));
+            } else if (dateField.getValue() != null && timeField.getValue() != null & titleCombo.getValue() != null) {
+                ticketController.returnBookingByDateTime(dateField.getValue(), timeField.getValue(), String.valueOf(titleCombo.getValue()));
+                tableView.setItems(ticketController.returnBookingByDateTime(dateField.getValue(), timeField.getValue(), String.valueOf(titleCombo.getValue())));
+                tableView.setItems(ticketController.returnBookingByDateTime(dateField.getValue(), timeField.getValue(), String.valueOf(titleCombo.getValue())));
+            } else {
                 updateAlertMessage("You need to select at least one criteria to be able to search for a booking");
             }
 
@@ -247,25 +243,20 @@ public class TicketView {
     }
 
     //METHOD FOR HANDLING THE CHECK BOXES
-    private void handleButtonAction(ActionEvent e) {
+    private int handleButtonAction() {
+        int count = 0;
         if (paidCheckBox.isSelected()) {
-
+            count++;
         }
         if (reservedCheckBox.isSelected()) {
-
+            count = 0;
         }
-        if (theatre1CheckBox.isSelected()) {
-
-        }
-        if (theatre2CheckBox.isSelected()) {
-
-        }
+        return count;
     }
 
     //TABLE VIEW FOR SHOWING BOOKINGS
     public TableView<Booking> showBookings() {
 
-        //ticketController.returnBookingByPhoneNumber(phoneNumberTxt.getText());
         tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
 
@@ -287,12 +278,12 @@ public class TicketView {
         seats.setMinWidth(50);
 
         javafx.scene.control.TableColumn<Booking, String> phoneNumber = new javafx.scene.control.TableColumn<>("Phone number:");
-        phoneNumber.setCellValueFactory(new PropertyValueFactory<>("phone_number"));
+        phoneNumber.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
         phoneNumber.setMinWidth(150);
 
 
         javafx.scene.control.TableColumn<Booking, String> paid = new javafx.scene.control.TableColumn<>("Paid:");
-        paid.setCellValueFactory(new PropertyValueFactory<>("isPaid"));
+        paid.setCellValueFactory(new PropertyValueFactory<>("paid"));
         paid.setMinWidth(50);
 
         tableView.getColumns().addAll(date, time, title, seats, phoneNumber, paid);

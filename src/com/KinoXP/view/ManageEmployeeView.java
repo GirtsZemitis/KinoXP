@@ -1,7 +1,6 @@
 package com.KinoXP.view;
 
 import com.KinoXP.controller.ManageEmployeeController;
-
 import com.KinoXP.model.EmployeeModel;
 import com.KinoXP.model.LoginViewModel;
 import com.KinoXP.model.ManageEmployeeModel;
@@ -21,17 +20,15 @@ import javafx.stage.Stage;
 
 
 /**
- * Created by Palko on 01/03/2016.
+ * Created by Paula/Lucia on 01/03/2016.
  */
 public class ManageEmployeeView {
 
     private ManageEmployeeController manageEmployeeController;
     private ManageEmployeeModel manageEmployeeModel;
 
-
     private TableView<EmployeeModel> tableView = new TableView<>();
     private TableView<LoginViewModel> tableView1 = new TableView<>();
-
 
     public ManageEmployeeView() {
         manageEmployeeModel = new ManageEmployeeModel();
@@ -48,7 +45,7 @@ public class ManageEmployeeView {
         hBox.setPrefSize(600, 80);
         BorderPane borderPane = new BorderPane();
 
-
+        //BUTTONS
         Button logOut = new Button("LOG OUT");
         logOut.setId("back");
 
@@ -64,7 +61,7 @@ public class ManageEmployeeView {
         Button edit = new Button("EDIT");
         edit.setId("back");
 
-
+        //TAB PANE FOR HOLDING THE TABLE VIEWS
         TabPane tabPane = new TabPane();
         Tab tab = new Tab();
         Tab tab1 = new Tab();
@@ -72,11 +69,10 @@ public class ManageEmployeeView {
         tab.setText("EMPLOYEE INFO");
         tab.setContent(new Rectangle(200, 200, Color.LIGHTSTEELBLUE));
         tab.setContent(new Cylinder(200, 200));
-        tab.setStyle("-fx-text-fill: white;");
-        tab1.setStyle("-fx-text-fill: white;");
         tabPane.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
         tabPane.getTabs().addAll(tab, tab1);
 
+        //TAB PANE ACTION
         tabPane.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Tab>() {
 
             //OVERWRITE FUNCTIONALITY OF BUTTON WHEN CHANGING TO DIFFERENT TAP
@@ -202,7 +198,6 @@ public class ManageEmployeeView {
         tab.setContent(showBookings());
         tab1.setContent(showLogInInfo());
 
-
         borderPane.setTop(tabPane);
 
         //ADD BOTH EMPLOYEE AND LOGIN INFORMATION TO DATABASE
@@ -260,11 +255,11 @@ public class ManageEmployeeView {
 
             //SAVES THE INFO TO THE DATABASE AND UPDATES THE TABLE VIEWS
             confirm.setOnAction(event1 -> {
-                if(userNameTextField.getText().length() == 0 || nameTextField.getText().length() == 0 ||
+                if (userNameTextField.getText().length() == 0 || nameTextField.getText().length() == 0 ||
                         surnameText.getText().length() == 0 || emailText.getText().length() == 0 ||
                         phoneNumberText.getText().length() == 0 || positionTextField.getText().length() == 0) {
                     updateAlertMessage("All text fields must contain information in order to add an employee to database");
-                }else{
+                } else {
                     manageEmployeeController.addEmployeeAction(userNameTextField.getText(), nameTextField.getText(),
                             surnameText.getText(), emailText.getText(), Integer.parseInt(phoneNumberText.getText()),
                             positionTextField.getText());
@@ -286,6 +281,7 @@ public class ManageEmployeeView {
 
         });
 
+        //GO BACK BUTTON
         goBack.setOnAction(event -> {
             primaryStage.close();
             MenuView menuView = new MenuView();
@@ -299,17 +295,10 @@ public class ManageEmployeeView {
 
         Scene scene = new Scene(borderPane, 1000, 650);
 
-
+        //STAGE
         scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
         primaryStage.setScene(scene);
         primaryStage.show();
-    }
-
-    //METHOD FOR THE ALERT MESSAGES SHOWN TO THE USER
-    public static void updateAlertMessage(String message) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setContentText(message);
-        alert.showAndWait();
     }
 
     //TABLE VIEW FOR EMPLOYEE INFO
@@ -323,38 +312,31 @@ public class ManageEmployeeView {
         javafx.scene.control.TableColumn<EmployeeModel, String> userName = new javafx.scene.control.TableColumn<>("User name");
         userName.setCellValueFactory(new PropertyValueFactory<>("userName"));
         userName.setMinWidth(100);
-        userName.setId("whitepls");
 
         javafx.scene.control.TableColumn<EmployeeModel, String> name = new javafx.scene.control.TableColumn<>("Name:");
         name.setCellValueFactory(new PropertyValueFactory<>("name"));
         name.setMinWidth(200);
-        name.setId("whitepls");
 
         javafx.scene.control.TableColumn<EmployeeModel, String> surname = new javafx.scene.control.TableColumn<>("Surname:");
         surname.setCellValueFactory(new PropertyValueFactory<>("surname"));
         surname.setMinWidth(100);
-        surname.setId("whitepls");
 
 
         javafx.scene.control.TableColumn<EmployeeModel, String> email = new javafx.scene.control.TableColumn<>("Email:");
         email.setCellValueFactory(new PropertyValueFactory<>("email"));
         email.setMinWidth(150);
-        email.setId("whitepls");
 
         javafx.scene.control.TableColumn<EmployeeModel, Integer> phoneNumber = new javafx.scene.control.TableColumn<>("Phone nuber:");
         phoneNumber.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
         phoneNumber.setMinWidth(150);
-        phoneNumber.setId("whitepls");
 
 
         javafx.scene.control.TableColumn<EmployeeModel, String> jobTitle = new javafx.scene.control.TableColumn<>("Job title:");
         jobTitle.setCellValueFactory(new PropertyValueFactory<>("jobTitle"));
         jobTitle.setMinWidth(150);
-        jobTitle.setId("whitepls");
 
         tableView.getColumns().addAll(userName, name, surname, email, phoneNumber, jobTitle);
         tableView.setItems(manageEmployeeController.returnEmployeeInfo());
-
 
         return tableView;
 
@@ -370,13 +352,10 @@ public class ManageEmployeeView {
         javafx.scene.control.TableColumn<LoginViewModel, String> userName = new javafx.scene.control.TableColumn<>("User name");
         userName.setCellValueFactory(new PropertyValueFactory<>("userName"));
         userName.setMinWidth(50);
-        userName.setId("whitepls");
 
-        javafx.scene.control.TableColumn<LoginViewModel, String> password = new javafx.scene.control.TableColumn<>("Password:");
+        javafx.scene.control.TableColumn<LoginViewModel, String> password = new javafx.scene.control.TableColumn<>("Password");
         password.setCellValueFactory(new PropertyValueFactory<>("password"));
         password.setMinWidth(50);
-        password.setId("whitepls");
-
 
         tableView1.getColumns().addAll(userName, password);
 
@@ -384,6 +363,13 @@ public class ManageEmployeeView {
 
         return tableView1;
 
+    }
+
+    //METHOD FOR THE ALERT MESSAGES SHOWN TO THE USER
+    public static void updateAlertMessage(String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 
 }
