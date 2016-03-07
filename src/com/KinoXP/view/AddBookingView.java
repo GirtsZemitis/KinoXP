@@ -79,6 +79,8 @@ public class AddBookingView {
         searchButton.setGraphic(new ImageView(imageSearch));
         Button addButton = new Button("GO");
 
+        Button backButton = new Button("BACK");
+
 
 
         //LAYOUT
@@ -87,8 +89,9 @@ public class AddBookingView {
         HBox isPaid = new HBox();
         isPaid.getChildren().addAll(paidLabel, paidCheck);
         VBox layout = new VBox();
-        layout.getChildren().addAll(mainLabel, searchLabel, search, titleLabel, titleCombo, dateLabel, dateField, timeLabel, timeField, seatsAmountLabel, seatsField, phoneNumberLabel, phoneNrField, isPaid, addButton);
+        layout.getChildren().addAll(mainLabel, searchLabel, search, titleLabel, titleCombo, dateLabel, dateField, timeLabel, timeField, seatsAmountLabel, seatsField, phoneNumberLabel, phoneNrField, isPaid, addButton, backButton);
         addButton.setAlignment(Pos.BOTTOM_RIGHT);
+        backButton.setAlignment(Pos.BOTTOM_LEFT);
         layout.setPadding(new Insets(40, 40, 40, 60));
         layout.setSpacing(5);
 
@@ -143,6 +146,12 @@ public class AddBookingView {
             seatsField.setText(Integer.toString(booking.getSeats()));
             phoneNrField.setText(booking.getPhoneNumber());
             paidCheck.setSelected(booking.isPaid());
+        });
+
+        backButton.setOnAction(event1 -> {
+            MenuView mainMenu = new MenuView();
+            primaryStage.close();
+            mainMenu.start();
         });
 
         addButton.setOnAction(event -> {
