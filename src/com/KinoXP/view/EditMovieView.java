@@ -27,6 +27,7 @@ public class EditMovieView extends Application {
 
     private EditMovieViewController editMovieViewController;
     private AddMovieFormViewController addMovieFormViewController;
+    private Button editMovieBtn;
     private  EditMovieViewModel manageMovieViewModul;
     private Stage primaryStage;
     private String title;
@@ -98,7 +99,6 @@ public class EditMovieView extends Application {
                 FXCollections.observableArrayList(
                         "Theater 1",
                         "Theater 2"
-
                 );
 
         ComboBox<String> movieTheaterCombo = new ComboBox<>(options);

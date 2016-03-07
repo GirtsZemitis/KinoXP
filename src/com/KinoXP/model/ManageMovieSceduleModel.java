@@ -37,6 +37,7 @@ public class ManageMovieSceduleModel {
         }
 
     }
+
     public String getSchedule(int i){
         //nr of week
         String schedule ="";
@@ -111,9 +112,9 @@ public class ManageMovieSceduleModel {
             preparedStatement.setString(7,s);
             preparedStatement.setString(8,s);
             preparedStatement.setString(9,s);
-            preparedStatement.setString(10,null);
-            preparedStatement.setString(11,null);
-            preparedStatement.setString(12,null);
+            preparedStatement.setString(10,s);
+            preparedStatement.setString(11,s);
+            preparedStatement.setString(12,s);
             int numberOfRows = preparedStatement.executeUpdate();
             System.out.println("Schedule is save: " + numberOfRows);
         } catch (SQLException e) {
@@ -147,7 +148,7 @@ public class ManageMovieSceduleModel {
     }
 
     public ObservableList<Movie> getMovieTitles(String s){
-        String sql ="SELECT `title` , `indexMovie`  FROM `Movie` WHERE cinemaRoomName=?";
+        String sql ="SELECT `title` , `indexMovie`,`premiere`  FROM `Movie` WHERE cinemaRoomName=?";
         PreparedStatement preparedStatement = null;
         ObservableList<Movie> observableList = FXCollections.observableArrayList();
         try {
@@ -156,7 +157,9 @@ public class ManageMovieSceduleModel {
 
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                observableList.add(new Movie(resultSet.getString(1),resultSet.getInt(2)));
+                //adding date to movie object
+                observableList.add(new Movie(resultSet.getString(1),resultSet.getInt(2),resultSet.getDate(3)));
+                System.out.println(observableList.toString());
             }
 
         } catch (SQLException e) {

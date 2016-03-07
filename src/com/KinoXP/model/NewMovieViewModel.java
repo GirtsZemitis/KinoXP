@@ -6,6 +6,7 @@ import javafx.scene.image.PixelWriter;
 import javafx.scene.image.WritableImage;
 
 import javax.imageio.ImageIO;
+import javax.xml.transform.Result;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -14,6 +15,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  * Created by Grzegorz Goraj on 25-02-2016.
@@ -43,7 +45,6 @@ public class NewMovieViewModel {
                 }
             }
         }
-
         ImageView imageView = new ImageView();
         imageView.setImage(wr);
         imageView.setFitHeight(100);
@@ -62,40 +63,45 @@ public class NewMovieViewModel {
             } catch (SQLException e) {
                 e.printStackTrace();
         }
-
         return null;
     }
-
-    public ResultSet getPhotoLink(){        // returns link to poster from database basing on index
+    // returns listOfExistingUrls from DB
+    public ArrayList<String> getUrlListFromDB(){        // returns link to poster from database basing on index
+        ArrayList<String> urlList = new ArrayList<>();
         try {
             String query = " SELECT posterPath FROM Movie";
             PreparedStatement preparedStatement = conn.prepareStatement(query);
-            return preparedStatement.executeQuery();
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while(resultSet.next()) {
+                urlList.add(resultSet.getString(1));
+            }
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return null;
+        return urlList;
     }
-
-    public ResultSet getMovieTitle(){                       //returns movie title from database, basing on index
-        String title ="";
+    //returns movie titles from database
+    public ArrayList<String> getTitleListFromDB(){
+        ArrayList<String> titleList = new ArrayList<>();
         try {
-            String query = " SELECT title,posterPath FROM Movie";
+            String query = " SELECT title FROM Movie";
             PreparedStatement preparedStatement = conn.prepareStatement(query);
-            return preparedStatement.executeQuery();
-
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while(resultSet.next()) {
+                titleList.add(resultSet.getString(1));
+            }
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        return null;
+        return titleList;
     }
 
-    public void createPosterPathFile(String filePath) {
-        File file = new File(filePath);
 
-    }
+
+
+
 }

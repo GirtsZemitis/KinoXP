@@ -29,6 +29,9 @@ public class AddBookingView {
     private Schedule schedule;
 
 
+    private String phoneNr;
+
+
     public void start() {
         //LABELS
         Label mainLabel = new Label("Add Booking");
@@ -62,11 +65,11 @@ public class AddBookingView {
 
         //COMBOBOXES
         ObservableList<String> options = addBookingViewController.getMoviesWithSchedule();
-        ComboBox titleCombo  = new ComboBox(options);
+        ComboBox titleCombo = new ComboBox(options);
         titleCombo.setPromptText("Choose a movie");
 
 
-        ComboBox hallCombo  = new ComboBox();
+        ComboBox hallCombo = new ComboBox();
         hallCombo.setPromptText("Choose a hall");
 
         //CHECHBOXES
@@ -84,6 +87,7 @@ public class AddBookingView {
         Image imageSearch = new Image(getClass().getResourceAsStream("search.png"));
         searchButton.setGraphic(new ImageView(imageSearch));
         Button addButton = new Button("GO");
+
 
 
         //LAYOUT
@@ -123,6 +127,7 @@ public class AddBookingView {
             }
 
             timeField.setItems( addBookingViewController.parseTimes(addBookingViewController.getTimes(Integer.parseInt(dateField.getSelectionModel().getSelectedItem().toString().substring(4, 5)),
+            
                     Integer.parseInt(dateField.getSelectionModel().getSelectedItem().toString().substring(11)), schedule)));
             timeField.setPromptText("Choose time");
 
@@ -162,6 +167,19 @@ public class AddBookingView {
             addBookingViewController.insertBooking(dateField.getValue(),timeField.getValue(),titleCombo.getValue().toString(),Integer.parseInt(seatsField.getText()),phoneNrField.getText(),paidCheck.isSelected());
             primaryStage.close();
 
+            }else{
+                addBookingViewController.insertBooking(
+                        dateField.getValue(),
+                        timeField.getValue(),
+                        titleCombo.getValue().toString(),
+                        Integer.parseInt(seatsField.getText()),
+                        phoneNrField.getText(),
+                        paidCheck.isSelected());
+                BuyFoodView buyFoodView = new BuyFoodView();
+                buyFoodView.startBuyFoodView();
+                buyFoodView.phoneNumber = phoneNrField.getText();
+            }
+            primaryStage.close();
         });
         updateButton.setOnAction(event -> {
             Booking booking = addBookingViewController.getBookingByPhoneNUmber(phoneNrField.getText());

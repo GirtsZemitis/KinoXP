@@ -16,16 +16,14 @@ package com.KinoXP.controller;
         import java.io.File;
         import java.io.IOException;
         import java.net.URL;
+        import java.time.LocalDate;
+        import java.time.LocalTime;
+        import java.util.Date;
 
 /**
  * Created by Paula on 26/02/2016.
  */
 public class AddMovieFormViewController {
-
-    //Greg - I moved AddmovieButtonActions Logic to AddMovieFormViewModel.
-    // controller only binds View with logic(Model)..
-
-
 
     public void addMovieFormViewDisplay(){
         AddMovieFormView addMovieFormView = new AddMovieFormView();
@@ -48,10 +46,10 @@ public class AddMovieFormViewController {
     //METHOD WHICH PASSES THE INPUT FROM THE VIEW TO THE MODEL
     public void addMovieToDB(String titleInput, String playingTimeInMinutesInput, String releaseYearInput,
                              String plotInput, String directorInput, String posterPathInput, String castInput,
-                             String theatreNameInput, String genreInput, String ageLimitInput) {
+                             String theatreNameInput, String genreInput, String ageLimitInput, java.sql.Date date) {
         try {
             addMovieFormViewModel.insertMovie(titleInput, playingTimeInMinutesInput, releaseYearInput, plotInput,
-                    directorInput, posterPathInput, castInput, theatreNameInput, genreInput, ageLimitInput);
+                    directorInput, posterPathInput, castInput, theatreNameInput, genreInput, ageLimitInput, date);
 
         } catch (Exception e) {
             System.out.println("Exception in addMovieToDB() from Controller: " + e.getMessage());
@@ -139,7 +137,7 @@ public class AddMovieFormViewController {
     public void validateFieldsAndAction(TextField titleInput, TextField playingTimeInMinutesInput,
                                         TextField releaseYearInput,
                                         TextArea plotInput, TextField directorInput, TextField posterPathInput, TextArea castInput,
-                                        String theatreNameInput, TextField genreInput, TextField ageLimitInput){
+                                        String theatreNameInput, TextField genreInput, TextField ageLimitInput, java.sql.Date date){
 
         if (areFieldsEmpty(titleInput.getText(), playingTimeInMinutesInput.getText(), releaseYearInput.getText(),
                 plotInput.getText(), directorInput.getText(), posterPathInput.getText(), castInput.getText(), theatreNameInput, genreInput.getText(), ageLimitInput.getText())) {
@@ -159,7 +157,7 @@ public class AddMovieFormViewController {
             //save movie in Db with default schedule
             addMovieToDB(titleInput.getText(), playingTimeInMinutesInput.getText(),
                     releaseYearInput.getText(), plotInput.getText(), directorInput.getText(), posterPathInput.getText(),
-                    castInput.getText(), theatreNameInput, genreInput.getText(), ageLimitInput.getText());
+                    castInput.getText(), theatreNameInput, genreInput.getText(), ageLimitInput.getText(),date);
             MovieWeek movieWeek = new MovieWeek();
             manageMovieScheduleController.insertMovie(movieWeek.save(movieWeek.getObservableList()));
             makeFileFromURL(addMovieFormView.getUrl(),addMovieFormView.getTitle());

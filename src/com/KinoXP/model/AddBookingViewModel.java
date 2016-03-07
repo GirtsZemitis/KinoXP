@@ -1,5 +1,7 @@
 package com.KinoXP.model;
 
+import com.KinoXP.controller.AddBookingViewController;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -33,8 +35,33 @@ public class AddBookingViewModel {
         }
         return null;
     }
+    //UPDATE ROW IN BOOKING TABLE BASED ON PHONE NUMBER
+    public Booking updateBookingAfterPaid(String date, String time, String title, int seats, String phoneNumber,boolean paid) {
+        try {
+            String sql = "UPDATE Booking SET date=?, time=?, title=?, seats=?, phone_number=?,isPaid=? WHERE phone_number=?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, date);
+            ps.setString(2, time);
+            ps.setString(3, title);
+            ps.setInt(4, seats);
+            ps.setString(5,phoneNumber);
+            ps.setBoolean(6, paid);
+            ps.setString(7,phoneNumber);
+
+            int numberOfRows=ps.executeUpdate();
+            System.out.println("Completed update. Number of rows affected:" + numberOfRows);
+            ps.close();
+            booking = new Booking(date, time, title, seats, phoneNumber,paid);
+            return booking;
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
     public Schedule getSchedule(String movieName) {
+        AddBookingViewController addBookingViewController = new AddBookingViewController();
         try {
             String query = "SELECT * FROM Movie INNER JOIN schedule ON Movie.indexMovie= schedule.indexMovie WhERE Movie.title=?";
             PreparedStatement preparedStatement = conn.prepareStatement(query);
@@ -43,8 +70,9 @@ public class AddBookingViewModel {
             Schedule schedule = new Schedule();
             while (results.next()){
                 //CHANGE HEREEEEE
+
                 for (int i = 1; i < 10; i++){
-                    schedule.parseSchedule(results.getString("week" + i), i);
+                    schedule.parseSchedule(addBookingViewController.convertWeek(results.getString("week" + i)), i);
                 }
             }
 
