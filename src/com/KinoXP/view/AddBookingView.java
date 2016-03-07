@@ -167,20 +167,14 @@ public class AddBookingView {
             addBookingViewController.insertBooking(dateField.getValue(),timeField.getValue(),titleCombo.getValue().toString(),Integer.parseInt(seatsField.getText()),phoneNrField.getText(),paidCheck.isSelected());
             primaryStage.close();
 
-            }else{
-                addBookingViewController.insertBooking(
-                        dateField.getValue(),
-                        timeField.getValue(),
-                        titleCombo.getValue().toString(),
-                        Integer.parseInt(seatsField.getText()),
-                        phoneNrField.getText(),
-                        paidCheck.isSelected());
+
                 BuyFoodView buyFoodView = new BuyFoodView();
                 buyFoodView.startBuyFoodView();
                 buyFoodView.phoneNumber = phoneNrField.getText();
-            }
+
             primaryStage.close();
         });
+
         updateButton.setOnAction(event -> {
             Booking booking = addBookingViewController.getBookingByPhoneNUmber(phoneNrField.getText());
             if(!paidCheck.isSelected()==(booking.isPaid())){
