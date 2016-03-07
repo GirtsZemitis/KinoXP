@@ -47,7 +47,8 @@ public class LoginView {
         password.setStyle("-fx-font-size: 20");
         TextField passwordText = new TextField();
         passwordText.setStyle("-fx-font-size: 16");
-        Button logIn = new Button("Confirm");
+        Button logIn = new Button("Log In");
+        Button exit = new Button("EXIT");
         logIn.setStyle("-fx-font-size: 20;-fx-background-color: #ffdd19;-fx-border-color: black");
         LoginViewController loginViewController = new LoginViewController();
 
@@ -60,10 +61,13 @@ public class LoginView {
         GridPane.setConstraints(password,0,3);
         GridPane.setConstraints(passwordText,1,3);
         GridPane.setConstraints(logIn,1,4);
+        GridPane.setConstraints(exit, 1,5);
 
         gridPane.setAlignment(Pos.CENTER);
 
-
+        exit.setOnAction(event1 -> {
+                primaryStage.close();
+        });
         //ACTION TO LOG IN BUTTON/////////////////////////////////////////////////////////////
         logIn.setOnAction(event -> {
             //CREATING NEW EMPLOYEE OBJECT TO GRAB THE INPUT ATTRIBUTE VALUES
@@ -80,7 +84,7 @@ public class LoginView {
         });
         //////////////////////////////////////////////////////////////////////////////////////
 
-        gridPane.getChildren().addAll(scenetitle,errorLabel,user,userField,password,passwordText,logIn);
+        gridPane.getChildren().addAll(scenetitle,errorLabel,user,userField,password,passwordText,logIn, exit);
         primaryStage.show();
 
     }
