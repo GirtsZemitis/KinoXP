@@ -23,7 +23,7 @@ public class PricesView {
     VBox vbox;
     Label menuLabel, lSodaLabel, sSodaLabel, lCandyLabel, sCandyLabel;
     public static Button back, priceButton;
-    private String lSodaPrice, sSodaPrice, lCandyPrice, sCandyPrice, textfield;
+    public String lSodaPrice, sSodaPrice, lCandyPrice, sCandyPrice;
     TextField lSodaField, sSodaField, lCandyField, sCandyField;
     PriceViewController priceViewController;
 
@@ -37,8 +37,6 @@ public class PricesView {
 
 
 
-        //GET PRICES FROM DB && SET THE LABELS
-        setLabels();
 
         //TEXTFIELDS
         lSodaField = new TextField();
@@ -53,7 +51,16 @@ public class PricesView {
         sCandyField = new TextField();
         sCandyField.setStyle("-fx-font-size: 16");
 
+        //MAKE LABELS !!!!!
+        lSodaLabel = new Label();
+        sSodaLabel = new Label();
+        lCandyLabel = new Label();
+        lCandyLabel = new Label();
+        sCandyLabel = new Label();
 
+
+        //GET PRICES FROM DB && SET THE LABELS
+        setLabels();
         menuLabel.setStyle(
                 "-fx-font-size: 20px;" +
                 "-fx-font-weight: bold"
@@ -131,14 +138,16 @@ public class PricesView {
         lCandyPrice= String.valueOf(candy.getLargePrice());
         sCandyPrice= String.valueOf(candy.getSmallPrice());
 
-        lSodaLabel = new Label("Large soda -- "+ lSodaPrice);
-        lSodaLabel.setId("priceLabels");
-        sSodaLabel = new Label("Small soda -- "+ sSodaPrice);
-        sSodaLabel.setId("priceLabels");
-        lCandyLabel = new Label("Large candy -- "+ lCandyPrice);
-        lCandyLabel.setId("priceLabels");
-        sCandyLabel = new Label("Small candy -- "+ sCandyPrice);
-        sCandyLabel.setId("priceLabels");
+        lSodaLabel.setText("Large soda -- " + lSodaPrice);
+        sSodaLabel.setText("Small soda -- "+ sSodaPrice);
+        lCandyLabel.setText("Large candy -- "+ lCandyPrice);
+        sCandyLabel.setText("Small candy -- "+ sCandyPrice);
+         lSodaField.setText(lSodaPrice);
+        sSodaField.setText(sSodaPrice);
+        lCandyField.setText(lCandyPrice);
+        sCandyField.setText(sCandyPrice);
+
+
     }
 
 
