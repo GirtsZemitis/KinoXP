@@ -1,12 +1,8 @@
 package com.KinoXP.view;
 
 import com.KinoXP.controller.ManageMovieScheduleController;
-import com.KinoXP.model.ManageMovieSceduleModel;
 import com.KinoXP.model.Movie;
 import com.KinoXP.model.TimeModel;
-import com.KinoXP.controller.NewMovieViewController;
-import com.sun.org.apache.xml.internal.security.utils.SignerOutputStream;
-import com.sun.org.apache.xpath.internal.SourceTree;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -14,7 +10,6 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -599,7 +594,11 @@ public class Schedule {
         button.setId("button");
         Button button1 = new Button("Go to main manu");
         button1.setOnAction(event2 -> {
+
+
+            MenuView mainMenu = new MenuView();
             primaryStage.close();
+            mainMenu.start();
         });
         button1.setId("button");
         hBox.getChildren().addAll(button1,button);
