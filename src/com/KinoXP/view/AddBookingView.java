@@ -18,7 +18,6 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
-
 import java.util.ArrayList;
 
 public class AddBookingView {
@@ -80,8 +79,6 @@ public class AddBookingView {
         searchButton.setGraphic(new ImageView(imageSearch));
         Button addButton = new Button("GO");
 
-        Button btnBack = new Button("BACK");
-
 
 
         //LAYOUT
@@ -90,9 +87,8 @@ public class AddBookingView {
         HBox isPaid = new HBox();
         isPaid.getChildren().addAll(paidLabel, paidCheck);
         VBox layout = new VBox();
-        layout.getChildren().addAll(mainLabel, searchLabel, search, titleLabel, titleCombo, dateLabel, dateField, timeLabel, timeField, seatsAmountLabel, seatsField, phoneNumberLabel, phoneNrField, isPaid, btnBack, addButton);
+        layout.getChildren().addAll(mainLabel, searchLabel, search, titleLabel, titleCombo, dateLabel, dateField, timeLabel, timeField, seatsAmountLabel, seatsField, phoneNumberLabel, phoneNrField, isPaid, addButton);
         addButton.setAlignment(Pos.BOTTOM_RIGHT);
-        btnBack.setAlignment(Pos.BASELINE_LEFT);
         layout.setPadding(new Insets(40, 40, 40, 60));
         layout.setSpacing(5);
 
@@ -147,13 +143,6 @@ public class AddBookingView {
             seatsField.setText(Integer.toString(booking.getSeats()));
             phoneNrField.setText(booking.getPhoneNumber());
             paidCheck.setSelected(booking.isPaid());
-        });
-
-        btnBack.setOnAction(event1 -> {
-
-            MenuView mainMenu = new MenuView();
-            primaryStage.close();
-            mainMenu.start();
         });
 
         addButton.setOnAction(event -> {

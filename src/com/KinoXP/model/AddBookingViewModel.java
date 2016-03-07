@@ -110,6 +110,83 @@ public class AddBookingViewModel {
         return null;
     }
 
+    public void updatePaid(boolean paid, String phoneNr) {
+
+        String sql = "UPDATE Booking SET isPaid=? WHERE phone_number = ?";
+        try {
+
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setBoolean(1, paid);
+            preparedStatement.setString(2, phoneNr);
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void updateSeat(String seat, String phoneNr) {
+        String sql = "UPDATE Booking SET seats=? WHERE phone_number = ?";
+        try {
+
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setString(1, seat);
+            preparedStatement.setString(2, phoneNr);
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void updateTime(String time, String phoneNr) {
+        String sql = "UPDATE Booking SET time=? WHERE phone_number = ?";
+        try {
+
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setString(1, time);
+            preparedStatement.setString(2, phoneNr);
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+    public void updateDate(String date, String phoneNr) {
+        String sql = "UPDATE Booking SET date=? WHERE phone_number = ?";
+        try {
+
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setString(1, date);
+            preparedStatement.setString(2, phoneNr);
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+    public void updateTitle(String title, String phoneNr) {
+        String sql = "UPDATE Booking SET title=? WHERE phone_number = ?";
+        try {
+
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setString(1, title);
+            preparedStatement.setString(2, phoneNr);
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
+
+
 
 
 
