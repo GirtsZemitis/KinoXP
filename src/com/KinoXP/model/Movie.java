@@ -45,4 +45,22 @@ public class Movie {
     }
 
     Date date;
+
+    public int getDuration() {
+        return duration;
+    }
+
+    public void setDuration(int duration) {
+        this.duration = duration;
+    }
+
+
+    public Movie(String title, int movieId, Date date, int duration) {
+        this.title = title;
+        this.movieId = movieId;
+        this.date = date;
+        this.duration = duration;
+    }
+
+    int duration;
 }

@@ -59,7 +59,7 @@ public class AddMovieFormView {
         mainTitleLbl.setFont(Font.font(25));
         Label titleLbl = new Label("Title");
         Label yearLbl = new Label("Year");
-        Label durationLbl = new Label("Duration");
+        Label durationLbl = new Label("Duration in minutes!!! Type correct value");
         Label genreLbl = new Label("Genre");
         Label descriptionLbl = new Label("Description");
         Label directorLbl = new Label("Director");
