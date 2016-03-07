@@ -10,6 +10,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -65,6 +66,31 @@ public class LoginView {
 
         gridPane.setAlignment(Pos.CENTER);
 
+
+
+        passwordText.setOnKeyPressed((keyEvent) -> {
+                    if (keyEvent.getCode() == KeyCode.ENTER) {
+                        employeeModel = new EmployeeModel(userField.getText(), passwordText.getText());
+
+                        errorLabel.setText(loginViewController.checkLogIn(employeeModel));//CALL METHOD FROM CONTROLLER
+                        primaryStage.close();// CLOSE THIS STAGE
+
+                        if (checkIfManager() == false) {
+                            manageEmployeeController.changeButtonVisibility();
+                        }
+
+
+                    }});
+
+
+
+
+
+
+
+
+
+        //exit button to close the whole app.
         exit.setOnAction(event1 -> {
                 primaryStage.close();
         });

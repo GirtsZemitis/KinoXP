@@ -36,7 +36,7 @@ public class AddBookingView {
         Label mainLabel = new Label("Add Booking");
         mainLabel.setFont(Font.font("Tahoma", FontWeight.NORMAL, 25));
         mainLabel.setAlignment(Pos.CENTER);
-        Label searchLabel = new Label("Search");
+        Label searchLabel = new Label("Search By Phone Number");
         Label dateLabel = new Label("Date");
         Label timeLabel = new Label("Time");
         Label titleLabel = new Label("Title");
@@ -85,7 +85,7 @@ public class AddBookingView {
 
         Image imageSearch = new Image(getClass().getResourceAsStream("search.png"));
         searchButton.setGraphic(new ImageView(imageSearch));
-        Button addButton = new Button("GO");
+        Button addButton = new Button("ADD Booking");
         Button btnBack = new Button("BACK");
 
 
