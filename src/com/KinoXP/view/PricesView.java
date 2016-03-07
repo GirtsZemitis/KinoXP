@@ -52,16 +52,16 @@ public class PricesView {
 
         //TEXTFIELDS
         lSodaField = new TextField();
-        lSodaField.setStyle("-fx-font-size: 16");
+        lSodaField.setId("priceFields");
 
         sSodaField = new TextField();
-        sSodaField.setStyle("-fx-font-size: 16");
+        sSodaField.setId("priceFields");
 
         lCandyField = new TextField();
-        lCandyField.setStyle("-fx-font-size: 16");
+        lCandyField.setId("priceFields");
 
         sCandyField = new TextField();
-        sCandyField.setStyle("-fx-font-size: 16");
+        sCandyField.setId("priceFields");
 
         //MAKE LABELS !!!!!
         lSodaLabel = new Label();
@@ -75,12 +75,13 @@ public class PricesView {
         setLabels();
         menuLabel.setStyle(
                 "-fx-font-size: 20px;" +
+                          "-fx-padding: 0 0 60 0; "              +
                 "-fx-font-weight: bold"
 
         );
 
         priceButton = new Button("Set Prices");
-        priceButton.setId("button");
+        priceButton.setId("priceButton");
 
 
         back = new Button("Back");
@@ -125,7 +126,7 @@ public class PricesView {
         elements.setHgap(50);
         elements.setVgap(20);
 
-        elements.setStyle("-fx-alignment: center;");
+        elements.setId("priceLabels");
 
         menuLayout = new BorderPane();
         menuLayout.setId("backgroundImage");

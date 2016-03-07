@@ -72,6 +72,8 @@ public class ManageEmployeeView {
         tab.setText("EMPLOYEE INFO");
         tab.setContent(new Rectangle(200, 200, Color.LIGHTSTEELBLUE));
         tab.setContent(new Cylinder(200, 200));
+        tab.setStyle("-fx-text-fill: white;");
+        tab1.setStyle("-fx-text-fill: white;");
         tabPane.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
         tabPane.getTabs().addAll(tab, tab1);
 
@@ -200,6 +202,7 @@ public class ManageEmployeeView {
         tab.setContent(showBookings());
         tab1.setContent(showLogInInfo());
 
+
         borderPane.setTop(tabPane);
 
         //ADD BOTH EMPLOYEE AND LOGIN INFORMATION TO DATABASE
@@ -320,31 +323,38 @@ public class ManageEmployeeView {
         javafx.scene.control.TableColumn<EmployeeModel, String> userName = new javafx.scene.control.TableColumn<>("User name");
         userName.setCellValueFactory(new PropertyValueFactory<>("userName"));
         userName.setMinWidth(100);
+        userName.setId("whitepls");
 
         javafx.scene.control.TableColumn<EmployeeModel, String> name = new javafx.scene.control.TableColumn<>("Name:");
         name.setCellValueFactory(new PropertyValueFactory<>("name"));
         name.setMinWidth(200);
+        name.setId("whitepls");
 
         javafx.scene.control.TableColumn<EmployeeModel, String> surname = new javafx.scene.control.TableColumn<>("Surname:");
         surname.setCellValueFactory(new PropertyValueFactory<>("surname"));
         surname.setMinWidth(100);
+        surname.setId("whitepls");
 
 
         javafx.scene.control.TableColumn<EmployeeModel, String> email = new javafx.scene.control.TableColumn<>("Email:");
         email.setCellValueFactory(new PropertyValueFactory<>("email"));
         email.setMinWidth(150);
+        email.setId("whitepls");
 
         javafx.scene.control.TableColumn<EmployeeModel, Integer> phoneNumber = new javafx.scene.control.TableColumn<>("Phone nuber:");
         phoneNumber.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
         phoneNumber.setMinWidth(150);
+        phoneNumber.setId("whitepls");
 
 
         javafx.scene.control.TableColumn<EmployeeModel, String> jobTitle = new javafx.scene.control.TableColumn<>("Job title:");
         jobTitle.setCellValueFactory(new PropertyValueFactory<>("jobTitle"));
         jobTitle.setMinWidth(150);
+        jobTitle.setId("whitepls");
 
         tableView.getColumns().addAll(userName, name, surname, email, phoneNumber, jobTitle);
         tableView.setItems(manageEmployeeController.returnEmployeeInfo());
+
 
         return tableView;
 
@@ -360,10 +370,13 @@ public class ManageEmployeeView {
         javafx.scene.control.TableColumn<LoginViewModel, String> userName = new javafx.scene.control.TableColumn<>("User name");
         userName.setCellValueFactory(new PropertyValueFactory<>("userName"));
         userName.setMinWidth(50);
+        userName.setId("whitepls");
 
         javafx.scene.control.TableColumn<LoginViewModel, String> password = new javafx.scene.control.TableColumn<>("Password:");
         password.setCellValueFactory(new PropertyValueFactory<>("password"));
         password.setMinWidth(50);
+        password.setId("whitepls");
+
 
         tableView1.getColumns().addAll(userName, password);
 

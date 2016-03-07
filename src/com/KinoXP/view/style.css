@@ -2,6 +2,10 @@
 
     -fx-background-image: url("picture.jpg");
 }
+#seamlessBackgroundImage{
+
+    -fx-background-image: url("666.jpg");
+}
 .scroll-pane > .viewport {
     -fx-background-color: transparent;
 }
@@ -47,15 +51,20 @@
     -fx-background-color: #a3b1bd;
 
 }
-#pricesButton {
+#priceButton {
 
-    -fx-text-fill: darkslategrey;
-    -fx-font-size: 13pt;
-    -fx-min-width: 90px;
-    -fx-min-height: 30px;
-    -fx-background-color: #8d98a1;
-    -fx-border-style: solid;
-    -fx-border-color: #99a5af;
+    -fx-min-width: 150px;
+    -fx-max-width: 150px;
+    -fx-background-color:
+            #000000,
+            linear-gradient(#7ebcea, #2f4b8f),
+            linear-gradient(#426ab7, #263e75),
+            linear-gradient(#395cab, #223768);
+    -fx-background-insets: 0,1,2,3;
+    -fx-background-radius: 3,2,2,2;
+    -fx-padding: 12 30 12 30;
+    -fx-text-fill: white;
+    -fx-font-size: 12px;
 }
 
 #pricesButton:hover{
@@ -66,10 +75,14 @@
 
     -fx-text-alignment: center;
     -fx-font-weight: bold;
-    -fx-font-size: 16px;
+    -fx-font-size: 14px;
     -fx-font-family: cursive;
 }
+#priceFields {
+    -fx-font-size: 16px;
+    -fx-max-width: 150px;
 
+}
 
 #chooseMovie{
     -fx-text-fill: red;
@@ -190,6 +203,7 @@
     -fx-text-fill: white;
     -fx-font-size: 12px;
     -fx-text-alignment: center;
+    -fx-hgap: 40px;
 }
 #scheduleButtons:hover{
     -fx-background-color: #8d98a1;
@@ -198,5 +212,38 @@
 
 #tabs{
     -fx-text-fill: white;
+
+}
+
+#booking {
+    -fx-min-width: 600px;
+    -fx-max-width: 600px;
+    -fx-alignment: center;
+    -fx-text-alignment: center;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+
+
+}
+#whitepls {
+
+    -fx-text-fill: black;
+    -fx-background-color: linear-gradient(#f2f2f2, #d6d6d6),
+    linear-gradient(#fcfcfc 0%, #d9d9d9 20%, #d6d6d6 100%),
+    linear-gradient(#dddddd 0%, #f6f6f6 50%);;
+    -fx-border-style: hidden;
+}
+#whitepls:hover {
+
+     -fx-background-color: #263e75;
+     -fx-text-fill: gold;
+    -fx-border-style: hidden;
+ }
+.table-row-cell:selected {
+    -fx-background-color: #2f4b8f;
+}
+.table-row-cell:selected .text {
+    -fx-fill: navy ;
+    -fx-font-weight: bold;
 
 }
