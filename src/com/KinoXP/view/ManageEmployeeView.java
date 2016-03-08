@@ -115,7 +115,6 @@ public class ManageEmployeeView {
                 Label password = new Label("Password");
                 TextField passwordTextField = new TextField();
 
-
                 GridPane.setConstraints(name, 0, 0);
                 GridPane.setConstraints(nameTextField, 1, 0);
                 GridPane.setConstraints(surname, 0, 1);
@@ -131,7 +130,6 @@ public class ManageEmployeeView {
                 GridPane.setConstraints(password, 0, 6);
                 GridPane.setConstraints(passwordTextField, 1, 6);
                 GridPane.setConstraints(confirm, 1, 7);
-
 
                 userNameTextField.setText(employeeModel.getUserName());
                 nameTextField.setText(employeeModel.getName());
@@ -261,7 +259,12 @@ public class ManageEmployeeView {
                         surnameText.getText().length() == 0 || emailText.getText().length() == 0 ||
                         phoneNumberText.getText().length() == 0 || positionTextField.getText().length() == 0) {
                     updateAlertMessage("All text fields must contain information in order to add an employee to database");
-                } else {
+
+
+                }
+                try {
+                    String.valueOf(phoneNumberText.getText());
+
                     manageEmployeeController.addEmployeeAction(userNameTextField.getText(), nameTextField.getText(),
                             surnameText.getText(), emailText.getText(), Integer.parseInt(phoneNumberText.getText()),
                             positionTextField.getText());
@@ -270,6 +273,9 @@ public class ManageEmployeeView {
                     tableView1.setItems(manageEmployeeController.returnLogInInfo());
 
                     stage1.close();
+
+                } catch (NumberFormatException e) {
+                    updateAlertMessage("Phone number cannot contain letters!");
                 }
 
             });
@@ -383,5 +389,6 @@ public class ManageEmployeeView {
         alert.setContentText(message);
         alert.showAndWait();
     }
+
 
 }
