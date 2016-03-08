@@ -153,7 +153,7 @@ public class TicketModel {
 
 
         try {
-            String sql = "SELECT * FROM Booking1 WHERE isPaid='1';";
+            String sql = "SELECT * FROM Booking1 WHERE isPaid=?;";
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setString(1, checkBox);
 

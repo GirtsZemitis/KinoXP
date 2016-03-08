@@ -36,7 +36,7 @@ public class AddBookingView {
         //LABELS
         Label mainLabel = new Label("Booking Manager");
         mainLabel.setFont(Font.font("Tahoma", FontWeight.NORMAL, 25));
-        Label searchLabel = new Label("Search By Phone Number");
+        Label searchLabel = new Label("Search By Reservation Number");
         Label dateLabel = new Label("Date");
         Label timeLabel = new Label("Time");
         Label titleLabel = new Label("Title");
@@ -100,7 +100,7 @@ public class AddBookingView {
         elements.addRow(1, dateLabel, dateField);
         elements.addRow(2, timeLabel, timeField);
         elements.addRow(3, seatsAmountLabel, seatsField);
-        elements.addRow(4, phoneNumberLabel, phoneNrField);
+        elements.addRow(4 );
         elements.addRow(5, paidLabel, paidCheck);
         elements.addRow(7, searchLabel, searchField);
         elements.addRow(8, searchNotFound, searchButton);
