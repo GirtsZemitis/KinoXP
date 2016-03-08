@@ -8,9 +8,7 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 
-/**
- * Created by Monica on 26-02-2016.
- */
+
 public class LoginViewModelTest{
     LoginViewModel loginViewModel = new LoginViewModel();
     @Before

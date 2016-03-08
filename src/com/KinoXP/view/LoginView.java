@@ -80,7 +80,7 @@ public class LoginView {
         //locating the text fields and labels
 
         GridPane.setConstraints(scenetitle,0,0);
-        GridPane.setConstraints(errorLabel,0,1);/////////////////////BY MONICA///////////
+        GridPane.setConstraints(errorLabel,0,1);
         GridPane.setConstraints(user,0,2);
         GridPane.setConstraints(userField,1,2);
         GridPane.setConstraints(password,0,3);
@@ -93,25 +93,21 @@ public class LoginView {
 
         //after typing in username and password u can press "enter" to log in.
         passwordText.setOnKeyPressed((keyEvent) -> {
-                    if (keyEvent.getCode() == KeyCode.ENTER) {
-                        employeeModel = new EmployeeModel(userField.getText(), passwordText.getText());
+            if (keyEvent.getCode() == KeyCode.ENTER) {
+                if ((userField.getText().equals("")) || (passwordText).getText().equals("")) {
+                            errorLabel.setText("The username and/or password do not match!");
+                } else {
+                    employeeModel = new EmployeeModel(userField.getText(), passwordText.getText());
 
-                        errorLabel.setText(loginViewController.checkLogIn(employeeModel));//CALL METHOD FROM CONTROLLER
-                        primaryStage.close();// CLOSE THIS STAGE
+                    errorLabel.setText(loginViewController.checkLogIn(employeeModel));//CALL METHOD FROM CONTROLLER
+                    primaryStage.close();// CLOSE THIS STAGE
 
-                        if (checkIfManager() == false) {
-                            manageEmployeeController.changeButtonVisibility();
-                        }
-
-
-                    }});
-
-
-
-
-
-
-
+                    if (checkIfManager() == false) {
+                        manageEmployeeController.changeButtonVisibility();
+                    }
+                }
+            }
+        });
 
 
         //exit button to close the whole app.
@@ -121,16 +117,16 @@ public class LoginView {
         //ACTION TO LOG IN BUTTON/////////////////////////////////////////////////////////////
         logIn.setOnAction(event -> {
             //CREATING NEW EMPLOYEE OBJECT TO GRAB THE INPUT ATTRIBUTE VALUES
-            employeeModel = new EmployeeModel(userField.getText(),passwordText.getText());
-
-            errorLabel.setText(loginViewController.checkLogIn(employeeModel));//CALL METHOD FROM CONTROLLER
-            primaryStage.close();// CLOSE THIS STAGE
-
-            if(checkIfManager()==false){
-                manageEmployeeController.changeButtonVisibility();
+            if((userField.getText().equals(""))||(passwordText).getText().equals("")) {
+                errorLabel.setText("The username and/or password do not match!");
+            }else{
+                employeeModel = new EmployeeModel(userField.getText(), passwordText.getText());
+                errorLabel.setText(loginViewController.checkLogIn(employeeModel));//CALL METHOD FROM CONTROLLER
+                primaryStage.close();// CLOSE THIS STAGE
+                if (checkIfManager() == false) {
+                    manageEmployeeController.changeButtonVisibility();
+                }
             }
-
-
         });
         //////////////////////////////////////////////////////////////////////////////////////
 

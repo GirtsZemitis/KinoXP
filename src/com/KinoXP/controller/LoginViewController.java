@@ -17,17 +17,19 @@ public class LoginViewController {
     //CHECK IF THE INSERTED USERNAME AND PASSWORD ARE AS THE ONES ESTABLISHED IN THE DATABASE//////////////////////////
     public String checkLogIn(EmployeeModel employeeModel){
         String textForLabel = "";
-        //calling the connect to db method
-        loginViewModel.connectToDatabase();
 
-        //Compares if the returned result is true or false.
-        if((loginViewModel.checkLoginAndPassword(employeeModel).equals(true))){
-            //IF YES THEN :
-            MenuView menuView = new MenuView();
-            menuView.start();
-        }else{
             textForLabel = "The username and/or password do not match!";
-        }
+
+            //calling the connect to db method
+            loginViewModel.connectToDatabase();
+            //Compares if the returned result is true or false.
+            if ((loginViewModel.checkLoginAndPassword(employeeModel).equals(true))) {
+                //IF YES THEN :
+                MenuView menuView = new MenuView();
+                menuView.start();
+            } else {
+                textForLabel = "The username and/or password do not match!";
+            }
         return textForLabel;
     }
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////

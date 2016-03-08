@@ -59,11 +59,6 @@ public class LoginViewModel {
         return isHostAvailable("google.com") || isHostAvailable("amazon.com")
                 || isHostAvailable("facebook.com")|| isHostAvailable("apple.com");
     }
-    public void launchLogInViewGui(Boolean answer){
-        if(answer){
-
-        }
-    }
 
     //DATABASE CONNECTING METHOD
     //PLEASE APPLY YOUR LOCAL MODIFICATIONS IN ORDER FOR THESE TO WORK!!!
@@ -84,24 +79,25 @@ public class LoginViewModel {
     }
     //CHECK LOG IN AND PASSWORD WITH SQL - DATABASE (PLEASE MODIFY HERE AND UP FOR YOUR LOCAL DATABASES!!!!!)
     public Boolean checkLoginAndPassword(EmployeeModel employeeModel){
-        try {
-            String sql = "SELECT * FROM LogIn WHERE userName=? AND password =?";
 
-            PreparedStatement preparedStatement = conn.prepareStatement(sql);
-            preparedStatement.setString(1, employeeModel.getUserName());
-            preparedStatement.setString(2, employeeModel.getPassword());
-            ResultSet resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()) {
-                employeeModel = new EmployeeModel(resultSet.getString(1),resultSet.getString(2));
-                return true;
-            } else {
-                employeeModel = null;
-                return false;
+            try {
+                String sql = "SELECT * FROM LogIn WHERE userName=? AND password =?";
+
+                PreparedStatement preparedStatement = conn.prepareStatement(sql);
+                preparedStatement.setString(1, employeeModel.getUserName());
+                preparedStatement.setString(2, employeeModel.getPassword());
+                ResultSet resultSet = preparedStatement.executeQuery();
+                if (resultSet.next()) {
+                    employeeModel = new EmployeeModel(resultSet.getString(1), resultSet.getString(2));
+                    return true;
+                } else {
+                    employeeModel = null;
+                    return false;
+                }
+
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
 
         return false;
     }
