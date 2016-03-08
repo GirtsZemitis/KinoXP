@@ -1,7 +1,6 @@
 package com.KinoXP.view;
 
 import com.KinoXP.controller.LoginViewController;
-import com.KinoXP.controller.ManageEmployeeController;
 import com.KinoXP.model.EmployeeModel;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -20,9 +19,11 @@ import javafx.stage.Stage;
 
 public class LoginView {
     EmployeeModel employeeModel;///// DON'T DELETE WITHOUT SAYING IT!!!!
-    ManageEmployeeController manageEmployeeController = new ManageEmployeeController();
+
+
 
     public void start(){
+        LoginViewController loginViewController = new LoginViewController();
 
         //creating scene
         Stage primaryStage = new Stage();
@@ -75,7 +76,6 @@ public class LoginView {
                 "    -fx-padding: 12 30 12 30;\n" +
                 "    -fx-text-fill: white;\n" +
                 "    -fx-font-size: 12px;");
-        LoginViewController loginViewController = new LoginViewController();
 
         //locating the text fields and labels
 
@@ -95,16 +95,13 @@ public class LoginView {
         passwordText.setOnKeyPressed((keyEvent) -> {
             if (keyEvent.getCode() == KeyCode.ENTER) {
                 if ((userField.getText().equals("")) || (passwordText).getText().equals("")) {
-                            errorLabel.setText("The username and/or password do not match!");
+                    errorLabel.setText("The username and/or password do not match!");
                 } else {
                     employeeModel = new EmployeeModel(userField.getText(), passwordText.getText());
 
                     errorLabel.setText(loginViewController.checkLogIn(employeeModel));//CALL METHOD FROM CONTROLLER
                     primaryStage.close();// CLOSE THIS STAGE
 
-                    if (checkIfManager() == false) {
-                        manageEmployeeController.changeButtonVisibility();
-                    }
                 }
             }
         });
@@ -112,7 +109,7 @@ public class LoginView {
 
         //exit button to close the whole app.
         exit.setOnAction(event1 -> {
-                primaryStage.close();
+            primaryStage.close();
         });
         //ACTION TO LOG IN BUTTON/////////////////////////////////////////////////////////////
         logIn.setOnAction(event -> {
@@ -122,10 +119,7 @@ public class LoginView {
             }else{
                 employeeModel = new EmployeeModel(userField.getText(), passwordText.getText());
                 errorLabel.setText(loginViewController.checkLogIn(employeeModel));//CALL METHOD FROM CONTROLLER
-                primaryStage.close();// CLOSE THIS STAGE
-                if (checkIfManager() == false) {
-                    manageEmployeeController.changeButtonVisibility();
-                }
+                //  primaryStage.close();// CLOSE THIS STAGE
             }
         });
         //////////////////////////////////////////////////////////////////////////////////////
@@ -139,18 +133,10 @@ public class LoginView {
 
     //GUI ALERT USED BY LogInViewController////////////////////////////////////////////////////
     public void networkAlertMethod(){
-       Alert alert = new Alert(Alert.AlertType.ERROR);
+        Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
         alert.setContentText("The system failed to start due to lack of internet connection signal! Please check your network connection.");
         alert.showAndWait();
     }
 
-    public boolean checkIfManager(){
-        if(employeeModel.getUserName().equals("1")&& employeeModel.getPassword().equals("1")){
-            return true;
-        }
-
-        return false;
-    }
-    //////////////////////////////////////////////////////BY MONICA// COMMUNICATE BEFORE YOU MOVE/CHANGE/DELETE!
 }

@@ -44,17 +44,20 @@ public class AddBookingView {
 
         //TEXTFIELDS
         TextField searchField = new TextField();
-        searchField.setPromptText("ex. 91110399");
+        searchField.setPromptText("type booking phone number");
+        searchField.setMaxWidth(200);
+        searchField.setMinWidth(200);
         ComboBox<String> dateField = new ComboBox<>();
-        dateField.setMinWidth(150);
+        dateField.setMaxWidth(200);
+        dateField.setMinWidth(200);
         ComboBox<String> timeField = new ComboBox<>();
-        timeField.setMinWidth(150);
+        timeField.setMaxWidth(200);
         TextField seatsField = new TextField();
-        seatsField.setPromptText("ex. 3");
+        seatsField.setPromptText("#");
         seatsField.setMaxWidth(40);
         TextField phoneNrField = new TextField();
-        phoneNrField.setPromptText("ex 91110399");
-        phoneNrField.setMaxWidth(150);
+        phoneNrField.setPromptText("type customer phone number");
+        phoneNrField.setMaxWidth(200);
 
 
         //COMBOBOXES
@@ -74,16 +77,19 @@ public class AddBookingView {
 
         Button searchButton = new Button();
         Button updateButton = new Button("Update");
+        updateButton.setId("back");
         updateButton.setVisible(false);
 
 
 
         Image imageSearch = new Image(getClass().getResourceAsStream("search.png"));
         searchButton.setGraphic(new ImageView(imageSearch));
-        Button addButton = new Button("ADD");
+        Button addButton = new Button("Add");
         addButton.setId("back");
         addButton.setTextAlignment(TextAlignment.CENTER);
-        Button btnBack = new Button("BACK");
+        Button btnBack = new Button("Back");
+        btnBack.setId("back");
+        btnBack.setTextAlignment(TextAlignment.CENTER);
 
 
         //LAYOUT

@@ -259,7 +259,12 @@ public class ManageEmployeeView {
                         surnameText.getText().length() == 0 || emailText.getText().length() == 0 ||
                         phoneNumberText.getText().length() == 0 || positionTextField.getText().length() == 0) {
                     updateAlertMessage("All text fields must contain information in order to add an employee to database");
-                } else {
+
+
+                }
+                try {
+                    String.valueOf(phoneNumberText.getText());
+
                     manageEmployeeController.addEmployeeAction(userNameTextField.getText(), nameTextField.getText(),
                             surnameText.getText(), emailText.getText(), Integer.parseInt(phoneNumberText.getText()),
                             positionTextField.getText());
@@ -268,6 +273,9 @@ public class ManageEmployeeView {
                     tableView1.setItems(manageEmployeeController.returnLogInInfo());
 
                     stage1.close();
+
+                } catch (NumberFormatException e) {
+                    updateAlertMessage("Phone number cannot contain letters!");
                 }
 
             });
@@ -381,5 +389,6 @@ public class ManageEmployeeView {
         alert.setContentText(message);
         alert.showAndWait();
     }
+
 
 }

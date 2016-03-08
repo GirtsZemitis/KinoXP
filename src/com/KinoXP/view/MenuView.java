@@ -10,9 +10,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -35,6 +33,12 @@ public class MenuView {
     AddBookingViewController addBookingViewController = new AddBookingViewController();
     ManageEmployeeView manageEmployeeView = new ManageEmployeeView();
 
+    public  MenuView(){
+        movies = new Button("Manage movies");
+        employees = new Button("Manage employees");
+
+
+    }
 
     public void start() {
 
@@ -43,7 +47,7 @@ public class MenuView {
         mainMenu = primaryStage;
         menuLabel = new Label("Main menu");
         menuLabel.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
-        movies = new Button("Manage movies");
+
         movies.setId("button");
         movies.setMaxWidth(Double.MAX_VALUE);
         schedule = new Button("Manage schedule");
@@ -52,7 +56,7 @@ public class MenuView {
         booking = new Button("Manage bookings");
         booking.setId("button");
         booking.setMaxWidth(Double.MAX_VALUE);
-        employees = new Button("Manage employees");
+
         employees.setId("button");
         employees.setMaxWidth(Double.MAX_VALUE);
         prices = new Button("Manage prices");
@@ -62,7 +66,7 @@ public class MenuView {
         ticketStatus.setId("button");
 
         logOut = new Button("Log out");
-        
+
         logOut.setId("button");
         logOut.setOnAction(event1 -> {
             loginViewController.startLoginWindow();
@@ -90,10 +94,10 @@ public class MenuView {
         });
 
         schedule.setOnAction(event -> {
-           // manageMovieScheduleController.scheduleDisplay();
+            // manageMovieScheduleController.scheduleDisplay();
             manageMovieScheduleController.scheduleFromTheatre();
             mainMenu.close();
-      });
+        });
         booking.setOnAction(event -> {
             addBookingViewController.addBookingViewDisplay();
             mainMenu.close();
@@ -112,8 +116,8 @@ public class MenuView {
         });
 
         prices.setOnAction(event -> {
-          PricesView pricesView = new PricesView();
-          pricesView.start();
+            PricesView pricesView = new PricesView();
+            pricesView.start();
             mainMenu.close();
         });
 
@@ -126,6 +130,4 @@ public class MenuView {
 
 
     }
-
-
 }

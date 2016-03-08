@@ -180,7 +180,7 @@ public class Schedule {
         HBox hBox = new HBox(30);
 
         scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
-        Label label = new Label("Welcome to manage schedule");
+        Label label = new Label("Manage schedule");
         label.setId("welcome");
         Label label1 = new Label("Please choose room");
         label1.setId("room");
@@ -201,8 +201,10 @@ public class Schedule {
         hBox.getChildren().addAll(button1,button);
 
         ComboBox<Movie> comboBox = new ComboBox<>();
+        comboBox.setMaxWidth(200);
 
         ComboBox<String>movieTheaterTxt= new ComboBox<>(options);
+        movieTheaterTxt.setMaxWidth(200);
         movieTheaterTxt.setOnAction(event -> {
             comboBox.setItems(manageMovieScheduleController.getMovieTitles(movieTheaterTxt.getSelectionModel().getSelectedItem()));
         });

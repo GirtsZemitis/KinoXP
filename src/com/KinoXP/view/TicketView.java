@@ -61,23 +61,23 @@ public class TicketView {
 
         //TEXT FIELDS
         phoneNumberTxt = new TextField();
-        phoneNumberTxt.setMaxWidth(150);
+        phoneNumberTxt.setMaxWidth(180);
 
         //COMBO BOXES
         ObservableList<String> options = ticketModel.getMovies();
         ComboBox titleCombo = new ComboBox(options);
         titleCombo.setPromptText("Choose a movie");
-        titleCombo.setMaxWidth(150);
+        titleCombo.setMinWidth(200);
         ComboBox<String> dateField = new ComboBox<>();
-        dateField.setMinWidth(150);
+        dateField.setMinWidth(200);
         ComboBox<String> timeField = new ComboBox<>();
-        timeField.setMinWidth(150);
+        timeField.setMinWidth(200);
         ObservableList<String> theatreList = FXCollections.observableArrayList(
                 "Theater 1",
                 "Theater 2"
         );
         ComboBox<String> theatreField = new ComboBox(theatreList);
-        theatreField.setMinWidth(150);
+        theatreField.setMinWidth(200);
 
 
         //CHECK BOXES
@@ -200,10 +200,10 @@ public class TicketView {
             hBox.setPrefSize(200, 80);
 
             //BUTTONS
-            Button logOut = new Button("LOG OUT");
-            logOut.setStyle("-fx-font-size: 15");
-            Button goBack = new Button("GO BACK");
-            goBack.setStyle("-fx-font-size: 15");
+            Button logOut = new Button("Log Out");
+            logOut.setId("back");
+            Button goBack = new Button("Back");
+            goBack.setId("back");
 
             //BUTTONS ACTION
             logOut.setOnAction(event1 -> {
@@ -228,6 +228,7 @@ public class TicketView {
 
             //SCENE
             Scene scene2 = new Scene(secondBorderPane, 1000, 650);
+            scene2.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
 
             //STAGE
             resultStage = new Stage();
