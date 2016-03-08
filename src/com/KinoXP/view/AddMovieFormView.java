@@ -54,25 +54,25 @@ public class AddMovieFormView {
         TextArea cast = new TextArea();
 
         //LABELS
-        Label mainTitleLbl = new Label("Add MovieModel");
+        Label mainTitleLbl = new Label("Add Movie");
         mainTitleLbl.setFont(Font.font("Courier", FontWeight.BOLD, 25));
         mainTitleLbl.setFont(Font.font(25));
         Label titleLbl = new Label("Title");
         Label yearLbl = new Label("Year");
-        Label durationLbl = new Label("Duration in minutes!!! Type correct value");
+        Label durationLbl = new Label("Duration in minutes!");
         Label genreLbl = new Label("Genre");
         Label descriptionLbl = new Label("Description");
         Label directorLbl = new Label("Director");
         Label ageLimitLbl = new Label("Age Limit");
         Label castLbl = new Label("Cast");
         Label posterLbl = new Label("Poster URL");
-        Label movieTheaterLbl = new Label("MovieModel Theater");
+        Label movieTheaterLbl = new Label("Movie Theater");
         Label movieTime = new Label("Movie premiere: ");
 
         //BUTTONS
 
-        Button addMovieBtn = new Button("Add MovieModel");
-        Button backBtn = new Button("Go Back");
+        Button addMovieBtn = new Button("Add Movie");
+        Button backBtn = new Button("Back");
 
         //calendar
 

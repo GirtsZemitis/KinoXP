@@ -49,8 +49,8 @@ public class TicketView {
         Label mainLabel = new Label("Search Booking");
         mainLabel.setFont(Font.font("Tahoma", FontWeight.NORMAL, 25));
         mainLabel.setAlignment(Pos.CENTER);
-        Label searchLabel = new Label("Search booking by:");
-        searchLabel.setFont(Font.font("Tahoma", FontWeight.NORMAL, 15));
+  //    Label searchLabel = new Label("Search booking by:");
+  //    searchLabel.setFont(Font.font("Tahoma", FontWeight.NORMAL, 15));
         Label phoneLabel = new Label("Phone Number");
         Label titleLabel = new Label("Movie");
         Label dateLabel = new Label("Date");
@@ -87,10 +87,10 @@ public class TicketView {
         reservedCheckBox.setSelected(false);
 
         //BUTTONS
-        Button searchButton = new Button("SEARCH");
-        searchButton.setId("scheduleButtons");
-        Button mainMenuButton = new Button("MAIN MENU");
-        mainMenuButton.setId("scheduleButtons");
+        Button searchButton = new Button("Search");
+        searchButton.setId("back");
+        Button mainMenuButton = new Button("Back");
+        mainMenuButton.setId("back");
 
         //H-BOXES
         VBox vBoxLeft = new VBox();
@@ -120,7 +120,7 @@ public class TicketView {
         vBoxLeft.getChildren().addAll(phoneLabel, phoneNumberTxt, titleLabel, titleCombo, dateLabel, dateField,
                 timeLabel, timeField, theatreLabel, theatreField);
 
-        layout.getChildren().addAll(searchLabel, vBoxLeft, checkedBoxes1, checkedBoxes2);
+        layout.getChildren().addAll(vBoxLeft, checkedBoxes1, checkedBoxes2);
         layout.setPadding(new Insets(40, 40, 40, 60));
         layout.setSpacing(10);
 
@@ -128,10 +128,12 @@ public class TicketView {
         borderPane.setCenter(layout);
         borderPane.setBottom(buttons);
         borderPane.setPadding(new Insets(40, 40, 40, 60));
+        layout.setId("booking");
+        borderPane.setId("backgroundImage");
 
 
         //SCENE
-        Scene scene = new Scene(borderPane, 400, 550);
+        Scene scene = new Scene(borderPane, 500, 550);
         Stage primaryStage = new Stage();
 
         //STAGE

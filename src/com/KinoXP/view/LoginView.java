@@ -27,18 +27,14 @@ public class LoginView {
         //creating scene
         Stage primaryStage = new Stage();
         GridPane gridPane = new GridPane();
-        Text scenetitle = new Text("KINO CINEMA Management");
-        scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 25));
+        Text scenetitle = new Text("KINO CINEMA");
+        scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 35));
         gridPane.setPadding(new Insets(0, 0, 50, 0));
-        gridPane.setStyle("-fx-background-color: \n" +
-                "        #c3c4c4,\n" +
-                "        linear-gradient(#d6d6d6 20%, white 100%),\n" +
-                "        radial-gradient(center 50% -40%, radius 100%, #e6e6e6 25%, rgba(230,230,230,0) 50%);");
-
+        gridPane.setId("backgroundImage");
         gridPane.setVgap(20);
         gridPane.setHgap(-80);
 
-        Scene scene = new Scene(gridPane,600,450);
+        Scene scene = new Scene(gridPane,650,540);
         primaryStage.setScene(scene);
 
 
@@ -139,6 +135,8 @@ public class LoginView {
         //////////////////////////////////////////////////////////////////////////////////////
 
         gridPane.getChildren().addAll(scenetitle,errorLabel,user,userField,password,passwordText,logIn, exit);
+        scene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
+        primaryStage.setResizable(false);
         primaryStage.show();
 
     }
