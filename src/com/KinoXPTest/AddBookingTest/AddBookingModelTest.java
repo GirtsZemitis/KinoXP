@@ -4,6 +4,8 @@ import com.KinoXP.model.AddBookingViewModel;
 import com.KinoXP.model.Booking;
 import com.KinoXP.model.LoginViewModel;
 import junit.framework.TestCase;
+import org.junit.Before;
+import org.junit.Test;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -14,6 +16,8 @@ import java.sql.SQLException;
  * https://github.com/GirtsZemitis
  */
 public class AddBookingModelTest extends TestCase {
+
+    LoginViewModel loginViewModel = new LoginViewModel();
 
     @org.junit.Test
     public void testAddBooking() {
@@ -43,6 +47,19 @@ public class AddBookingModelTest extends TestCase {
             e.printStackTrace();
         }
 
+    }
+
+    @Before
+    public void connectToDatabase() {
+        loginViewModel.connectToDatabase();
+    }
+    @Test
+    public void testUpdateBooking(){
+
+        AddBookingViewModel abvm = new AddBookingViewModel();
+        Booking booking = new Booking("date", "time", "title", 2, "7777777",true);
+        //assertNotNull(abvm.updateBookingAfterPaid("date", "time", "title", 2, "7777777",true));
+        //assertEquals(booking.getPhoneNumber(),abvm.updateBookingAfterPaid("date", "time", "title", 2, "7777777",true).getPhoneNumber());
     }
 
 
