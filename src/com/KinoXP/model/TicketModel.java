@@ -101,7 +101,7 @@ public class TicketModel {
 
 
         try {
-            String sql = "SELECT * FROM Booking WHERE phone_number=?";
+            String sql = "SELECT * FROM Booking1 WHERE bookingId=?";
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setString(1, phoneNumber);
 
@@ -132,7 +132,7 @@ public class TicketModel {
 
 
         try {
-            String sql = "SELECT * FROM Booking WHERE title=?";
+            String sql = "SELECT * FROM Booking1 WHERE title=?";
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setString(1, title);
 
@@ -163,7 +163,7 @@ public class TicketModel {
 
 
         try {
-            String sql = "SELECT * FROM Booking WHERE date=?";
+            String sql = "SELECT * FROM Booking1 WHERE date=?";
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
             //noinspection JpaQueryApiInspection
             preparedStatement.setString(1, date);
@@ -195,7 +195,7 @@ public class TicketModel {
 
 
         try {
-            String sql = "SELECT * FROM Booking WHERE isPaid='1';";
+            String sql = "SELECT * FROM Booking1 WHERE isPaid='1';";
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
             //noinspection JpaQueryApiInspection
             preparedStatement.setBoolean(1, paid);

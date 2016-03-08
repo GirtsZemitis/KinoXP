@@ -14,20 +14,20 @@ import java.sql.SQLException;
 public class AddBookingViewModel {
 
     Connection conn = LoginViewModel.conn;
-    Booking booking;
+
     public Booking insertBooking(String date, String time, String title, int seats, String phoneNumber,boolean paid) {
         try {
-            String sql = "INSERT INTO Booking (date, time, title, seats, phone_number,isPaid) VALUES (?,?,?,?,?,?);";
+            String sql = "INSERT INTO Booking1 (date, time, title, seats, bookingId,isPaid) VALUES (?,?,?,?,?,?);";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, date);
             ps.setString(2, time);
             ps.setString(3, title);
             ps.setInt(4, seats);
-            ps.setString(5, phoneNumber);
-            ps.setBoolean(6,paid);
+            ps.setString(5, null);
+            ps.setBoolean(6, paid);
             ps.execute();
             ps.close();
-            booking = new Booking(date, time, title, seats, phoneNumber,paid);
+            Booking booking = new Booking(date, time, title, seats, phoneNumber,paid);
             return booking;
         }
         catch (SQLException e) {
@@ -44,14 +44,14 @@ public class AddBookingViewModel {
             ps.setString(2, time);
             ps.setString(3, title);
             ps.setInt(4, seats);
-            ps.setString(5,phoneNumber);
+            ps.setString(5, phoneNumber);
             ps.setBoolean(6, paid);
-            ps.setString(7,phoneNumber);
+            ps.setString(7, phoneNumber);
 
             int numberOfRows=ps.executeUpdate();
             System.out.println("Completed update. Number of rows affected:" + numberOfRows);
             ps.close();
-            booking = new Booking(date, time, title, seats, phoneNumber,paid);
+            Booking booking = new Booking(date, time, title, seats, phoneNumber,paid);
             return booking;
         }
         catch (SQLException e) {
@@ -88,8 +88,9 @@ public class AddBookingViewModel {
 
     public Booking getBooking(String phoneNumber){
         String out = "";
+        Booking booking=null;
         try {
-            String query = "SELECT * FROM Booking WHERE phone_number=?";
+            String query = "SELECT * FROM Booking1 WHERE bookingId=?";
             PreparedStatement preparedStatement = conn.prepareStatement(query);
             preparedStatement.setString(1, phoneNumber);
             ResultSet results = preparedStatement.executeQuery();
@@ -112,7 +113,7 @@ public class AddBookingViewModel {
 
     public void updatePaid(boolean paid, String phoneNr) {
 
-        String sql = "UPDATE Booking SET isPaid=? WHERE phone_number = ?";
+        String sql = "UPDATE Booking1 SET isPaid=? WHERE bookingId = ?";
         try {
 
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
@@ -127,7 +128,7 @@ public class AddBookingViewModel {
     }
 
     public void updateSeat(String seat, String phoneNr) {
-        String sql = "UPDATE Booking SET seats=? WHERE phone_number = ?";
+        String sql = "UPDATE Booking1 SET seats=? WHERE bookingId = ?";
         try {
 
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
@@ -142,7 +143,7 @@ public class AddBookingViewModel {
     }
 
     public void updateTime(String time, String phoneNr) {
-        String sql = "UPDATE Booking SET time=? WHERE phone_number = ?";
+        String sql = "UPDATE Booking1 SET time=? WHERE bookingId = ?";
         try {
 
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
@@ -156,7 +157,7 @@ public class AddBookingViewModel {
 
     }
     public void updateDate(String date, String phoneNr) {
-        String sql = "UPDATE Booking SET date=? WHERE phone_number = ?";
+        String sql = "UPDATE Booking1 SET date=? WHERE bookingId = ?";
         try {
 
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
@@ -170,7 +171,7 @@ public class AddBookingViewModel {
 
     }
     public void updateTitle(String title, String phoneNr) {
-        String sql = "UPDATE Booking SET title=? WHERE phone_number = ?";
+        String sql = "UPDATE Booking1 SET title=? WHERE bookingId = ?";
         try {
 
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
@@ -183,8 +184,28 @@ public class AddBookingViewModel {
         }
 
     }
+    public int getId() {
+        String out = "";
+        Booking booking = null;
+        int id = 0;
 
 
+        String query = "SELECT bookingId FROM Booking1 ORDER BY bookingId DESC LIMIT 1;";
+
+        try {
+            PreparedStatement preparedStatement = conn.prepareStatement(query);
+            ResultSet results = preparedStatement.executeQuery();
+            while (results.next()) {
+                id = results.getInt(1);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return  id;
+
+    }
 
 
 

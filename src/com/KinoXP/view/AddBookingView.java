@@ -27,10 +27,6 @@ public class AddBookingView {
     AddBookingViewController addBookingViewController = new AddBookingViewController();
     private Schedule schedule;
 
-
-    private String phoneNr;
-
-
     public void start() {
         //LABELS
         Label mainLabel = new Label("Add Booking");
@@ -95,7 +91,7 @@ public class AddBookingView {
         HBox isPaid = new HBox();
         isPaid.getChildren().addAll(paidLabel, paidCheck);
         VBox layout = new VBox();
-        layout.getChildren().addAll(mainLabel, searchLabel, search, searchNotFound, titleLabel, titleCombo, dateLabel, dateField, timeLabel, timeField, seatsAmountLabel, seatsField, phoneNumberLabel, phoneNrField, isPaid, addButton, btnBack ,updateButton);
+        layout.getChildren().addAll(mainLabel, searchLabel, search, searchNotFound, titleLabel, titleCombo, dateLabel, dateField, timeLabel, timeField, seatsAmountLabel, seatsField, isPaid, addButton, btnBack ,updateButton);
         addButton.setAlignment(Pos.BOTTOM_RIGHT);
         layout.setPadding(new Insets(40, 40, 40, 60));
         layout.setSpacing(5);
@@ -158,9 +154,20 @@ public class AddBookingView {
                 addButton.setVisible(false);
                 phoneNrField.setDisable(true);
                 updateButton.setVisible(true);
+                searchNotFound.setText(null);
+
 
             } else {
                 searchNotFound.setText("This ticket id doesn't exist");
+
+                dateField.setValue(null);
+                timeField.setValue(null);
+                seatsField.setText(null);
+                phoneNrField.setText(null);
+                paidCheck.setSelected(false);
+                updateButton.setVisible(false);
+                addButton.setVisible(true);
+
             }
 
 
@@ -168,13 +175,28 @@ public class AddBookingView {
 
         addButton.setOnAction(event -> {
 
+
             addBookingViewController.insertBooking(dateField.getValue(), timeField.getValue(), titleCombo.getValue().toString(), Integer.parseInt(seatsField.getText()), phoneNrField.getText(), paidCheck.isSelected());
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Reservation number");
+            alert.setHeaderText("Reservation Number is " + addBookingViewController.getId());
+
+
+            Optional<ButtonType> results = alert.showAndWait();
+            if (results.get() == ButtonType.OK) {
+                alert.close();
+                MenuView mainMenu = new MenuView();
+                mainMenu.start();
+            }
+
+
             primaryStage.close();
 
 
             BuyFoodView buyFoodView = new BuyFoodView();
             buyFoodView.startBuyFoodView();
-            buyFoodView.phoneNumber = phoneNrField.getText();
+
+            buyFoodView.phoneNumber = addBookingViewController.getId();
 
             primaryStage.close();
         });

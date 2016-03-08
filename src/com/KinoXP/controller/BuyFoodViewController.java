@@ -8,7 +8,7 @@ import com.KinoXP.model.BuyFoodViewModel;
 public class BuyFoodViewController {
     BuyFoodViewModel buyFoodViewModel = new BuyFoodViewModel();
 
-    public void insertFood(String phonenumber, int sCandyCount, int lCandyCount, int sSodaCount, int lSodaCount){
+    public void insertFood(int phonenumber, int sCandyCount, int lCandyCount, int sSodaCount, int lSodaCount){
 
         buyFoodViewModel.setFoodToDB(phonenumber ,sCandyCount,lCandyCount,sSodaCount, lSodaCount);
     }

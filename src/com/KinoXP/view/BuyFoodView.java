@@ -33,7 +33,7 @@ public class BuyFoodView {
     int lSodaCount = 0;
     int sCandyCount = 0;
     int lCandyCount = 0;
-    String phoneNumber;
+    int phoneNumber;
     Stage primaryStage;
 
 

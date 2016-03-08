@@ -237,5 +237,8 @@ public class AddBookingViewController {
         }
         return  newSchedule;
     }
+    public int getId(){
+        return addBookingViewModel.getId();
+    }
 
 }

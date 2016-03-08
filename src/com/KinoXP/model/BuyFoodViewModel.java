@@ -14,13 +14,13 @@ public class BuyFoodViewModel {
 
     Connection conn = LoginViewModel.conn;
 
-    public void setFoodToDB(String phoneNumber, int sCandyCount, int lCandyCount, int sSodaCount, int lSodaCount) {
+    public void setFoodToDB(int phoneNumber, int sCandyCount, int lCandyCount, int sSodaCount, int lSodaCount) {
 
         String query;
-        query = "INSERT into drinkSnacks VALUES (?,?,?,?,?)";
+        query = "INSERT into drinkSnacks1 VALUES (?,?,?,?,?)";
         try {
             PreparedStatement preparedStatement = conn.prepareStatement(query);
-            preparedStatement.setString(1, phoneNumber);
+            preparedStatement.setInt(1, phoneNumber);
             preparedStatement.setInt(2, sCandyCount);
             preparedStatement.setInt(3, lCandyCount);
             preparedStatement.setInt(4, sSodaCount);
