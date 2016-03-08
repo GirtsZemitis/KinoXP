@@ -22,15 +22,12 @@ import org.controlsfx.control.spreadsheet.Grid;
 
 import java.util.ArrayList;
 import java.util.Optional;
+import java.util.regex.Pattern;
 
 public class AddBookingView {
 
     AddBookingViewController addBookingViewController = new AddBookingViewController();
     private Schedule schedule;
-
-
-    private String phoneNr;
-
 
     public void start() {
         //LABELS
@@ -41,9 +38,7 @@ public class AddBookingView {
         Label timeLabel = new Label("Time");
         Label titleLabel = new Label("Title");
         Label seatsAmountLabel = new Label("Seats amount");
-        Label phoneNumberLabel = new Label("Phone number");
         Label paidLabel = new Label("Paid");
-        Label reservationLabel = new Label("Reservation");
         Label searchNotFound = new Label();
         searchNotFound.setTextFill(Color.web("#FF0000"));
 
@@ -169,14 +164,6 @@ public class AddBookingView {
 
         searchButton.setOnAction(event -> {
             Booking booking = addBookingViewController.getBookingByPhoneNUmber(searchField.getText());
-            /*String dateValue = booking.getDate();
-            try {
-                Date date = new SimpleDateFormat("yyyy-mm-dd").parse(dateValue);
-                LocalDate localDate = LocalDate.parse(new SimpleDateFormat(("yyyy-MM-dd").format(dateValue)));
-                dateField.setValue(localDate);
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }*/
 
             if (booking != null) {
                 titleCombo.setValue((booking.getTitle()));
@@ -209,29 +196,43 @@ public class AddBookingView {
 
         addButton.setOnAction(event -> {
 
-            addBookingViewController.insertBooking(dateField.getValue(), timeField.getValue(), titleCombo.getValue().toString(), Integer.parseInt(seatsField.getText()), phoneNrField.getText(), paidCheck.isSelected());
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Reservation number");
-            alert.setHeaderText("Reservation Number is " + addBookingViewController.getId());
+            if ((seatsField.getText() == null) || (dateField.getValue() == null) || (timeField.getValue() == null) || (titleCombo.getValue() == null)) {
+                searchNotFound.setText("You have to add all fields");
+            }else{
+
+                try {
+
+                    addBookingViewController.insertBooking(dateField.getValue(), timeField.getValue(), titleCombo.getValue().toString(), Integer.parseInt(seatsField.getText()), phoneNrField.getText(), paidCheck.isSelected());
+                    Alert alert = null;
+
+                    alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setTitle("Reservation number");
+                    alert.setHeaderText("Reservation Number is " + addBookingViewController.getId());
+
+                    Optional<ButtonType> results = alert.showAndWait();
+                    if (results.get() == ButtonType.OK) {
+                        alert.close();
+                        MenuView mainMenu = new MenuView();
+                        mainMenu.start();
+                    }
+                    primaryStage.close();
 
 
-            Optional<ButtonType> results = alert.showAndWait();
-            if (results.get() == ButtonType.OK) {
-                alert.close();
-                MenuView mainMenu = new MenuView();
-                mainMenu.start();
+                    BuyFoodView buyFoodView = new BuyFoodView();
+                    buyFoodView.startBuyFoodView();
+
+                    buyFoodView.phoneNumber = addBookingViewController.getId();
+
+                    primaryStage.close();
+                } catch (NumberFormatException e) {
+
+                    searchNotFound.setText("You have to give a number for the seat");
+                    System.out.println("you can not put letts");
+                } catch (NullPointerException e) {
+                    System.out.println();
+                }
             }
 
-
-            primaryStage.close();
-
-
-            BuyFoodView buyFoodView = new BuyFoodView();
-            buyFoodView.startBuyFoodView();
-
-            buyFoodView.phoneNumber = addBookingViewController.getId();
-
-            primaryStage.close();
         });
 
         updateButton.setOnAction(event -> {
