@@ -148,7 +148,7 @@ public class ManageMovieSceduleModel {
     }
 
     public ObservableList<Movie> getMovieTitles(String s){
-        String sql ="SELECT `title` , `indexMovie`,`premiere`  FROM `Movie` WHERE cinemaRoomName=?";
+        String sql ="SELECT `title` , `indexMovie`,`premiere`, `playingTimeMin`  FROM `Movie` WHERE cinemaRoomName=?";
         PreparedStatement preparedStatement = null;
         ObservableList<Movie> observableList = FXCollections.observableArrayList();
         try {
@@ -158,7 +158,7 @@ public class ManageMovieSceduleModel {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 //adding date to movie object
-                observableList.add(new Movie(resultSet.getString(1),resultSet.getInt(2),resultSet.getDate(3)));
+                observableList.add(new Movie(resultSet.getString(1),resultSet.getInt(2),resultSet.getDate(3),resultSet.getInt(4)));
                 System.out.println(observableList.toString());
             }
 
@@ -167,5 +167,7 @@ public class ManageMovieSceduleModel {
         }
         return observableList;
     }
+
+
 
 }

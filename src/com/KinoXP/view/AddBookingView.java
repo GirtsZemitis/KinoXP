@@ -12,12 +12,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
+import org.controlsfx.control.spreadsheet.Grid;
 
 import java.util.ArrayList;
 import java.util.Optional;
@@ -27,12 +28,15 @@ public class AddBookingView {
     AddBookingViewController addBookingViewController = new AddBookingViewController();
     private Schedule schedule;
 
+
+    private String phoneNr;
+
+
     public void start() {
         //LABELS
-        Label mainLabel = new Label("Add Booking");
+        Label mainLabel = new Label("Booking Manager");
         mainLabel.setFont(Font.font("Tahoma", FontWeight.NORMAL, 25));
-        mainLabel.setAlignment(Pos.CENTER);
-        Label searchLabel = new Label("Search");
+        Label searchLabel = new Label("Search By Phone Number");
         Label dateLabel = new Label("Date");
         Label timeLabel = new Label("Time");
         Label titleLabel = new Label("Title");
@@ -81,27 +85,57 @@ public class AddBookingView {
 
         Image imageSearch = new Image(getClass().getResourceAsStream("search.png"));
         searchButton.setGraphic(new ImageView(imageSearch));
-        Button addButton = new Button("GO");
+        Button addButton = new Button("ADD");
+        addButton.setId("back");
+        addButton.setTextAlignment(TextAlignment.CENTER);
         Button btnBack = new Button("BACK");
 
 
         //LAYOUT
-        HBox search = new HBox();
-        search.getChildren().addAll(searchField, searchButton);
-        HBox isPaid = new HBox();
-        isPaid.getChildren().addAll(paidLabel, paidCheck);
-        VBox layout = new VBox();
-        layout.getChildren().addAll(mainLabel, searchLabel, search, searchNotFound, titleLabel, titleCombo, dateLabel, dateField, timeLabel, timeField, seatsAmountLabel, seatsField, isPaid, addButton, btnBack ,updateButton);
-        addButton.setAlignment(Pos.BOTTOM_RIGHT);
-        layout.setPadding(new Insets(40, 40, 40, 60));
-        layout.setSpacing(5);
+        BorderPane menu = new BorderPane();
+        menu.setId("backgroundImage");
+
+        GridPane elements = new GridPane();
+        elements.addRow(0, titleLabel, titleCombo);
+        elements.addRow(1, dateLabel, dateField);
+        elements.addRow(2, timeLabel, timeField);
+        elements.addRow(3, seatsAmountLabel, seatsField);
+        elements.addRow(4, phoneNumberLabel, phoneNrField);
+        elements.addRow(5, paidLabel, paidCheck);
+        elements.addRow(7, searchLabel, searchField);
+        elements.addRow(8, searchNotFound, searchButton);
+        elements.setVgap(5);
+        elements.setHgap(20);
+        elements.setId("booking");
+
+
+        FlowPane menubuttons = new FlowPane();
+        menubuttons.setHgap(50);
+        menubuttons.getChildren().addAll(addButton,updateButton, btnBack);
+        menubuttons.setAlignment(Pos.CENTER);
+        menubuttons.setPadding(new Insets(0, 0, 15, 0));
+        FlowPane title = new FlowPane();
+        title.getChildren().addAll(mainLabel);
+        title.setPadding(new Insets(25, 0, 0, 0));
+        title.setAlignment(Pos.CENTER);
+
+
+        menu.setTop(title);
+        menu.setCenter(elements);
+        menu.setBottom(menubuttons);
+
+
+
+
+
 
         //SCENE
         //SCENE
-        Scene scene = new Scene(layout, 300, 550);
+        Scene scene = new Scene(menu, 660, 554);
         Stage primaryStage = new Stage();
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);
+        scene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
         primaryStage.show();
 
         titleCombo.getSelectionModel().selectedItemProperty().addListener(observable -> {
@@ -174,7 +208,6 @@ public class AddBookingView {
         });
 
         addButton.setOnAction(event -> {
-
 
             addBookingViewController.insertBooking(dateField.getValue(), timeField.getValue(), titleCombo.getValue().toString(), Integer.parseInt(seatsField.getText()), phoneNrField.getText(), paidCheck.isSelected());
             Alert alert = new Alert(Alert.AlertType.WARNING);

@@ -10,7 +10,9 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -61,7 +63,6 @@ public class MenuView {
 
         logOut = new Button("Log out");
         
-        logOut.setStyle("-fx-font-size: 20");
         logOut.setId("button");
         logOut.setOnAction(event1 -> {
             loginViewController.startLoginWindow();
@@ -80,7 +81,7 @@ public class MenuView {
         menuLayout.setTop(menuLabel);
         menuLayout.setAlignment(menuLabel, Pos.TOP_CENTER);
         menuLayout.setBottom(logOut);
-        menuLayout.setAlignment(logOut, Pos.BOTTOM_RIGHT);
+        menuLayout.setAlignment(logOut, Pos.BOTTOM_CENTER);
         vbox.setAlignment(Pos.CENTER);
 
         movies.setOnAction(event -> {
@@ -116,9 +117,11 @@ public class MenuView {
             mainMenu.close();
         });
 
-        menu = new Scene(menuLayout, 500, 500);
+        menu = new Scene(menuLayout, 674, 584);
         menu.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
+
         mainMenu.setScene(menu);
+        primaryStage.setResizable(false);
         mainMenu.show();
 
 

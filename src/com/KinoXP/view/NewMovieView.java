@@ -56,7 +56,7 @@ public class NewMovieView {
         Stage primaryStage = new Stage();
         //ROOT
         borderPane = new BorderPane();
-        borderPane.setId("backgroundImage");
+        borderPane.setId("seamlessBackgroundImage");
 
         //TOP
         topLayout = new Label("Movies Database");

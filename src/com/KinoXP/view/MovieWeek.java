@@ -56,6 +56,12 @@ public class MovieWeek {
     public void setYesDb(TimeModel timeModel, int i){
         observableListFromDb.set(i,timeModel);
     }
+    public void setYesDb(TimeModel timeModel,int i, int howMany){
+        for(int b = 0; b < howMany; b++){
+            observableListFromDb.set(i,timeModel);
+            i++;
+        }
+    }
 
     public String save(ObservableList<TimeModel> observableList2){
         String save ="";
@@ -95,11 +101,7 @@ public class MovieWeek {
 
 
         observableListFromDb = FXCollections.observableArrayList();
-        if(s.equals("bla")){
-            observableListFromDb= observableList;
-            return observableListFromDb;
 
-        }
         for(int i =0; i <s.length(); i++){
             if(s.charAt(i)=='-') {
                 break;

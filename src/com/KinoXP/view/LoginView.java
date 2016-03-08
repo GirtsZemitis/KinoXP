@@ -10,6 +10,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -26,14 +27,14 @@ public class LoginView {
         //creating scene
         Stage primaryStage = new Stage();
         GridPane gridPane = new GridPane();
-        Text scenetitle = new Text("Welcome to KINO XP!");
-        scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 25));
+        Text scenetitle = new Text("KINO CINEMA");
+        scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 35));
         gridPane.setPadding(new Insets(0, 0, 50, 0));
-
+        gridPane.setId("backgroundImage");
         gridPane.setVgap(20);
         gridPane.setHgap(-80);
 
-        Scene scene = new Scene(gridPane,600,450);
+        Scene scene = new Scene(gridPane,650,540);
         primaryStage.setScene(scene);
 
 
@@ -48,8 +49,32 @@ public class LoginView {
         TextField passwordText = new TextField();
         passwordText.setStyle("-fx-font-size: 16");
         Button logIn = new Button("Log In");
-        Button exit = new Button("EXIT");
-        logIn.setStyle("-fx-font-size: 20;-fx-background-color: #ffdd19;-fx-border-color: black");
+        Button exit = new Button("Exit");
+        logIn.setStyle("-fx-min-width: 130px;\n" +
+                "    -fx-max-width: 130px;\n" +
+                "    -fx-background-color:\n" +
+                "            #000000,\n" +
+                "            linear-gradient(#7ebcea, #2f4b8f),\n" +
+                "            linear-gradient(#426ab7, #263e75),\n" +
+                "            linear-gradient(#395cab, #223768);\n" +
+                "    -fx-background-insets: 0,1,2,3;\n" +
+                "    -fx-background-radius: 3,2,2,2;\n" +
+                "    -fx-padding: 12 30 12 30;\n" +
+                "    -fx-text-fill: white;\n" +
+                "    -fx-font-size: 12px;");
+
+        exit.setStyle("-fx-min-width: 130px;\n" +
+                "    -fx-max-width: 130px;\n" +
+                "    -fx-background-color:\n" +
+                "            #000000,\n" +
+                "            linear-gradient(#7ebcea, #2f4b8f),\n" +
+                "            linear-gradient(#426ab7, #263e75),\n" +
+                "            linear-gradient(#395cab, #223768);\n" +
+                "    -fx-background-insets: 0,1,2,3;\n" +
+                "    -fx-background-radius: 3,2,2,2;\n" +
+                "    -fx-padding: 12 30 12 30;\n" +
+                "    -fx-text-fill: white;\n" +
+                "    -fx-font-size: 12px;");
         LoginViewController loginViewController = new LoginViewController();
 
         //locating the text fields and labels
@@ -65,6 +90,31 @@ public class LoginView {
 
         gridPane.setAlignment(Pos.CENTER);
 
+
+        //after typing in username and password u can press "enter" to log in.
+        passwordText.setOnKeyPressed((keyEvent) -> {
+                    if (keyEvent.getCode() == KeyCode.ENTER) {
+                        employeeModel = new EmployeeModel(userField.getText(), passwordText.getText());
+
+                        errorLabel.setText(loginViewController.checkLogIn(employeeModel));//CALL METHOD FROM CONTROLLER
+                        primaryStage.close();// CLOSE THIS STAGE
+
+                        if (checkIfManager() == false) {
+                            manageEmployeeController.changeButtonVisibility();
+                        }
+
+
+                    }});
+
+
+
+
+
+
+
+
+
+        //exit button to close the whole app.
         exit.setOnAction(event1 -> {
                 primaryStage.close();
         });
@@ -85,6 +135,8 @@ public class LoginView {
         //////////////////////////////////////////////////////////////////////////////////////
 
         gridPane.getChildren().addAll(scenetitle,errorLabel,user,userField,password,passwordText,logIn, exit);
+        scene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
+        primaryStage.setResizable(false);
         primaryStage.show();
 
     }

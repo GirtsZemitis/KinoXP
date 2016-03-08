@@ -10,62 +10,13 @@ import java.sql.SQLException;
 import java.util.Date;
 
 /**
- * Created by hartyandi on 2/24/16.
+ * Created by Lucia/Paula on 2/24/16.
  */
 public class TicketModel {
 
     private static Connection conn = LoginViewModel.conn;
 
-    /*public int getUnpaidTicket(String title, String date, String time) {
-        int out = 0;
-        try {
-            String sql = "SELECT sum(seats) FROM Booking WHERE title =? and date = ? and time = ? and isPaid = '0'";
-
-            PreparedStatement preparedStatement = conn.prepareStatement(sql);
-            preparedStatement.setString(1, title);
-            preparedStatement.setString(2, date);
-            preparedStatement.setString(3, time);
-
-            ResultSet results = preparedStatement.executeQuery();
-
-            if (results.next()) {
-                out = results.getInt(1);
-                System.out.println(out);
-            } else {
-                out = 0;
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return out;
-    }
-    public int getPaidTicket(String title, String date, String time) {
-        int out = 0;
-        try {
-            String sql = "SELECT sum(seats) FROM Booking WHERE title =? and date = ? and time = ? and isPaid = '1'";
-
-            PreparedStatement preparedStatement = conn.prepareStatement(sql);
-            preparedStatement.setString(1, title);
-            preparedStatement.setString(2, date);
-            preparedStatement.setString(3, time);
-
-            ResultSet results = preparedStatement.executeQuery();
-
-            if (results.next()) {
-                out = results.getInt(1);
-                System.out.println(out);
-            } else {
-                out = 0;
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return out;
-    }*/
-
-
+    //GET MOVIES FROM DB
     public ObservableList<String> getMovies() {
         ObservableList<String> observableList = FXCollections.observableArrayList();
         Booking booking;
@@ -125,6 +76,7 @@ public class TicketModel {
         return observableList;
     }
 
+    //GET BOOKINGS BY TITLE
     public ObservableList<Booking> getBookingByTitle(String title) {
         ObservableList<Booking> observableList = FXCollections.observableArrayList();
         Booking booking;
@@ -156,7 +108,8 @@ public class TicketModel {
         return observableList;
     }
 
-    public ObservableList<Booking> getBookingByDate(String date) {
+    //GET BOOKINGS BY TITLE, DATE AND TIME
+    public ObservableList<Booking> getMovieByDateTime(String date, String time, String title) {
         ObservableList<Booking> observableList = FXCollections.observableArrayList();
         Booking booking;
         String out = "";
@@ -167,6 +120,10 @@ public class TicketModel {
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
             //noinspection JpaQueryApiInspection
             preparedStatement.setString(1, date);
+            //noinspection JpaQueryApiInspection
+            preparedStatement.setString(2, time);
+            //noinspection JpaQueryApiInspection
+            preparedStatement.setString(3, title);
 
 
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -188,7 +145,8 @@ public class TicketModel {
         return observableList;
     }
 
-    public ObservableList<Booking> getBookingByPaidTickets(boolean paid) {
+    //GET BOOKINGS BY PAID TICKET
+    public ObservableList<Booking> getBookingByPaidTicket(String checkBox) {
         ObservableList<Booking> observableList = FXCollections.observableArrayList();
         Booking booking;
         String out = "";
@@ -197,8 +155,7 @@ public class TicketModel {
         try {
             String sql = "SELECT * FROM Booking1 WHERE isPaid='1';";
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
-            //noinspection JpaQueryApiInspection
-            preparedStatement.setBoolean(1, paid);
+            preparedStatement.setString(1, checkBox);
 
 
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -216,6 +173,59 @@ public class TicketModel {
         } catch (SQLException e) {
             e.printStackTrace();
 
+        }
+        return observableList;
+    }
+
+    //GET BOOKINGS BY RESERVED TICKET
+    public ObservableList<Booking> getBookingByUnpaidTicket(String checkBox2) {
+        ObservableList<Booking> observableList = FXCollections.observableArrayList();
+        Booking booking;
+
+        try {
+            String sql = "SELECT * FROM Booking WHERE isPaid=?";
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setString(1, checkBox2);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+
+
+                booking = new Booking(resultSet.getString(1), resultSet.getString(2), resultSet.getString(3),
+                        resultSet.getInt(4), resultSet.getString(5), resultSet.getBoolean(6));
+
+                observableList.add(booking);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return observableList;
+    }
+
+    //GET BOOKINGS BY THEATER
+    public ObservableList<Booking> getBookingByTheater(String theatre) {
+        ObservableList<Booking> observableList = FXCollections.observableArrayList();
+        Booking booking;
+
+        try {
+            String sql = "SELECT date, time, Booking.title, seats, phone_number, isPaid FROM Booking JOIN Movie ON Booking.title = Movie.title WHERE cinemaRoomName=?";
+            PreparedStatement preparedStatement = conn.prepareStatement(sql);
+            //noinspection JpaQueryApiInspection
+            preparedStatement.setString(1, theatre);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+
+
+                booking = new Booking(resultSet.getString(1), resultSet.getString(2), resultSet.getString(3),
+                        resultSet.getInt(4), resultSet.getString(5), resultSet.getBoolean(6));
+
+                observableList.add(booking);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         return observableList;
     }

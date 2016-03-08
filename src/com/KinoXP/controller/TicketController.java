@@ -3,17 +3,14 @@ package com.KinoXP.controller;
 import com.KinoXP.model.Booking;
 import com.KinoXP.model.TicketModel;
 import com.KinoXP.view.TicketView;
-import com.sun.org.apache.xpath.internal.operations.String;
-import javafx.beans.property.StringProperty;
 import javafx.collections.ObservableList;
 
 /**
- * Created by Palko on 05/03/2016.
+ * Created by Lucia/Paula on 05/03/2016.
  */
 public class TicketController {
     TicketModel ticketModel;
     TicketView ticketView;
-    Booking booking;
 
     public TicketController(TicketModel ticketModel, TicketView ticketView){
         this.ticketModel = ticketModel;
@@ -21,45 +18,41 @@ public class TicketController {
     }
 
     public TicketController(){}
-/*
-    //GET RESERVED TICKETS
-    public int getUnpaidTicket(String title,String date,String time){
-        ticketModel = new TicketModel();
-        int unpaidTicketNumber = 0;
-      unpaidTicketNumber=  ticketModel.getUnpaidTicket(title,date,time);
-        return  unpaidTicketNumber;
-    }
 
-    //GET PAID TICKETS
-    public int getPaidTicket(String title,String date,String time){
-        ticketModel = new TicketModel();
-        int unpaidTicketNumber = 0;
-        unpaidTicketNumber=  ticketModel.getPaidTicket(title,date,time);
-        return  unpaidTicketNumber;
-    }*/
-
-    //GET BOOKING INFO
+    //GET BOOKING BY PHONE NUMBER
     public ObservableList<Booking> returnBookingByPhoneNumber(java.lang.String phoneNumber) {
         ObservableList<Booking> tab = ticketModel.getBookingByPhoneNumber(phoneNumber);
         return tab;
     }
 
+    //GET BOOKING BY TITLE
     public ObservableList<Booking> returnBookingByTitle(java.lang.String title) {
         ObservableList<Booking> tab = ticketModel.getBookingByTitle(title);
         return tab;
     }
 
-    public ObservableList<Booking> returnBookingByDate(java.lang.String date) {
-        ObservableList<Booking> tab = ticketModel.getBookingByDate(date);
+    //GET BOOKING BY TITLE, DATE AND TIME
+    public ObservableList<Booking> returnBookingByDateTime(java.lang.String date, java.lang.String time, java.lang.String title) {
+        ObservableList<Booking> tab = ticketModel.getMovieByDateTime(date, time, title);
         return tab;
     }
 
-    public ObservableList<Booking> returnBookingByPaidTickets(boolean paid) {
-        ObservableList<Booking> tab = ticketModel.getBookingByPaidTickets(paid);
+    //GET BOOKING BY PAID TICKET
+    public ObservableList<Booking> returnBookingByPaidTicket(java.lang.String checkBox) {
+        ObservableList<Booking> tab = ticketModel.getBookingByPaidTicket(checkBox);
         return tab;
     }
 
-    public Booking searchBooking(){
-        return booking;
+    //GET BOOKING BY RESERVED TICKET
+    public ObservableList<Booking> returnBookingByUnpaidTicket(java.lang.String checkBox) {
+        ObservableList<Booking> tab = ticketModel.getBookingByUnpaidTicket(checkBox);
+        return tab;
     }
+
+    //GET BOOKING BY THEATER
+    public ObservableList<Booking> returnBookingByTheater(java.lang.String theatre) {
+        ObservableList<Booking> tab = ticketModel.getBookingByTheater(theatre);
+        return tab;
+    }
+
 }

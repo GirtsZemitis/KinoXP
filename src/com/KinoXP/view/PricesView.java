@@ -12,7 +12,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
+
+import java.io.IOException;
 
 
 public class PricesView {
@@ -23,7 +27,7 @@ public class PricesView {
     VBox vbox;
     Label menuLabel, lSodaLabel, sSodaLabel, lCandyLabel, sCandyLabel;
     public static Button back, priceButton;
-    private String lSodaPrice, sSodaPrice, lCandyPrice, sCandyPrice, textfield;
+    public String lSodaPrice, sSodaPrice, lCandyPrice, sCandyPrice;
     TextField lSodaField, sSodaField, lCandyField, sCandyField;
     PriceViewController priceViewController;
 
@@ -36,36 +40,60 @@ public class PricesView {
         priceViewController = new PriceViewController();
 
 
+        lSodaLabel = new Label("Large soda -- "+ lSodaPrice);
+        lSodaLabel.setId("priceLabels");
+        sSodaLabel = new Label("Small soda -- "+ sSodaPrice);
+        sSodaLabel.setId("priceLabels");
+        lCandyLabel = new Label("Large candy -- "+ lCandyPrice);
+        lCandyLabel.setId("priceLabels");
+        sCandyLabel = new Label("Small candy -- "+ sCandyPrice);
+        sCandyLabel.setId("priceLabels");
 
-        //GET PRICES FROM DB && SET THE LABELS
-        setLabels();
 
         //TEXTFIELDS
         lSodaField = new TextField();
-        lSodaField.setStyle("-fx-font-size: 16");
+        lSodaField.setId("priceFields");
 
         sSodaField = new TextField();
-        sSodaField.setStyle("-fx-font-size: 16");
+        sSodaField.setId("priceFields");
 
         lCandyField = new TextField();
-        lCandyField.setStyle("-fx-font-size: 16");
+        lCandyField.setId("priceFields");
 
         sCandyField = new TextField();
-        sCandyField.setStyle("-fx-font-size: 16");
+        sCandyField.setId("priceFields");
+
+        //MAKE LABELS !!!!!
+        lSodaLabel = new Label();
+        sSodaLabel = new Label();
+        lCandyLabel = new Label();
+        lCandyLabel = new Label();
+        sCandyLabel = new Label();
 
 
+        //GET PRICES FROM DB && SET THE LABELS
+        setLabels();
         menuLabel.setStyle(
                 "-fx-font-size: 20px;" +
+                          "-fx-padding: 0 0 60 0; "              +
                 "-fx-font-weight: bold"
+
         );
 
         priceButton = new Button("Set Prices");
-        priceButton.setId("pricesButton");
+        priceButton.setId("priceButton");
 
 
         back = new Button("Back");
-        back.setStyle("-fx-font-size: 20");
+        back.setStyle("-fx-font-size: 12");
         back.setId("button");
+
+
+
+
+
+
+
 
 
         priceButton.setOnAction(event1 -> {
@@ -98,7 +126,7 @@ public class PricesView {
         elements.setHgap(50);
         elements.setVgap(20);
 
-        elements.setStyle("-fx-alignment: center;");
+        elements.setId("priceLabels");
 
         menuLayout = new BorderPane();
         menuLayout.setId("backgroundImage");
@@ -131,14 +159,16 @@ public class PricesView {
         lCandyPrice= String.valueOf(candy.getLargePrice());
         sCandyPrice= String.valueOf(candy.getSmallPrice());
 
-        lSodaLabel = new Label("Large soda -- "+ lSodaPrice);
-        lSodaLabel.setId("priceLabels");
-        sSodaLabel = new Label("Small soda -- "+ sSodaPrice);
-        sSodaLabel.setId("priceLabels");
-        lCandyLabel = new Label("Large candy -- "+ lCandyPrice);
-        lCandyLabel.setId("priceLabels");
-        sCandyLabel = new Label("Small candy -- "+ sCandyPrice);
-        sCandyLabel.setId("priceLabels");
+        lSodaLabel.setText("Large soda -- " + lSodaPrice);
+        sSodaLabel.setText("Small soda -- "+ sSodaPrice);
+        lCandyLabel.setText("Large candy -- "+ lCandyPrice);
+        sCandyLabel.setText("Small candy -- "+ sCandyPrice);
+         lSodaField.setText(lSodaPrice);
+        sSodaField.setText(sSodaPrice);
+        lCandyField.setText(lCandyPrice);
+        sCandyField.setText(sCandyPrice);
+
+
     }
 
 

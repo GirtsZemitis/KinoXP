@@ -8,32 +8,31 @@ import com.KinoXP.view.MenuView;
 import javafx.collections.ObservableList;
 
 /**
- * Created by Paula on 01/03/16.
+ * Created by Paula/Lucia on 01/03/16.
  */
 public class ManageEmployeeController {
     ManageEmployeeModel manageEmployeeModel;
     ManageEmployeeView manageEmployeeView;
     EmployeeModel employeeModel;
-    LoginViewModel loginViewModel;
-
 
     public ManageEmployeeController(ManageEmployeeModel manageEmployeeModel, ManageEmployeeView manageEmployeeView) {
         this.manageEmployeeModel = manageEmployeeModel;
         this.manageEmployeeView = manageEmployeeView;
     }
 
-    public ManageEmployeeController(){
+    public ManageEmployeeController() {
 
     }
 
-    //CHANGES BUTTONS TO INVISIBLE IF USER LOGING IN IS NOT MANAGER
-    public void changeButtonVisibility(){
+    //CHANGES BUTTONS TO INVISIBLE IF USER WHO LOGS IN IS NOT MANAGER
+    public void changeButtonVisibility() {
 
         MenuView.employees.setDisable(true);
         MenuView.movies.setDisable(true);
     }
+
     /**
-          METHODS WHICH MAKE THE CONNECTION BETWEEN THE VIEW AND THE MODEL
+     * METHODS WHICH MAKE THE CONNECTION BETWEEN THE VIEW AND THE MODEL
      **/
 
     //GET EMPLOYEE INFO
@@ -62,9 +61,9 @@ public class ManageEmployeeController {
     public void addEmployeeAction(String userNameInput, String nameInput, String surnameInput, String emailInput,
                                   Integer phoneNumberInput, String jobTitleInput) {
         try {
-            if(userNameInput.equals(manageEmployeeModel.getUserName(userNameInput))) {
+            if (userNameInput.equals(manageEmployeeModel.checkUserName(userNameInput))) {
                 manageEmployeeView.updateAlertMessage("User name already exists. Please insert a different one.");
-            }else if(!userNameInput.equals(manageEmployeeModel.getUserName(userNameInput))) {
+            } else if (!userNameInput.equals(manageEmployeeModel.checkUserName(userNameInput))) {
                 manageEmployeeModel.insertEmployee(userNameInput, nameInput, surnameInput, emailInput,
                         phoneNumberInput, jobTitleInput);
                 manageEmployeeView.updateAlertMessage("New employee was successfully added to the database");
@@ -74,14 +73,14 @@ public class ManageEmployeeController {
         }
     }
 
-    //CREATE LOG IN ACCOUNT
+    //CREATE LOG IN ACCOUNT INTO DATABASE
     public void addLogInCredentials(String userNameInput, String passwordInput) {
         try {
             if (userNameInput.length() > 0 && passwordInput.length() > 0) {
                 manageEmployeeModel.insertLogIn(userNameInput, passwordInput);
-            }else if(userNameInput.equals(employeeModel.getUserName())) {
+            } else if (userNameInput.equals(employeeModel.getUserName())) {
                 manageEmployeeView.updateAlertMessage("User name already exists. Please insert a different one.");
-            }else {
+            } else {
                 manageEmployeeView.updateAlertMessage("All text fields must contain information in order to save the employee");
             }
 
@@ -95,15 +94,16 @@ public class ManageEmployeeController {
         String existingUserName = manageEmployeeModel.checkUserName(userName);
         if (!userName.equals(existingUserName)) {
             manageEmployeeModel.editEmployee(userName, name, surname, email, phoneNumber, jobTitle, oldUser);
-        } else if(userName.equals(existingUserName)){
-            manageEmployeeModel.editEmployeeWithoutUserName(name,surname,email,phoneNumber,jobTitle,oldUser);
             manageEmployeeView.updateAlertMessage("Employee information was successfully edited into the database");
-        }else{
+        } else if (userName.equals(existingUserName)) {
+            manageEmployeeModel.editEmployeeWithoutUserName(name, surname, email, phoneNumber, jobTitle, oldUser);
+            manageEmployeeView.updateAlertMessage("Employee information was edited except user name which already exists into the database");
+        } else {
             System.out.println("User name already exists. Please insert a different one.");
         }
     }
 
-    //EDIT LOG IN ACCOUNT
+    //EDIT LOG IN ACCOUNT FROM DATABASE
     public void editLogin(String userName, String password, String oldUserName) {
         manageEmployeeModel.editLogIn(userName, password, oldUserName);
     }
@@ -115,7 +115,7 @@ public class ManageEmployeeController {
     }
 
     //DELETE LOG IN ACCOUNT FROM DATABASE
-    public void deleteLogInCredentials(String userNameInput){
+    public void deleteLogInCredentials(String userNameInput) {
         manageEmployeeModel.deleteLogInCredentials(userNameInput);
     }
 }
