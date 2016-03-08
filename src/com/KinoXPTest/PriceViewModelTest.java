@@ -9,9 +9,7 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
-/**
- * Created by Monica on 08-03-2016.
- */
+
 public class PriceViewModelTest {
 
 
