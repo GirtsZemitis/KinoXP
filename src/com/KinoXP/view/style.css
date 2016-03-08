@@ -214,7 +214,11 @@
     -fx-text-fill: white;
 
 }
-
+#adding {
+    -fx-text-alignment: center;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+}
 #booking {
     -fx-min-width: 600px;
     -fx-max-width: 600px;
@@ -225,6 +229,14 @@
 
 
 }
+.table-cell{
+    -fx-background-color: ghostwhite;
+}
+.table-cell:hover{
+    -fx-background-color: #3a3938;
+    -fx-text-fill: gold;
+    -fx-border-style: hidden;
+}
 #whitepls {
 
     -fx-text-fill: black;
@@ -233,14 +245,13 @@
     linear-gradient(#dddddd 0%, #f6f6f6 50%);;
     -fx-border-style: hidden;
 }
-#whitepls:hover {
-
-     -fx-background-color: #263e75;
-     -fx-text-fill: gold;
+#whitepls:hover{
+    -fx-background-color: #395cab;
+    -fx-text-fill: gold;
     -fx-border-style: hidden;
- }
+}
 .table-row-cell:selected {
-    -fx-background-color: #2f4b8f;
+    -fx-background-color: #395cab;
 }
 .table-row-cell:selected .text {
     -fx-fill: navy ;

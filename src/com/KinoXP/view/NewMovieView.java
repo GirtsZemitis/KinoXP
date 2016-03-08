@@ -158,6 +158,8 @@ public class NewMovieView {
             imageView.setFitHeight(200);
             imageView.setFitWidth(200);
             Button button666 = new Button();
+            button666.setPrefSize(200, 200);
+            button666.setStyle("-fx-background-color: transparent");
 
             button666.setPadding(new Insets(0, 0, 0, 0));
             button666.setGraphic(imageView);
@@ -182,7 +184,7 @@ public class NewMovieView {
             titleBtnLabel666.setAlignment(Pos.CENTER);
             titleBtnLabel666.setText(titlesString.get(i));
             VBox vBox = new VBox();
-            vBox.setPrefSize(200, 120);
+            vBox.setPrefSize(200, 200);
             vBox.setAlignment(Pos.TOP_CENTER);
             Text text = new Text(titleBtnLabel666.getText());
             text.setStyle("-fx-background-color:transparent;");

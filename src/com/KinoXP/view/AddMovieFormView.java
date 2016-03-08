@@ -72,7 +72,9 @@ public class AddMovieFormView {
         //BUTTONS
 
         Button addMovieBtn = new Button("Add Movie");
+        addMovieBtn.setId("back");
         Button backBtn = new Button("Back");
+        backBtn.setId("back");
 
         //calendar
 
@@ -133,7 +135,7 @@ public class AddMovieFormView {
 
         HBox hBox1 = new HBox();
         hBox1.getChildren().addAll(durationLbl, genreLbl, ageLimitLbl);
-        hBox1.setSpacing(155);
+        hBox1.setSpacing(120);
 
         HBox hBox2 = new HBox();
         hBox2.getChildren().addAll(playingTimeInMinutesTxt, genreTxt, ageLimitTxt);
@@ -141,7 +143,7 @@ public class AddMovieFormView {
 
         HBox hBox3 = new HBox();
         hBox3.getChildren().addAll(directorLbl, yearLbl);
-        hBox3.setSpacing(150);
+        hBox3.setSpacing(200);
 
         HBox hBox4 = new HBox();
         hBox4.getChildren().addAll(directorTxt, releaseYearTxt);
@@ -170,10 +172,13 @@ public class AddMovieFormView {
         //LAYOUT OF THE SCENE
         BorderPane borderPane = new BorderPane();
         borderPane.setPadding(new Insets(25));
+        vBox.setId("adding");
         borderPane.setLeft(vBox);
+        borderPane.setId("seamlessBackgroundImage");
 
         //SETTING UP THE SCENE AND THE STAGE
-        Scene scene = new Scene(borderPane, 800, 800);
+        Scene scene = new Scene(borderPane, 650, 700);
+        scene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
         stage = new Stage();
         stage.setScene(scene);
         stage.show();
