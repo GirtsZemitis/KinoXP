@@ -1,9 +1,6 @@
 package com.KinoXP.controller;
 
-import com.KinoXP.model.AddBookingViewModel;
-import com.KinoXP.model.Booking;
-import com.KinoXP.model.LoginViewModel;
-import com.KinoXP.model.Schedule;
+import com.KinoXP.model.*;
 import com.KinoXP.view.AddBookingView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -35,6 +32,10 @@ public class AddBookingViewController {
     public Booking getBookingByPhoneNUmber(String phoneNumber){
         return addBookingViewModel.getBooking(phoneNumber);
 
+    }
+
+    public Snacks getSnacks(String phoneNumber){
+        return addBookingViewModel.getSnacks(phoneNumber);
     }
 
     public ObservableList<String> getMoviesWithSchedule() {

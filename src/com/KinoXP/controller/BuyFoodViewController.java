@@ -13,4 +13,23 @@ public class BuyFoodViewController {
         buyFoodViewModel.setFoodToDB(phonenumber ,sCandyCount,lCandyCount,sSodaCount, lSodaCount);
     }
 
+    public void updateLargeCandy(int lCandyCount, int phonenumber){
+
+        buyFoodViewModel.updateLargeCandy(lCandyCount, phonenumber);
+    }
+
+    public void updateSmallCandy(int sCandyCount, int phonenumber){
+
+        buyFoodViewModel.updateSmallCandy(sCandyCount, phonenumber);
+    }
+
+    public void updateLargeSoda(int lSodaCount, int phonenumber){
+
+        buyFoodViewModel.updateLargeSoda(lSodaCount, phonenumber);
+    }
+
+    public void updateSmallSoda(int sSodaCount, int phonenumber){
+
+        buyFoodViewModel.updateSmallSoda(sSodaCount, phonenumber);
+    }
 }

@@ -111,6 +111,31 @@ public class AddBookingViewModel {
         return null;
     }
 
+    public Snacks getSnacks(String phoneNumber){
+        String out = "";
+        Snacks snacks=null;
+        try {
+            String query = "SELECT smallCandy, largeCandy, smallDrink, largeDrink FROM drinkSnacks1 WHERE bookingId=?";
+            PreparedStatement preparedStatement = conn.prepareStatement(query);
+            preparedStatement.setString(1, phoneNumber);
+            ResultSet results = preparedStatement.executeQuery();
+
+            while(results.next()){
+                snacks = new Snacks (results.getInt(1),results.getInt(2),results.getInt(3),results.getInt(4));
+            }
+
+
+
+            return snacks;
+
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public void updatePaid(boolean paid, String phoneNr) {
 
         String sql = "UPDATE Booking1 SET isPaid=? WHERE bookingId = ?";

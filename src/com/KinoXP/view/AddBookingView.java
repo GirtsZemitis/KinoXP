@@ -5,6 +5,7 @@ package com.KinoXP.view;/**
 import com.KinoXP.controller.AddBookingViewController;
 import com.KinoXP.model.Booking;
 import com.KinoXP.model.Schedule;
+import com.KinoXP.model.Snacks;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -260,6 +261,9 @@ public class AddBookingView {
                 addBookingViewController.updateTitle(titleCombo.getValue().toString(), phoneNrField.getText());
 
             }
+
+
+
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Save");
             alert.setHeaderText("You updated the booking");
@@ -276,8 +280,20 @@ public class AddBookingView {
 
             alert.getButtonTypes().setAll(buttonTypeYes);
             primaryStage.close();
-
-
+            BuyFoodView buyFoodView = new BuyFoodView();
+            buyFoodView.startBuyFoodView();
+            buyFoodView.phoneNumber = addBookingViewController.getId();
+            Snacks snacks = addBookingViewController.getSnacks(phoneNrField.getText());
+                buyFoodView.lSodaAmount.setText(Integer.toString(snacks.getLargeSoda()));
+                buyFoodView.sSodaAmount.setText(Integer.toString(snacks.getSmallSoda()));
+                buyFoodView.sCandyAmount.setText(Integer.toString(snacks.getSmallCandy()));
+                buyFoodView.lCandyAmount.setText(Integer.toString(snacks.getLargeCandy()));
+                buyFoodView.lSodaCount = snacks.getLargeSoda();
+                buyFoodView.sSodaCount = snacks.getSmallSoda();
+                buyFoodView.lCandyCount = snacks.getLargeCandy();
+                buyFoodView.sCandyCount = snacks.getSmallCandy();
+            buyFoodView.hboxButtons.getChildren().removeAll(buyFoodView.yes, buyFoodView.noThankYou);
+            buyFoodView.hboxButtons.getChildren().add(buyFoodView.buttonUpdate);
         });
 
         btnBack.setOnAction(event1 -> {

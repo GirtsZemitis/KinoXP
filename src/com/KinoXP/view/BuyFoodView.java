@@ -2,6 +2,7 @@ package com.KinoXP.view;
 
 import com.KinoXP.controller.BuyFoodViewController;
 import com.KinoXP.model.Booking;
+import com.KinoXP.model.Snacks;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -36,6 +37,11 @@ public class BuyFoodView {
     int phoneNumber;
     Stage primaryStage;
 
+    HBox hboxButtons;
+    Button buttonUpdate;
+    Button yes;
+    Button noThankYou;
+
 
 
 
@@ -55,8 +61,9 @@ public class BuyFoodView {
         Button smallCandyMinus = new Button("-");
         Button largeCandyPlus = new Button("+");
         Button largeCandyMinus = new Button("-");
-        Button noThankYou = new Button("No");
-        Button yes = new Button("Yes");
+        buttonUpdate = new Button("Update");
+        noThankYou = new Button("No");
+        yes = new Button("Yes");
 
         lSodaAmount = new Label("?");
         lCandyAmount = new Label("?");
@@ -88,7 +95,7 @@ public class BuyFoodView {
         HBox hboxSCandy = new HBox();
         hboxSCandy.getChildren().addAll(smallCandyMinus, sCandyAmount, smallCandyPlus);
         hboxSCandy.setAlignment(Pos.CENTER);
-        HBox hboxButtons = new HBox();
+        hboxButtons = new HBox();
         hboxButtons.setPadding(new Insets(10, 10, 10, 10));
         hboxButtons.setAlignment(Pos.CENTER);
 
@@ -155,6 +162,28 @@ public class BuyFoodView {
             menuView.start();
             primaryStage.close();
         });
+
+        Snacks snacks = new Snacks();
+
+        buttonUpdate.setOnAction(event -> {
+            if (sCandyCount != snacks.getSmallCandy()) {
+                buyFoodViewController.updateSmallCandy(sCandyCount, phoneNumber);
+            }
+
+            if (lCandyCount != snacks.getLargeCandy()) {
+                buyFoodViewController.updateLargeCandy(lCandyCount, phoneNumber);
+            }
+
+            if (sSodaCount != snacks.getSmallSoda()) {
+                buyFoodViewController.updateSmallSoda(sSodaCount, phoneNumber);
+            }
+
+            if (lSodaCount != snacks.getLargeSoda()) {
+                buyFoodViewController.updateLargeSoda(lSodaCount, phoneNumber);
+            }
+            primaryStage.close();
+        })
+           ;
 
 
 
