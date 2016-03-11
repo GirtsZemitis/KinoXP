@@ -1,9 +1,6 @@
 package com.KinoXP.controller;
 
-import com.KinoXP.model.ManageMovieSceduleModel;
-import com.KinoXP.model.Movie;
-import com.KinoXP.model.TableForSchedule;
-import com.KinoXP.model.TimeModel;
+import com.KinoXP.model.*;
 import com.KinoXP.view.MenuView;
 import com.KinoXP.view.Schedule;
 
@@ -11,7 +8,6 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-import com.KinoXP.view.MovieWeek;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableView;
 
@@ -122,6 +118,7 @@ public class ManageMovieScheduleController {
     }
 
     public void nextButtonAction() {
+        //Incremant week which is in label
         weekFromDb++;
         weekCounter++;
         if (weekFromDb < weekLimit) {
@@ -132,6 +129,7 @@ public class ManageMovieScheduleController {
             weekCounter = 1;
             weekFromDb = weekLimit-12;
             schedule.getTable().setItems(getObservableListForWeek(weekCounter-1, movie.getTitle()));
+            //update label
             setNrOfWeek(weekFromDb);
         }
     }

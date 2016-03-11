@@ -1,8 +1,6 @@
 package com.KinoXP.model;
 
 import com.KinoXP.controller.ManageMovieScheduleController;
-import com.KinoXP.view.TableCellTextColorExample;
-import javafx.collections.ObservableList;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TablePosition;
@@ -118,24 +116,25 @@ public class TableForSchedule{
         saturday = new TableColumn("Saturday");
         saturday.setStyle("-fx-background-color: #cfcbd0;" +
                 "       -fx-border-style: solid;" +
-                "       -fx-border-color: #3d586f;");
-        setFancyDesignForCell(saturday,"saturday");
-    }
-    public void setSanday(){
-        sanday = new TableColumn("Sanday");
-        sanday.setStyle("-fx-background-color: #cfcbd0;" +
-                "       -fx-border-style: solid;" +
-                "       -fx-border-color: #3d586f;");
-        setFancyDesignForCell(sanday,"sunday");
-    }
+                            "       -fx-border-color: #3d586f;");
+                    setFancyDesignForCell(saturday,"saturday");
+                }
+            public void setSanday(){
+                sanday = new TableColumn("Sanday");
+                sanday.setStyle("-fx-background-color: #cfcbd0;" +
+                        "       -fx-border-style: solid;" +
+                        "       -fx-border-color: #3d586f;");
+                setFancyDesignForCell(sanday,"sunday");
+            }
 
-    public void setFancyDesignForCell(TableColumn columnName,String valueFactory){
-        columnName.setCellValueFactory(new PropertyValueFactory<TimeModel, String>(valueFactory));
-        columnName.setCellFactory(new Callback<TableColumn, TableCell>() {
-            public TableCell call(TableColumn param) {
-                return new TableCell<TableCellTextColorExample.TableData, String>() {
+            public void setFancyDesignForCell(TableColumn columnName,String valueFactory){
 
-                    @Override
+                columnName.setCellValueFactory(new PropertyValueFactory<TimeModel, String>(valueFactory));
+                columnName.setCellFactory(new Callback<TableColumn, TableCell>() {
+                    public TableCell call(TableColumn param) {
+                        return new TableCell<TableCellTextColorExample.TableData, String>() {
+
+                            @Override
                     public void updateItem(String item, boolean empty) {
                         super.updateItem(item, empty);
                         if (!isEmpty()) {
@@ -144,8 +143,7 @@ public class TableForSchedule{
                                 this.setStyle("-fx-background-color: #878588;" +
                                         "-fx-border-bottom-style: solid; " +
                                         "-fx-border-color: #979495;; " );
-                                //  this.setStyle("-fx-border-style: solid");
-                                //this.setStyle("-fx-border-color: white");
+
 
 
                             }
@@ -156,7 +154,6 @@ public class TableForSchedule{
                                         "-fx-border-bottom-style: solid; " +
                                         "-fx-border-color: #979495;; " );
                             }
-                            // Get fancy and change color based on data
 
                         }
                     }
@@ -210,6 +207,7 @@ public class TableForSchedule{
 
             }
         }
+
         if (column == 2)  {
             if (timeModel.getTuesday().equals("n")) {
                 if(howManyCells>1){

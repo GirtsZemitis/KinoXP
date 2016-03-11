@@ -1,6 +1,5 @@
-package com.KinoXP.view;
+package com.KinoXP.model;
 
-import javafx.application.Application;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -28,41 +27,13 @@ public class TableCellTextColorExample {//try to make some structure here, it do
                 this.two = new SimpleStringProperty(two);
                 this.three = new SimpleStringProperty(three);
             }
-            public String getOne() {
-                return one.get();
-            }
-
-            public void setOne(String one) {
-                this.one.set(one);
-            }
-
-            public String getThree() {
-                return three.get();
-            }
-
-            public void setThree(String three) {
-                this.three.set(three);
-            }
-
-            public String getTwo() {
-                return two.get();
-            }
-
-            public void setTwo(String two) {
-                this.two.set(two);
-            }
+           
 
         }
 
 
 
         public void start() {
-            Stage stage = new Stage();
-            VBox vbox = new VBox();
-            Scene scene = new Scene(vbox, 200, 200);
-            stage.setTitle("Table View - Change color of a particular column");
-            stage.setWidth(400);
-            stage.setHeight(500);
 
 
             TableView<TableData> myTable = new TableView<TableData>();
@@ -105,14 +76,7 @@ public class TableCellTextColorExample {//try to make some structure here, it do
                 }
             });
 
-            myTable.setItems(myTableData);
-            myTable.getColumns().addAll(firstColumn, secondColumn, thirdColumn);
 
-            vbox.getChildren().addAll(myTable);
-            VBox.setVgrow(myTable, Priority.ALWAYS);
-
-            stage.setScene(scene);
-            stage.show();
         }
     }
 

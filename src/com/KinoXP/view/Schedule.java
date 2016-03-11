@@ -15,10 +15,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import javafx.util.Callback;
 
-import java.util.ArrayList;
-import java.util.Calendar;
 
 /**
  * Created by krystian on 2015-09-04.
@@ -93,7 +90,7 @@ public class Schedule {
 
         pleaseSelectMovie = new Label("Please select movie");
         pleaseSelectMovie.setPrefSize(200,30);
-        javafx.scene.image.Image image = new javafx.scene.image.Image(getClass().getResource("arrowRight.png").toExternalForm());
+        javafx.scene.image.Image image = new javafx.scene.image.Image(getClass().getResource("picturesForSchedule/arrowRight.png").toExternalForm());
         nextButton = new Button();
         nextButton.setGraphic(new ImageView(image));
 
@@ -103,7 +100,7 @@ public class Schedule {
             manageMovieScheduleController.nextButtonAction();
 
         });
-        javafx.scene.image.Image image1 = new javafx.scene.image.Image(getClass().getResource("arrowLefi.png").toExternalForm());
+        javafx.scene.image.Image image1 = new javafx.scene.image.Image(getClass().getResource("picturesForSchedule/arrowLefi.png").toExternalForm());
 
         preButton = new Button();
         preButton.setGraphic(new ImageView(image1));
@@ -180,7 +177,7 @@ public class Schedule {
         HBox hBox = new HBox(30);
 
         scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
-        Label label = new Label("Manage schedule");
+        Label label = new Label("Welcome to manage schedule");
         label.setId("welcome");
         Label label1 = new Label("Please choose room");
         label1.setId("room");
@@ -201,10 +198,8 @@ public class Schedule {
         hBox.getChildren().addAll(button1,button);
 
         ComboBox<Movie> comboBox = new ComboBox<>();
-        comboBox.setMaxWidth(200);
 
         ComboBox<String>movieTheaterTxt= new ComboBox<>(options);
-        movieTheaterTxt.setMaxWidth(200);
         movieTheaterTxt.setOnAction(event -> {
             comboBox.setItems(manageMovieScheduleController.getMovieTitles(movieTheaterTxt.getSelectionModel().getSelectedItem()));
         });

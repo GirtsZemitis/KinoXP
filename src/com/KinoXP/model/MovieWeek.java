@@ -1,7 +1,5 @@
-package com.KinoXP.view;
+package com.KinoXP.model;
 
-import com.KinoXP.model.LoginViewModel;
-import com.KinoXP.model.TimeModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 

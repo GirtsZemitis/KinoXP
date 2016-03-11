@@ -1,22 +1,22 @@
 #backgroundImage{
 
-    -fx-background-image: url("picture.jpg");
+    -fx-background-image: url("picturesForSchedule/picture.jpg");
 }
 #seamlessBackgroundImage{
 
-    -fx-background-image: url("666.jpg");
+    -fx-background-image: url("picturesForSchedule/666.jpg");
 }
 .scroll-pane > .viewport {
     -fx-background-color: transparent;
 }
 #plusButton{
 
-    -fx-background-image: url("add.png");
+    -fx-background-image: url("picturesForSchedule/add.png");
     -fx-focus-color: transparent;
     -fx-faint-focus-color: transparent;
 }
 #MenuView{
-    -fx-background-image: url("picture.jpg");
+    -fx-background-image: url("picturesForSchedule/picture.jpg");
 
 }
 
@@ -194,7 +194,7 @@
 
 }
 #vbox{
--fx-background-image: url("backGround.jpg")}
+-fx-background-image: url("picturesForSchedule/backGround.jpg")}
 
 #scheduleButtons {
     -fx-background-color: #000000 linear-gradient(#7ebcea, #2f4b8f) linear-gradient(#426ab7, #263e75),linear-gradient(#395cab, #223768);

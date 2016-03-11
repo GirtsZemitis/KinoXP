@@ -83,7 +83,7 @@ public class AddBookingView {
 
 
 
-        Image imageSearch = new Image(getClass().getResourceAsStream("search.png"));
+        Image imageSearch = new Image(getClass().getResourceAsStream("picturesForSchedule/  search.png"));
         searchButton.setGraphic(new ImageView(imageSearch));
         Button addButton = new Button("Add");
         addButton.setId("back");

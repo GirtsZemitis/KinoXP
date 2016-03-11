@@ -1,8 +1,8 @@
 package com.KinoXP.controller;
 
         import com.KinoXP.model.AddMovieFormViewModel;
+        import com.KinoXP.model.MovieWeek;
         import com.KinoXP.view.AddMovieFormView;
-        import com.KinoXP.view.MovieWeek;
         import com.KinoXP.view.NewMovieView;
         import javafx.scene.control.ComboBox;
         import javafx.scene.control.TextArea;
@@ -16,9 +16,6 @@ package com.KinoXP.controller;
         import java.io.File;
         import java.io.IOException;
         import java.net.URL;
-        import java.time.LocalDate;
-        import java.time.LocalTime;
-        import java.util.Date;
 
 /**
  * Created by Paula on 26/02/2016.

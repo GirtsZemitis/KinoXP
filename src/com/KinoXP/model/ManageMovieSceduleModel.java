@@ -124,8 +124,11 @@ public class ManageMovieSceduleModel {
     }
 
     public String getScheduleForMovie(String movieTitle, int weeknr){
+        //Create string which will be use to get schedule for certain week
         String week = "week"+weeknr;
+        //sql query
         String sql = "SELECT "+ week +" FROM `schedule` INNER JOIN Movie ON schedule.indexMovie = Movie.indexMovie WHERE Movie.title = ?";
+        //string variable for storing schedule
         String scheduleForMovie="";
         PreparedStatement preparedStatement = null;
 
@@ -134,22 +137,23 @@ public class ManageMovieSceduleModel {
             preparedStatement.setString(1, movieTitle);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
+                //saving results
                 scheduleForMovie = resultSet.getString(1);
             }
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        System.out.println(week);
-        System.out.println("week form db is" + scheduleForMovie);
-
+        //return schedule
         return scheduleForMovie;
 
     }
 
     public ObservableList<Movie> getMovieTitles(String s){
+        //sql query
         String sql ="SELECT `title` , `indexMovie`,`premiere`, `playingTimeMin`  FROM `Movie` WHERE cinemaRoomName=?";
         PreparedStatement preparedStatement = null;
+        //observableList for storing movie objects
         ObservableList<Movie> observableList = FXCollections.observableArrayList();
         try {
             preparedStatement = conn.prepareStatement(sql);
